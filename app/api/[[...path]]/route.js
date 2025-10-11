@@ -113,7 +113,16 @@ export async function POST(request) {
   
   try {
     const db = await getDb();
-    const body = await request.json();
+    
+    let body = {};
+    try {
+      const text = await request.text();
+      if (text) {
+        body = JSON.parse(text);
+      }
+    } catch (e) {
+      // Empty body is ok for some endpoints
+    }
 
     // Create reservation
     if (pathname === '/api/reservations') {
