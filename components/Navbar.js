@@ -1,29 +1,43 @@
 'use client'
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
-import { Menu, X, Calendar, Heart, Users } from 'lucide-react';
+import { Menu, X, Calendar, Heart, Users, Newspaper, Info, Globe } from 'lucide-react';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/events', label: 'Evenementen', icon: Calendar },
-    { href: '/reserveren', label: 'Reserveren', icon: Users },
-    { href: '/doneren', label: 'Doneren', icon: Heart },
+    { href: '/about', label: 'Hakkımızda', icon: Info },
+    { href: '/events', label: 'Etkinlikler', icon: Calendar },
+    { href: '/news', label: 'Haberler', icon: Newspaper },
+    { href: '/reserveren', label: 'Rezervasyon', icon: Users },
+    { href: '/doneren', label: 'Bağış', icon: Heart },
+  ];
+
+  const languages = [
+    { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
+    { code: 'en', name: 'English', flag: '🇬🇧' },
+    { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
   ];
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#05B6C4] to-[#3B87BE] rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">SA</span>
-            </div>
-            <span className="text-xl font-bold text-gray-800">Stichting Atlas</span>
+            <Image 
+              src="/logo.png" 
+              alt="Stichting Atlas" 
+              width={180} 
+              height={60}
+              className="h-14 w-auto"
+              priority
+            />
           </Link>
 
           {/* Desktop Menu */}
