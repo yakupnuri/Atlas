@@ -5,6 +5,8 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Calendar, Heart, Users, ArrowRight, Sparkles } from 'lucide-react';
 import EventCard from '@/components/EventCard';
+import HeroCarousel from '@/components/HeroCarousel';
+import NearbyPrograms from '@/components/NearbyPrograms';
 
 export default function Home() {
   const [upcomingEvents, setUpcomingEvents] = useState([]);
@@ -28,8 +30,8 @@ export default function Home() {
 
   return (
     <div className="bg-gradient-to-b from-gray-50 to-white">
-      {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-[#05B6C4] via-[#3B87BE] to-[#99D8E0] text-white py-20 overflow-hidden">
+      {/* Hero Carousel */}
+      <HeroCarousel />
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
           <div className="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
