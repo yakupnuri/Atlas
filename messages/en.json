@@ -1,0 +1,37 @@
+{
+  "nav": {
+    "home": "Home",
+    "events": "Events",
+    "about": "About Us",
+    "news": "News",
+    "reserve": "Reserve",
+    "donate": "Donate"
+  },
+  "hero": {
+    "title": "Building an inclusive community together",
+    "subtitle": "Stichting Atlas brings people together through culture, education and community activities.",
+    "cta1": "View Events",
+    "cta2": "Donate Now",
+    "anbi": "ANBI recognized"
+  },
+  "home": {
+    "mission": "Our Mission",
+    "missionText": "We build bridges between cultures and generations through accessible programs and gatherings.",
+    "vision": "Our Vision",
+    "visionText": "A society where everyone feels welcome and has the opportunity to grow and develop.",
+    "values": "Our Values",
+    "valuesText": "Inclusivity, respect, collaboration and cherishing cultural diversity are central.",
+    "upcomingEvents": "Upcoming Events",
+    "upcomingEventsSubtitle": "Join our activities and meet new people!",
+    "viewAll": "View All Events",
+    "loadDemo": "Load Demo Events",
+    "noEvents": "No upcoming events found.",
+    "nearbyPrograms": "Nearby Programs"
+  },
+  "programs": {
+    "ramazan": "Ramadan Iftar Program",
+    "ramazanDesc": "Special iftar dinners for our community",
+    "ders": "Educational Dinner Event",
+    "dersDesc": "Educational meal program for students and families"
+  }
+}
