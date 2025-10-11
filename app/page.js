@@ -32,56 +32,6 @@ export default function Home() {
     <div className="bg-gradient-to-b from-gray-50 to-white">
       {/* Hero Carousel */}
       <HeroCarousel />
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-72 h-72 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-white rounded-full blur-3xl"></div>
-        </div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="max-w-3xl mx-auto text-center"
-          >
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.2, type: 'spring' }}
-              className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6"
-            >
-              <Sparkles className="w-4 h-4" />
-              <span className="text-sm font-medium">ANBI erkend</span>
-            </motion.div>
-            
-            <h1 className="text-4xl md:text-6xl font-bold mb-6">
-              Samen bouwen aan een inclusieve gemeenschap
-            </h1>
-            
-            <p className="text-xl md:text-2xl mb-8 text-white/90">
-              Stichting Atlas brengt mensen samen door cultuur, educatie en gemeenschapsactiviteiten.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/events"
-                className="inline-flex items-center justify-center gap-2 bg-white text-[#05B6C4] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg"
-              >
-                <Calendar className="w-5 h-5" />
-                Bekijk Evenementen
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              
-              <Link
-                href="/doneren"
-                className="inline-flex items-center justify-center gap-2 bg-[#F7941D] text-white px-8 py-4 rounded-lg font-semibold hover:bg-[#E88610] transition-colors shadow-lg"
-              >
-                <Heart className="w-5 h-5" />
-                Doneer Nu
-              </Link>
-            </div>
-          </motion.div>
-        </div>
       </section>
 
       {/* Mission/Vision Section */}
