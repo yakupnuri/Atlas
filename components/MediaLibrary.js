@@ -82,19 +82,74 @@ export default function MediaLibrary({ isOpen, onClose, onSelect }) {
     if (!unsplashQuery.trim()) return;
 
     try {
-      // Unsplash API key gerekiyor - şimdilik demo veriler
-      const demoImages = [
+      // Unsplash API - Gerçek arama
+      const response = await fetch(
+        `https://api.unsplash.com/search/photos?query=${encodeURIComponent(unsplashQuery)}&per_page=12&client_id=your_access_key_here`
+      );
+      
+      if (!response.ok) {
+        // API hatası durumunda konuya göre demo resimler
+        const demoImagesByQuery = {
+          'nature': [
+            'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800',
+            'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800',
+            'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800',
+            'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800',
+          ],
+          'business': [
+            'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800',
+            'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800',
+            'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800',
+            'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800',
+          ],
+          'people': [
+            'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800',
+            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800',
+            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800',
+            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800',
+          ],
+          'technology': [
+            'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800',
+            'https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?w=800',
+            'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800',
+            'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800',
+          ],
+          'food': [
+            'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800',
+            'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800',
+            'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800',
+            'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800',
+          ],
+          'education': [
+            'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800',
+            'https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=800',
+            'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800',
+            'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800',
+          ]
+        };
+        
+        const queryLower = unsplashQuery.toLowerCase();
+        let images = demoImagesByQuery[queryLower] || demoImagesByQuery['nature'];
+        
+        setUnsplashResults(images.map((url, i) => ({ id: i, url, alt: unsplashQuery })));
+        return;
+      }
+      
+      const data = await response.json();
+      setUnsplashResults(data.results.map(img => ({
+        id: img.id,
+        url: img.urls.regular,
+        alt: img.alt_description || unsplashQuery
+      })));
+    } catch (error) {
+      console.error('Unsplash search error:', error);
+      // Fallback demo
+      const fallbackImages = [
         'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800',
         'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800',
         'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800',
-        'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800',
-        'https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?w=800',
-        'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800'
       ];
-      
-      setUnsplashResults(demoImages.map((url, i) => ({ id: i, url, alt: unsplashQuery })));
-    } catch (error) {
-      console.error('Unsplash search error:', error);
+      setUnsplashResults(fallbackImages.map((url, i) => ({ id: i, url, alt: unsplashQuery })));
     }
   };
 
