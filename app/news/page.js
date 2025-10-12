@@ -19,6 +19,7 @@ const newsItems = [
   {
     id: 2,
     title: 'Yeni Ders Yemeği Programı Başlıyor',
+    slug: 'yeni-ders-yemegi-programi-basliyor',
     excerpt: 'Öğrenciler ve aileler için her Cumartesi düzenlenen eğitici yemek programımız başlıyor.',
     date: '2025-03-22',
     author: 'Mehmet Kaya',
