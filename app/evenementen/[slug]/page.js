@@ -175,7 +175,7 @@ export default function EventDetailPage() {
               </div>
             </motion.div>
 
-            {/* Map Placeholder */}
+            {/* Map Section */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -183,10 +183,33 @@ export default function EventDetailPage() {
               className="bg-white rounded-lg p-6 shadow-md"
             >
               <h2 className="text-2xl font-bold text-gray-800 mb-4">Locatie op de kaart</h2>
-              <div className="aspect-video bg-gray-200 rounded-lg flex items-center justify-center">
-                <MapPin className="w-12 h-12 text-gray-400" />
+              <div className="aspect-video rounded-lg overflow-hidden">
+                <iframe
+                  src={`https://www.google.com/maps?q=${event.lat},${event.lng}&hl=nl&z=15&output=embed`}
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title={`Kaart van ${event.locationName}`}
+                />
               </div>
-              <p className="text-sm text-gray-600 mt-4">{event.address}</p>
+              <div className="mt-4 flex items-start gap-2">
+                <MapPin className="w-5 h-5 text-[#05B6C4] mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold text-gray-800">{event.locationName}</p>
+                  <p className="text-sm text-gray-600">{event.address}</p>
+                  <a
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${event.lat},${event.lng}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm text-[#05B6C4] hover:underline mt-1 inline-block"
+                  >
+                    Routebeschrijving →
+                  </a>
+                </div>
+              </div>
             </motion.div>
           </div>
 
