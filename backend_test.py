@@ -317,9 +317,9 @@ def test_document_replacement():
             get_response = requests.get(f"{API_BASE}/anbi")
             if get_response.status_code == 200:
                 data = get_response.json()
-                beleidsplan_doc = data['documents'].get('beleidsplan')
+                beloningsbeleid_doc = data['documents'].get('beloningsbeleid')
                 
-                if beleidsplan_doc and beleidsplan_doc['fileName'] == 'second_beleidsplan.pdf':
+                if beloningsbeleid_doc and beloningsbeleid_doc['fileName'] == 'second_beloningsbeleid.pdf':
                     print("✅ Document replacement working - upsert functionality confirmed")
                     return True
                 else:
