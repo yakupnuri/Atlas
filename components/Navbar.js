@@ -3,11 +3,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Menu, X, Calendar, Heart, Users, Newspaper, Info, Globe } from 'lucide-react';
+import { Menu, X, Calendar, Heart, Users, Newspaper, Info } from 'lucide-react';
+import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [langOpen, setLangOpen] = useState(false);
 
   const navLinks = [
     { href: '/', label: 'Home' },
