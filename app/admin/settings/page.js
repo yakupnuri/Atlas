@@ -264,6 +264,82 @@ export default function SettingsPage() {
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-gray-900 mb-4">API Ayarları</h2>
               
+              {/* Google OAuth */}
+              <div className="border-2 border-[#05B6C4] rounded-lg p-4 bg-blue-50">
+                <h3 className="font-bold text-lg mb-3 text-[#05B6C4]">🔐 Google OAuth (Giriş Sistemi)</h3>
+                <div className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <input
+                      type="checkbox"
+                      checked={settings.apis?.google_oauth?.enabled || false}
+                      onChange={(e) => setSettings({
+                        ...settings,
+                        apis: {
+                          ...settings.apis,
+                          google_oauth: { ...settings.apis.google_oauth, enabled: e.target.checked }
+                        }
+                      })}
+                      className="w-5 h-5"
+                    />
+                    <label className="text-sm font-medium">Google ile Giriş Aktif</label>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Client ID</label>
+                    <input
+                      type="text"
+                      value={settings.apis?.google_oauth?.client_id || ''}
+                      onChange={(e) => setSettings({
+                        ...settings,
+                        apis: {
+                          ...settings.apis,
+                          google_oauth: { ...settings.apis.google_oauth, client_id: e.target.value }
+                        }
+                      })}
+                      placeholder="xxxxx.apps.googleusercontent.com"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none font-mono text-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Client Secret</label>
+                    <input
+                      type="password"
+                      value={settings.apis?.google_oauth?.client_secret || ''}
+                      onChange={(e) => setSettings({
+                        ...settings,
+                        apis: {
+                          ...settings.apis,
+                          google_oauth: { ...settings.apis.google_oauth, client_secret: e.target.value }
+                        }
+                      })}
+                      placeholder="GOCSPX-xxxxx"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none font-mono text-sm"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Redirect URI</label>
+                    <input
+                      type="text"
+                      value={settings.apis?.google_oauth?.redirect_uri || ''}
+                      onChange={(e) => setSettings({
+                        ...settings,
+                        apis: {
+                          ...settings.apis,
+                          google_oauth: { ...settings.apis.google_oauth, redirect_uri: e.target.value }
+                        }
+                      })}
+                      placeholder="https://yourdomain.com/api/auth/callback/google"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none text-sm"
+                    />
+                  </div>
+                  <div className="bg-white border border-blue-200 p-3 rounded-lg text-sm">
+                    <p className="text-blue-800">
+                      💡 <strong>Not:</strong> Bu bilgileri Google Cloud Console'dan alabilirsiniz. 
+                      Değişikliklerden sonra .env dosyasını da güncelleyin.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
               {/* Unsplash */}
               <div className="border border-gray-200 rounded-lg p-4">
                 <h3 className="font-bold text-lg mb-3">Unsplash API</h3>
@@ -304,7 +380,7 @@ export default function SettingsPage() {
 
               {/* Google APIs */}
               <div className="border border-gray-200 rounded-lg p-4">
-                <h3 className="font-bold text-lg mb-3">Google APIs</h3>
+                <h3 className="font-bold text-lg mb-3">Google Maps & Analytics</h3>
                 <div className="space-y-3">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Google Maps API Key</label>
