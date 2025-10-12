@@ -49,6 +49,7 @@ const newsItems = [
   {
     id: 5,
     title: 'Yeni Gönüllüler Arıyoruz',
+    slug: 'yeni-gonulluler-ariyoruz',
     excerpt: 'Etkinliklerimizde görev almak isteyen gönüllüleri aramaya başladık.',
     date: '2025-02-15',
     author: 'Fatma Demir',
