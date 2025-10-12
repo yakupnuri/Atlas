@@ -238,8 +238,121 @@ export default function EventDetailPage() {
                 Reserveer je plek tijdig! Het aantal plaatsen is beperkt en vol = vol.
               </p>
             </motion.div>
+
+            {/* Social Media Share */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="bg-white border border-gray-200 rounded-lg p-6"
+            >
+              <h3 className="font-semibold text-gray-800 mb-4">Deel dit evenement</h3>
+              <div className="flex flex-wrap gap-3">
+                <a
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-10 h-10 bg-[#1877F2] text-white rounded-full hover:shadow-lg transition-all"
+                  title="Deel op Facebook"
+                >
+                  <Facebook className="w-5 h-5" />
+                </a>
+                <a
+                  href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}&text=${encodeURIComponent(event.title)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-10 h-10 bg-[#1DA1F2] text-white rounded-full hover:shadow-lg transition-all"
+                  title="Deel op Twitter"
+                >
+                  <Twitter className="w-5 h-5" />
+                </a>
+                <a
+                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-10 h-10 bg-[#0A66C2] text-white rounded-full hover:shadow-lg transition-all"
+                  title="Deel op LinkedIn"
+                >
+                  <Linkedin className="w-5 h-5" />
+                </a>
+                <a
+                  href={`https://wa.me/?text=${encodeURIComponent(event.title + ' - ' + (typeof window !== 'undefined' ? window.location.href : ''))}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center w-10 h-10 bg-[#25D366] text-white rounded-full hover:shadow-lg transition-all"
+                  title="Deel via WhatsApp"
+                >
+                  <Share2 className="w-5 h-5" />
+                </a>
+                <button
+                  onClick={() => {
+                    if (navigator.share) {
+                      navigator.share({
+                        title: event.title,
+                        text: event.description,
+                        url: typeof window !== 'undefined' ? window.location.href : ''
+                      });
+                    } else {
+                      alert('Share via Instagram app');
+                    }
+                  }}
+                  className="flex items-center justify-center w-10 h-10 bg-gradient-to-tr from-[#FD5949] via-[#D6249F] to-[#285AEB] text-white rounded-full hover:shadow-lg transition-all"
+                  title="Deel op Instagram"
+                >
+                  <Instagram className="w-5 h-5" />
+                </button>
+              </div>
+            </motion.div>
           </div>
         </div>
+
+        {/* Previous Year Gallery Section */}
+        {event.hasPreviousEdition && event.photoGallery && event.photoGallery.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mt-12"
+          >
+            <div className="bg-white rounded-lg p-8 shadow-md">
+              <h2 className="text-3xl font-bold text-gray-800 mb-2">
+                Foto's van {event.previousYear || 'vorig jaar'}
+              </h2>
+              <p className="text-gray-600 mb-6">
+                Bekijk sfeerimpressies van onze eerdere editie
+              </p>
+              
+              {event.relatedNewsSlug && (
+                <Link
+                  href={`/nieuws/${event.relatedNewsSlug}`}
+                  className="inline-flex items-center gap-2 text-[#05B6C4] hover:underline mb-6"
+                >
+                  Lees het nieuwsbericht over dit evenement
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              )}
+
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-6">
+                {event.photoGallery.map((photo, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.1 * index }}
+                    className="aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow cursor-pointer"
+                    onClick={() => window.open(photo, '_blank')}
+                  >
+                    <img
+                      src={photo}
+                      alt={`Foto ${index + 1} van ${event.title} ${event.previousYear}`}
+                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                    />
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
       </div>
     </div>
   );
