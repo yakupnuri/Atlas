@@ -98,8 +98,8 @@ export default function AdminANBIPage() {
 
   const getDocumentName = (type) => {
     const names = {
+      beloningsbeleid: 'Beloningsbeleid',
       beleidsplan: 'Beleidsplan',
-      huisstijl: 'Huisstijl',
       jaarrekening: 'Jaarrekening'
     }
     return names[type] || type
