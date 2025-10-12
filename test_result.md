@@ -273,6 +273,42 @@ frontend:
       - working: true
         agent: "main"
         comment: "Responsive navigation with mobile menu, footer with contact info"
+  
+  - task: "ANBI Public Page"
+    implemented: true
+    working: true
+    file: "/app/app/anbi/page.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "ANBI page created with multi-language support (NL, EN, TR), displays 3 document cards (Beleidsplan, Huisstijl, Jaarrekening), fetches documents from API, shows 'Nog niet beschikbaar' when no PDFs uploaded"
+
+  - task: "ANBI Admin Page"
+    implemented: true
+    working: true
+    file: "/app/app/admin/anbi/page.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "Admin interface for uploading and managing ANBI documents, 3 sections for Beleidsplan, Huisstijl, Jaarrekening, PDF validation (10MB max), file upload with base64 encoding"
+
+  - task: "ANBI API Routes"
+    implemented: true
+    working: true
+    file: "/app/app/api/anbi/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: true
+        agent: "main"
+        comment: "GET /api/anbi returns all ANBI documents, POST /api/anbi handles file uploads with validation, stores files in /public/uploads/anbi/, saves metadata to MongoDB anbi_documents collection"
 
 metadata:
   created_by: "main_agent"
