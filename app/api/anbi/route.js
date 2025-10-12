@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server'
-import { connectDB } from '@/lib/mongodb'
+import { getDb } from '@/lib/mongodb'
 import { writeFile, mkdir } from 'fs/promises'
 import { existsSync } from 'fs'
 import path from 'path'
 
 export async function GET(request) {
   try {
-    const db = await connectDB()
+    const db = await getDb()
     const anbiCollection = db.collection('anbi_documents')
 
     // Fetch all documents
