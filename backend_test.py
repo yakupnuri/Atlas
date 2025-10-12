@@ -11,7 +11,7 @@ import os
 from datetime import datetime
 
 # Configuration
-BASE_URL = "https://atlas-events.preview.emergentagent.com"
+BASE_URL = "https://community-hub-147.preview.emergentagent.com"
 API_BASE = f"{BASE_URL}/api"
 
 def create_test_pdf_base64():
