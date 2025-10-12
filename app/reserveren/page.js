@@ -261,6 +261,19 @@ export default function ReserverenPage() {
 
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
+                        Telefoonnummer (optioneel)
+                      </label>
+                      <input
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none"
+                        placeholder="+31 6 12345678"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-gray-700 mb-2">
                         Aantal personen *
                       </label>
                       <input
