@@ -84,9 +84,17 @@ export async function PUT(request) {
     const db = await getDb();
     const data = await request.json();
     
+    // Remove _id and type from update data to avoid immutable field error
+    const { _id, type, ...updateData } = data;
+    
     await db.collection('about').updateOne(
       { type: 'content' },
-      { $set: data },
+      { 
+        $set: {
+          type: 'content',
+          ...updateData
+        }
+      },
       { upsert: true }
     );
     
