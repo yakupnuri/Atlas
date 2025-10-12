@@ -5,13 +5,13 @@ import { Upload, FileText, Check, X, Loader2 } from 'lucide-react'
 
 export default function AdminANBIPage() {
   const [documents, setDocuments] = useState({
+    beloningsbeleid: null,
     beleidsplan: null,
-    huisstijl: null,
     jaarrekening: null
   })
   const [uploading, setUploading] = useState({
+    beloningsbeleid: false,
     beleidsplan: false,
-    huisstijl: false,
     jaarrekening: false
   })
   const [message, setMessage] = useState('')
