@@ -341,7 +341,17 @@ export default function AdminEventsPage() {
                           <p className="text-gray-900 font-medium">
                             {new Date(event.date).toLocaleDateString('nl-NL')}
                           </p>
-                          <p className="text-gray-500">{event.time || 'Tüm gün'}</p>
+                          {event.allDay ? (
+                            <p className="text-gray-500">Tüm gün</p>
+                          ) : event.startTime || event.endTime ? (
+                            <p className="text-gray-500">
+                              {event.startTime && event.startTime.substring(0, 5)}
+                              {event.startTime && event.endTime && ' - '}
+                              {event.endTime && event.endTime.substring(0, 5)}
+                            </p>
+                          ) : (
+                            <p className="text-gray-500">Saat belirtilmemiş</p>
+                          )}
                         </div>
                       </td>
                       <td className="px-6 py-4">
