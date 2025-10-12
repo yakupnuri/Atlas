@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Users, ArrowRight } from 'lucide-react';
+import { Users, ArrowRight, Target, Heart, Award } from 'lucide-react';
 import EventCard from '@/components/EventCard';
 import HeroCarousel from '@/components/HeroCarousel';
 import NearbyPrograms from '@/components/NearbyPrograms';
