@@ -73,11 +73,13 @@ export default function AdminAboutPage() {
       });
 
       if (response.ok) {
-        alert('✅ İçerik başarıyla kaydedildi! Content is succesvol opgeslagen!');
+        setSuccessMessage('✅ İçerik başarıyla kaydedildi! Veritabanına kaydedildi.');
+        setTimeout(() => setSuccessMessage(''), 5000);
         // Refresh data to confirm
         await fetchData();
       } else {
-        alert('❌ Kaydetme hatası! Er is een fout opgetreden bij het opslaan.');
+        setSuccessMessage('❌ Kaydetme hatası! Er is een fout opgetreden bij het opslaan.');
+        setTimeout(() => setSuccessMessage(''), 5000);
       }
     } catch (error) {
       console.error('Save error:', error);
