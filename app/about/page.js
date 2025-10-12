@@ -1,16 +1,39 @@
 'use client'
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Users, Target, Heart, Award, Mail, MapPin } from 'lucide-react';
 import Image from 'next/image';
 
 export default function AboutPage() {
-  const team = [
-    { name: 'Ahmet Yılmaz', role: 'Kurucu Başkan', image: 'https://i.pravatar.cc/300?img=12' },
-    { name: 'Fatma Demir', role: 'Program Koordinatörü', image: 'https://i.pravatar.cc/300?img=5' },
-    { name: 'Mehmet Kaya', role: 'Eğitim Sorumlusu', image: 'https://i.pravatar.cc/300?img=33' },
-    { name: 'Ayşe Öztürk', role: 'Etkinlik Yöneticisi', image: 'https://i.pravatar.cc/300?img=9' },
-  ];
+  const [content, setContent] = useState(null);
+  const [team, setTeam] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchAboutData();
+  }, []);
+
+  const fetchAboutData = async () => {
+    try {
+      const response = await fetch('/api/admin/about');
+      const data = await response.json();
+      setContent(data.content);
+      setTeam(data.team || []);
+    } catch (error) {
+      console.error('Error fetching about data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#05B6C4]"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
