@@ -233,15 +233,6 @@ export default function AdminAboutPage() {
               <span className="text-gray-400">|</span>
               <h1 className="text-xl font-bold text-gray-800">Over Ons Beheer</h1>
             </div>
-            
-            <button
-              onClick={saveContent}
-              disabled={saving}
-              className="flex items-center gap-2 bg-[#05B6C4] hover:bg-[#3B87BE] text-white px-6 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50"
-            >
-              <Save className="w-4 h-4" />
-              {saving ? 'Bezig...' : 'Opslaan'}
-            </button>
           </div>
           
           {/* Success Message */}
