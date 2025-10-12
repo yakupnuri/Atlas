@@ -167,42 +167,44 @@ export default function AboutPage() {
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#05B6C4] mx-auto"></div>
               </div>
             ) : team.length > 0 ? (
-              <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8">
-                {team.map((member, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.1 * index }}
-                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow"
-                  >
-                    <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
-                      {member.photo ? (
-                        <img
-                          src={member.photo}
-                          alt={member.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#05B6C4] to-[#3B87BE]">
-                          <User className="w-24 h-24 text-white opacity-80" />
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-4 text-center">
-                      <h3 className="font-bold text-gray-900 text-lg mb-1">
-                        {member.name}
-                      </h3>
-                      <p className="text-sm text-[#05B6C4] mb-2">{member.role}</p>
-                      {member.category && (
-                        <p className="text-xs text-gray-500">{member.category}</p>
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
+              <div className="flex justify-center">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                  {team.map((member, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: 0.1 * index }}
+                      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-64 mx-auto"
+                    >
+                      <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
+                        {member.photo ? (
+                          <img
+                            src={member.photo}
+                            alt={member.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#05B6C4] to-[#3B87BE]">
+                            <User className="w-24 h-24 text-white opacity-80" />
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-4 text-center">
+                        <h3 className="font-bold text-gray-900 text-lg mb-1">
+                          {member.name}
+                        </h3>
+                        <p className="text-sm text-[#05B6C4] mb-2">{member.role}</p>
+                        {member.category && (
+                          <p className="text-xs text-gray-500">{member.category}</p>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             ) : (
-              <div className="text-center py-12 bg-white rounded-lg shadow-md">
+              <div className="text-center py-12 bg-white rounded-lg shadow-md max-w-2xl mx-auto">
                 <Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
                 <p className="text-gray-500">Team informatie wordt binnenkort toegevoegd</p>
               </div>
