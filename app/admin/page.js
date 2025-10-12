@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 import { motion } from 'framer-motion';
 import { Lock, User, AlertCircle, Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
