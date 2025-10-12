@@ -268,7 +268,7 @@ export default function NewsDetailPage() {
           >
             {prevNext.prev ? (
               <Link
-                href={`/news/${prevNext.prev.slug}`}
+                href={`/nieuws/${prevNext.prev.slug}`}
                 className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow flex items-center gap-4"
               >
                 <ChevronLeft className="w-8 h-8 text-[#05B6C4] flex-shrink-0" />
