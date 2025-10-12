@@ -227,6 +227,16 @@ export default function NewsManagement() {
           </div>
         )}
 
+        {/* Media Library */}
+        <MediaLibrary
+          isOpen={showMediaLibrary}
+          onClose={() => setShowMediaLibrary(false)}
+          onSelect={(url) => {
+            setFormData({ ...formData, image: url });
+            setShowMediaLibrary(false);
+          }}
+        />
+
         {/* Modal */}
         {showModal && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 overflow-y-auto p-4">
