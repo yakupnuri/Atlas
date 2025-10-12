@@ -208,7 +208,11 @@ export default function EventDetailPage() {
               <h2 className="text-2xl font-bold text-gray-800 mb-4">Locatie op de kaart</h2>
               <div className="aspect-video rounded-lg overflow-hidden">
                 <iframe
-                  src={`https://www.google.com/maps?q=${event.lat},${event.lng}&hl=nl&z=15&output=embed`}
+                  src={
+                    event.lat && event.lng
+                      ? `https://www.google.com/maps?q=${event.lat},${event.lng}&hl=nl&z=15&output=embed`
+                      : `https://www.google.com/maps?q=${encodeURIComponent(event.address || event.locationName)}&hl=nl&z=15&output=embed`
+                  }
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -224,7 +228,11 @@ export default function EventDetailPage() {
                   <p className="font-semibold text-gray-800">{event.locationName}</p>
                   <p className="text-sm text-gray-600">{event.address}</p>
                   <a
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${event.lat},${event.lng}`}
+                    href={
+                      event.lat && event.lng
+                        ? `https://www.google.com/maps/dir/?api=1&destination=${event.lat},${event.lng}`
+                        : `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(event.address || event.locationName)}`
+                    }
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-sm text-[#05B6C4] hover:underline mt-1 inline-block"
