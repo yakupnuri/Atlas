@@ -44,12 +44,18 @@ export default function EventCard({ event, index = 0 }) {
         <div className="space-y-2 mb-4">
           <div className="flex items-center text-sm text-gray-600">
             <Calendar className="w-4 h-4 mr-2 text-[#05B6C4]" />
-            {format(new Date(event.startAt), 'EEEE d MMMM yyyy, HH:mm', { locale: nl })}
+            {event.startAt ? (
+              format(new Date(event.startAt), 'EEEE d MMMM yyyy, HH:mm', { locale: nl })
+            ) : event.date ? (
+              format(new Date(event.date), 'EEEE d MMMM yyyy', { locale: nl })
+            ) : (
+              'Datum nog niet bekend'
+            )}
           </div>
           
           <div className="flex items-center text-sm text-gray-600">
             <MapPin className="w-4 h-4 mr-2 text-[#05B6C4]" />
-            {event.locationName}
+            {event.locationName || event.location || 'Locatie nog niet bekend'}
           </div>
           
           <div className="flex items-center text-sm text-gray-600">
