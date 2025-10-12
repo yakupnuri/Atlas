@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Menu, X, Calendar, Heart, Users, Newspaper, Info } from 'lucide-react';
+import { Menu, X, Calendar, Heart, Users, Newspaper, Info, FileText } from 'lucide-react';
 import LanguageSwitcher from './LanguageSwitcher';
 
 export default function Navbar() {
