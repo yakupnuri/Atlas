@@ -5,20 +5,22 @@ import { motion } from 'framer-motion';
 import { Users, Target, Heart, Award, User } from 'lucide-react';
 
 export default function AboutPage() {
+  const [aboutContent, setAboutContent] = useState(null);
   const [team, setTeam] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchTeamData();
+    fetchAboutData();
   }, []);
 
-  const fetchTeamData = async () => {
+  const fetchAboutData = async () => {
     try {
       const response = await fetch('/api/admin/about');
       const data = await response.json();
+      setAboutContent(data.content);
       setTeam(data.team || []);
     } catch (error) {
-      console.error('Error fetching team data:', error);
+      console.error('Error fetching about data:', error);
     } finally {
       setLoading(false);
     }
