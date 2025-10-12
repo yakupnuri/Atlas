@@ -60,7 +60,7 @@ export default function EventCard({ event, index = 0 }) {
         
         <Link
           href={`/evenementen/${event.slug}`}
-          className="block w-full text-center bg-[#05B6C4] hover:bg-[#3B87BE] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
+          className="block w-full text-center bg-gradient-to-r from-[#05B6C4] to-[#0891A0] hover:shadow-lg text-white font-semibold py-2 px-4 rounded-lg transition-all duration-300"
         >
           Bekijk details
         </Link>
