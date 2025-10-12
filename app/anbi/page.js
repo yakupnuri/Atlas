@@ -3,10 +3,10 @@
 import { useState, useEffect } from 'react'
 import { FileText, Download } from 'lucide-react'
 import { motion } from 'framer-motion'
-import { useTranslations } from 'next-intl'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function ANBIPage() {
-  const t = useTranslations('anbi')
+  const { t } = useLanguage()
   const [documents, setDocuments] = useState({
     beleidsplan: null,
     huisstijl: null,
