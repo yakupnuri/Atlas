@@ -48,33 +48,7 @@ export default function Navbar() {
             ))}
             
             {/* Language Selector */}
-            <div className="relative">
-              <button
-                onClick={() => setLangOpen(!langOpen)}
-                className="flex items-center gap-2 text-gray-700 hover:text-[#05B6C4] transition-colors font-medium"
-              >
-                <Globe className="w-4 h-4" />
-                <span className="hidden lg:inline">TR</span>
-              </button>
-              
-              {langOpen && (
-                <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg py-2 border">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => {
-                        setLangOpen(false);
-                        // Language switching will be implemented
-                      }}
-                      className="w-full px-4 py-2 text-left hover:bg-gray-50 flex items-center gap-2"
-                    >
-                      <span>{lang.flag}</span>
-                      <span className="text-sm">{lang.name}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+            <LanguageSwitcher />
           </div>
 
           {/* Mobile Menu Button */}
