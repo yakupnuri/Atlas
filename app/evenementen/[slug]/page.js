@@ -265,6 +265,32 @@ export default function EventDetailPage() {
               </p>
             </motion.div>
 
+            {/* Volunteers Section */}
+            {event.volunteers && event.volunteers.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.25 }}
+                className="bg-white border border-gray-200 rounded-lg p-6"
+              >
+                <h3 className="font-semibold text-gray-800 mb-4">Organisatieteam</h3>
+                <p className="text-sm text-gray-600 mb-4">Dit evenement wordt georganiseerd door onze toegewijde vrijwilligers</p>
+                <div className="space-y-3">
+                  {event.volunteers.map((volunteer, index) => (
+                    <div key={index} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#05B6C4] to-[#3B87BE] rounded-full flex items-center justify-center text-white font-semibold text-sm">
+                        {volunteer.charAt(0).toUpperCase()}
+                      </div>
+                      <div>
+                        <p className="font-semibold text-gray-800">{volunteer}</p>
+                        <p className="text-xs text-gray-500">Vrijwilliger</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
             {/* Social Media Share */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
