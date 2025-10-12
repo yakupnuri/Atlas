@@ -15,7 +15,7 @@ export default function AdminAboutPage() {
   
   const [content, setContent] = useState({
     whoWeAre: { title: '', content: '' },
-    mission: { title: '', content: '' },
+    mission: { title: '', content: '', items: [] },
     vision: { title: '', content: '' },
     values: []
   });
