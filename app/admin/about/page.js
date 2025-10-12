@@ -605,7 +605,7 @@ export default function AdminAboutPage() {
             </div>
           </div>
         )}
-      </main>
-    </div>
+      </div>
+    </AdminLayout>
   );
 }
