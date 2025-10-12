@@ -320,58 +320,36 @@ export default function EventDetailPage() {
             >
               <h3 className="font-semibold text-gray-800 mb-4">Deel dit evenement</h3>
               <div className="flex flex-wrap gap-3">
-                <a
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  onClick={() => shareOnSocial('facebook')}
                   className="flex items-center justify-center w-10 h-10 bg-[#1877F2] text-white rounded-full hover:shadow-lg transition-all"
                   title="Deel op Facebook"
                 >
                   <Facebook className="w-5 h-5" />
-                </a>
-                <a
-                  href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}&text=${encodeURIComponent(event.title)}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                </button>
+                <button
+                  onClick={() => shareOnSocial('twitter')}
                   className="flex items-center justify-center w-10 h-10 bg-[#1DA1F2] text-white rounded-full hover:shadow-lg transition-all"
                   title="Deel op Twitter"
                 >
                   <Twitter className="w-5 h-5" />
-                </a>
-                <a
-                  href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                </button>
+                <button
+                  onClick={() => shareOnSocial('linkedin')}
                   className="flex items-center justify-center w-10 h-10 bg-[#0A66C2] text-white rounded-full hover:shadow-lg transition-all"
                   title="Deel op LinkedIn"
                 >
                   <Linkedin className="w-5 h-5" />
-                </a>
-                <a
-                  href={`https://wa.me/?text=${encodeURIComponent(event.title + ' - ' + (typeof window !== 'undefined' ? window.location.href : ''))}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                </button>
+                <button
+                  onClick={() => shareOnSocial('whatsapp')}
                   className="flex items-center justify-center w-10 h-10 bg-[#25D366] text-white rounded-full hover:shadow-lg transition-all"
                   title="Deel via WhatsApp"
                 >
                   <Share2 className="w-5 h-5" />
-                </a>
+                </button>
                 <button
-                  onClick={() => {
-                    // Copy link to clipboard for Instagram sharing
-                    const url = typeof window !== 'undefined' ? window.location.href : '';
-                    if (navigator.clipboard) {
-                      navigator.clipboard.writeText(url).then(() => {
-                        alert('Link gekopieerd! Plak deze in je Instagram story of post.');
-                      });
-                    } else if (navigator.share) {
-                      navigator.share({
-                        title: event.title,
-                        text: event.description,
-                        url: url
-                      });
-                    }
-                  }}
+                  onClick={() => shareOnSocial('instagram')}
                   className="flex items-center justify-center w-10 h-10 bg-gradient-to-tr from-[#FD5949] via-[#D6249F] to-[#285AEB] text-white rounded-full hover:shadow-lg transition-all"
                   title="Deel op Instagram"
                 >
