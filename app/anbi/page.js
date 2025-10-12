@@ -34,16 +34,16 @@ export default function ANBIPage() {
 
   const documentCards = [
     {
-      id: 'beleidsplan',
-      title: t('anbi.beleidsplan.title'),
-      description: t('anbi.beleidsplan.description'),
+      id: 'beloningsbeleid',
+      title: t('anbi.beloningsbeleid.title'),
+      description: t('anbi.beloningsbeleid.description'),
       icon: FileText,
       color: 'from-blue-500 to-blue-600'
     },
     {
-      id: 'huisstijl',
-      title: t('anbi.huisstijl.title'),
-      description: t('anbi.huisstijl.description'),
+      id: 'beleidsplan',
+      title: t('anbi.beleidsplan.title'),
+      description: t('anbi.beleidsplan.description'),
       icon: FileText,
       color: 'from-purple-500 to-purple-600'
     },
