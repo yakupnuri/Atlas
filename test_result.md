@@ -313,14 +313,16 @@ frontend:
 metadata:
   created_by: "main_agent"
   version: "1.0"
-  test_sequence: 1
+  test_sequence: 2
   run_ui: true
   fase_completed: 1
-  current_fase: 1
+  current_fase: 2
 
 test_plan:
   current_focus:
-    - "All Fase 1 tasks completed and manually tested"
+    - "ANBI Public Page"
+    - "ANBI Admin Page"
+    - "ANBI API Routes"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
@@ -330,3 +332,5 @@ agent_communication:
     message: "FASE 1 COMPLETE! Event & Reservation system with countdown timer and capacity visualization (sandalyeli) working perfectly. Manual testing done via curl and screenshot tool. Ready for user review."
   - agent: "main"
     message: "Special features implemented: 1) Animated countdown timer with Framer Motion 2) Chair-based capacity visualization showing reserved vs available seats 3) Complete NL interface 4) Demo email system 5) Responsive design"
+  - agent: "main"
+    message: "ANBI PAGE IMPLEMENTATION COMPLETE! Created /anbi public page with 3 document cards (Beleidsplan, Huisstijl, Jaarrekening) with multi-language support (NL, EN, TR). Added /admin/anbi page for document management with PDF upload functionality. Added ANBI link to Navbar. API routes created for fetching and uploading documents. Files stored in /public/uploads/anbi/ and metadata in MongoDB. Needs backend testing for file upload and API functionality."
