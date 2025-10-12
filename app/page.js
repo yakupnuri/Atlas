@@ -65,50 +65,99 @@ export default function Home() {
       <section className="py-16 container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Left: Featured News - 2 columns */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 space-y-6">
             {latestNews.length > 0 ? (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow h-full"
-              >
-                <div className="relative h-96">
-                  <img
-                    src={latestNews[0].image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'}
-                    alt={latestNews[0].title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="bg-[#05B6C4] text-white px-3 py-1 rounded-full text-sm font-semibold">
-                        {latestNews[0].category || 'Nieuws'}
-                      </span>
-                      <span className="text-sm opacity-90">
-                        {new Date(latestNews[0].date || latestNews[0].publishDate).toLocaleDateString('nl-NL', {
-                          day: 'numeric',
-                          month: 'long',
-                          year: 'numeric'
-                        })}
-                      </span>
+              <>
+                {/* Main Featured News */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
+                >
+                  <div className="relative h-80">
+                    <img
+                      src={latestNews[0].image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'}
+                      alt={latestNews[0].title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                      <div className="flex items-center gap-3 mb-2">
+                        <span className="bg-[#05B6C4] text-white px-3 py-1 rounded-full text-sm font-semibold">
+                          {latestNews[0].category || 'Nieuws'}
+                        </span>
+                        <span className="text-sm opacity-90">
+                          {new Date(latestNews[0].date || latestNews[0].publishDate).toLocaleDateString('nl-NL', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                          })}
+                        </span>
+                      </div>
+                      <h2 className="text-2xl font-bold mb-2 leading-tight">
+                        {latestNews[0].title}
+                      </h2>
+                      <p className="text-base opacity-90 mb-3 line-clamp-2">
+                        {latestNews[0].excerpt}
+                      </p>
+                      <Link 
+                        href={`/nieuws/${latestNews[0].slug}`}
+                        className="inline-flex items-center bg-white text-[#05B6C4] px-5 py-2 rounded-lg font-semibold hover:bg-[#05B6C4] hover:text-white transition-colors group"
+                      >
+                        Lees meer
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </Link>
                     </div>
-                    <h2 className="text-3xl font-bold mb-3 leading-tight">
-                      {latestNews[0].title}
-                    </h2>
-                    <p className="text-lg opacity-90 mb-4 line-clamp-2">
-                      {latestNews[0].excerpt}
-                    </p>
-                    <Link 
-                      href={`/nieuws/${latestNews[0].slug}`}
-                      className="inline-flex items-center bg-white text-[#05B6C4] px-6 py-3 rounded-lg font-semibold hover:bg-[#05B6C4] hover:text-white transition-colors group"
-                    >
-                      Lees meer
-                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </Link>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
+
+                {/* 4 Smaller News Cards */}
+                {latestNews.length > 1 && (
+                  <div className="grid grid-cols-2 gap-4">
+                    {latestNews.slice(1, 5).map((news, index) => (
+                      <motion.div
+                        key={news.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow group"
+                      >
+                        <Link href={`/nieuws/${news.slug}`}>
+                          <div className="relative h-32">
+                            <img
+                              src={news.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400'}
+                              alt={news.title}
+                              className="w-full h-full object-cover"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                          </div>
+                          <div className="p-4">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="bg-[#05B6C4]/10 text-[#05B6C4] px-2 py-1 rounded text-xs font-semibold">
+                                {news.category || 'Nieuws'}
+                              </span>
+                              <span className="text-xs text-gray-500">
+                                {new Date(news.date || news.publishDate).toLocaleDateString('nl-NL', {
+                                  day: 'numeric',
+                                  month: 'short'
+                                })}
+                              </span>
+                            </div>
+                            <h3 className="font-bold text-gray-800 mb-2 line-clamp-2 group-hover:text-[#05B6C4] transition-colors">
+                              {news.title}
+                            </h3>
+                            <p className="text-sm text-gray-600 line-clamp-2">
+                              {news.excerpt}
+                            </p>
+                          </div>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
+              </>
             ) : (
               <div className="bg-gray-100 rounded-lg shadow-lg h-full flex items-center justify-center p-8">
                 <p className="text-gray-500 text-lg">Geen nieuws beschikbaar</p>
