@@ -231,6 +231,17 @@ export default function AdminAboutPage() {
               {saving ? 'Bezig...' : 'Opslaan'}
             </button>
           </div>
+          
+          {/* Success Message */}
+          {successMessage && (
+            <div className={`mt-4 p-4 rounded-lg ${
+              successMessage.includes('✅') 
+                ? 'bg-green-50 text-green-800 border border-green-200' 
+                : 'bg-red-50 text-red-800 border border-red-200'
+            }`}>
+              <p className="font-semibold text-center">{successMessage}</p>
+            </div>
+          )}
         </div>
       </header>
 
