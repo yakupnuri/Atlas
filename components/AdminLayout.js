@@ -12,7 +12,8 @@ import {
   FileText,
   Menu,
   X,
-  LogOut
+  LogOut,
+  Users
 } from 'lucide-react';
 
 export default function AdminLayout({ children }) {
