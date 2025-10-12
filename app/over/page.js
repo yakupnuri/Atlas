@@ -150,11 +150,8 @@ export default function AboutPage() {
             </div>
             
             <div className="bg-gradient-to-br from-blue-50 to-teal-50 rounded-lg shadow-md p-8">
-              <p className="text-gray-700 leading-relaxed mb-4">
-                Wij geloven in een samenleving waarin respect, tolerantie en culturele diversiteit als fundamentele waarden gelden. Stichting Atlas wil bijdragen aan sociale cohesie, actief burgerschap en gedeelde toekomstperspectieven.
-              </p>
               <p className="text-gray-700 leading-relaxed">
-                Door middel van educatie, ontmoeting en samenwerking creëren wij ruimte voor dialoog en persoonlijke ontwikkeling. Onze projecten zijn gericht op het zichtbaar maken en verbinden van mensen en gemeenschappen.
+                {aboutContent?.vision?.content || 'Wij geloven in een samenleving waarin respect, tolerantie en culturele diversiteit als fundamentele waarden gelden. Stichting Atlas wil bijdragen aan sociale cohesie, actief burgerschap en gedeelde toekomstperspectieven. Door middel van educatie, ontmoeting en samenwerking creëren wij ruimte voor dialoog en persoonlijke ontwikkeling. Onze projecten zijn gericht op het zichtbaar maken en verbinden van mensen en gemeenschappen.'}
               </p>
             </div>
           </motion.div>
