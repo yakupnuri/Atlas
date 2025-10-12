@@ -3,9 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Save, Plus, Trash2, Edit2, ArrowLeft, Users as UsersIcon } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
+import { Save, Plus, Trash2, Edit2, Users as UsersIcon } from 'lucide-react';
+import AdminLayout from '@/components/AdminLayout';
 
 export default function AdminAboutPage() {
   const router = useRouter();
