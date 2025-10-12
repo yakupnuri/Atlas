@@ -11,7 +11,10 @@ const corsHeaders = {
 // Verify admin token
 async function verifyAdmin(request) {
   const token = request.headers.get('authorization')?.replace('Bearer ', '');
-  if (!token) return null;
+  if (!token) {
+    console.log('No token provided');
+    return null;
+  }
   
   // Demo token için fallback
   if (token === 'demo-admin-token') {
@@ -24,8 +27,32 @@ async function verifyAdmin(request) {
   
   try {
     const db = await getDb();
+    
+    // Token ile kullanıcı ara
     const admin = await db.collection('admins').findOne({ token });
-    return admin;
+    
+    if (admin) {
+      console.log('Admin found by token:', admin.username);
+      return admin;
+    }
+    
+    // Token pattern: "token-{userId}-{timestamp}" - userId'den kullanıcı bul
+    if (token.startsWith('token-')) {
+      const parts = token.split('-');
+      if (parts.length >= 2) {
+        const userId = parts.slice(1, -1).join('-'); // Son timestamp hariç ortadaki kısım user id
+        console.log('Trying to find user by ID:', userId);
+        
+        const adminById = await db.collection('admins').findOne({ id: userId });
+        if (adminById) {
+          console.log('Admin found by ID:', adminById.username);
+          return adminById;
+        }
+      }
+    }
+    
+    console.log('No admin found for token');
+    return null;
   } catch (error) {
     console.error('Token verification error:', error);
     return null;
