@@ -325,7 +325,6 @@ test_plan:
   current_focus:
     - "ANBI Public Page"
     - "ANBI Admin Page"
-    - "ANBI API Routes"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
