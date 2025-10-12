@@ -1,6 +1,5 @@
 const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
-require('dotenv').config();
 
 async function createAdmin() {
   const client = new MongoClient(process.env.MONGO_URL);
