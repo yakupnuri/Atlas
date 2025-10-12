@@ -304,11 +304,14 @@ frontend:
     file: "/app/app/api/anbi/route.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: true
         agent: "main"
         comment: "GET /api/anbi returns all ANBI documents, POST /api/anbi handles file uploads with validation, stores files in /public/uploads/anbi/, saves metadata to MongoDB anbi_documents collection"
+      - working: true
+        agent: "testing"
+        comment: "BACKEND TESTING COMPLETE ✅ All 6 test scenarios passed: 1) GET empty documents returns correct structure 2) POST uploads work for all 3 document types (beleidsplan, huisstijl, jaarrekening) 3) GET after uploads returns all documents with correct metadata 4) Invalid requests properly rejected (missing fields, invalid types) 5) Document replacement (upsert) working correctly 6) File system creation verified - files stored in /public/uploads/anbi/ 7) MongoDB storage verified - metadata in anbi_documents collection. API handles base64 file uploads, validates document types, creates unique filenames with timestamps, and implements upsert functionality. Note: File size validation (10MB limit) expected to be handled by frontend."
 
 metadata:
   created_by: "main_agent"
