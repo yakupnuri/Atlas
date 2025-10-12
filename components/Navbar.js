@@ -14,6 +14,7 @@ export default function Navbar() {
     { href: '/about', label: 'Over Ons', icon: Info },
     { href: '/events', label: 'Evenementen', icon: Calendar },
     { href: '/news', label: 'Nieuws', icon: Newspaper },
+    { href: '/anbi', label: 'ANBI', icon: FileText },
     { href: '/reserveren', label: 'Reserveren', icon: Users },
     { href: '/doneren', label: 'Doneren', icon: Heart },
   ];
