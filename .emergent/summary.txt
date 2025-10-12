@@ -1,35 +1,27 @@
 <analysis>
-The previous AI engineer effectively initiated and iteratively developed the Stichting Atlas web application, following a priority-driven approach. Initially, the focus was on establishing the core Event & Reservation system, including backend APIs, MongoDB integration, and a basic frontend with essential features like capacity visualization and countdowns. Upon successful completion of Fase 1, the engineer transitioned to incorporating user feedback for multi-language support, a dynamic homepage carousel, and dedicated News and About Us pages. Critical issues like  syntax errors and i18n  integration challenges were systematically debugged and resolved. The work then progressed to enriching the News detail page, fixing the Reservation flow, and enhancing it with a sidebar and dynamic event linking. The development trajectory demonstrates a strong capability for feature implementation, debugging, and user interaction, with a clear focus on delivering demonstrable progress.
+The AI engineer's trajectory demonstrates a highly iterative and responsive development process, effectively handling a wide array of user requests from new feature implementation to critical bug fixes and refactoring. Key achievements include the creation and refinement of the ANBI page, a major overhaul of the application's navigation and page URL structure (e.g.,  to ), and comprehensive button standardization across the site. Significant effort was dedicated to enhancing the Event Detail page with social media sharing, volunteer display, and a dynamic Google Maps integration. Debugging i18n context issues, resolving data persistence problems in MongoDB, and fixing URL linking post-refactoring were recurrent challenges, addressed through systematic analysis and multiple attempts. The work concluded with persistent issues in syncing Over Ons content from the API to the homepage, indicating a data synchronization or caching challenge in the backend.
 </analysis>
 
 <product_requirements>
-The Stichting Atlas web application aims to be a modern, scalable, and secure platform. The public-facing site is primarily in Dutch (NL), with the admin panel supporting NL and potentially EN. Key features include a comprehensive sitemap, a robust admin panel for content, event, reservation, and donation management, a user system for Culture-Education Center (students/parents), and volunteer management.
+The Stichting Atlas web application aims to be a modern, scalable, and secure platform. The public-facing site is primarily in Dutch (NL), with admin panel supporting NL/EN/TR.
 
 **Implemented Features & Current State:**
-*   **Core Infrastructure**: Next.js (App Router, TypeScript), React 18, Tailwind CSS, Framer Motion, MongoDB for database,  for i18n.
-*   **Event & Reservation System (Fase 1 Complete)**:
-    *   Public  page with event listing and  for event details.
-    *   Reservation functionality via  with capacity control, .ics attachment, and email confirmation (demo mode).
-    *   Event detail page includes a countdown timer and chair-based capacity visualization.
-    *   Reservation form now includes a sidebar listing other events for easy navigation.
-    *   Navbar Reserveren link consistently directs to the event selection screen.
-*   **Homepage ()**: Dynamic Hero Carousel displaying program promotions, Yakındaki Program (nearby programs) section, Upcoming Events, Mission/Vision/Values, Donation widget, News (latest 3).
-*   **About Us ()**: Basic page created. User requested enhancements for admin-controlled team sections (categorized), and editable Mission, Vision, Values, Who We Are text (2-5 values).
-*   **News ()**: List page and detail page (). News detail includes image, title, content, social media share buttons, and previous/next news navigation. Comments section with admin-controlled visibility and CAPTCHA is requested.
-*   **Admin Panel ()**: A basic login screen is implemented. User requested that the admin panel default to Turkish. The core CRUD functionalities for content, events, reservations, donations, and education center management are pending.
-*   **Multi-language Support**: Infrastructure for NL, EN, TR established using . Frontend defaults to NL, user can select EN/TR. Admin panel default language requested as TR. An admin Diller (Languages) section for management (list, upload, edit, activate/deactivate) is requested.
-*   **Styling**: Adheres to specified color palette and uses Tailwind CSS with Shadcn UI for a clean, responsive design.
+*   **ANBI & Transparantie ()**: New page created. It lists Beleidsplan, Beloningsbeleid, and Jaarrekening cards with PDF download links, whose content is manageable from the admin panel. Buttons on this page serve as the standard for site-wide button styling.
+*   **Menu Structure & Navigation**: Refactored to include dropdowns for Atlas Academie. Pages like , , ,  were moved to , , , and  (then changed to  as a sub-menu of Evenementen). New pages like , , , , ,  are created.
+*   **Event Detail Page ()**: Now includes social media share buttons (Facebook, Twitter/X, Instagram, LinkedIn, WhatsApp), a Google Maps iframe (supports address or lat/lng), and a Organisatieteam section displaying responsible volunteers. It also has a planned (but not fully implemented in admin) Önceki Yılki Etkinliğimizden gallery.
+*   **Reservation System**: Enhanced to include an optional phone number field, prevent duplicate reservations by email for the same event, and features a stylish ticket format for confirmation emails.
+*   **Homepage () & Over Ons ()**: Over Ons page updated with user-provided detailed content (mission, vision, who we are). Homepage Mission/Vision and Who We Are sections are now intended to dynamically pull data from the same backend API as the Over Ons page.
+*   **UI/UX**: Navbar is responsive with a working hamburger menu. Button styling has been standardized: teal gradient for standard buttons on light backgrounds, white for buttons on dark/gradient backgrounds, and orange gradient for donation buttons.
 </product_requirements>
 
 <key_technical_concepts>
--   **Next.js (App Router)**: Frontend and API routes.
--   **React 18**: UI development.
--   **Tailwind CSS & Shadcn UI**: Styling and accessible components.
--   **Framer Motion**: Animations for UI elements (e.g., countdown, carousel).
--   **MongoDB**: NoSQL database for data storage.
--   ****: Internationalization for multi-language support.
--   **Nodemailer (Demo)**: Email sending (currently in demo mode).
--   **NextAuth**: Authentication (basic setup for admin login screen).
+-   **Next.js (App Router)**: Full-stack framework for rendering and API routes.
+-   **React 18**: Core UI library.
+-   **Tailwind CSS & Shadcn UI**: Styling and component library for responsive design.
+-   **MongoDB**: NoSQL database for content and event data.
+-   ** & **: Internationalization for multi-language support (NL, EN, TR).
+-   **Framer Motion**: Animations.
+-   **Nodemailer (Demo)**: Email sending for reservations.
 </key_technical_concepts>
 
 <code_architecture>
@@ -40,58 +32,59 @@ The application utilizes a Next.js full-stack architecture with a file-based rou
 
 **Key Files and Changes:**
 
-*   **/app/app/api/[[...path]]/route.js**: Centralized API route handler for general backend logic.
-    *   **Changes**: Handles event, reservation, news data (CRUD-like operations), capacity checks, and demo data seeding. Modified several times to fix JSON parsing errors and add news seeding logic.
-*   **/app/lib/mongodb.js**: Establishes and manages MongoDB connection.
-    *   **Summary**: Centralized module for database connectivity.
-*   **/app/lib/email.js**: Handles email sending functionality.
-    *   **Summary**: Configured for demo mode with Nodemailer-like behavior, sending confirmation emails.
-*   **/app/lib/auth.js**: Contains authentication-related utilities.
-    *   **Summary**: Likely includes functions for user login/session management, though a full auth flow isn't yet live.
-*   **/app/middleware.js**: Next.js middleware for handling requests, especially for i18n routing.
-    *   **Changes**: Configured for  to handle locale detection and routing. Fixed during multi-language setup.
-*   **/app/i18n.js**:  configuration.
-    *   **Summary**: Defines locales and message loading strategy for internationalization.
-*   **/app/app/layout.js**: Root layout for the application.
-    *   **Changes**: Integrated 's  for multi-language support. Adjusted to resolve 404 errors during i18n setup.
-*   **/app/app/page.js**: Homepage component.
-    *   **Changes**: Implemented Hero Carousel, Upcoming Events, Mission/Vision/Values, Donation Widget, and News sections. Underwent multiple rewrites due to syntax errors during multi-language and content updates.
-*   **/app/app/events/page.js**: Events listing page.
-    *   **Changes**: Added  component below the filter for upcoming events, made ticker items clickable to navigate to event details.
-*   **/app/app/events/[slug]/page.js**: Event detail page.
-    *   **Summary**: Displays event specific information, countdown, capacity visualization, and a Reserveer Nu button. (Map and social share buttons are requested next).
+*   **/app/app/api/[[...path]]/route.js**: Centralized API route handler.
+    *   **Changes**: Modified to add  to demo event data, handle  in reservations, and prevent duplicate reservations by email for the same event.
+*   **/app/app/api/admin/about/route.js**: API for About Us content.
+    *   **Changes**: Updated to manage whoWeAre, mission items, and vision content, intended to feed both  and  pages.
+*   **/app/app/api/anbi/route.js**: New API route for ANBI documents.
+    *   **Summary**: Handles CRUD operations for ANBI documents (Beleidsplan, Beloningsbeleid, Jaarrekening).
+*   **/app/app/anbi/page.js**: New ANBI page.
+    *   **Summary**: Displays ANBI information and document cards. Uses  for translations. Content and styling were updated multiple times, including button standardization.
+*   **/app/app/admin/anbi/page.js**: New admin page for ANBI.
+    *   **Summary**: Provides an interface to manage ANBI document uploads.
+*   **/app/app/evenementen/page.js**: Events listing page.
+    *   **Changes**: Moved from . Event card links updated to .
+*   **/app/app/evenementen/[slug]/page.js**: Event detail page.
+    *   **Changes**: Moved from . Enhanced with social media share buttons, Google Maps iframe (coordinates or address), and a Organisatieteam section for volunteers.  function implemented.
+*   **/app/app/nieuws/page.js**: News listing page.
+    *   **Changes**: Moved from .
+*   **/app/app/nieuws/[slug]/page.js**: News detail page.
+    *   **Changes**: Moved from . Social sharing links fixed to . Contains the  function.
 *   **/app/app/reserveren/page.js**: Reservation form page.
-    *   **Changes**: Refactored to allow direct access without an , fixed a 404 error, and added a sidebar displaying other events.
-*   **/app/app/news/page.js**: News listing page.
-    *   **Changes**: Devamını Oku button now correctly links to .
-*   **/app/app/news/[slug]/page.js**: News detail page.
-    *   **Summary**: Displays news image, title, content, social media share buttons, and previous/next navigation. Comments section is planned.
-*   **/app/app/admin/page.js**: Admin login page.
-    *   **Summary**: Provides a login interface for the admin panel.
-*   **/app/app/admin/about/page.js**: Admin page for managing About Us content.
-    *   **Summary**: Will provide CRUD for Mission, Vision, Values, Who We Are text, and team members with categorization.
-*   **/components/Navbar.js**: Navigation bar component.
-    *   **Changes**: Integrated logo, , and updated links. Required debugging for  icon reference.
-*   **/components/EventTicker.js**: New component for scrolling event headlines.
-    *   **Summary**: Displays upcoming event titles as a horizontally scrolling list.
-*   **/components/LanguageSwitcher.js**: New component for language selection.
-    *   **Summary**: Allows users to switch between NL, EN, TR locales.
-*   **/public/web-logo.png**: Stored user-provided logo.
+    *   **Changes**: Moved to  as a direct route under Evenementen dropdown. Added optional  field.
+*   **/app/app/over/page.js**: Over Ons page.
+    *   **Changes**: Moved from . Content completely rewritten with user-provided text, including mission, vision, and team members with placeholder images. Team cards are now centered. Fetches data from .
+*   **/app/app/page.js**: Homepage.
+    *   **Changes**: Mission and Vision sections updated to fetch data from . Donate button and other general CTA buttons were restyled for consistency.
+*   **/app/app/academie/\*\*/page.js**: New Academie pages.
+    *   **Summary**: Multiple new pages created (, , , ). CTA buttons on these pages were standardized.
+*   **/app/components/Navbar.js**: Navigation bar.
+    *   **Changes**: Significantly updated to reflect the new menu structure with dropdowns, new URLs, and responsive hamburger menu.
+*   **/app/components/EventCard.js**: Event card component.
+    *   **Changes**: Button styling updated to use the standard teal gradient. Link updated to .
+*   **/app/components/NearbyPrograms.js**: Component displaying nearby events on homepage.
+    *   **Changes**: Detayları Gör button styling updated to use the standard teal gradient.
+*   **/app/lib/email.js**: Email utility.
+    *   **Changes**: Email template for reservation confirmation updated to a stylish ticket format.
+*   **/app/messages/\*.json**: Language translation files.
+    *   **Changes**: Updated to include translations for ANBI page content, new menu items, and other text additions.
 </code_architecture>
 
 <pending_tasks>
--   **Admin Panel Functionality**: Full CRUD for Events, Reservations, Donations, Volunteers, Education Center (classes, courses, terms, students, parents, teachers, attendance), Site Settings.
--   **About Us Page**: Implement admin-controlled team management (add/remove, categorize).
--   **News Detail Page**: Implement comments section with admin control (open/close) and CAPTCHA.
+-   **Admin Panel Functionality**: Full CRUD for Events, Reservations, Donations, Volunteers, Education Center, Site Settings.
+-   **News Detail Page**: Implement comments section with admin control and CAPTCHA.
 -   **Multi-language**: Implement the Diller (Languages) section in the admin panel for managing language packages.
--   **Event Detail Page**: Add working map display and social media share buttons.
--   **ANBI Page**: Create a new  page with content, add to main menu, make content and PDF links editable from admin panel.
+-   **Event Detail Page**: Admin panel integration for , , ,  fields.
+-   **About Us Page**: Admin-controlled team management (add/remove, categorize).
+-   **Homepage / Over Ons Content Synchronization**: Resolve the database/caching issue where  content isn't correctly pulled from API after updates, and ensure data consistency.
 </pending_tasks>
 
 <current_work>
-Immediately before this summary request, the AI engineer was working on enhancing the Event Detail page. The user had requested to add a map display and social media share buttons below the Reserveer Nu button. The engineer had just started this task by creating a new component, , to handle the map functionality. However, the user then interrupted with a new request to create an ANBI (Algemeen Nut Beogende Instelling - Public Benefit Organization) page. This new page needs to be added to the main menu and include three cards: Beleidsplan, Huisstijl, and Jaarrekening, all with PDF links that are manageable from the admin panel. The current focus has now shifted to initiating the ANBI page development.
+Immediately before this summary request, the AI engineer was attempting to resolve a persistent data synchronization issue for the Over Ons page () and the homepage (). The user had provided specific content for Wie zijn wij, Onze Missie, and Onze Visie, which was expected to be stored in MongoDB and fetched via the  endpoint.
+
+Despite efforts to update the content directly in MongoDB, delete and re-insert records, and restart the Next.js service multiple times, the pages were still displaying outdated or fallback content. The AI engineer observed that the  collection was being cleared successfully, and then the Over Ons page correctly showed fallback content. The next immediate step was to re-add the correct, new data to the database, which was the last action performed in the trajectory. The problem lies in ensuring the newly inserted data is correctly retrieved and displayed by the frontend, suggesting a potential API or caching issue.
 </current_work>
 
 <optional_next_step>
-Create the ANBI page, add it to the main menu, and set up its content and PDF link management via the admin panel.
+Re-add the correct Over Ons content to the database and verify it's displayed on the frontend.
 </optional_next_step>
