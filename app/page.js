@@ -98,7 +98,7 @@ export default function Home() {
                   await fetch('/api/seed', { method: 'POST', body: '{}', headers: {'Content-Type': 'application/json'} });
                   fetchUpcomingEvents();
                 }}
-                className="bg-[#05B6C4] text-white px-6 py-2 rounded-lg hover:bg-[#3B87BE] transition-colors"
+                className="bg-gradient-to-r from-[#05B6C4] to-[#0891A0] text-white px-6 py-2 rounded-lg hover:shadow-lg transition-all duration-300"
               >
                 Laad Demo Evenementen
               </button>
