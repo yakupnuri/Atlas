@@ -50,6 +50,15 @@ export default function UsersManagement() {
     
     try {
       const token = localStorage.getItem('adminToken');
+      
+      if (!token) {
+        alert('❌ Oturum süreniz dolmuş. Lütfen tekrar giriş yapın.');
+        router.push('/admin');
+        return;
+      }
+      
+      console.log('Submitting user data:', { ...formData, password: '***' });
+      
       const url = editingUser 
         ? '/api/admin/users' 
         : '/api/admin/users';
@@ -65,7 +74,11 @@ export default function UsersManagement() {
         body: JSON.stringify(editingUser ? { ...formData, userId: editingUser.id } : formData)
       });
 
+      console.log('Response status:', response.status);
+      
       if (response.ok) {
+        const data = await response.json();
+        console.log('Success:', data);
         alert('✅ Kullanıcı başarıyla kaydedildi!');
         setShowModal(false);
         setEditingUser(null);
@@ -73,11 +86,12 @@ export default function UsersManagement() {
         fetchUsers();
       } else {
         const data = await response.json();
-        alert('❌ Hata: ' + data.error);
+        console.error('Error response:', data);
+        alert('❌ Hata: ' + (data.error || 'Bilinmeyen hata'));
       }
     } catch (error) {
       console.error('Error saving user:', error);
-      alert('❌ Kaydetme hatası!');
+      alert('❌ Kaydetme hatası: ' + error.message);
     }
   };
 
