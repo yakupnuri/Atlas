@@ -29,6 +29,7 @@ const newsItems = [
   {
     id: 3,
     title: 'Weekendonderwijs Kayıtları Başladı',
+    slug: 'weekendonderwijs-kayitlari-basladi',
     excerpt: 'Hafta sonu okulumuzun yeni dönemi için kayıtlar açıldı. Şimdi kaydolun!',
     date: '2025-03-10',
     author: 'Ayşe Öztürk',
