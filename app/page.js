@@ -11,11 +11,13 @@ import NearbyPrograms from '@/components/NearbyPrograms';
 export default function Home() {
   const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [aboutContent, setAboutContent] = useState(null);
+  const [latestNews, setLatestNews] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchUpcomingEvents();
     fetchAboutContent();
+    fetchLatestNews();
   }, []);
 
   const fetchAboutContent = async () => {
@@ -25,6 +27,20 @@ export default function Home() {
       setAboutContent(data.content);
     } catch (error) {
       console.error('Error fetching about content:', error);
+    }
+  };
+
+  const fetchLatestNews = async () => {
+    try {
+      const response = await fetch('/api/news');
+      const data = await response.json();
+      // Get latest 5 news sorted by date
+      const sortedNews = (data.news || [])
+        .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate))
+        .slice(0, 5);
+      setLatestNews(sortedNews);
+    } catch (error) {
+      console.error('Error fetching news:', error);
     }
   };
 
