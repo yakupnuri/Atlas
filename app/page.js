@@ -45,41 +45,55 @@ export default function Home() {
       {/* Hero Carousel */}
       <HeroCarousel />
 
-      {/* Mission/Vision Section */}
+      {/* Mission/Vision/Values Section */}
       <section className="py-16 container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {[
             {
               title: 'Onze Missie',
-              description: aboutContent?.mission?.content || 'We bouwen bruggen tussen culturen en generaties door toegankelijke programma\'s en ontmoetingen.',
+              description: 'We bouwen bruggen tussen culturen en generaties.',
+              icon: Target,
               color: 'from-[#05B6C4] to-[#3B87BE]',
             },
             {
               title: 'Onze Visie',
-              description: aboutContent?.vision?.content || 'Een samenleving waarin iedereen zich welkom voelt en de kans krijgt om te groeien en te ontwikkelen.',
+              description: 'Een inclusieve samenleving waar iedereen zich welkom voelt.',
+              icon: Heart,
               color: 'from-[#3B87BE] to-[#99D8E0]',
             },
             {
               title: 'Onze Waarden',
-              description: aboutContent?.values?.[0]?.description || 'Inclusiviteit, respect, samenwerking en het koesteren van culturele diversiteit staan centraal.',
+              description: 'Inclusiviteit, respect en samenwerking staan centraal.',
+              icon: Award,
               color: 'from-[#B37B83] to-[#F7941D]',
             },
-          ].map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.2 }}
-              className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow"
-            >
-              <div className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-lg mb-4 flex items-center justify-center`}>
-                <Users className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-800 mb-3">{item.title}</h3>
-              <p className="text-gray-600">{item.description}</p>
-            </motion.div>
-          ))}
+          ].map((item, index) => {
+            const IconComponent = item.icon;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.2 }}
+                className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all group"
+              >
+                <div className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-lg mb-4 flex items-center justify-center`}>
+                  <IconComponent className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-3">{item.title}</h3>
+                <p className="text-gray-600 mb-4 min-h-[3rem]">{item.description}</p>
+                
+                <Link 
+                  href="/over" 
+                  className="inline-flex items-center text-[#05B6C4] hover:text-[#3B87BE] font-semibold transition-colors"
+                >
+                  Lees meer
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 
