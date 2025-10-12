@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminLayout from '@/components/AdminLayout';
-import { Plus, Edit2, Trash2, Eye } from 'lucide-react';
+import MediaLibrary from '@/components/MediaLibrary';
+import { Plus, Edit2, Trash2, Eye, Image as ImageIcon } from 'lucide-react';
 
 export default function NewsManagement() {
   const router = useRouter();
