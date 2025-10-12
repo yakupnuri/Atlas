@@ -349,7 +349,7 @@ def test_file_size_validation():
     large_base64 = base64.b64encode(large_data.encode()).decode('utf-8')
     
     payload = {
-        "type": "beleidsplan",
+        "type": "beloningsbeleid",
         "fileName": "large_test.pdf",
         "fileData": large_base64,
         "fileSize": 15 * 1024 * 1024  # Report 15MB size
