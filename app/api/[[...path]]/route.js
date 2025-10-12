@@ -245,6 +245,7 @@ export async function POST(request) {
           bannerImage: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800',
           status: 'published',
           createdAt: new Date().toISOString(),
+          volunteers: ['Nuri Yako', 'Tanju A.'],
         },
         {
           id: uuidv4(),
