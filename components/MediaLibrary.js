@@ -236,39 +236,46 @@ export default function MediaLibrary({ isOpen, onClose, onSelect }) {
                 </div>
               ) : filteredMedia.length > 0 ? (
                 <div className="grid grid-cols-4 gap-4">
-                  {filteredMedia.map((item) => (
-                    <div
-                      key={item.id}
-                      className="relative group aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
-                      onClick={() => onSelect(item.url)}
-                    >
-                      <img
-                        src={item.url}
-                        alt={item.originalName}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onSelect(item.url);
-                          }}
-                          className="px-4 py-2 bg-[#05B6C4] text-white rounded-lg hover:bg-[#3B87BE] text-sm font-semibold"
-                        >
-                          Seç
-                        </button>
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleDelete(item.id);
-                          }}
-                          className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
+                  {filteredMedia.map((item) => {
+                    // Tam URL oluştur
+                    const fullUrl = item.url.startsWith('http') 
+                      ? item.url 
+                      : `${window.location.origin}${item.url}`;
+                    
+                    return (
+                      <div
+                        key={item.id}
+                        className="relative group aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
+                        onClick={() => onSelect(fullUrl)}
+                      >
+                        <img
+                          src={fullUrl}
+                          alt={item.originalName}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onSelect(fullUrl);
+                            }}
+                            className="px-4 py-2 bg-[#05B6C4] text-white rounded-lg hover:bg-[#3B87BE] text-sm font-semibold"
+                          >
+                            Seç
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDelete(item.id);
+                            }}
+                            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               ) : (
                 <div className="text-center py-12">
