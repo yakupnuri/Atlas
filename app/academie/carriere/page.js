@@ -99,7 +99,7 @@ export default function CarrierePage() {
           </p>
           <a
             href="mailto:info@stichtingatlas.nl"
-            className="inline-block bg-gradient-to-r from-[#05B6C4] to-[#0891A0] text-white py-3 px-8 rounded-lg hover:shadow-lg transition-all duration-300 font-semibold"
+            className="inline-block bg-white text-purple-600 py-3 px-8 rounded-lg hover:shadow-lg transition-all duration-300 font-semibold"
           >
             Afspraak Maken
           </a>
