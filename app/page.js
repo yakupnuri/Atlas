@@ -167,9 +167,9 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/doneren"
-              className="inline-flex items-center justify-center gap-2 bg-white text-[#F7941D] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#F7941D] to-[#E88610] text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
             >
-              Doneer
+              Doneer Nu
             </Link>
           </div>
         </motion.div>
