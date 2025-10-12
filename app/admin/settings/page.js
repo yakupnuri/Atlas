@@ -60,10 +60,60 @@ export default function SettingsPage() {
         const data = await response.json();
         setSettings(data.settings);
       }
+      
+      // Fetch Stripe settings separately
+      await fetchStripeSettings();
     } catch (error) {
       console.error('Error fetching settings:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchStripeSettings = async () => {
+    try {
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch('/api/admin/stripe-keys', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setStripeKeys(data);
+      }
+    } catch (error) {
+      console.error('Error fetching Stripe settings:', error);
+    }
+  };
+
+  const saveStripeSettings = async () => {
+    try {
+      setSaving(true);
+      const token = localStorage.getItem('adminToken');
+      
+      const response = await fetch('/api/admin/stripe-keys', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(stripeKeys)
+      });
+
+      if (response.ok) {
+        alert('✅ Stripe ayarları kaydedildi!');
+        await fetchStripeSettings();
+      } else {
+        const error = await response.json();
+        alert('❌ Hata: ' + (error.error || 'Kaydedilemedi'));
+      }
+    } catch (error) {
+      console.error('Error saving Stripe settings:', error);
+      alert('❌ Kaydetme hatası!');
+    } finally {
+      setSaving(false);
     }
   };
 
