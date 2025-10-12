@@ -126,7 +126,7 @@ export async function POST(request) {
 
     // Create reservation
     if (pathname === '/api/reservations') {
-      const { eventId, name, email, count, notes } = body;
+      const { eventId, name, email, phone, count, notes } = body;
       
       // Validate
       if (!eventId || !name || !email || !count) {
@@ -142,6 +142,17 @@ export async function POST(request) {
         return NextResponse.json(
           { error: 'Evenement niet gevonden' },
           { status: 404, headers: corsHeaders }
+        );
+      }
+      
+      // Check for duplicate reservation (same email + same event)
+      const existingUserReservation = await db.collection('reservations')
+        .findOne({ eventId, email: email.toLowerCase(), status: 'confirmed' });
+      
+      if (existingUserReservation) {
+        return NextResponse.json(
+          { error: 'Je hebt al een reservering voor dit evenement. Controleer je email of neem contact op voor wijzigingen.' },
+          { status: 400, headers: corsHeaders }
         );
       }
       
@@ -165,7 +176,8 @@ export async function POST(request) {
         id: uuidv4(),
         eventId,
         name,
-        email,
+        email: email.toLowerCase(),
+        phone: phone || '',
         count: parseInt(count),
         notes: notes || '',
         status: 'confirmed',
@@ -179,6 +191,8 @@ export async function POST(request) {
         name,
         eventTitle: event.title,
         eventDate: event.startAt,
+        eventLocation: event.locationName,
+        eventAddress: event.address,
         count,
         reservationId: reservation.id,
       });
