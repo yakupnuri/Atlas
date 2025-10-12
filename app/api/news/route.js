@@ -34,3 +34,86 @@ export async function GET(request) {
     );
   }
 }
+
+// Create new news
+export async function POST(request) {
+  try {
+    const data = await request.json();
+    const db = await getDb();
+    
+    const newNews = {
+      id: require('crypto').randomUUID(),
+      ...data,
+      createdAt: new Date(),
+      commentsEnabled: false
+    };
+    
+    await db.collection('news').insertOne(newNews);
+    
+    return NextResponse.json(
+      { message: 'News created successfully', news: newNews },
+      { headers: corsHeaders }
+    );
+  } catch (error) {
+    console.error('Error creating news:', error);
+    return NextResponse.json(
+      { error: 'Server error' },
+      { status: 500, headers: corsHeaders }
+    );
+  }
+}
+
+// Update news
+export async function PUT(request) {
+  try {
+    const data = await request.json();
+    const db = await getDb();
+    
+    const { id, _id, ...updateData } = data;
+    
+    await db.collection('news').updateOne(
+      { id },
+      { $set: updateData }
+    );
+    
+    return NextResponse.json(
+      { message: 'News updated successfully' },
+      { headers: corsHeaders }
+    );
+  } catch (error) {
+    console.error('Error updating news:', error);
+    return NextResponse.json(
+      { error: 'Server error' },
+      { status: 500, headers: corsHeaders }
+    );
+  }
+}
+
+// Delete news
+export async function DELETE(request) {
+  try {
+    const { searchParams } = new URL(request.url);
+    const id = searchParams.get('id');
+    
+    if (!id) {
+      return NextResponse.json(
+        { error: 'News ID required' },
+        { status: 400, headers: corsHeaders }
+      );
+    }
+    
+    const db = await getDb();
+    await db.collection('news').deleteOne({ id });
+    
+    return NextResponse.json(
+      { message: 'News deleted successfully' },
+      { headers: corsHeaders }
+    );
+  } catch (error) {
+    console.error('Error deleting news:', error);
+    return NextResponse.json(
+      { error: 'Server error' },
+      { status: 500, headers: corsHeaders }
+    );
+  }
+}
