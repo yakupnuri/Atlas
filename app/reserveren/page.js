@@ -186,39 +186,42 @@ export default function ReserverenPage() {
           )}
 
           {selectedEvent && (
-            <>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="bg-white rounded-lg p-6 shadow-md mb-8"
-              >
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-xl font-bold text-gray-800">Geselecteerd</h2>
-                  <button
-                    onClick={() => setSelectedEvent(null)}
-                    className="text-sm text-[#05B6C4] hover:underline"
-                  >
-                    Wijzigen
-                  </button>
-                </div>
-                
-                <h3 className="text-lg font-bold text-gray-800 mb-2">{selectedEvent.title}</h3>
-                <p className="text-gray-600 text-sm">
-                  {new Date(selectedEvent.startAt).toLocaleDateString('nl-NL', {
-                    weekday: 'long',
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                  })}
-                </p>
-              </motion.div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Main Form Area */}
+              <div className="lg:col-span-2">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="bg-white rounded-lg p-6 shadow-md mb-8"
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-xl font-bold text-gray-800">Geselecteerd Evenement</h2>
+                    <button
+                      onClick={() => setSelectedEvent(null)}
+                      className="text-sm text-[#05B6C4] hover:underline"
+                    >
+                      Wijzigen
+                    </button>
+                  </div>
+                  
+                  <h3 className="text-lg font-bold text-gray-800 mb-2">{selectedEvent.title}</h3>
+                  <p className="text-gray-600 text-sm">
+                    {new Date(selectedEvent.startAt).toLocaleDateString('nl-NL', {
+                      weekday: 'long',
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric'
+                    })}
+                  </p>
+                </motion.div>
 
-              <motion.form
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                onSubmit={handleSubmit}
-                className="bg-white rounded-lg p-6 shadow-md"
-              >
+                <motion.form
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  onSubmit={handleSubmit}
+                  className="bg-white rounded-lg p-6 shadow-md"
+                >
                 {error && (
                   <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 flex items-start gap-2">
                     <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
