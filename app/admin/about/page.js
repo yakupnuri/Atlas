@@ -214,7 +214,7 @@ export default function AdminAboutPage() {
               <Link href="/admin/dashboard" className="text-gray-600 hover:text-gray-800">
                 <ArrowLeft className="w-6 h-6" />
               </Link>
-              <Image src="/logo.png" alt="Logo" width={100} height={40} className="h-8 w-auto" />
+              <Image src="/web-logo.png" alt="Logo" width={100} height={40} className="h-8 w-auto" />
               <span className="text-gray-400">|</span>
               <h1 className="text-xl font-bold text-gray-800">Over Ons Beheer</h1>
             </div>
