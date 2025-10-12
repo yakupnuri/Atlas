@@ -51,17 +51,17 @@ export default function Home() {
           {[
             {
               title: 'Onze Missie',
-              description: 'We bouwen bruggen tussen culturen en generaties door toegankelijke programma\'s en ontmoetingen.',
+              description: aboutContent?.mission?.content || 'We bouwen bruggen tussen culturen en generaties door toegankelijke programma\'s en ontmoetingen.',
               color: 'from-[#05B6C4] to-[#3B87BE]',
             },
             {
               title: 'Onze Visie',
-              description: 'Een samenleving waarin iedereen zich welkom voelt en de kans krijgt om te groeien en te ontwikkelen.',
+              description: aboutContent?.vision?.content || 'Een samenleving waarin iedereen zich welkom voelt en de kans krijgt om te groeien en te ontwikkelen.',
               color: 'from-[#3B87BE] to-[#99D8E0]',
             },
             {
               title: 'Onze Waarden',
-              description: 'Inclusiviteit, respect, samenwerking en het koesteren van culturele diversiteit staan centraal.',
+              description: aboutContent?.values?.[0]?.description || 'Inclusiviteit, respect, samenwerking en het koesteren van culturele diversiteit staan centraal.',
               color: 'from-[#B37B83] to-[#F7941D]',
             },
           ].map((item, index) => (
