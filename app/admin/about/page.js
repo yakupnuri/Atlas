@@ -432,6 +432,16 @@ export default function AdminAboutPage() {
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] focus:border-transparent outline-none resize-none"
                   />
                 </div>
+                <div className="flex justify-end">
+                  <button
+                    onClick={() => saveSection('vision')}
+                    disabled={saving}
+                    className="flex items-center gap-2 bg-[#05B6C4] hover:bg-[#3B87BE] text-white px-6 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50"
+                  >
+                    <Save className="w-4 h-4" />
+                    {saving ? 'Bezig...' : 'Onze Visie Opslaan'}
+                  </button>
+                </div>
               </div>
             </div>
 
