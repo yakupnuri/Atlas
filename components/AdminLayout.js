@@ -146,6 +146,76 @@ export default function AdminLayout({ children }) {
               </Link>
             );
           })}
+
+          {/* Sayfalar Menüsü */}
+          <div className="mt-4">
+            <button
+              onClick={() => setPagesMenuOpen(!pagesMenuOpen)}
+              className="flex items-center gap-3 px-4 py-3 w-full rounded-lg hover:bg-white/10 transition-all"
+            >
+              <FileStack className="w-5 h-5 flex-shrink-0" />
+              {sidebarOpen && (
+                <>
+                  <span className="font-medium flex-1 text-left">Sayfalar</span>
+                  {pagesMenuOpen ? (
+                    <ChevronDown className="w-4 h-4" />
+                  ) : (
+                    <ChevronRight className="w-4 h-4" />
+                  )}
+                </>
+              )}
+            </button>
+
+            {/* Sayfalar Alt Menüsü */}
+            {pagesMenuOpen && sidebarOpen && (
+              <div className="mt-2 ml-4 space-y-1">
+                {pagesMenuItems.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = pathname === item.href;
+                  
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all text-sm ${
+                        isActive
+                          ? 'bg-white text-[#05B6C4] shadow-lg'
+                          : 'hover:bg-white/10'
+                      }`}
+                    >
+                      <Icon className="w-4 h-4 flex-shrink-0" />
+                      <span className="font-medium">{item.title}</span>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Alt Menü (Ayarlar) */}
+          <div className="mt-4 pt-4 border-t border-white/20">
+            {bottomMenuItems.map((item) => {
+              const Icon = item.icon;
+              const isActive = pathname === item.href;
+              
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                    isActive
+                      ? 'bg-white text-[#05B6C4] shadow-lg'
+                      : 'hover:bg-white/10'
+                  }`}
+                >
+                  <Icon className="w-5 h-5 flex-shrink-0" />
+                  {sidebarOpen && (
+                    <span className="font-medium">{item.title}</span>
+                  )}
+                </Link>
+              );
+            })}
+          </div>
         </nav>
 
         {/* Logout Button */}
