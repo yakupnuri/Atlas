@@ -42,6 +42,29 @@ export default function EventDetailPage() {
     }
   };
 
+  const shareOnSocial = (platform) => {
+    const url = typeof window !== 'undefined' ? window.location.href : '';
+    const title = event?.title || '';
+    
+    const shareUrls = {
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+      twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+      whatsapp: `https://wa.me/?text=${encodeURIComponent(title + ' - ' + url)}`,
+    };
+
+    if (shareUrls[platform]) {
+      window.open(shareUrls[platform], '_blank', 'width=600,height=400');
+    } else if (platform === 'instagram') {
+      // Copy to clipboard for Instagram
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => {
+          alert('Link gekopieerd! Plak deze in je Instagram story of post.');
+        });
+      }
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
