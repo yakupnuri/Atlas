@@ -10,11 +10,23 @@ import NearbyPrograms from '@/components/NearbyPrograms';
 
 export default function Home() {
   const [upcomingEvents, setUpcomingEvents] = useState([]);
+  const [aboutContent, setAboutContent] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchUpcomingEvents();
+    fetchAboutContent();
   }, []);
+
+  const fetchAboutContent = async () => {
+    try {
+      const response = await fetch('/api/admin/about');
+      const data = await response.json();
+      setAboutContent(data.content);
+    } catch (error) {
+      console.error('Error fetching about content:', error);
+    }
+  };
 
   const fetchUpcomingEvents = async () => {
     try {
