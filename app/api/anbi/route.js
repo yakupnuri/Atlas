@@ -49,7 +49,7 @@ export async function POST(request) {
     }
 
     // Validate document type
-    const validTypes = ['beleidsplan', 'huisstijl', 'jaarrekening']
+    const validTypes = ['beloningsbeleid', 'beleidsplan', 'jaarrekening']
     if (!validTypes.includes(type)) {
       return NextResponse.json(
         { success: false, message: 'Invalid document type' },
