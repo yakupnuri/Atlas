@@ -68,6 +68,7 @@ export const authOptions = {
   },
   pages: {
     signIn: "/admin",
+    error: "/admin/auth-error",
   },
   session: {
     strategy: "database",
