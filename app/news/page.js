@@ -154,10 +154,13 @@ export default function NewsPage() {
                   {item.excerpt}
                 </p>
 
-                <button className="text-[#05B6C4] hover:text-[#3B87BE] font-semibold flex items-center gap-2">
+                <Link
+                  href={`/news/${item.slug}`}
+                  className="text-[#05B6C4] hover:text-[#3B87BE] font-semibold flex items-center gap-2"
+                >
                   Devamını Oku
                   <ArrowRight className="w-4 h-4" />
-                </button>
+                </Link>
               </div>
             </motion.article>
           ))}
