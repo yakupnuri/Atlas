@@ -61,11 +61,11 @@ export default function Home() {
       {/* Hero Carousel */}
       <HeroCarousel />
 
-      {/* News Highlight Section */}
+      {/* News Highlight + Mission/Vision/Values Section */}
       <section className="py-16 container mx-auto px-4">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Main Featured News - Full Width */}
-          <div className="lg:col-span-3">
+          {/* Left: News Section - 2 columns */}
+          <div className="lg:col-span-2">
             {latestNews.length > 0 ? (
               <div className="space-y-6">
                 {/* Big Main News */}
@@ -76,13 +76,13 @@ export default function Home() {
                   className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
                 >
                   <Link href={`/nieuws/${latestNews[0].slug}`}>
-                    <div className="relative h-[500px]">
+                    <div className="relative h-[400px]">
                       <img
                         src={latestNews[0].image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'}
                         alt={latestNews[0].title}
                         className="w-full h-full object-cover"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
                       
                       {/* Category badge - top left */}
                       <div className="absolute top-4 left-4">
@@ -91,19 +91,22 @@ export default function Home() {
                         </span>
                       </div>
                       
-                      {/* Title - bottom */}
-                      <div className="absolute bottom-0 left-0 right-0 p-8">
-                        <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
+                      {/* Title and description - bottom */}
+                      <div className="absolute bottom-0 left-0 right-0 p-6 bg-white/95">
+                        <h2 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">
                           {latestNews[0].title}
                         </h2>
+                        <p className="text-gray-600 text-sm line-clamp-2">
+                          {latestNews[0].excerpt}
+                        </p>
                       </div>
                     </div>
                   </Link>
                 </motion.div>
 
-                {/* 4 Small News Boxes - Horizontal Grid Below Main News */}
+                {/* 4 Small News Boxes - Horizontal Grid Below */}
                 {latestNews.length > 1 && (
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="grid grid-cols-4 gap-3">
                     {latestNews.slice(1, 5).map((news, index) => (
                       <motion.div
                         key={news.id}
@@ -111,23 +114,15 @@ export default function Home() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.1 }}
-                        className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow group"
+                        className="rounded-lg overflow-hidden hover:shadow-lg transition-shadow group"
                       >
                         <Link href={`/nieuws/${news.slug}`}>
-                          <div className="relative h-48">
+                          <div className="relative h-32">
                             <img
-                              src={news.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400'}
+                              src={news.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=300'}
                               alt={news.title}
-                              className="w-full h-full object-cover"
+                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-                            
-                            {/* Small text overlay on image */}
-                            <div className="absolute bottom-0 left-0 right-0 p-3">
-                              <h3 className="font-bold text-sm text-white leading-tight line-clamp-2 group-hover:text-[#05B6C4] transition-colors">
-                                {news.title}
-                              </h3>
-                            </div>
                           </div>
                         </Link>
                       </motion.div>
@@ -141,13 +136,9 @@ export default function Home() {
               </div>
             )}
           </div>
-        </div>
-      </section>
 
-      {/* Mission/Vision/Values Section */}
-      <section className="py-16 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {/* Right: Mission/Vision/Values - 1 column */}
+          <div className="lg:col-span-1 space-y-4">
             {[
               {
                 title: 'Onze Missie',
@@ -172,21 +163,21 @@ export default function Home() {
               return (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.2 }}
+                  transition={{ delay: index * 0.15 }}
                   className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all group"
                 >
                   <div className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-lg mb-4 flex items-center justify-center`}>
                     <IconComponent className="w-6 h-6 text-white" />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">{item.title}</h3>
-                  <p className="text-gray-600 mb-4 min-h-[3rem]">{item.description}</p>
+                  <h3 className="text-lg font-bold text-gray-800 mb-2">{item.title}</h3>
+                  <p className="text-gray-600 text-sm mb-4">{item.description}</p>
                   
                   <Link 
                     href="/over" 
-                    className="inline-flex items-center text-[#05B6C4] hover:text-[#3B87BE] font-semibold transition-colors"
+                    className="inline-flex items-center text-[#05B6C4] hover:text-[#3B87BE] font-semibold text-sm transition-colors"
                   >
                     Lees meer
                     <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
