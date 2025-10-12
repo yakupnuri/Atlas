@@ -114,6 +114,42 @@ export default function AdminAboutPage() {
     });
   };
 
+  // Mission items functions
+  const addMissionItem = () => {
+    const currentItems = content.mission?.items || [];
+    setContent({
+      ...content,
+      mission: {
+        ...content.mission,
+        items: [...currentItems, '']
+      }
+    });
+  };
+
+  const removeMissionItem = (index) => {
+    const newItems = [...(content.mission?.items || [])];
+    newItems.splice(index, 1);
+    setContent({
+      ...content,
+      mission: {
+        ...content.mission,
+        items: newItems
+      }
+    });
+  };
+
+  const updateMissionItem = (index, value) => {
+    const newItems = [...(content.mission?.items || [])];
+    newItems[index] = value;
+    setContent({
+      ...content,
+      mission: {
+        ...content.mission,
+        items: newItems
+      }
+    });
+  };
+
   const addTeamMember = async () => {
     try {
       const token = localStorage.getItem('adminToken');
