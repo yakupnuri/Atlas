@@ -72,10 +72,15 @@ export default function AdminAboutPage() {
       });
 
       if (response.ok) {
-        alert('Content succesvol opgeslagen!');
+        alert('✅ İçerik başarıyla kaydedildi! Content is succesvol opgeslagen!');
+        // Refresh data to confirm
+        await fetchData();
+      } else {
+        alert('❌ Kaydetme hatası! Er is een fout opgetreden bij het opslaan.');
       }
     } catch (error) {
-      alert('Fout bij opslaan');
+      console.error('Save error:', error);
+      alert('❌ Kaydetme hatası! Er is een fout opgetreden bij het opslaan.');
     } finally {
       setSaving(false);
     }
