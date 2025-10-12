@@ -27,15 +27,22 @@ export async function GET(request) {
         type: 'content',
         whoWeAre: {
           title: 'Wie zijn wij',
-          content: 'Wij zijn mensen die onlangs uit Turkije naar Nederland zijn gekomen. We willen ons aanpassen aan Nederland, integreren in de Nederlandse samenleving en ons leven hier voortzetten. Als initiatief willen we een cultuur van samenleven creëren.'
+          content: 'Stichting Atlas is een jonge, dynamische organisatie die in 2024 is opgericht door een groep maatschappelijk betrokken nieuwkomers uit Turkije, woonachtig in Leiden en omliggende gemeenten. De stichting is geworteld in het streven naar een inclusieve, verbonden en vreedzame samenleving waarin culturele diversiteit wordt gewaardeerd en waarin iedereen actief kan deelnemen aan het maatschappelijk leven. Met een team van toegewijde vrijwilligers, ervaren projectleiders en betrokken bestuursleden realiseert Atlas sociale, culturele en educatieve projecten die bijdragen aan wederzijds begrip, acceptatie en participatie.'
         },
         mission: {
           title: 'Onze Missie',
-          content: 'We bouwen bruggen tussen culturen en generaties door toegankelijke programma\'s en ontmoetingen.'
+          content: 'We bouwen bruggen tussen culturen en generaties door toegankelijke programma\'s en ontmoetingen.',
+          items: [
+            'Toegankelijke en impactvolle educatieve programma\'s en informatieve bijeenkomsten organiseren',
+            'Projecten ontwikkelen die interculturele dialoog en ontmoeting bevorderen',
+            'Participatie en integratie van nieuwkomers en andere kwetsbare groepen ondersteunen',
+            'Activiteiten opzetten voor jongeren, volwassenen en ouderen, afgestemd op hun behoeften',
+            'Lokale betrokkenheid en gemeenschapszin versterken via laagdrempelige initiatieven'
+          ]
         },
         vision: {
           title: 'Onze Visie',
-          content: 'Een samenleving waarin iedereen zich welkom voelt en de kans krijgt om te groeien en te ontwikkelen.'
+          content: 'Wij geloven in een samenleving waarin respect, tolerantie en culturele diversiteit als fundamentele waarden gelden. Stichting Atlas wil bijdragen aan sociale cohesie, actief burgerschap en gedeelde toekomstperspectieven. Door middel van educatie, ontmoeting en samenwerking creëren wij ruimte voor dialoog en persoonlijke ontwikkeling. Onze projecten zijn gericht op het zichtbaar maken en verbinden van mensen en gemeenschappen.'
         },
         values: [
           { id: uuidv4(), title: 'Inclusiviteit', description: 'Iedereen is welkom bij ons' },
