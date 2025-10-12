@@ -109,7 +109,7 @@ def test_post_valid_anbi_document():
     print("\n=== Testing POST /api/anbi (valid documents) ===")
     
     test_pdf_base64 = create_test_pdf_base64()
-    valid_types = ['beleidsplan', 'huisstijl', 'jaarrekening']
+    valid_types = ['beloningsbeleid', 'beleidsplan', 'jaarrekening']
     
     results = []
     
