@@ -55,6 +55,23 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Who We Are */}
+      {content?.whoWeAre && (
+        <section className="py-16 bg-gray-50">
+          <div className="container mx-auto px-4">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="max-w-4xl mx-auto text-center"
+            >
+              <h2 className="text-3xl font-bold text-gray-800 mb-6">{content.whoWeAre.title}</h2>
+              <p className="text-lg text-gray-600 leading-relaxed">{content.whoWeAre.content}</p>
+            </motion.div>
+          </div>
+        </section>
+      )}
+
       {/* Mission & Vision */}
       <section className="py-16 container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-16">
@@ -67,10 +84,9 @@ export default function AboutPage() {
             <div className="w-16 h-16 bg-[#05B6C4] rounded-lg mb-6 flex items-center justify-center">
               <Target className="w-8 h-8 text-white" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Misyonumuz</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">{content?.mission?.title || 'Onze Missie'}</h2>
             <p className="text-gray-600 leading-relaxed">
-              Erişilebilir programlar ve buluşmalar yoluyla kültürler ve nesiller arasında köprüler kuruyoruz. 
-              Herkesin kendini hoş karşılandığı ve değerli hissettiği bir topluluk oluşturmayı hedefliyoruz.
+              {content?.mission?.content || 'We bouwen bruggen tussen culturen en generaties.'}
             </p>
           </motion.div>
 
@@ -83,10 +99,9 @@ export default function AboutPage() {
             <div className="w-16 h-16 bg-[#3B87BE] rounded-lg mb-6 flex items-center justify-center">
               <Heart className="w-8 h-8 text-white" />
             </div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Vizyonumuz</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">{content?.vision?.title || 'Onze Visie'}</h2>
             <p className="text-gray-600 leading-relaxed">
-              Herkesin kendini hoş karşılandığı ve büyüme ve gelişme fırsatına sahip olduğu bir toplum. 
-              Kültürel çeşitliliğin bir zenginlik kaynağı olarak görüldüğü bir dünya.
+              {content?.vision?.content || 'Een samenleving waarin iedereen zich welkom voelt.'}
             </p>
           </motion.div>
         </div>
@@ -98,19 +113,15 @@ export default function AboutPage() {
           viewport={{ once: true }}
           className="bg-white rounded-lg p-8 shadow-md"
         >
-          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Değerlerimiz</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              { title: 'Kapsayıcılık', desc: 'Herkes bizimle hoş karşılanır' },
-              { title: 'Saygı', desc: 'Tüm kültürlere eşit saygı' },
-              { title: 'İşbirliği', desc: 'Birlikte daha güçlüyüz' },
-            ].map((value, index) => (
-              <div key={index} className="text-center">
+          <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Onze Waarden</h2>
+          <div className={`grid grid-cols-1 md:grid-cols-${Math.min(content?.values?.length || 3, 4)} gap-6`}>
+            {content?.values?.map((value, index) => (
+              <div key={value.id} className="text-center">
                 <div className="w-12 h-12 bg-[#F7941D] rounded-full mx-auto mb-3 flex items-center justify-center">
                   <Users className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="font-semibold text-gray-800 mb-2">{value.title}</h3>
-                <p className="text-sm text-gray-600">{value.desc}</p>
+                <p className="text-sm text-gray-600">{value.description}</p>
               </div>
             ))}
           </div>
