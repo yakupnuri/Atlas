@@ -84,6 +84,13 @@ export default function AboutPage() {
             </div>
             
             <div className="bg-white rounded-lg shadow-md p-8">
+              {/* Mission Description */}
+              {aboutContent?.mission?.content && (
+                <p className="text-gray-700 leading-relaxed mb-6 text-center italic">
+                  {aboutContent.mission.content}
+                </p>
+              )}
+              
               <ul className="space-y-4">
                 {aboutContent?.mission?.items?.map((item, index) => (
                   <li key={index} className="flex items-start">
