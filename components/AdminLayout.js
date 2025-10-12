@@ -26,6 +26,11 @@ export default function AdminLayout({ children }) {
       href: '/admin/dashboard',
     },
     {
+      title: 'Kullanıcılar',
+      icon: Users,
+      href: '/admin/users',
+    },
+    {
       title: 'Haberler',
       icon: Newspaper,
       href: '/admin/nieuws',
