@@ -59,7 +59,7 @@ export default function EventCard({ event, index = 0 }) {
         </div>
         
         <Link
-          href={`/events/${event.slug}`}
+          href={`/evenementen/${event.slug}`}
           className="block w-full text-center bg-[#05B6C4] hover:bg-[#3B87BE] text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200"
         >
           Bekijk details
