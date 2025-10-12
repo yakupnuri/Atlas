@@ -106,8 +106,8 @@ export default function AdminANBIPage() {
   }
 
   const documentTypes = [
+    { id: 'beloningsbeleid', name: 'Beloningsbeleid', description: 'Upload het beloningsbeleid document' },
     { id: 'beleidsplan', name: 'Beleidsplan', description: 'Upload het beleidsplan document' },
-    { id: 'huisstijl', name: 'Huisstijl', description: 'Upload de huisstijl handleiding' },
     { id: 'jaarrekening', name: 'Jaarrekening', description: 'Upload de jaarrekening' }
   ]
 
