@@ -88,36 +88,47 @@ export default function AboutPage() {
             
             <div className="bg-white rounded-lg shadow-md p-8">
               <ul className="space-y-4">
-                <li className="flex items-start">
-                  <span className="text-[#05B6C4] font-bold text-xl mr-3">•</span>
-                  <span className="text-gray-700 leading-relaxed">
-                    Toegankelijke en impactvolle educatieve programma's en informatieve bijeenkomsten organiseren
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-[#05B6C4] font-bold text-xl mr-3">•</span>
-                  <span className="text-gray-700 leading-relaxed">
-                    Projecten ontwikkelen die interculturele dialoog en ontmoeting bevorderen
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-[#05B6C4] font-bold text-xl mr-3">•</span>
-                  <span className="text-gray-700 leading-relaxed">
-                    Participatie en integratie van nieuwkomers en andere kwetsbare groepen ondersteunen
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-[#05B6C4] font-bold text-xl mr-3">•</span>
-                  <span className="text-gray-700 leading-relaxed">
-                    Activiteiten opzetten voor jongeren, volwassenen en ouderen, afgestemd op hun behoeften
-                  </span>
-                </li>
-                <li className="flex items-start">
-                  <span className="text-[#05B6C4] font-bold text-xl mr-3">•</span>
-                  <span className="text-gray-700 leading-relaxed">
-                    Lokale betrokkenheid en gemeenschapszin versterken via laagdrempelige initiatieven
-                  </span>
-                </li>
+                {aboutContent?.mission?.items?.map((item, index) => (
+                  <li key={index} className="flex items-start">
+                    <span className="text-[#05B6C4] font-bold text-xl mr-3">•</span>
+                    <span className="text-gray-700 leading-relaxed">
+                      {item}
+                    </span>
+                  </li>
+                )) || (
+                  <>
+                    <li className="flex items-start">
+                      <span className="text-[#05B6C4] font-bold text-xl mr-3">•</span>
+                      <span className="text-gray-700 leading-relaxed">
+                        Toegankelijke en impactvolle educatieve programma's en informatieve bijeenkomsten organiseren
+                      </span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#05B6C4] font-bold text-xl mr-3">•</span>
+                      <span className="text-gray-700 leading-relaxed">
+                        Projecten ontwikkelen die interculturele dialoog en ontmoeting bevorderen
+                      </span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#05B6C4] font-bold text-xl mr-3">•</span>
+                      <span className="text-gray-700 leading-relaxed">
+                        Participatie en integratie van nieuwkomers en andere kwetsbare groepen ondersteunen
+                      </span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#05B6C4] font-bold text-xl mr-3">•</span>
+                      <span className="text-gray-700 leading-relaxed">
+                        Activiteiten opzetten voor jongeren, volwassenen en ouderen, afgestemd op hun behoeften
+                      </span>
+                    </li>
+                    <li className="flex items-start">
+                      <span className="text-[#05B6C4] font-bold text-xl mr-3">•</span>
+                      <span className="text-gray-700 leading-relaxed">
+                        Lokale betrokkenheid en gemeenschapszin versterken via laagdrempelige initiatieven
+                      </span>
+                    </li>
+                  </>
+                )}
               </ul>
             </div>
           </motion.div>
