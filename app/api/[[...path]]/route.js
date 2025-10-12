@@ -288,8 +288,60 @@ export async function POST(request) {
       
       await db.collection('events').insertMany(demoEvents);
       
+      // Demo news articles
+      const demoNews = [
+        {
+          id: uuidv4(),
+          title: 'Ramazan İftar Programı Başarıyla Tamamlandı',
+          slug: 'ramazan-iftar-programi-basariyla-tamamlandi',
+          excerpt: 'Bu yılki Ramazan ayında düzenlediğimiz iftar programlarına 150\'den fazla kişi katıldı.',
+          content: 'Bu yılki Ramazan ayında düzenlediğimiz iftar programları büyük bir başarıyla tamamlandı. Her gün düzenlenen iftar yemeklerine toplam 150\'den fazla kişi katıldı.\\n\\nProgram boyunca misafirlerimize geleneksel Türk mutfağından çeşitli lezzetler sunuldu. Etkinliğimiz, farklı kültürlerden insanların bir araya gelip birlikte yemek yediği, sohbet ettiği ve dostluklar kurduğu özel bir atmosfere sahipti.\\n\\nKatılımcılardan gelen geri bildirimler oldukça olumlu oldu. Gelecek yıl da bu programı tekrarlamayı planlıyoruz.',
+          date: '2025-04-15',
+          author: 'Fatma Demir',
+          category: 'Etkinlik',
+          image: 'https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=800',
+          gallery: [
+            'https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=400',
+            'https://images.unsplash.com/photo-1606787366850-de6330128bfc?w=400',
+            'https://images.unsplash.com/photo-1544025162-d76694265947?w=400'
+          ],
+          commentsEnabled: true,
+          createdAt: new Date().toISOString(),
+        },
+        {
+          id: uuidv4(),
+          title: 'Yeni Ders Yemeği Programı Başlıyor',
+          slug: 'yeni-ders-yemegi-programi-basliyor',
+          excerpt: 'Öğrenciler ve aileler için her Cumartesi düzenlenen eğitici yemek programımız başlıyor.',
+          content: 'Öğrenciler ve aileler için özel olarak tasarlanmış Ders Yemeği programımız başlıyor! Her Cumartesi saat 12:00-15:00 arasında düzenlenecek bu program, hem eğitici hem de eğlenceli aktiviteler içeriyor.\\n\\nProgram kapsamında:\\n- Sağlıklı beslenme eğitimi\\n- Birlikte yemek pişirme atölyeleri\\n- Kültürel yemek tarifleri\\n- Aile bağlarını güçlendirici aktiviteler\\n\\nKayıtlar başladı! Sınırlı kontenjan.',
+          date: '2025-03-22',
+          author: 'Mehmet Kaya',
+          category: 'Eğitim',
+          image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800',
+          gallery: [],
+          commentsEnabled: true,
+          createdAt: new Date().toISOString(),
+        },
+        {
+          id: uuidv4(),
+          title: 'Weekendonderwijs Kayıtları Başladı',
+          slug: 'weekendonderwijs-kayitlari-basladi',
+          excerpt: 'Hafta sonu okulumuzun yeni dönemi için kayıtlar açıldı. Şimdi kaydolun!',
+          content: 'Weekendonderwijs (Hafta Sonu Okulu) programımızın yeni dönem kayıtları başladı! 6-14 yaş arası çocuklar için düzenlenen bu program, kültürel eğitim ve dil gelişimi odaklıdır.\\n\\nProgram içeriği:\\n- Türkçe dil eğitimi\\n- Kültürel değerler\\n- Sanat ve müzik\\n- Sosyal aktiviteler\\n\\nDersler her Cumartesi ve Pazar günleri yapılacaktır.',
+          date: '2025-03-10',
+          author: 'Ayşe Öztürk',
+          category: 'Eğitim',
+          image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800',
+          gallery: [],
+          commentsEnabled: false,
+          createdAt: new Date().toISOString(),
+        }
+      ];
+      
+      await db.collection('news').insertMany(demoNews);
+      
       return NextResponse.json(
-        { message: 'Demo data succesvol aangemaakt!', count: demoEvents.length },
+        { message: 'Demo data succesvol aangemaakt!', events: demoEvents.length, news: demoNews.length },
         { headers: corsHeaders }
       );
     }
