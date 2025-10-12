@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function ANBIPage() {
-  const { t } = useLanguage()
+  const { t, loading: languageLoading } = useLanguage()
   const [documents, setDocuments] = useState({
     beleidsplan: null,
     huisstijl: null,
