@@ -1,17 +1,46 @@
 'use client'
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Lock, User, AlertCircle } from 'lucide-react';
 import Image from 'next/image';
 
 export default function AdminLoginPage() {
+  const router = useRouter();
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setError('Admin paneli henüz geliştirilme aşamasındadır. Fase 2\'de tamamlanacaktır.');
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(credentials),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        // Store token
+        localStorage.setItem('adminToken', data.token);
+        localStorage.setItem('adminUser', JSON.stringify(data.user));
+        
+        // Redirect to dashboard
+        router.push('/admin/dashboard');
+      } else {
+        setError(data.error || 'Inloggen mislukt');
+      }
+    } catch (error) {
+      setError('Er is een fout opgetreden');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,7 +62,7 @@ export default function AdminLoginPage() {
             />
           </div>
           <h1 className="text-2xl font-bold text-white mb-2">Admin Panel</h1>
-          <p className="text-white/80 text-sm">Stichting Atlas Yönetim Paneli</p>
+          <p className="text-white/80 text-sm">Beheer uw website content</p>
         </div>
 
         {/* Form */}
@@ -42,7 +71,7 @@ export default function AdminLoginPage() {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-yellow-50 border border-yellow-200 text-yellow-800 px-4 py-3 rounded-lg mb-6 flex items-start gap-2"
+              className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-6 flex items-start gap-2"
             >
               <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
               <span className="text-sm">{error}</span>
@@ -52,7 +81,7 @@ export default function AdminLoginPage() {
           <form onSubmit={handleLogin} className="space-y-6">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Kullanıcı Adı
+                Gebruikersnaam
               </label>
               <div className="relative">
                 <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -62,13 +91,14 @@ export default function AdminLoginPage() {
                   onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] focus:border-transparent outline-none"
                   placeholder="admin"
+                  required
                 />
               </div>
             </div>
 
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
-                Şifre
+                Wachtwoord
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -78,21 +108,23 @@ export default function AdminLoginPage() {
                   onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] focus:border-transparent outline-none"
                   placeholder="••••••••"
+                  required
                 />
               </div>
             </div>
 
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-[#05B6C4] to-[#3B87BE] text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-shadow"
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-[#05B6C4] to-[#3B87BE] text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-shadow disabled:opacity-50"
             >
-              Giriş Yap
+              {loading ? 'Bezig...' : 'Inloggen'}
             </button>
           </form>
 
           <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
-              🚧 Admin paneli <span className="font-semibold">Fase 2</span>'de tamamlanacaktır.
+              <strong>Demo:</strong> admin / atlas2025
             </p>
           </div>
         </div>
