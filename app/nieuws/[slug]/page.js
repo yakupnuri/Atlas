@@ -285,7 +285,7 @@ export default function NewsDetailPage() {
 
             {prevNext.next ? (
               <Link
-                href={`/news/${prevNext.next.slug}`}
+                href={`/nieuws/${prevNext.next.slug}`}
                 className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow flex items-center gap-4 justify-end text-right"
               >
                 <div>
