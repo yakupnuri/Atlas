@@ -63,101 +63,41 @@ export default function Home() {
 
       {/* News Highlight + Mission/Vision/Values Section */}
       <section className="py-16 container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left: Featured News - 2 columns */}
-          <div className="lg:col-span-2 space-y-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Left: Main Featured News - 2 columns */}
+          <div className="lg:col-span-2">
             {latestNews.length > 0 ? (
-              <>
-                {/* Main Featured News */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
-                >
-                  <div className="relative h-80">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow h-full"
+              >
+                <Link href={`/nieuws/${latestNews[0].slug}`}>
+                  <div className="relative h-[500px]">
                     <img
                       src={latestNews[0].image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'}
                       alt={latestNews[0].title}
                       className="w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                      <div className="flex items-center gap-3 mb-2">
-                        <span className="bg-[#05B6C4] text-white px-3 py-1 rounded-full text-sm font-semibold">
-                          {latestNews[0].category || 'Nieuws'}
-                        </span>
-                        <span className="text-sm opacity-90">
-                          {new Date(latestNews[0].date || latestNews[0].publishDate).toLocaleDateString('nl-NL', {
-                            day: 'numeric',
-                            month: 'long',
-                            year: 'numeric'
-                          })}
-                        </span>
-                      </div>
-                      <h2 className="text-2xl font-bold mb-2 leading-tight">
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                    
+                    {/* Category badge - top left */}
+                    <div className="absolute top-4 left-4">
+                      <span className="bg-red-600 text-white px-4 py-2 rounded text-sm font-bold uppercase">
+                        {latestNews[0].category || 'Nieuws'}
+                      </span>
+                    </div>
+                    
+                    {/* Title - bottom */}
+                    <div className="absolute bottom-0 left-0 right-0 p-8">
+                      <h2 className="text-3xl md:text-4xl font-bold text-white leading-tight">
                         {latestNews[0].title}
                       </h2>
-                      <p className="text-base opacity-90 mb-3 line-clamp-2">
-                        {latestNews[0].excerpt}
-                      </p>
-                      <Link 
-                        href={`/nieuws/${latestNews[0].slug}`}
-                        className="inline-flex items-center bg-white text-[#05B6C4] px-5 py-2 rounded-lg font-semibold hover:bg-[#05B6C4] hover:text-white transition-colors group"
-                      >
-                        Lees meer
-                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                      </Link>
                     </div>
                   </div>
-                </motion.div>
-
-                {/* 4 Smaller News Cards */}
-                {latestNews.length > 1 && (
-                  <div className="grid grid-cols-2 gap-4">
-                    {latestNews.slice(1, 5).map((news, index) => (
-                      <motion.div
-                        key={news.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                        className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow group"
-                      >
-                        <Link href={`/nieuws/${news.slug}`}>
-                          <div className="relative h-32">
-                            <img
-                              src={news.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400'}
-                              alt={news.title}
-                              className="w-full h-full object-cover"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                          </div>
-                          <div className="p-4">
-                            <div className="flex items-center gap-2 mb-2">
-                              <span className="bg-[#05B6C4]/10 text-[#05B6C4] px-2 py-1 rounded text-xs font-semibold">
-                                {news.category || 'Nieuws'}
-                              </span>
-                              <span className="text-xs text-gray-500">
-                                {new Date(news.date || news.publishDate).toLocaleDateString('nl-NL', {
-                                  day: 'numeric',
-                                  month: 'short'
-                                })}
-                              </span>
-                            </div>
-                            <h3 className="font-bold text-gray-800 mb-2 line-clamp-2 group-hover:text-[#05B6C4] transition-colors">
-                              {news.title}
-                            </h3>
-                            <p className="text-sm text-gray-600 line-clamp-2">
-                              {news.excerpt}
-                            </p>
-                          </div>
-                        </Link>
-                      </motion.div>
-                    ))}
-                  </div>
-                )}
-              </>
+                </Link>
+              </motion.div>
             ) : (
               <div className="bg-gray-100 rounded-lg shadow-lg h-full flex items-center justify-center p-8">
                 <p className="text-gray-500 text-lg">Geen nieuws beschikbaar</p>
@@ -165,57 +105,93 @@ export default function Home() {
             )}
           </div>
 
-          {/* Right: Mission/Vision/Values - 1 column, stacked vertically */}
-          <div className="lg:col-span-1 space-y-6">
-            {[
-              {
-                title: 'Onze Missie',
-                description: 'We bouwen bruggen tussen culturen en generaties.',
-                icon: Target,
-                color: 'from-[#05B6C4] to-[#3B87BE]',
-              },
-              {
-                title: 'Onze Visie',
-                description: 'Een inclusieve samenleving waar iedereen zich welkom voelt.',
-                icon: Heart,
-                color: 'from-[#3B87BE] to-[#99D8E0]',
-              },
-              {
-                title: 'Onze Waarden',
-                description: 'Inclusiviteit, respect en samenwerking staan centraal.',
-                icon: Award,
-                color: 'from-[#B37B83] to-[#F7941D]',
-              },
-            ].map((item, index) => {
-              const IconComponent = item.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all group"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
-                      <IconComponent className="w-6 h-6 text-white" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-bold text-gray-800 mb-2">{item.title}</h3>
-                      <p className="text-gray-600 text-sm mb-3">{item.description}</p>
-                      <Link 
-                        href="/over" 
-                        className="inline-flex items-center text-[#05B6C4] hover:text-[#3B87BE] font-semibold text-sm transition-colors"
-                      >
-                        Lees meer
-                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                      </Link>
-                    </div>
+          {/* Right: 4 Smaller News + Mission/Vision/Values - 1 column */}
+          <div className="lg:col-span-1 space-y-4">
+            {/* 4 Smaller News Items */}
+            {latestNews.length > 1 && latestNews.slice(1, 5).map((news, index) => (
+              <motion.div
+                key={news.id}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow group"
+              >
+                <Link href={`/nieuws/${news.slug}`} className="flex gap-3">
+                  <div className="relative w-32 h-24 flex-shrink-0">
+                    <img
+                      src={news.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=200'}
+                      alt={news.title}
+                      className="w-full h-full object-cover"
+                    />
                   </div>
-                </motion.div>
-              );
-            })}
+                  <div className="flex-1 p-3 pr-4">
+                    <span className="text-xs font-semibold text-[#05B6C4] uppercase">
+                      {news.category || 'Nieuws'}
+                    </span>
+                    <h3 className="font-bold text-sm text-gray-800 mt-1 line-clamp-2 group-hover:text-[#05B6C4] transition-colors leading-tight">
+                      {news.title}
+                    </h3>
+                    <span className="text-xs text-gray-500 mt-2 block">
+                      {new Date(news.date || news.publishDate).toLocaleDateString('nl-NL', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric'
+                      })}
+                    </span>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+
+            {/* Mission/Vision/Values - Compact Cards */}
+            <div className="space-y-3 mt-6">
+              {[
+                {
+                  title: 'Onze Missie',
+                  description: 'Bruggen tussen culturen',
+                  icon: Target,
+                  color: 'from-[#05B6C4] to-[#3B87BE]',
+                },
+                {
+                  title: 'Onze Visie',
+                  description: 'Inclusieve samenleving',
+                  icon: Heart,
+                  color: 'from-[#3B87BE] to-[#99D8E0]',
+                },
+                {
+                  title: 'Onze Waarden',
+                  description: 'Respect en samenwerking',
+                  icon: Award,
+                  color: 'from-[#B37B83] to-[#F7941D]',
+                },
+              ].map((item, index) => {
+                const IconComponent = item.icon;
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4 + index * 0.1 }}
+                    className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-all group"
+                  >
+                    <Link href="/over" className="flex items-center gap-3">
+                      <div className={`w-10 h-10 bg-gradient-to-br ${item.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                        <IconComponent className="w-5 h-5 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="font-bold text-sm text-gray-800 group-hover:text-[#05B6C4] transition-colors">
+                          {item.title}
+                        </h3>
+                        <p className="text-xs text-gray-600">{item.description}</p>
+                      </div>
+                      <ArrowRight className="w-4 h-4 text-[#05B6C4] group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
