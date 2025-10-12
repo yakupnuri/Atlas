@@ -330,6 +330,141 @@ export default function SettingsPage() {
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-gray-900 mb-4">API Ayarları</h2>
               
+              {/* Stripe Payment Gateway */}
+              <div className="border-2 border-green-500 rounded-lg p-4 bg-green-50">
+                <h3 className="font-bold text-lg mb-3 text-green-700 flex items-center gap-2">
+                  💳 Stripe Payment Gateway
+                  <span className="text-xs bg-green-200 text-green-800 px-2 py-1 rounded">Ödeme Sistemi</span>
+                </h3>
+                <div className="space-y-4">
+                  {/* Enable/Disable & Mode Selection */}
+                  <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="checkbox"
+                        id="stripeEnabled"
+                        checked={stripeKeys.enabled}
+                        onChange={(e) => setStripeKeys({ ...stripeKeys, enabled: e.target.checked })}
+                        className="w-5 h-5 text-green-600 rounded"
+                      />
+                      <label htmlFor="stripeEnabled" className="text-sm font-medium">Stripe Aktif</label>
+                    </div>
+                    
+                    <div className="flex items-center gap-4 ml-8">
+                      <label className="text-sm font-medium text-gray-700">Mod:</label>
+                      <label className="inline-flex items-center">
+                        <input
+                          type="radio"
+                          name="stripeMode"
+                          value="test"
+                          checked={stripeKeys.mode === 'test'}
+                          onChange={(e) => setStripeKeys({ ...stripeKeys, mode: 'test' })}
+                          className="w-4 h-4 text-green-600"
+                        />
+                        <span className="ml-2 text-sm">Test Mode</span>
+                      </label>
+                      <label className="inline-flex items-center">
+                        <input
+                          type="radio"
+                          name="stripeMode"
+                          value="live"
+                          checked={stripeKeys.mode === 'live'}
+                          onChange={(e) => setStripeKeys({ ...stripeKeys, mode: 'live' })}
+                          className="w-4 h-4 text-green-600"
+                        />
+                        <span className="ml-2 text-sm">Live Mode</span>
+                      </label>
+                    </div>
+                  </div>
+
+                  {/* Publishable Key */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Publishable Key
+                      {stripeKeys.publishableKey && stripeKeys.publishableKey.includes('...') && (
+                        <span className="text-xs text-gray-500 ml-2">(Mevcut: {stripeKeys.publishableKey})</span>
+                      )}
+                    </label>
+                    <input
+                      type="text"
+                      value={stripeKeys.publishableKey && !stripeKeys.publishableKey.includes('...') ? stripeKeys.publishableKey : ''}
+                      onChange={(e) => setStripeKeys({ ...stripeKeys, publishableKey: e.target.value })}
+                      placeholder={stripeKeys.mode === 'test' ? 'pk_test_...' : 'pk_live_...'}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none font-mono text-sm"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Frontend'de kullanılır (güvenli)</p>
+                  </div>
+
+                  {/* Secret Key */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Secret Key
+                      {stripeKeys.secretKey && stripeKeys.secretKey.includes('...') && (
+                        <span className="text-xs text-gray-500 ml-2">(Mevcut: {stripeKeys.secretKey})</span>
+                      )}
+                    </label>
+                    <div className="relative">
+                      <input
+                        type={showStripeSecret ? 'text' : 'password'}
+                        value={stripeKeys.secretKey && !stripeKeys.secretKey.includes('...') ? stripeKeys.secretKey : ''}
+                        onChange={(e) => setStripeKeys({ ...stripeKeys, secretKey: e.target.value })}
+                        placeholder={stripeKeys.mode === 'test' ? 'sk_test_...' : 'sk_live_...'}
+                        className="w-full px-4 py-2 pr-20 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none font-mono text-sm"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowStripeSecret(!showStripeSecret)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-600 hover:text-gray-800"
+                      >
+                        {showStripeSecret ? 'Gizle' : 'Göster'}
+                      </button>
+                    </div>
+                    <p className="text-xs text-red-600 mt-1">⚠️ Asla frontend'de kullanmayın!</p>
+                  </div>
+
+                  {/* Webhook Secret */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Webhook Secret (İsteğe Bağlı)
+                      {stripeKeys.webhookSecret && stripeKeys.webhookSecret.includes('...') && (
+                        <span className="text-xs text-gray-500 ml-2">(Mevcut: {stripeKeys.webhookSecret})</span>
+                      )}
+                    </label>
+                    <input
+                      type="text"
+                      value={stripeKeys.webhookSecret && !stripeKeys.webhookSecret.includes('...') ? stripeKeys.webhookSecret : ''}
+                      onChange={(e) => setStripeKeys({ ...stripeKeys, webhookSecret: e.target.value })}
+                      placeholder="whsec_..."
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none font-mono text-sm"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Stripe Dashboard → Webhooks bölümünden alınır</p>
+                  </div>
+
+                  {/* Info Box */}
+                  <div className="bg-white border border-green-200 p-4 rounded-lg">
+                    <p className="text-sm text-green-800 font-semibold mb-2">📋 Stripe Dashboard'dan Anahtarları Alma:</p>
+                    <ol className="text-xs text-gray-700 space-y-1 list-decimal list-inside">
+                      <li><a href="https://dashboard.stripe.com/apikeys" target="_blank" rel="noopener" className="text-blue-600 hover:underline">Stripe Dashboard → API Keys</a> sayfasına gidin</li>
+                      <li>Test Mode/Live Mode seçin (sağ üst köşe)</li>
+                      <li>Publishable key ve Secret key'i kopyalayın</li>
+                      <li>Webhook için: Developers → Webhooks → Add endpoint</li>
+                    </ol>
+                  </div>
+
+                  {/* Save Button */}
+                  <div className="pt-4">
+                    <button
+                      type="button"
+                      onClick={saveStripeSettings}
+                      disabled={saving}
+                      className="px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg font-semibold transition-colors disabled:bg-gray-400"
+                    >
+                      {saving ? 'Kaydediliyor...' : '💾 Stripe Ayarlarını Kaydet'}
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               {/* Google OAuth */}
               <div className="border-2 border-[#05B6C4] rounded-lg p-4 bg-blue-50">
                 <h3 className="font-bold text-lg mb-3 text-[#05B6C4]">🔐 Google OAuth (Giriş Sistemi)</h3>
