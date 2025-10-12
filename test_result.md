@@ -312,6 +312,9 @@ frontend:
       - working: true
         agent: "testing"
         comment: "BACKEND TESTING COMPLETE ✅ All 6 test scenarios passed: 1) GET empty documents returns correct structure 2) POST uploads work for all 3 document types (beleidsplan, huisstijl, jaarrekening) 3) GET after uploads returns all documents with correct metadata 4) Invalid requests properly rejected (missing fields, invalid types) 5) Document replacement (upsert) working correctly 6) File system creation verified - files stored in /public/uploads/anbi/ 7) MongoDB storage verified - metadata in anbi_documents collection. API handles base64 file uploads, validates document types, creates unique filenames with timestamps, and implements upsert functionality. Note: File size validation (10MB limit) expected to be handled by frontend."
+      - working: true
+        agent: "testing"
+        comment: "UPDATED ANBI TESTING COMPLETE ✅ Verified new document types after cleanup: 1) Database and file system cleared successfully 2) GET /api/anbi returns empty state correctly 3) POST uploads work for all NEW document types: beloningsbeleid (Remuneration Policy), beleidsplan (Policy Plan), jaarrekening (Annual Report) 4) Old document type 'huisstijl' properly rejected with 400 status 5) File naming includes correct type prefix (beloningsbeleid_, beleidsplan_, jaarrekening_) 6) MongoDB documents have correct type field 7) Document replacement (upsert) working for new types 8) All validation and error handling working correctly. API successfully updated to use new document types as specified."
 
 metadata:
   created_by: "main_agent"
