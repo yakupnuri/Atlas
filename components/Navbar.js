@@ -12,15 +12,7 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { 
-      href: '/over', 
-      label: 'Over Ons', 
-      icon: Info,
-      dropdown: [
-        { href: '/over/missie-visie', label: 'Missie & Visie' },
-        { href: '/over/bestuur-beleid', label: 'Bestuur & Beleid' }
-      ]
-    },
+    { href: '/over', label: 'Over Ons', icon: Info },
     { 
       href: '/academie', 
       label: 'Atlas Academie', 
@@ -36,11 +28,12 @@ export default function Navbar() {
       label: 'Evenementen', 
       icon: Calendar,
       dropdown: [
-        { href: '/evenementen/reserveren', label: 'Reserveren' }
+        { href: '/evenementen', label: 'Evenementen' },
+        { href: '/reserveren', label: 'Reserveren' }
       ]
     },
     { href: '/nieuws', label: 'Nieuws', icon: Newspaper },
-    { href: '/anbi', label: 'ANBI & Transparantie', icon: FileText },
+    { href: '/anbi', label: 'ANBI', icon: FileText },
     { href: '/doneren', label: 'Doneren', icon: Heart },
   ];
 
