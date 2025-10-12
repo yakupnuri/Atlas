@@ -219,33 +219,24 @@ export default function AdminAboutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
-              <Link href="/admin/dashboard" className="text-gray-600 hover:text-gray-800">
-                <ArrowLeft className="w-6 h-6" />
-              </Link>
-              <Image src="/web-logo.png" alt="Logo" width={100} height={40} className="h-8 w-auto" />
-              <span className="text-gray-400">|</span>
-              <h1 className="text-xl font-bold text-gray-800">Over Ons Beheer</h1>
-            </div>
-          </div>
-          
-          {/* Success Message */}
-          {successMessage && (
-            <div className={`mt-4 p-4 rounded-lg ${
-              successMessage.includes('✅') 
-                ? 'bg-green-50 text-green-800 border border-green-200' 
-                : 'bg-red-50 text-red-800 border border-red-200'
-            }`}>
-              <p className="font-semibold text-center">{successMessage}</p>
-            </div>
-          )}
+    <AdminLayout>
+      <div className="p-8">
+        {/* Page Header */}
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Over Ons Beheer</h1>
+          <p className="text-gray-600">Kurum bilgilerini, takım üyelerini ve değerlerinizi yönetin</p>
         </div>
-      </header>
+        
+        {/* Success Message */}
+        {successMessage && (
+          <div className={`mb-6 p-4 rounded-lg ${
+            successMessage.includes('✅') 
+              ? 'bg-green-50 text-green-800 border border-green-200' 
+              : 'bg-red-50 text-red-800 border border-red-200'
+          }`}>
+            <p className="font-semibold text-center">{successMessage}</p>
+          </div>
+        )}
 
       {/* Tabs */}
       <div className="bg-white border-b">
