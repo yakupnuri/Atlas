@@ -267,7 +267,7 @@ export default function AdminAboutPage() {
       </div>
 
       {/* Main Content */}
-      <main className="container mx-auto px-4 py-8">
+      <div className="space-y-6">
         {activeTab === 'content' && (
           <div className="space-y-8">
             {/* Wie zijn wij */}
