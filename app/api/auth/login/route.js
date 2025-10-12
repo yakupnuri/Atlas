@@ -15,7 +15,7 @@ export async function POST(request) {
   try {
     const { username, password } = await request.json();
     
-    const result = createSession(username, password);
+    const result = await createSession(username, password);
     
     if (result.success) {
       return NextResponse.json(result, { headers: corsHeaders });
@@ -26,8 +26,9 @@ export async function POST(request) {
       { status: 401, headers: corsHeaders }
     );
   } catch (error) {
+    console.error('Login error:', error);
     return NextResponse.json(
-      { error: 'Server error' },
+      { error: 'Server error', details: error.message },
       { status: 500, headers: corsHeaders }
     );
   }
