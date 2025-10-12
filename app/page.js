@@ -113,8 +113,8 @@ export default function Home() {
               
               <div className="text-center">
                 <Link
-                  href="/events"
-                  className="inline-flex items-center gap-2 bg-[#05B6C4] text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#3B87BE] transition-colors"
+                  href="/evenementen"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-[#05B6C4] to-[#0891A0] text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
                 >
                   Bekijk Alle Evenementen
                   <ArrowRight className="w-5 h-5" />
