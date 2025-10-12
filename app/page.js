@@ -61,55 +61,113 @@ export default function Home() {
       {/* Hero Carousel */}
       <HeroCarousel />
 
-      {/* Mission/Vision/Values Section */}
+      {/* News Highlight + Mission/Vision/Values Section */}
       <section className="py-16 container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {[
-            {
-              title: 'Onze Missie',
-              description: 'We bouwen bruggen tussen culturen en generaties.',
-              icon: Target,
-              color: 'from-[#05B6C4] to-[#3B87BE]',
-            },
-            {
-              title: 'Onze Visie',
-              description: 'Een inclusieve samenleving waar iedereen zich welkom voelt.',
-              icon: Heart,
-              color: 'from-[#3B87BE] to-[#99D8E0]',
-            },
-            {
-              title: 'Onze Waarden',
-              description: 'Inclusiviteit, respect en samenwerking staan centraal.',
-              icon: Award,
-              color: 'from-[#B37B83] to-[#F7941D]',
-            },
-          ].map((item, index) => {
-            const IconComponent = item.icon;
-            return (
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left: Featured News - 2 columns */}
+          <div className="lg:col-span-2">
+            {latestNews.length > 0 ? (
               <motion.div
-                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.2 }}
-                className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all group"
+                className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow h-full"
               >
-                <div className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-lg mb-4 flex items-center justify-center`}>
-                  <IconComponent className="w-6 h-6 text-white" />
+                <div className="relative h-96">
+                  <img
+                    src={latestNews[0].image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'}
+                    alt={latestNews[0].title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                  <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="bg-[#05B6C4] text-white px-3 py-1 rounded-full text-sm font-semibold">
+                        {latestNews[0].category || 'Nieuws'}
+                      </span>
+                      <span className="text-sm opacity-90">
+                        {new Date(latestNews[0].date || latestNews[0].publishDate).toLocaleDateString('nl-NL', {
+                          day: 'numeric',
+                          month: 'long',
+                          year: 'numeric'
+                        })}
+                      </span>
+                    </div>
+                    <h2 className="text-3xl font-bold mb-3 leading-tight">
+                      {latestNews[0].title}
+                    </h2>
+                    <p className="text-lg opacity-90 mb-4 line-clamp-2">
+                      {latestNews[0].excerpt}
+                    </p>
+                    <Link 
+                      href={`/nieuws/${latestNews[0].slug}`}
+                      className="inline-flex items-center bg-white text-[#05B6C4] px-6 py-3 rounded-lg font-semibold hover:bg-[#05B6C4] hover:text-white transition-colors group"
+                    >
+                      Lees meer
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">{item.title}</h3>
-                <p className="text-gray-600 mb-4 min-h-[3rem]">{item.description}</p>
-                
-                <Link 
-                  href="/over" 
-                  className="inline-flex items-center text-[#05B6C4] hover:text-[#3B87BE] font-semibold transition-colors"
-                >
-                  Lees meer
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Link>
               </motion.div>
-            );
-          })}
+            ) : (
+              <div className="bg-gray-100 rounded-lg shadow-lg h-full flex items-center justify-center p-8">
+                <p className="text-gray-500 text-lg">Geen nieuws beschikbaar</p>
+              </div>
+            )}
+          </div>
+
+          {/* Right: Mission/Vision/Values - 1 column, stacked vertically */}
+          <div className="lg:col-span-1 space-y-6">
+            {[
+              {
+                title: 'Onze Missie',
+                description: 'We bouwen bruggen tussen culturen en generaties.',
+                icon: Target,
+                color: 'from-[#05B6C4] to-[#3B87BE]',
+              },
+              {
+                title: 'Onze Visie',
+                description: 'Een inclusieve samenleving waar iedereen zich welkom voelt.',
+                icon: Heart,
+                color: 'from-[#3B87BE] to-[#99D8E0]',
+              },
+              {
+                title: 'Onze Waarden',
+                description: 'Inclusiviteit, respect en samenwerking staan centraal.',
+                icon: Award,
+                color: 'from-[#B37B83] to-[#F7941D]',
+              },
+            ].map((item, index) => {
+              const IconComponent = item.icon;
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all group"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-lg flex items-center justify-center flex-shrink-0`}>
+                      <IconComponent className="w-6 h-6 text-white" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-bold text-gray-800 mb-2">{item.title}</h3>
+                      <p className="text-gray-600 text-sm mb-3">{item.description}</p>
+                      <Link 
+                        href="/over" 
+                        className="inline-flex items-center text-[#05B6C4] hover:text-[#3B87BE] font-semibold text-sm transition-colors"
+                      >
+                        Lees meer
+                        <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                      </Link>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
