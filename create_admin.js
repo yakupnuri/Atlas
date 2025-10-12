@@ -2,7 +2,8 @@ const { MongoClient } = require('mongodb');
 const bcrypt = require('bcryptjs');
 
 async function createAdmin() {
-  const client = new MongoClient(process.env.MONGO_URL);
+  const MONGO_URL = 'mongodb://localhost:27017/stichting_atlas';
+  const client = new MongoClient(MONGO_URL);
   
   try {
     await client.connect();
