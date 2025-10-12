@@ -87,7 +87,7 @@ export default function NewsManagement() {
     
     try {
       const token = localStorage.getItem('adminToken');
-      const response = await fetch(`/api/[[...path]]/news?id=${newsId}`, {
+      const response = await fetch(`/api/news?id=${newsId}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
       });
@@ -95,6 +95,8 @@ export default function NewsManagement() {
       if (response.ok) {
         alert('✅ Haber silindi!');
         fetchNews();
+      } else {
+        alert('❌ Silme hatası!');
       }
     } catch (error) {
       console.error('Error deleting news:', error);
