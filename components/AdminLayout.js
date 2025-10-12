@@ -14,7 +14,14 @@ import {
   X,
   LogOut,
   Users,
-  Settings
+  Settings,
+  FileStack,
+  ChevronDown,
+  ChevronRight,
+  Phone,
+  GraduationCap,
+  Briefcase,
+  FolderKanban
 } from 'lucide-react';
 
 export default function AdminLayout({ children }) {
