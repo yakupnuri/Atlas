@@ -495,6 +495,16 @@ export default function AdminAboutPage() {
                   </div>
                 ))}
               </div>
+              <div className="flex justify-end mt-4">
+                <button
+                  onClick={() => saveSection('values')}
+                  disabled={saving}
+                  className="flex items-center gap-2 bg-[#05B6C4] hover:bg-[#3B87BE] text-white px-6 py-2 rounded-lg font-semibold transition-colors disabled:opacity-50"
+                >
+                  <Save className="w-4 h-4" />
+                  {saving ? 'Bezig...' : 'Onze Waarden Opslaan'}
+                </button>
+              </div>
             </div>
           </div>
         )}
