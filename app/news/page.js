@@ -59,6 +59,7 @@ const newsItems = [
   {
     id: 6,
     title: 'ANBI Statüsü Yenilendi',
+    slug: 'anbi-statusu-yenilendi',
     excerpt: 'Stichting Atlas\'un ANBI statüsü başarıyla yenilendi.',
     date: '2025-01-20',
     author: 'Ahmet Yılmaz',
