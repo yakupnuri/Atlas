@@ -74,7 +74,7 @@ export async function POST(request) {
     await writeFile(filePath, buffer)
 
     // Store document info in database
-    const db = await connectDB()
+    const db = await getDb()
     const anbiCollection = db.collection('anbi_documents')
 
     const documentData = {
