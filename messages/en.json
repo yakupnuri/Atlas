@@ -5,7 +5,8 @@
     "about": "About Us",
     "news": "News",
     "reserve": "Reserve",
-    "donate": "Donate"
+    "donate": "Donate",
+    "anbi": "ANBI"
   },
   "hero": {
     "title": "Building an inclusive community together",
@@ -33,5 +34,41 @@
     "ramazanDesc": "Special iftar dinners for our community",
     "ders": "Educational Dinner Event",
     "dersDesc": "Educational meal program for students and families"
+  },
+  "anbi": {
+    "title": "ANBI Status",
+    "subtitle": "Stichting Atlas is recognized as a Public Benefit Organization (ANBI)",
+    "info": {
+      "title": "What is ANBI?",
+      "description": "An ANBI is a Public Benefit Organization that provides tax benefits to donors. Donations to our foundation are tax-deductible.",
+      "fiscalTitle": "Tax Benefits",
+      "fiscalDesc": "Your donations are tax-deductible under Dutch tax law.",
+      "transparencyTitle": "Transparency",
+      "transparencyDesc": "As an ANBI, we publicly publish our documents and financial information."
+    },
+    "documents": {
+      "title": "Official Documents",
+      "subtitle": "Download our policy plans and financial reports"
+    },
+    "beleidsplan": {
+      "title": "Policy Plan",
+      "description": "Our strategic policy plan with objectives and plans for the coming years."
+    },
+    "huisstijl": {
+      "title": "Brand Guidelines",
+      "description": "Our official brand guidelines with logo, colors and brand guidelines."
+    },
+    "jaarrekening": {
+      "title": "Annual Report",
+      "description": "The most recent annual report with financial overview and accountability."
+    },
+    "download": "Download PDF",
+    "notAvailable": "Not yet available",
+    "loading": "Loading documents...",
+    "contact": {
+      "title": "Questions about ANBI?",
+      "description": "Contact us for more information about our ANBI status",
+      "button": "Contact Us"
+    }
   }
 }
