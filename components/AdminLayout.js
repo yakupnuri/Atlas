@@ -52,6 +52,11 @@ export default function AdminLayout({ children }) {
       icon: FileText,
       href: '/admin/anbi',
     },
+    {
+      title: 'Ayarlar',
+      icon: Settings,
+      href: '/admin/settings',
+    },
   ];
 
   const handleLogout = () => {
