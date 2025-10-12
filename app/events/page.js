@@ -96,6 +96,11 @@ export default function EventsPage() {
         </div>
       </section>
 
+      {/* Event Ticker */}
+      {upcomingEvents.length > 0 && (
+        <EventTicker events={upcomingEvents} />
+      )}
+
       {/* Events Grid */}
       <section className="container mx-auto px-4 py-12">
         {loading ? (
