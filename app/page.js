@@ -69,63 +69,69 @@ export default function Home() {
           <div className="lg:col-span-2">
             {latestNews.length > 0 ? (
               <div className="space-y-6">
-                {/* Big Main News */}
+                {/* Big Main News - Increased Height */}
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-shadow"
+                  className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
                 >
-                  <Link href={`/nieuws/${latestNews[0].slug}`}>
-                    <div className="relative h-[400px]">
+                  <Link href={`/nieuws/${latestNews[selectedNewsIndex].slug}`}>
+                    <div className="relative h-[500px]">
                       <img
-                        src={latestNews[0].image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'}
-                        alt={latestNews[0].title}
-                        className="w-full h-full object-cover"
+                        src={latestNews[selectedNewsIndex].image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'}
+                        alt={latestNews[selectedNewsIndex].title}
+                        className="w-full h-full object-cover transition-all duration-500"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
                       
                       {/* Category badge - top left */}
                       <div className="absolute top-4 left-4">
                         <span className="bg-red-600 text-white px-4 py-2 rounded text-sm font-bold uppercase">
-                          {latestNews[0].category || 'Nieuws'}
+                          {latestNews[selectedNewsIndex].category || 'Nieuws'}
                         </span>
                       </div>
                       
                       {/* Title and description - bottom */}
                       <div className="absolute bottom-0 left-0 right-0 p-6 bg-white/95">
                         <h2 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">
-                          {latestNews[0].title}
+                          {latestNews[selectedNewsIndex].title}
                         </h2>
                         <p className="text-gray-600 text-sm line-clamp-2">
-                          {latestNews[0].excerpt}
+                          {latestNews[selectedNewsIndex].excerpt}
                         </p>
                       </div>
                     </div>
                   </Link>
                 </motion.div>
 
-                {/* 4 Small News Boxes - Horizontal Grid Below */}
+                {/* 4 Small News Boxes - Horizontal Grid Below with Hover */}
                 {latestNews.length > 1 && (
                   <div className="grid grid-cols-4 gap-3">
-                    {latestNews.slice(1, 5).map((news, index) => (
+                    {latestNews.slice(0, 5).map((news, index) => (
                       <motion.div
                         key={news.id}
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: index * 0.1 }}
-                        className="rounded-lg overflow-hidden hover:shadow-lg transition-shadow group"
+                        onMouseEnter={() => setSelectedNewsIndex(index)}
+                        className={`rounded-lg overflow-hidden transition-all duration-300 cursor-pointer ${
+                          selectedNewsIndex === index 
+                            ? 'ring-4 ring-[#05B6C4] shadow-xl scale-105' 
+                            : 'hover:shadow-lg hover:scale-102'
+                        }`}
                       >
-                        <Link href={`/nieuws/${news.slug}`}>
-                          <div className="relative h-32">
-                            <img
-                              src={news.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=300'}
-                              alt={news.title}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                            />
-                          </div>
-                        </Link>
+                        <div className="relative h-32">
+                          <img
+                            src={news.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=300'}
+                            alt={news.title}
+                            className="w-full h-full object-cover transition-transform duration-300"
+                          />
+                          {selectedNewsIndex === index && (
+                            <div className="absolute inset-0 bg-[#05B6C4]/20"></div>
+                          )}
+                        </div>
                       </motion.div>
                     ))}
                   </div>
