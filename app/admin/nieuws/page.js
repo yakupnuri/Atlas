@@ -50,7 +50,7 @@ export default function NewsManagement() {
     
     try {
       const token = localStorage.getItem('adminToken');
-      const url = '/api/[[...path]]/news';
+      const url = '/api/news';
       const method = editingNews ? 'PUT' : 'POST';
       
       const payload = editingNews 
@@ -73,11 +73,12 @@ export default function NewsManagement() {
         resetForm();
         fetchNews();
       } else {
-        alert('❌ Kaydetme hatası!');
+        const errorData = await response.json();
+        alert('❌ Kaydetme hatası: ' + (errorData.error || 'Bilinmeyen hata'));
       }
     } catch (error) {
       console.error('Error saving news:', error);
-      alert('❌ Kaydetme hatası!');
+      alert('❌ Kaydetme hatası: ' + error.message);
     }
   };
 
