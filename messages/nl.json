@@ -5,7 +5,8 @@
     "about": "Over Ons",
     "news": "Nieuws",
     "reserve": "Reserveren",
-    "donate": "Doneren"
+    "donate": "Doneren",
+    "anbi": "ANBI"
   },
   "hero": {
     "title": "Samen bouwen aan een inclusieve gemeenschap",
@@ -49,13 +50,13 @@
       "title": "Officiële Documenten",
       "subtitle": "Download onze beleidsplannen en financiële rapportages"
     },
+    "beloningsbeleid": {
+      "title": "Beloningsbeleid",
+      "description": "Het bestuur en vrijwilligers ontvangen geen beloning. Eventuele kosten kunnen worden vergoed."
+    },
     "beleidsplan": {
       "title": "Beleidsplan",
-      "description": "Ons strategisch beleidsplan met doelstellingen en plannen voor de komende jaren."
-    },
-    "huisstijl": {
-      "title": "Huisstijl",
-      "description": "Onze officiële huisstijlgids met logo, kleuren en merkrichtlijnen."
+      "description": "Beleidsplan 2025 met onze visie, missie, doelstellingen en maatschappelijke koers."
     },
     "jaarrekening": {
       "title": "Jaarrekening",

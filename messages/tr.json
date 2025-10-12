@@ -50,13 +50,13 @@
       "title": "Resmi Belgeler",
       "subtitle": "Politika planlarımızı ve mali raporlarımızı indirin"
     },
+    "beloningsbeleid": {
+      "title": "Ücretlendirme Politikası",
+      "description": "Yönetim kurulu ve gönüllüler ücret almazlar. Sadece masraflar karşılanabilir."
+    },
     "beleidsplan": {
       "title": "Politika Planı",
-      "description": "Önümüzdeki yıllar için hedefler ve planlar içeren stratejik politika planımız."
-    },
-    "huisstijl": {
-      "title": "Marka Kılavuzu",
-      "description": "Logo, renkler ve marka yönergeleri ile resmi marka kılavuzumuz."
+      "description": "Vizyon, misyon, hedefler ve sosyal yönümüz ile 2025 Politika Planı."
     },
     "jaarrekening": {
       "title": "Yıllık Rapor",
