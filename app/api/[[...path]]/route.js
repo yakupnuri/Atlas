@@ -203,6 +203,7 @@ export async function POST(request) {
       // Clear existing data
       await db.collection('events').deleteMany({});
       await db.collection('reservations').deleteMany({});
+      await db.collection('news').deleteMany({});
       
       // Create demo events
       const now = new Date();
