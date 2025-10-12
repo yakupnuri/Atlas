@@ -335,14 +335,18 @@ export default function EventDetailPage() {
                 </a>
                 <button
                   onClick={() => {
-                    if (navigator.share) {
+                    // Copy link to clipboard for Instagram sharing
+                    const url = typeof window !== 'undefined' ? window.location.href : '';
+                    if (navigator.clipboard) {
+                      navigator.clipboard.writeText(url).then(() => {
+                        alert('Link gekopieerd! Plak deze in je Instagram story of post.');
+                      });
+                    } else if (navigator.share) {
                       navigator.share({
                         title: event.title,
                         text: event.description,
-                        url: typeof window !== 'undefined' ? window.location.href : ''
+                        url: url
                       });
-                    } else {
-                      alert('Share via Instagram app');
                     }
                   }}
                   className="flex items-center justify-center w-10 h-10 bg-gradient-to-tr from-[#FD5949] via-[#D6249F] to-[#285AEB] text-white rounded-full hover:shadow-lg transition-all"
