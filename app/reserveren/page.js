@@ -19,6 +19,7 @@ export default function ReserverenPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    phone: '',
     count: 1,
     notes: '',
   });
