@@ -164,7 +164,7 @@ def test_get_anbi_documents_after_upload():
             data = response.json()
             if data.get('success') and 'documents' in data:
                 documents = data['documents']
-                expected_types = ['beleidsplan', 'huisstijl', 'jaarrekening']
+                expected_types = ['beloningsbeleid', 'beleidsplan', 'jaarrekening']
                 
                 # Check if all document types are present
                 found_types = list(documents.keys())
