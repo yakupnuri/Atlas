@@ -37,6 +37,12 @@ export async function GET() {
           url: process.env.MONGO_URL ? '✓ Configured' : '✗ Not configured'
         },
         apis: {
+          google_oauth: {
+            enabled: true,
+            client_id: 'REDACTED_CLIENT_ID',
+            client_secret: 'REDACTED_CLIENT_SECRET',
+            redirect_uri: 'https://atlas-admin-1.preview.emergentagent.com/api/auth/callback/google'
+          },
           unsplash: {
             enabled: false,
             accessKey: ''
