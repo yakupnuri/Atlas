@@ -505,16 +505,50 @@ export default function AdminEventsPage() {
                     />
                   </div>
 
-                  {/* Time */}
+                  {/* All Day Checkbox */}
+                  <div className="flex items-center pt-8">
+                    <input
+                      type="checkbox"
+                      id="allDay"
+                      checked={formData.allDay}
+                      onChange={(e) => setFormData({ 
+                        ...formData, 
+                        allDay: e.target.checked,
+                        startTime: e.target.checked ? '' : formData.startTime,
+                        endTime: e.target.checked ? '' : formData.endTime
+                      })}
+                      className="w-5 h-5 text-[#05B6C4] rounded"
+                    />
+                    <label htmlFor="allDay" className="ml-3 text-sm font-medium text-gray-700">
+                      Tüm Gün
+                    </label>
+                  </div>
+
+                  {/* Start Time */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Saat
+                      Başlangıç Saati
                     </label>
                     <input
                       type="time"
-                      value={formData.time}
-                      onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none"
+                      value={formData.startTime}
+                      onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
+                      disabled={formData.allDay}
+                    />
+                  </div>
+
+                  {/* End Time */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Bitiş Saati
+                    </label>
+                    <input
+                      type="time"
+                      value={formData.endTime}
+                      onChange={(e) => setFormData({ ...formData, endTime: e.target.value })}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none disabled:bg-gray-100 disabled:cursor-not-allowed"
+                      disabled={formData.allDay}
                     />
                   </div>
 
