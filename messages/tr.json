@@ -5,7 +5,8 @@
     "about": "Hakkımızda",
     "news": "Haberler",
     "reserve": "Rezervasyon",
-    "donate": "Bağış Yap"
+    "donate": "Bağış Yap",
+    "anbi": "ANBI"
   },
   "hero": {
     "title": "Birlikte kapsayıcı bir topluluk inşa ediyoruz",
@@ -33,5 +34,41 @@
     "ramazanDesc": "Topluluğumuz için özel iftar yemekleri düzenliyoruz",
     "ders": "Ders Yemeği Etkinliği",
     "dersDesc": "Öğrenciler ve aileler için eğitici yemek programı"
+  },
+  "anbi": {
+    "title": "ANBI Durumu",
+    "subtitle": "Stichting Atlas, Kamu Yararına Kuruluş (ANBI) olarak tanınmıştır",
+    "info": {
+      "title": "ANBI Nedir?",
+      "description": "ANBI, bağışçılara vergi avantajları sağlayan bir Kamu Yararına Kuruluştur. Vakfımıza yapılan bağışlar vergiden düşülebilir.",
+      "fiscalTitle": "Vergi Avantajları",
+      "fiscalDesc": "Bağışlarınız Hollanda vergi kanunlarına göre vergiden düşülebilir.",
+      "transparencyTitle": "Şeffaflık",
+      "transparencyDesc": "ANBI olarak, belgelerimizi ve finansal bilgilerimizi kamuya açık olarak yayınlıyoruz."
+    },
+    "documents": {
+      "title": "Resmi Belgeler",
+      "subtitle": "Politika planlarımızı ve mali raporlarımızı indirin"
+    },
+    "beleidsplan": {
+      "title": "Politika Planı",
+      "description": "Önümüzdeki yıllar için hedefler ve planlar içeren stratejik politika planımız."
+    },
+    "huisstijl": {
+      "title": "Marka Kılavuzu",
+      "description": "Logo, renkler ve marka yönergeleri ile resmi marka kılavuzumuz."
+    },
+    "jaarrekening": {
+      "title": "Yıllık Rapor",
+      "description": "Mali genel bakış ve hesap verebilirlik ile en son yıllık rapor."
+    },
+    "download": "PDF İndir",
+    "notAvailable": "Henüz mevcut değil",
+    "loading": "Belgeler yükleniyor...",
+    "contact": {
+      "title": "ANBI hakkında sorularınız mı var?",
+      "description": "ANBI durumumuz hakkında daha fazla bilgi için bizimle iletişime geçin",
+      "button": "İletişime Geçin"
+    }
   }
 }
