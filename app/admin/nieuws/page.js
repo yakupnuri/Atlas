@@ -11,6 +11,7 @@ export default function NewsManagement() {
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [showMediaLibrary, setShowMediaLibrary] = useState(false);
   const [editingNews, setEditingNews] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
