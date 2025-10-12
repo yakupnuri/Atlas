@@ -161,7 +161,7 @@ export default function NewsPage() {
                 </p>
 
                 <Link
-                  href={`/news/${item.slug}`}
+                  href={`/nieuws/${item.slug}`}
                   className="text-[#05B6C4] hover:text-[#3B87BE] font-semibold flex items-center gap-2"
                 >
                   Devamını Oku
