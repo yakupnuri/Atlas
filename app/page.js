@@ -13,6 +13,7 @@ export default function Home() {
   const [aboutContent, setAboutContent] = useState(null);
   const [latestNews, setLatestNews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedNewsIndex, setSelectedNewsIndex] = useState(0);
 
   useEffect(() => {
     fetchUpcomingEvents();
