@@ -41,6 +41,13 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 className="text-gray-700 hover:text-[#05B6C4] transition-colors font-medium flex items-center gap-2"
+                onClick={(e) => {
+                  // Force page reload for Reserveren to reset state
+                  if (link.href === '/reserveren') {
+                    e.preventDefault();
+                    window.location.href = '/reserveren';
+                  }
+                }}
               >
                 {link.icon && <link.icon className="w-4 h-4" />}
                 {link.label}
