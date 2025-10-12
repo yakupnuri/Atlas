@@ -59,31 +59,43 @@ export default function AdminAboutPage() {
     }
   };
 
-  const saveContent = async () => {
+  const saveSection = async (sectionName) => {
     setSaving(true);
     try {
       const token = localStorage.getItem('adminToken');
+      
+      // Get current data from database first
+      const getResponse = await fetch('/api/admin/about');
+      const currentData = await getResponse.json();
+      
+      // Prepare update - only update the specific section
+      const updateData = {
+        ...currentData.content,
+        [sectionName]: content[sectionName]
+      };
+      
       const response = await fetch('/api/admin/about', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(content)
+        body: JSON.stringify(updateData)
       });
 
       if (response.ok) {
-        setSuccessMessage('✅ İçerik başarıyla kaydedildi! Veritabanına kaydedildi.');
+        setSuccessMessage(`✅ ${sectionName} başarıyla kaydedildi! Veritabanına kaydedildi.`);
         setTimeout(() => setSuccessMessage(''), 5000);
         // Refresh data to confirm
         await fetchData();
       } else {
-        setSuccessMessage('❌ Kaydetme hatası! Er is een fout opgetreden bij het opslaan.');
+        setSuccessMessage(`❌ ${sectionName} kaydetme hatası!`);
         setTimeout(() => setSuccessMessage(''), 5000);
       }
     } catch (error) {
       console.error('Save error:', error);
-      alert('❌ Kaydetme hatası! Er is een fout opgetreden bij het opslaan.');
+      setSuccessMessage(`❌ ${sectionName} kaydetme hatası!`);
+      setTimeout(() => setSuccessMessage(''), 5000);
     } finally {
       setSaving(false);
     }
