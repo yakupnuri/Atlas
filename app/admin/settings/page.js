@@ -20,13 +20,29 @@ export default function SettingsPage() {
     },
     database: { status: '', url: '' },
     apis: {
+      stripe: { 
+        enabled: false, 
+        mode: 'test',
+        publishableKey: '', 
+        secretKey: '',
+        webhookSecret: ''
+      },
       unsplash: { enabled: false, accessKey: '' },
       google: { mapsKey: '', analyticsId: '' },
+      google_oauth: { enabled: false, client_id: '', client_secret: '', redirect_uri: '' },
       smtp: { host: '', port: 587, user: '', password: '', from: '' }
     },
     social: { facebook: '', twitter: '', instagram: '', linkedin: '', youtube: '' },
     seo: { metaTitle: '', metaDescription: '', keywords: '' }
   });
+  const [stripeKeys, setStripeKeys] = useState({
+    enabled: false,
+    mode: 'test',
+    publishableKey: '',
+    secretKey: '',
+    webhookSecret: ''
+  });
+  const [showStripeSecret, setShowStripeSecret] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem('adminToken');
