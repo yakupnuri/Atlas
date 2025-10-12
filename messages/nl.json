@@ -33,5 +33,41 @@
     "ramazanDesc": "Toplumumuz için özel iftar yemekleri düzenliyoruz",
     "ders": "Ders Yemeği Etkinliği",
     "dersDesc": "Öğrenciler ve aileler için eğitici yemek programı"
+  },
+  "anbi": {
+    "title": "ANBI Status",
+    "subtitle": "Stichting Atlas is erkend als Algemeen Nut Beogende Instelling (ANBI)",
+    "info": {
+      "title": "Wat is ANBI?",
+      "description": "Een ANBI is een Algemeen Nut Beogende Instelling die fiscale voordelen biedt aan donateurs. Giften aan onze stichting zijn aftrekbaar van de belasting.",
+      "fiscalTitle": "Fiscale Voordelen",
+      "fiscalDesc": "Uw donaties zijn fiscaal aftrekbaar volgens de Nederlandse belastingwetgeving.",
+      "transparencyTitle": "Transparantie",
+      "transparencyDesc": "Als ANBI publiceren wij onze documenten en financiële informatie openbaar."
+    },
+    "documents": {
+      "title": "Officiële Documenten",
+      "subtitle": "Download onze beleidsplannen en financiële rapportages"
+    },
+    "beleidsplan": {
+      "title": "Beleidsplan",
+      "description": "Ons strategisch beleidsplan met doelstellingen en plannen voor de komende jaren."
+    },
+    "huisstijl": {
+      "title": "Huisstijl",
+      "description": "Onze officiële huisstijlgids met logo, kleuren en merkrichtlijnen."
+    },
+    "jaarrekening": {
+      "title": "Jaarrekening",
+      "description": "De meest recente jaarrekening met financieel overzicht en verantwoording."
+    },
+    "download": "Download PDF",
+    "notAvailable": "Nog niet beschikbaar",
+    "loading": "Documenten laden...",
+    "contact": {
+      "title": "Vragen over ANBI?",
+      "description": "Neem contact met ons op voor meer informatie over onze ANBI-status",
+      "button": "Contact Opnemen"
+    }
   }
 }
