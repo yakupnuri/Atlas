@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Calendar, MapPin } from 'lucide-react';
 import { format } from 'date-fns';
 import { nl } from 'date-fns/locale';
+import Link from 'next/link';
 
 export default function EventTicker({ events }) {
   // Duplicate events for seamless loop
@@ -33,9 +34,10 @@ export default function EventTicker({ events }) {
           }}
         >
           {duplicatedEvents.map((event, index) => (
-            <div
+            <Link
               key={`${event.id}-${index}`}
-              className="flex items-center gap-4 px-6 py-2 bg-white/10 rounded-lg backdrop-blur-sm"
+              href={`/events/${event.slug}`}
+              className="flex items-center gap-4 px-6 py-2 bg-white/10 hover:bg-white/20 rounded-lg backdrop-blur-sm transition-colors cursor-pointer"
             >
               <Calendar className="w-4 h-4 flex-shrink-0" />
               <div className="flex items-center gap-4">
@@ -48,7 +50,7 @@ export default function EventTicker({ events }) {
                   {format(new Date(event.startAt), 'd MMM', { locale: nl })}
                 </span>
               </div>
-            </div>
+            </Link>
           ))}
         </motion.div>
       </div>
