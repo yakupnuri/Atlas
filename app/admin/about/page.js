@@ -12,6 +12,7 @@ export default function AdminAboutPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState('content');
+  const [successMessage, setSuccessMessage] = useState('');
   
   const [content, setContent] = useState({
     whoWeAre: { title: '', content: '' },
