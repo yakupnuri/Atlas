@@ -3,10 +3,12 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import EventCard from '@/components/EventCard';
+import EventTicker from '@/components/EventTicker';
 import { Filter } from 'lucide-react';
 
 export default function EventsPage() {
   const [events, setEvents] = useState([]);
+  const [upcomingEvents, setUpcomingEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState('all');
 
