@@ -39,6 +39,7 @@ const newsItems = [
   {
     id: 4,
     title: 'Soepdag - 100. Etkinlik Kutlaması',
+    slug: 'soepdag-100-etkinlik-kutlamasi',
     excerpt: 'Her hafta düzenlediğimiz Soepdag programının 100. etkinliğini kutladık!',
     date: '2025-02-28',
     author: 'Ahmet Yılmaz',
