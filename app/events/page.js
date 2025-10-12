@@ -22,6 +22,7 @@ export default function EventsPage() {
 
   useEffect(() => {
     fetchEvents();
+    fetchUpcomingForTicker();
   }, [selectedCategory]);
 
   const fetchEvents = async () => {
@@ -37,6 +38,16 @@ export default function EventsPage() {
       console.error('Error fetching events:', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchUpcomingForTicker = async () => {
+    try {
+      const response = await fetch('/api/events?upcoming=true');
+      const data = await response.json();
+      setUpcomingEvents(data.events.slice(0, 5)); // Get first 5 upcoming
+    } catch (error) {
+      console.error('Error fetching upcoming events:', error);
     }
   };
 
