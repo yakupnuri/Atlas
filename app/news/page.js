@@ -9,6 +9,7 @@ const newsItems = [
   {
     id: 1,
     title: 'Ramazan İftar Programı Başarıyla Tamamlandı',
+    slug: 'ramazan-iftar-programi-basariyla-tamamlandi',
     excerpt: 'Bu yılki Ramazan ayında düzenlediğimiz iftar programlarına 150\'den fazla kişi katıldı.',
     date: '2025-04-15',
     author: 'Fatma Demir',
