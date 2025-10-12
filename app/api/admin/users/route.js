@@ -13,9 +13,23 @@ async function verifyAdmin(request) {
   const token = request.headers.get('authorization')?.replace('Bearer ', '');
   if (!token) return null;
   
-  const db = await getDb();
-  const admin = await db.collection('admins').findOne({ token });
-  return admin;
+  // Demo token için fallback
+  if (token === 'demo-admin-token') {
+    return {
+      id: '1',
+      username: 'admin',
+      role: 'super_admin'
+    };
+  }
+  
+  try {
+    const db = await getDb();
+    const admin = await db.collection('admins').findOne({ token });
+    return admin;
+  } catch (error) {
+    console.error('Token verification error:', error);
+    return null;
+  }
 }
 
 export async function OPTIONS() {
