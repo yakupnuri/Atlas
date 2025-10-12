@@ -11,17 +11,11 @@ export default function Navbar() {
 
   const navLinks = [
     { href: '/', label: 'Home' },
-    { href: '/about', label: 'Hakkımızda', icon: Info },
-    { href: '/events', label: 'Etkinlikler', icon: Calendar },
-    { href: '/news', label: 'Haberler', icon: Newspaper },
-    { href: '/reserveren', label: 'Rezervasyon', icon: Users },
-    { href: '/doneren', label: 'Bağış', icon: Heart },
-  ];
-
-  const languages = [
-    { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
-    { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'tr', name: 'Türkçe', flag: '🇹🇷' },
+    { href: '/about', label: 'Over Ons', icon: Info },
+    { href: '/events', label: 'Evenementen', icon: Calendar },
+    { href: '/news', label: 'Nieuws', icon: Newspaper },
+    { href: '/reserveren', label: 'Reserveren', icon: Users },
+    { href: '/doneren', label: 'Doneren', icon: Heart },
   ];
 
   return (
