@@ -295,7 +295,66 @@ export default function ReserverenPage() {
                   </button>
                 </div>
               </motion.form>
-            </>
+              </div>
+
+              {/* Sidebar - Other Events */}
+              <div className="lg:col-span-1">
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="bg-white rounded-lg p-6 shadow-md sticky top-24"
+                >
+                  <h3 className="text-lg font-bold text-gray-800 mb-4">Andere Evenementen</h3>
+                  <div className="space-y-4">
+                    {events
+                      .filter(e => e.id !== selectedEvent.id)
+                      .slice(0, 4)
+                      .map((event) => (
+                        <button
+                          key={event.id}
+                          onClick={() => {
+                            setSelectedEvent(event);
+                            setFormData({ name: '', email: '', count: 1, notes: '' });
+                            setError('');
+                            window.scrollTo({ top: 0, behavior: 'smooth' });
+                          }}
+                          className="w-full text-left border border-gray-200 rounded-lg p-4 hover:border-[#05B6C4] hover:bg-gray-50 transition-colors"
+                        >
+                          <div className="flex items-start gap-3">
+                            <img
+                              src={event.bannerImage}
+                              alt={event.title}
+                              className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
+                            />
+                            <div className="flex-1 min-w-0">
+                              <h4 className="font-semibold text-gray-800 text-sm line-clamp-2 mb-1">
+                                {event.title}
+                              </h4>
+                              <div className="flex items-center gap-1 text-xs text-gray-600">
+                                <Calendar className="w-3 h-3" />
+                                {new Date(event.startAt).toLocaleDateString('nl-NL', {
+                                  day: 'numeric',
+                                  month: 'short'
+                                })}
+                              </div>
+                            </div>
+                          </div>
+                        </button>
+                      ))}
+                  </div>
+                  
+                  {events.length > 5 && (
+                    <button
+                      onClick={() => setSelectedEvent(null)}
+                      className="w-full mt-4 text-center text-sm text-[#05B6C4] hover:underline font-medium"
+                    >
+                      Alle evenementen bekijken
+                    </button>
+                  )}
+                </motion.div>
+              </div>
+            </div>
           )}
         </div>
       </div>
