@@ -162,6 +162,53 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Values */}
+      <section className="py-16 bg-gradient-to-br from-gray-50 to-gray-100">
+        <div className="container mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="max-w-4xl mx-auto"
+          >
+            <div className="flex items-center justify-center mb-8">
+              <Award className="w-12 h-12 text-[#05B6C4] mr-4" />
+              <h2 className="text-3xl font-bold text-gray-900">Onze Waarden</h2>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {aboutContent?.values?.map((value, index) => (
+                <motion.div
+                  key={value.id || index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                  className="bg-white rounded-lg shadow-md p-6 text-center hover:shadow-xl transition-shadow"
+                >
+                  <h3 className="text-xl font-bold text-[#05B6C4] mb-3">{value.title}</h3>
+                  <p className="text-gray-700 leading-relaxed">{value.description}</p>
+                </motion.div>
+              )) || (
+                <>
+                  <div className="bg-white rounded-lg shadow-md p-6 text-center">
+                    <h3 className="text-xl font-bold text-[#05B6C4] mb-3">Inclusiviteit</h3>
+                    <p className="text-gray-700 leading-relaxed">Iedereen is welkom bij ons</p>
+                  </div>
+                  <div className="bg-white rounded-lg shadow-md p-6 text-center">
+                    <h3 className="text-xl font-bold text-[#05B6C4] mb-3">Respect</h3>
+                    <p className="text-gray-700 leading-relaxed">Gelijke waardering voor alle culturen</p>
+                  </div>
+                  <div className="bg-white rounded-lg shadow-md p-6 text-center">
+                    <h3 className="text-xl font-bold text-[#05B6C4] mb-3">Samenwerking</h3>
+                    <p className="text-gray-700 leading-relaxed">Samen zijn we sterker</p>
+                  </div>
+                </>
+              )}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Team Section */}
       <section className="py-16 bg-gradient-to-br from-gray-50 to-gray-100">
         <div className="container mx-auto px-4">
