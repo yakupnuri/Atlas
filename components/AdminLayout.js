@@ -27,6 +27,7 @@ import {
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [pagesMenuOpen, setPagesMenuOpen] = useState(true);
 
   const menuItems = [
     {
@@ -40,25 +41,51 @@ export default function AdminLayout({ children }) {
       href: '/admin/users',
     },
     {
-      title: 'Haberler',
-      icon: Newspaper,
-      href: '/admin/nieuws',
-    },
-    {
       title: 'Etkinlikler',
       icon: Calendar,
       href: '/admin/evenementen',
     },
+  ];
+
+  const pagesMenuItems = [
     {
       title: 'Over Ons',
       icon: Info,
-      href: '/admin/about',
+      href: '/admin/pages/over-ons',
+    },
+    {
+      title: 'Cultuur Educatie',
+      icon: GraduationCap,
+      href: '/admin/pages/cultuur-educatie',
+    },
+    {
+      title: 'Carrière Center',
+      icon: Briefcase,
+      href: '/admin/pages/carriere-center',
+    },
+    {
+      title: 'Projectgroep',
+      icon: FolderKanban,
+      href: '/admin/pages/projectgroep',
+    },
+    {
+      title: 'Nieuws',
+      icon: Newspaper,
+      href: '/admin/nieuws',
     },
     {
       title: 'ANBI',
       icon: FileText,
       href: '/admin/anbi',
     },
+    {
+      title: 'Contact',
+      icon: Phone,
+      href: '/admin/pages/contact',
+    },
+  ];
+
+  const bottomMenuItems = [
     {
       title: 'Ayarlar',
       icon: Settings,
