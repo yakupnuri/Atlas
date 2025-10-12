@@ -21,7 +21,7 @@ export const authOptions = {
       return session;
     },
     async signIn({ user, account, profile }) {
-      // Check if user exists in our admins collection
+      // Only allow sign-in if user email exists in admins collection
       const { MongoClient } = require('mongodb');
       const client = new MongoClient(process.env.MONGO_URL);
       
@@ -29,26 +29,34 @@ export const authOptions = {
         await client.connect();
         const db = client.db(process.env.DB_NAME || 'stichting_atlas');
         
-        // Check if this email is an admin
+        // Check if this email is in admins collection
         const adminUser = await db.collection('admins').findOne({ 
           email: user.email 
         });
         
-        if (adminUser) {
-          // Update user role in NextAuth users collection
-          await db.collection('users').updateOne(
-            { email: user.email },
-            { $set: { role: adminUser.role || 'super_admin' } }
-          );
+        if (!adminUser) {
+          // User not authorized - email not in admins collection
+          console.log(`❌ Access denied for: ${user.email} - Not in admins list`);
+          return false; // Reject sign-in
         }
+        
+        console.log(`✅ Access granted for: ${user.email} (Role: ${adminUser.role})`);
+        
+        // Update user role in NextAuth users collection
+        await db.collection('users').updateOne(
+          { email: user.email },
+          { $set: { role: adminUser.role || 'super_admin' } },
+          { upsert: true }
+        );
+        
+        return true; // Allow sign-in
         
       } catch (error) {
         console.error('Error checking admin status:', error);
+        return false; // Reject on error
       } finally {
         await client.close();
       }
-      
-      return true;
     },
     async redirect({ url, baseUrl }) {
       // After login, redirect to admin dashboard
