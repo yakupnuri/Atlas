@@ -277,8 +277,8 @@ def test_document_replacement():
     
     # Upload first document
     payload1 = {
-        "type": "beleidsplan",
-        "fileName": "first_beleidsplan.pdf",
+        "type": "beloningsbeleid",
+        "fileName": "first_beloningsbeleid.pdf",
         "fileData": test_pdf_base64,
         "fileSize": len(base64.b64decode(test_pdf_base64))
     }
