@@ -220,6 +220,16 @@ def test_post_invalid_scenarios():
             "expected_status": 400
         },
         {
+            "name": "Old document type (huisstijl) should be rejected",
+            "payload": {
+                "type": "huisstijl",
+                "fileName": "test_huisstijl.pdf",
+                "fileData": test_pdf_base64,
+                "fileSize": 1000
+            },
+            "expected_status": 400
+        },
+        {
             "name": "Non-PDF file (fake extension)",
             "payload": {
                 "type": "beleidsplan",
