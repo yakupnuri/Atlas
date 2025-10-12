@@ -166,11 +166,13 @@ export default function NewsDetailPage() {
             <div className="flex items-center gap-6 text-gray-600 text-sm mb-6">
               <div className="flex items-center gap-2">
                 <Calendar className="w-4 h-4" />
-                {format(new Date(article.date), 'd MMMM yyyy', { locale: nl })}
+                {article.date || article.publishDate 
+                  ? format(new Date(article.date || article.publishDate), 'd MMMM yyyy', { locale: nl })
+                  : 'Tarih belirtilmemiş'}
               </div>
               <div className="flex items-center gap-2">
                 <User className="w-4 h-4" />
-                {article.author}
+                {article.author || 'Stichting Atlas'}
               </div>
             </div>
 
