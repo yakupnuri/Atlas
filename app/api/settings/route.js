@@ -39,9 +39,9 @@ export async function GET() {
         apis: {
           google_oauth: {
             enabled: true,
-            client_id: 'REDACTED_CLIENT_ID',
-            client_secret: 'REDACTED_CLIENT_SECRET',
-            redirect_uri: 'https://atlas-admin-1.preview.emergentagent.com/api/auth/callback/google'
+            client_id: process.env.GOOGLE_CLIENT_ID || '',
+            client_secret: process.env.GOOGLE_CLIENT_SECRET || '',
+            redirect_uri: process.env.NEXTAUTH_URL ? `${process.env.NEXTAUTH_URL}/api/auth/callback/google` : ''
           },
           unsplash: {
             enabled: false,
