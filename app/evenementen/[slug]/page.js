@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Calendar, MapPin, Users, Clock, ArrowRight, AlertCircle } from 'lucide-react';
+import { Calendar, MapPin, Users, Clock, ArrowRight, AlertCircle, Facebook, Twitter, Linkedin, Share2, Instagram } from 'lucide-react';
 import { format } from 'date-fns';
 import { nl } from 'date-fns/locale';
 import CountdownTimer from '@/components/CountdownTimer';
