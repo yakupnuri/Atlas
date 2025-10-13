@@ -642,6 +642,98 @@ export default function AdminEventsPage() {
                   </div>
                 </div>
 
+                {/* Previous Edition */}
+                <div className="border-t pt-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Önceki Etkinlik</h3>
+                  
+                  <div className="space-y-4">
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="checkbox"
+                        id="hasPreviousEdition"
+                        checked={formData.hasPreviousEdition}
+                        onChange={(e) => setFormData({ ...formData, hasPreviousEdition: e.target.checked })}
+                        className="w-5 h-5 text-[#05B6C4] rounded"
+                      />
+                      <label htmlFor="hasPreviousEdition" className="text-sm font-medium text-gray-700">
+                        Bu etkinlik daha önce yapıldı
+                      </label>
+                    </div>
+
+                    {formData.hasPreviousEdition && (
+                      <div className="grid grid-cols-2 gap-4 ml-8">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Önceki Yıl
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.previousYear}
+                            onChange={(e) => setFormData({ ...formData, previousYear: e.target.value })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none"
+                            placeholder="Örn: 2024"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Önceki Etkinlik ID (opsiyonel)
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.previousEventId}
+                            onChange={(e) => setFormData({ ...formData, previousEventId: e.target.value })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none"
+                            placeholder="Otomatik bağlanır"
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+
+                {/* Gallery */}
+                <div className="border-t pt-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Fotoğraf Galerisi</h3>
+                  
+                  <div className="space-y-4">
+                    <div className="grid grid-cols-4 gap-4">
+                      {formData.gallery && formData.gallery.map((img, index) => (
+                        <div key={index} className="relative group">
+                          <img
+                            src={img}
+                            alt={`Gallery ${index + 1}`}
+                            className="w-full h-32 object-cover rounded-lg"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => setFormData({ 
+                              ...formData, 
+                              gallery: formData.gallery.filter((_, i) => i !== index) 
+                            })}
+                            className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
+                      
+                      {/* Add Gallery Image Button */}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setShowMediaLibrary(true);
+                          // Mark as gallery mode
+                          window.galleryMode = true;
+                        }}
+                        className="w-full h-32 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center hover:border-[#05B6C4] hover:bg-gray-50 transition-colors"
+                      >
+                        <ImageIcon className="w-8 h-8 text-gray-400 mb-2" />
+                        <span className="text-sm text-gray-600">Galeri Görseli Ekle</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
                 {/* Checkboxes */}
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
