@@ -161,7 +161,7 @@ export default function ReserverenPage() {
                     >
                       <div className="flex items-start gap-4">
                         <img
-                          src={event.bannerImage}
+                          src={event.bannerImage || event.image}
                           alt={event.title}
                           className="w-24 h-24 object-cover rounded-lg"
                         />
@@ -170,12 +170,28 @@ export default function ReserverenPage() {
                           <div className="space-y-1 text-sm text-gray-600">
                             <div className="flex items-center gap-2">
                               <Calendar className="w-4 h-4" />
-                              {new Date(event.startAt).toLocaleDateString('nl-NL')}
+                              {(() => {
+                                try {
+                                  const dateStr = event.startAt || event.date;
+                                  if (!dateStr) return 'Datum TBA';
+                                  const eventDate = new Date(dateStr);
+                                  if (isNaN(eventDate.getTime())) return 'Datum TBA';
+                                  return eventDate.toLocaleDateString('nl-NL');
+                                } catch (e) {
+                                  return 'Datum TBA';
+                                }
+                              })()}
                             </div>
                             <div className="flex items-center gap-2">
                               <MapPin className="w-4 h-4" />
-                              {event.locationName}
+                              {event.locationName || event.location || 'Locatie TBA'}
                             </div>
+                            {event.available !== undefined && (
+                              <div className="flex items-center gap-2 text-green-600 font-medium">
+                                <Users className="w-4 h-4" />
+                                {event.available} plaatsen beschikbaar
+                              </div>
+                            )}
                           </div>
                         </div>
                       </div>
