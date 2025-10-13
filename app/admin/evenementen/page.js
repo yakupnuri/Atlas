@@ -787,8 +787,225 @@ export default function AdminEventsPage() {
                   </div>
                 </div>
 
+                {/* Organizer */}
+                <div className="border-t pt-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Organizatör</h3>
+                  
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Organizatör Adı
+                      </label>
+                      <input
+                        type="text"
+                        value={formData.organizer}
+                        onChange={(e) => setFormData({ ...formData, organizer: e.target.value })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none"
+                        placeholder="Örn: Stichting Atlas"
+                      />
+                      <p className="text-xs text-gray-500 mt-1">
+                        Bu etkinliği organize eden kuruluş veya kişi
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Contributors (Konuşmacılar/Sanatçılar) */}
+                <div className="border-t pt-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">Konuşmacılar / Sanatçılar / Eğitmenler</h3>
+                  
+                  <div className="space-y-4">
+                    {/* Existing Contributors */}
+                    {formData.contributors && formData.contributors.length > 0 && (
+                      <div className="space-y-3 mb-4">
+                        {formData.contributors.map((contributor) => (
+                          <div key={contributor.id} className="flex items-start gap-4 p-4 bg-gray-50 rounded-lg">
+                            {contributor.photo && (
+                              <img
+                                src={contributor.photo}
+                                alt={contributor.name}
+                                className="w-16 h-16 rounded-full object-cover"
+                              />
+                            )}
+                            <div className="flex-1">
+                              <div className="flex items-center justify-between mb-2">
+                                <h4 className="font-semibold text-gray-900">{contributor.name}</h4>
+                                <button
+                                  type="button"
+                                  onClick={() => handleRemoveContributor(contributor.id)}
+                                  className="text-red-600 hover:text-red-700"
+                                >
+                                  <X className="w-5 h-5" />
+                                </button>
+                              </div>
+                              <p className="text-sm text-gray-600 mb-1">
+                                <span className="font-medium">Rol:</span> {
+                                  contributor.role === 'speaker' ? 'Konuşmacı' :
+                                  contributor.role === 'seminar' ? 'Seminer Verici' :
+                                  contributor.role === 'artist' ? 'Sanatçı' :
+                                  contributor.role === 'trainer' ? 'Eğitmen' :
+                                  contributor.role === 'moderator' ? 'Moderatör' :
+                                  'Diğer'
+                                }
+                              </p>
+                              {contributor.bio && (
+                                <p className="text-sm text-gray-500">{contributor.bio}</p>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* Add New Contributor Form */}
+                    <div className="border-2 border-dashed border-gray-300 rounded-lg p-4">
+                      <h4 className="font-medium text-gray-900 mb-4">Yeni Ekle</h4>
+                      
+                      <div className="grid grid-cols-2 gap-4">
+                        <div className="col-span-2">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            İsim Soyisim *
+                          </label>
+                          <input
+                            type="text"
+                            value={contributorForm.name}
+                            onChange={(e) => setContributorForm({ ...contributorForm, name: e.target.value })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none"
+                            placeholder="Örn: Dr. Ahmet Yılmaz"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Rol *
+                          </label>
+                          <select
+                            value={contributorForm.role}
+                            onChange={(e) => setContributorForm({ ...contributorForm, role: e.target.value })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none"
+                          >
+                            <option value="speaker">Konuşmacı</option>
+                            <option value="seminar">Seminer Verici</option>
+                            <option value="artist">Sanatçı</option>
+                            <option value="trainer">Eğitmen</option>
+                            <option value="moderator">Moderatör</option>
+                            <option value="other">Diğer</option>
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Profil Fotoğrafı
+                          </label>
+                          <div className="flex items-center gap-2">
+                            {contributorForm.photo && (
+                              <img
+                                src={contributorForm.photo}
+                                alt="Preview"
+                                className="w-12 h-12 rounded-full object-cover"
+                              />
+                            )}
+                            <button
+                              type="button"
+                              onClick={() => {
+                                window.contributorPhotoMode = true;
+                                setShowMediaLibrary(true);
+                              }}
+                              className="px-3 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg text-sm transition-colors"
+                            >
+                              {contributorForm.photo ? 'Değiştir' : 'Fotoğraf Seç'}
+                            </button>
+                          </div>
+                        </div>
+
+                        <div className="col-span-2">
+                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                            Kısa Bio
+                          </label>
+                          <textarea
+                            value={contributorForm.bio}
+                            onChange={(e) => setContributorForm({ ...contributorForm, bio: e.target.value })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none"
+                            rows="2"
+                            placeholder="Kısa tanıtım..."
+                          />
+                        </div>
+
+                        <div className="col-span-2">
+                          <button
+                            type="button"
+                            onClick={handleAddContributor}
+                            className="w-full px-4 py-2 bg-[#05B6C4] text-white rounded-lg hover:bg-[#049aa7] transition-colors"
+                          >
+                            + Ekle
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Statistics */}
+                <div className="border-t pt-6">
+                  <h3 className="text-lg font-semibold text-gray-900 mb-4">İstatistikler</h3>
+                  
+                  <div className="grid grid-cols-3 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Toplam Rezervasyon
+                      </label>
+                      <input
+                        type="number"
+                        value={formData.statistics?.totalReservations || 0}
+                        onChange={(e) => setFormData({ 
+                          ...formData, 
+                          statistics: { ...formData.statistics, totalReservations: parseInt(e.target.value) || 0 }
+                        })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none"
+                        min="0"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Gerçek Katılım (Manuel)
+                      </label>
+                      <input
+                        type="number"
+                        value={formData.statistics?.actualAttendees || 0}
+                        onChange={(e) => setFormData({ 
+                          ...formData, 
+                          statistics: { ...formData.statistics, actualAttendees: parseInt(e.target.value) || 0 }
+                        })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none"
+                        min="0"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Gelir (€) - Ücretli etkinlik
+                      </label>
+                      <input
+                        type="number"
+                        value={formData.statistics?.revenue || 0}
+                        onChange={(e) => setFormData({ 
+                          ...formData, 
+                          statistics: { ...formData.statistics, revenue: parseFloat(e.target.value) || 0 }
+                        })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none"
+                        min="0"
+                        step="0.01"
+                      />
+                    </div>
+                  </div>
+                  <p className="text-xs text-gray-500 mt-2">
+                    Bu değerler raporlama için saklanır. Gerçek katılım manuel girilir.
+                  </p>
+                </div>
+
                 {/* Checkboxes */}
-                <div className="space-y-3">
+                <div className="space-y-3 border-t pt-6">
                   <div className="flex items-center gap-3">
                     <input
                       type="checkbox"
