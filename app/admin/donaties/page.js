@@ -92,7 +92,7 @@ export default function DonationsAdminPage() {
       return;
     }
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('adminToken');
     try {
       const response = await fetch(`/api/donations?id=${id}`, {
         method: 'DELETE',
