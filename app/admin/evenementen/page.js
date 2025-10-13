@@ -176,7 +176,11 @@ export default function AdminEventsPage() {
   };
 
   const handleImageSelect = (imageUrl) => {
-    if (window.galleryMode) {
+    if (window.contributorPhotoMode) {
+      // Set contributor photo
+      setContributorForm({ ...contributorForm, photo: imageUrl });
+      window.contributorPhotoMode = false;
+    } else if (window.galleryMode) {
       // Add to gallery
       setFormData({ 
         ...formData, 
@@ -188,6 +192,32 @@ export default function AdminEventsPage() {
       setFormData({ ...formData, image: imageUrl });
     }
     setShowMediaLibrary(false);
+  };
+
+  const handleAddContributor = () => {
+    if (!contributorForm.name.trim()) {
+      alert('Lütfen isim girin!');
+      return;
+    }
+    
+    setFormData({
+      ...formData,
+      contributors: [...(formData.contributors || []), { ...contributorForm, id: Date.now() }]
+    });
+    
+    setContributorForm({
+      name: '',
+      role: 'speaker',
+      bio: '',
+      photo: '',
+    });
+  };
+
+  const handleRemoveContributor = (id) => {
+    setFormData({
+      ...formData,
+      contributors: formData.contributors.filter(c => c.id !== id)
+    });
   };
 
   const categories = [
