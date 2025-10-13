@@ -17,6 +17,7 @@ export default function AdminEventsPage() {
   const [showParticipantsModal, setShowParticipantsModal] = useState(false);
   const [showEmailModal, setShowEmailModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [participantsData, setParticipantsData] = useState([]);
   const [emailForm, setEmailForm] = useState({
     subject: '',
     message: '',
