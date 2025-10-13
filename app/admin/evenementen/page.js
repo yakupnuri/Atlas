@@ -13,6 +13,7 @@ export default function AdminEventsPage() {
   const [showModal, setShowModal] = useState(false);
   const [showMediaLibrary, setShowMediaLibrary] = useState(false);
   const [editingEvent, setEditingEvent] = useState(null);
+  const [filterTab, setFilterTab] = useState('all'); // all, featured, upcoming, past
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
