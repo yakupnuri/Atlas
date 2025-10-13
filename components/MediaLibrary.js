@@ -155,8 +155,6 @@ export default function MediaLibrary({ onClose, onSelect }) {
     item.originalName?.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  if (!isOpen) return null;
-
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[100] p-4">
       <div className="bg-white rounded-lg w-full max-w-6xl max-h-[90vh] flex flex-col shadow-2xl">
