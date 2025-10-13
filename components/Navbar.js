@@ -60,21 +60,25 @@ export default function Navbar() {
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6">
             {navLinks.map((link, index) => (
-              <div key={link.href} className="relative group">
+              <div 
+                key={link.href} 
+                className="relative group"
+                onMouseEnter={() => link.dropdown && setOpenDropdown(index)}
+                onMouseLeave={() => link.dropdown && setOpenDropdown(null)}
+              >
                 {link.dropdown ? (
                   <>
-                    <button
+                    <Link
+                      href={link.href}
                       className="text-gray-700 hover:text-[#05B6C4] transition-colors font-medium flex items-center gap-1"
-                      onMouseEnter={() => setOpenDropdown(index)}
                     >
                       {link.icon && <link.icon className="w-4 h-4" />}
                       {link.label}
                       <ChevronDown className="w-4 h-4" />
-                    </button>
+                    </Link>
                     {openDropdown === index && (
                       <div 
                         className="absolute top-full left-0 mt-2 bg-white shadow-lg rounded-lg py-2 min-w-[220px] z-50"
-                        onMouseLeave={() => setOpenDropdown(null)}
                       >
                         {link.dropdown.map((item) => (
                           <Link
