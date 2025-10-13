@@ -46,6 +46,11 @@ export default function AdminLayout({ children }) {
       icon: Calendar,
       href: '/admin/evenementen',
     },
+    {
+      title: 'Bağışlar',
+      icon: Heart,
+      href: '/admin/donaties',
+    },
   ];
 
   const pagesMenuItems = [
