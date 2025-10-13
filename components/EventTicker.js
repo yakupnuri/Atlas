@@ -47,7 +47,11 @@ export default function EventTicker({ events }) {
                   {event.locationName}
                 </span>
                 <span className="text-white/80 text-sm">
-                  {format(new Date(event.startAt), 'd MMM', { locale: nl })}
+                  {event.startAt || event.date ? (
+                    format(new Date(event.startAt || event.date), 'd MMM', { locale: nl })
+                  ) : (
+                    'Datum TBA'
+                  )}
                 </span>
               </div>
             </Link>
