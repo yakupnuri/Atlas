@@ -129,19 +129,40 @@ export default function ReserverenPage() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-white rounded-lg p-8 shadow-lg max-w-md text-center"
+          className="bg-white rounded-lg p-8 shadow-lg max-w-md w-full"
         >
           <CheckCircle className="w-20 h-20 text-green-500 mx-auto mb-4" />
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">Reservering Gelukt!</h2>
-          <p className="text-gray-600 mb-4">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">Reservering Gelukt!</h2>
+          <p className="text-gray-600 mb-6 text-center">
             Je ontvangt binnen enkele minuten een bevestigingsmail.
           </p>
+          
+          {successData?.reservation?.participants && (
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+              <h3 className="font-semibold text-gray-800 mb-3">Jouw Badge Nummers:</h3>
+              <div className="space-y-2">
+                {successData.reservation.participants.map((participant, index) => (
+                  <div key={index} className="flex items-center justify-between bg-white p-3 rounded">
+                    <span className="text-gray-700">{participant.name}</span>
+                    <span className="bg-[#05B6C4] text-white px-3 py-1 rounded-full font-bold text-sm">
+                      #{participant.badgeNumber}
+                    </span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-sm text-gray-600 mt-3">
+                💡 Bewaar deze badge nummers voor het printen van badges
+              </p>
+            </div>
+          )}
+          
           <button
             onClick={() => {
               setSuccess(false);
+              setSuccessData(null);
               fetchEvents();
             }}
-            className="bg-[#05B6C4] hover:bg-[#3B87BE] text-white px-6 py-2 rounded-lg font-semibold"
+            className="w-full bg-[#05B6C4] hover:bg-[#3B87BE] text-white px-6 py-3 rounded-lg font-semibold"
           >
             Nieuwe Reservering
           </button>
