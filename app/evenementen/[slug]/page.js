@@ -127,7 +127,7 @@ export default function EventDetailPage() {
               <h2 className="text-2xl font-bold text-gray-800 mb-4 text-center">
                 Begint over...
               </h2>
-              <CountdownTimer targetDate={event.startAt} />
+              <CountdownTimer targetDate={event.startAt || event.date} />
             </motion.div>
 
             {/* Description */}
