@@ -101,6 +101,7 @@ export default function ReserverenPage() {
 
       if (response.ok) {
         setSuccess(true);
+        setSuccessData(data);
         setFormData({ email: '', phone: '', count: 1 });
         setParticipantNames(['']);
         setSelectedEvent(null);
