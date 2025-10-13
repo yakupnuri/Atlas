@@ -264,7 +264,11 @@ export default function ReserverenPage() {
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-xl font-bold text-gray-800">Geselecteerd Evenement</h2>
                     <button
-                      onClick={() => setSelectedEvent(null)}
+                      onClick={() => {
+                        setSelectedEvent(null);
+                        setParticipantNames(['']);
+                        setFormData({ email: '', phone: '', count: 1 });
+                      }}
                       className="text-sm text-[#05B6C4] hover:underline"
                     >
                       Wijzigen
