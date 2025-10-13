@@ -37,6 +37,21 @@ export default function ReserverenPage() {
     }
   }, [eventIdFromUrl, events]);
 
+  // Update participant names array when count changes
+  useEffect(() => {
+    const count = parseInt(formData.count) || 1;
+    const currentNames = [...participantNames];
+    
+    if (count > currentNames.length) {
+      // Add empty strings for new participants
+      const newNames = [...currentNames, ...Array(count - currentNames.length).fill('')];
+      setParticipantNames(newNames);
+    } else if (count < currentNames.length) {
+      // Remove extra participants
+      setParticipantNames(currentNames.slice(0, count));
+    }
+  }, [formData.count]);
+
   const fetchEvents = async () => {
     try {
       const response = await fetch('/api/events?upcoming=true');
