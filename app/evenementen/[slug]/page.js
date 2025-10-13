@@ -87,8 +87,8 @@ export default function EventDetailPage() {
     );
   }
 
-  const startDate = new Date(event.startAt);
-  const endDate = new Date(event.endAt);
+  const startDate = event.startAt ? new Date(event.startAt) : (event.date ? new Date(event.date) : new Date());
+  const endDate = event.endAt ? new Date(event.endAt) : startDate;
   const duration = Math.round((endDate - startDate) / (1000 * 60 * 60));
 
   return (
