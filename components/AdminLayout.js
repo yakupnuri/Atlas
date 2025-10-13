@@ -88,11 +88,6 @@ export default function AdminLayout({ children }) {
       href: '/admin/pages/over-ons',
     },
     {
-      title: 'Cultuur Educatie',
-      icon: GraduationCap,
-      href: '/admin/pages/cultuur-educatie',
-    },
-    {
       title: 'Carrière Center',
       icon: Briefcase,
       href: '/admin/pages/carriere-center',
