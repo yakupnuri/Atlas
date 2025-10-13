@@ -31,8 +31,21 @@ export default function AdminEventsPage() {
     hasPreviousEdition: false,
     previousEventId: '',
     previousYear: '',
+    organizer: '',
+    contributors: [],
+    statistics: {
+      totalReservations: 0,
+      actualAttendees: 0,
+      revenue: 0
+    },
     featured: false,
     registrationRequired: true,
+  });
+  const [contributorForm, setContributorForm] = useState({
+    name: '',
+    role: 'speaker',
+    bio: '',
+    photo: '',
   });
 
   useEffect(() => {
