@@ -1205,6 +1205,180 @@ export default function AdminEventsPage() {
           </div>
         )}
 
+        {/* Participants Modal */}
+        {showParticipantsModal && selectedEvent && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg shadow-2xl w-full max-w-3xl max-h-[80vh] overflow-y-auto">
+              <div className="sticky top-0 bg-white border-b px-6 py-4 flex justify-between items-center">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  Katılımcılar - {selectedEvent.title}
+                </h2>
+                <button
+                  onClick={() => setShowParticipantsModal(false)}
+                  className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              <div className="p-6">
+                <div className="mb-4 flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-gray-600">
+                      Toplam Rezervasyon: <span className="font-bold">{selectedEvent.statistics?.totalReservations || 0}</span>
+                    </p>
+                    <p className="text-sm text-gray-600">
+                      Gerçek Katılım: <span className="font-bold text-green-600">{selectedEvent.statistics?.actualAttendees || 0}</span>
+                    </p>
+                  </div>
+                  <button
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    📥 Excel'e Aktar
+                  </button>
+                </div>
+
+                {/* Demo Participants List */}
+                <div className="border rounded-lg overflow-hidden">
+                  <table className="w-full">
+                    <thead className="bg-gray-50">
+                      <tr>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          İsim Soyisim
+                        </th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          Email
+                        </th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          Tarih
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-gray-200">
+                      {[...Array(selectedEvent.statistics?.totalReservations || 0)].map((_, index) => (
+                        <tr key={index} className="hover:bg-gray-50">
+                          <td className="px-4 py-3 text-sm text-gray-900">
+                            Demo Kullanıcı {index + 1}
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-600">
+                            demo{index + 1}@example.com
+                          </td>
+                          <td className="px-4 py-3 text-sm text-gray-500">
+                            {new Date().toLocaleDateString('tr-TR')}
+                          </td>
+                        </tr>
+                      ))}
+                      {(!selectedEvent.statistics?.totalReservations || selectedEvent.statistics.totalReservations === 0) && (
+                        <tr>
+                          <td colSpan="3" className="px-4 py-8 text-center text-gray-500">
+                            Henüz rezervasyon yok
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+
+                <p className="text-xs text-gray-500 mt-4">
+                  💡 Not: Bu demo veridir. Gerçek rezervasyon sistemi entegre edildiğinde buradan gerçek katılımcıları görebileceksiniz.
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Email Modal */}
+        {showEmailModal && selectedEvent && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg shadow-2xl w-full max-w-2xl">
+              <div className="bg-gradient-to-r from-green-500 to-emerald-500 px-6 py-4 flex justify-between items-center rounded-t-lg">
+                <div className="flex items-center gap-3">
+                  <Mail className="w-6 h-6 text-white" />
+                  <h2 className="text-xl font-bold text-white">
+                    Toplu Email Gönder
+                  </h2>
+                </div>
+                <button
+                  onClick={() => setShowEmailModal(false)}
+                  className="p-2 hover:bg-white/20 rounded-lg transition-colors"
+                >
+                  <X className="w-6 h-6 text-white" />
+                </button>
+              </div>
+
+              <div className="p-6">
+                <div className="mb-4 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <p className="text-sm text-blue-800 mb-2">
+                    <strong>Alıcılar:</strong> {selectedEvent.title} etkinliğine kayıt olan {selectedEvent.statistics?.totalReservations || 0} kişi
+                  </p>
+                  <p className="text-xs text-blue-600">
+                    ✅ Emailler BCC ile gönderilecek (alıcılar birbirlerini görmez)
+                  </p>
+                </div>
+
+                <form onSubmit={(e) => {
+                  e.preventDefault();
+                  alert('✅ Email gönderiliyor...\n\n(Demo mode - Gerçek email sisteminde çalışacak)');
+                  setShowEmailModal(false);
+                }}>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Konu
+                      </label>
+                      <input
+                        type="text"
+                        value={emailForm.subject}
+                        onChange={(e) => setEmailForm({ ...emailForm, subject: e.target.value })}
+                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+                        placeholder="Email konusu..."
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Mesaj
+                      </label>
+                      <textarea
+                        value={emailForm.message}
+                        onChange={(e) => setEmailForm({ ...emailForm, message: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
+                        rows="10"
+                        placeholder="Email içeriği..."
+                        required
+                      />
+                    </div>
+
+                    <div className="bg-yellow-50 border border-yellow-200 p-3 rounded-lg">
+                      <p className="text-xs text-yellow-800">
+                        ⚠️ <strong>Demo Mode:</strong> Bu özellik demo modda çalışıyor. 
+                        Gerçek email göndermek için SMTP ayarlarını yapılandırın (Ayarlar → API Ayarları).
+                      </p>
+                    </div>
+
+                    <div className="flex gap-3 pt-4">
+                      <button
+                        type="button"
+                        onClick={() => setShowEmailModal(false)}
+                        className="flex-1 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                      >
+                        İptal
+                      </button>
+                      <button
+                        type="submit"
+                        className="flex-1 px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg hover:shadow-lg transition-shadow font-medium"
+                      >
+                        📧 Gönder ({selectedEvent.statistics?.totalReservations || 0} kişiye)
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Media Library Modal */}
         {showMediaLibrary && (
           <MediaLibrary
