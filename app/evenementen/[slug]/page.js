@@ -29,11 +29,25 @@ export default function EventDetailPage() {
       const data = await response.json();
       
       if (data.event) {
+        // If event found via [[...path]] API, use that data
         setEvent(data.event);
         setCapacity({
           reserved: data.reservedCount || 0,
-          available: data.available || data.event.capacity,
+          available: data.available !== undefined ? data.available : data.event.capacity,
         });
+      } else {
+        // Try the main /api/events API
+        const allEventsResponse = await fetch('/api/events');
+        const allEventsData = await allEventsResponse.json();
+        const matchedEvent = allEventsData.events?.find(e => e.slug === params.slug);
+        
+        if (matchedEvent) {
+          setEvent(matchedEvent);
+          setCapacity({
+            reserved: matchedEvent.reservedCount || 0,
+            available: matchedEvent.available !== undefined ? matchedEvent.available : matchedEvent.capacity,
+          });
+        }
       }
     } catch (error) {
       console.error('Error fetching event:', error);
