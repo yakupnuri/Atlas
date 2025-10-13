@@ -514,9 +514,33 @@ export default function AdminEventsPage() {
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <span className="inline-block px-3 py-1 text-sm bg-blue-100 text-blue-700 rounded-full capitalize">
-                          {event.category}
-                        </span>
+                        <div className="space-y-1 text-xs">
+                          <div className="flex items-center gap-2">
+                            <Users className="w-4 h-4 text-blue-600" />
+                            <span className="font-medium text-gray-700">
+                              {event.statistics?.totalReservations || 0} rezervasyon
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <Users className="w-4 h-4 text-green-600" />
+                            <span className="font-medium text-gray-700">
+                              {event.statistics?.actualAttendees || 0} katıldı
+                            </span>
+                          </div>
+                          {event.contributors && event.contributors.length > 0 && (
+                            <div className="flex items-center gap-2">
+                              <Users className="w-4 h-4 text-purple-600" />
+                              <span className="font-medium text-gray-700">
+                                {event.contributors.length} konuşmacı
+                              </span>
+                            </div>
+                          )}
+                          {event.statistics?.revenue > 0 && (
+                            <div className="flex items-center gap-2 text-green-700 font-semibold">
+                              💰 €{event.statistics.revenue.toFixed(2)}
+                            </div>
+                          )}
+                        </div>
                       </td>
                       <td className="px-6 py-4">
                         {new Date(event.date) >= new Date() ? (
