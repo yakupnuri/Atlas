@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
@@ -22,13 +22,36 @@ import {
   GraduationCap,
   Briefcase,
   FolderKanban,
-  Heart
+  Heart,
+  User,
+  Circle
 } from 'lucide-react';
 
 export default function AdminLayout({ children }) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [pagesMenuOpen, setPagesMenuOpen] = useState(true);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [onlineUsers, setOnlineUsers] = useState(1);
+
+  useEffect(() => {
+    // Get current user from localStorage
+    const userEmail = localStorage.getItem('adminEmail');
+    if (userEmail) {
+      setCurrentUser({
+        email: userEmail,
+        name: userEmail.split('@')[0],
+        avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(userEmail.split('@')[0])}&background=05B6C4&color=fff&bold=true`
+      });
+    }
+
+    // Simulate online users count (in real app, this would come from WebSocket or API)
+    const interval = setInterval(() => {
+      setOnlineUsers(Math.floor(Math.random() * 3) + 1);
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const menuItems = [
     {
