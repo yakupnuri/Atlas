@@ -72,16 +72,27 @@ export default function ReserverenPage() {
       return;
     }
 
+    // Validate all participant names are filled
+    const emptyNames = participantNames.some(name => !name.trim());
+    if (emptyNames) {
+      setError('Vul alle deelnemersnamen in');
+      return;
+    }
+
     setSubmitting(true);
     setError('');
 
     try {
+      const participants = participantNames.map(name => ({ name: name.trim() }));
+      
       const response = await fetch('/api/reservations', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           eventId: selectedEvent.id,
-          ...formData,
+          email: formData.email,
+          phone: formData.phone,
+          participants,
         }),
       });
 
@@ -89,7 +100,8 @@ export default function ReserverenPage() {
 
       if (response.ok) {
         setSuccess(true);
-        setFormData({ name: '', email: '', count: 1, notes: '' });
+        setFormData({ email: '', phone: '', count: 1 });
+        setParticipantNames(['']);
         setSelectedEvent(null);
       } else {
         setError(data.error || 'Er is iets misgegaan.');
