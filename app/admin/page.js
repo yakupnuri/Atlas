@@ -29,9 +29,10 @@ export default function AdminLoginPage() {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        // Store token
+        // Store token and user info
         localStorage.setItem('adminToken', data.token);
         localStorage.setItem('adminUser', JSON.stringify(data.user));
+        localStorage.setItem('adminEmail', credentials.username);
         
         // Redirect to dashboard
         router.push('/admin/dashboard');
