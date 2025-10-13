@@ -44,13 +44,17 @@ export default function EventCard({ event, index = 0 }) {
         <div className="space-y-2 mb-4">
           <div className="flex items-center text-sm text-gray-600">
             <Calendar className="w-4 h-4 mr-2 text-[#05B6C4]" />
-            {event.startAt ? (
-              format(new Date(event.startAt), 'EEEE d MMMM yyyy, HH:mm', { locale: nl })
-            ) : event.date ? (
-              format(new Date(event.date), 'EEEE d MMMM yyyy', { locale: nl })
-            ) : (
-              'Datum nog niet bekend'
-            )}
+            {(() => {
+              try {
+                const dateStr = event.startAt || event.date;
+                if (!dateStr) return 'Datum nog niet bekend';
+                const eventDate = new Date(dateStr);
+                if (isNaN(eventDate.getTime())) return 'Datum nog niet bekend';
+                return format(eventDate, 'EEEE d MMMM yyyy, HH:mm', { locale: nl });
+              } catch (e) {
+                return 'Datum nog niet bekend';
+              }
+            })()}
           </div>
           
           <div className="flex items-center text-sm text-gray-600">
@@ -60,7 +64,12 @@ export default function EventCard({ event, index = 0 }) {
           
           <div className="flex items-center text-sm text-gray-600">
             <Users className="w-4 h-4 mr-2 text-[#05B6C4]" />
-            {event.capacity} plaatsen
+            {event.capacity ? `${event.capacity} plaatsen` : 'Capaciteit niet bekend'}
+            {event.available !== undefined && event.available < event.capacity && (
+              <span className="ml-2 text-orange-600 font-medium">
+                ({event.available} beschikbaar)
+              </span>
+            )}
           </div>
         </div>
         
