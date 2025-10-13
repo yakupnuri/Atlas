@@ -27,6 +27,10 @@ export default function AdminEventsPage() {
     maxParticipants: '',
     price: '',
     image: '',
+    gallery: [],
+    hasPreviousEdition: false,
+    previousEventId: '',
+    previousYear: '',
     featured: false,
     registrationRequired: true,
   });
