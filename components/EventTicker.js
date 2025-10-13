@@ -44,14 +44,20 @@ export default function EventTicker({ events }) {
                 <span className="font-semibold">{event.title}</span>
                 <span className="text-white/80 text-sm flex items-center gap-1">
                   <MapPin className="w-3 h-3" />
-                  {event.locationName}
+                  {event.locationName || event.location || 'Locatie TBA'}
                 </span>
                 <span className="text-white/80 text-sm">
-                  {event.startAt || event.date ? (
-                    format(new Date(event.startAt || event.date), 'd MMM', { locale: nl })
-                  ) : (
-                    'Datum TBA'
-                  )}
+                  {(() => {
+                    try {
+                      const dateStr = event.startAt || event.date;
+                      if (!dateStr) return 'Datum TBA';
+                      const eventDate = new Date(dateStr);
+                      if (isNaN(eventDate.getTime())) return 'Datum TBA';
+                      return format(eventDate, 'd MMM', { locale: nl });
+                    } catch (e) {
+                      return 'Datum TBA';
+                    }
+                  })()}
                 </span>
               </div>
             </Link>
