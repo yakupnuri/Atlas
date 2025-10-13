@@ -57,11 +57,34 @@ export async function POST(request) {
     
     const db = await getDb();
     
+    // Convert admin form data to standardized format
+    const { date, startTime, endTime, allDay, maxParticipants, location, ...rest } = eventData;
+    
+    // Create startAt and endAt ISO strings
+    let startAt, endAt;
+    if (date) {
+      if (allDay) {
+        startAt = new Date(date + 'T00:00:00').toISOString();
+        endAt = new Date(date + 'T23:59:59').toISOString();
+      } else {
+        startAt = new Date(date + 'T' + (startTime || '00:00:00')).toISOString();
+        endAt = new Date(date + 'T' + (endTime || '23:59:59')).toISOString();
+      }
+    }
+    
     const newEvent = {
       id: require('crypto').randomUUID(),
-      ...eventData,
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      ...rest,
+      startAt,
+      endAt,
+      capacity: parseInt(maxParticipants) || 0,
+      locationName: location || rest.locationName || '',
+      isPaid: rest.price && parseFloat(rest.price) > 0,
+      price: parseFloat(rest.price) || 0,
+      bannerImage: rest.image || rest.bannerImage || '',
+      status: 'published',
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
     };
     
     await db.collection('events').insertOne(newEvent);
