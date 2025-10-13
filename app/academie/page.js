@@ -86,12 +86,9 @@ export default function AcademiePage() {
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">
                       {program.title}
                     </h3>
-                    <p className="text-sm text-gray-500 mb-4">
-                      {program.titleNL}
-                    </p>
 
                     {/* Description */}
                     <p className="text-gray-700 leading-relaxed mb-6 flex-grow">
