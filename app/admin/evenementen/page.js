@@ -1272,11 +1272,13 @@ export default function AdminEventsPage() {
                   <div className="flex gap-6">
                     <div className="px-4 py-3 bg-blue-50 border border-blue-200 rounded-lg">
                       <p className="text-xs text-blue-600 mb-1">Toplam Rezervasyon</p>
-                      <p className="text-2xl font-bold text-blue-900">{selectedEvent.statistics?.totalReservations || 0}</p>
+                      <p className="text-2xl font-bold text-blue-900">{participantsData.length}</p>
                     </div>
                     <div className="px-4 py-3 bg-green-50 border border-green-200 rounded-lg">
                       <p className="text-xs text-green-600 mb-1">Gerçek Katılım</p>
-                      <p className="text-2xl font-bold text-green-900">{selectedEvent.statistics?.actualAttendees || 0}</p>
+                      <p className="text-2xl font-bold text-green-900">
+                        {participantsData.filter(p => p.attended).length}
+                      </p>
                     </div>
                   </div>
                   <div className="flex gap-2">
@@ -1317,32 +1319,39 @@ export default function AdminEventsPage() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
-                      {[...Array(selectedEvent.statistics?.totalReservations || 0)].map((_, index) => (
-                        <tr key={index} className="hover:bg-gray-50">
-                          <td className="px-4 py-3 text-sm text-gray-500">
-                            {index + 1}
-                          </td>
-                          <td className="px-4 py-3 text-sm font-medium text-gray-900">
-                            Demo Kullanıcı {index + 1}
-                          </td>
-                          <td className="px-4 py-3 text-sm text-gray-600">
-                            demo{index + 1}@example.com
-                          </td>
-                          <td className="px-4 py-3">
-                            <span className="inline-block px-3 py-1 text-sm font-bold bg-orange-100 text-orange-700 rounded-full">
-                              #{index + 1}
-                            </span>
-                          </td>
-                          <td className="px-4 py-3">
-                            <input
-                              type="checkbox"
-                              className="w-5 h-5 text-green-600 rounded"
-                              defaultChecked={index < (selectedEvent.statistics?.actualAttendees || 0)}
-                            />
-                          </td>
-                        </tr>
-                      ))}
-                      {(!selectedEvent.statistics?.totalReservations || selectedEvent.statistics.totalReservations === 0) && (
+                      {participantsData.length > 0 ? (
+                        participantsData.map((participant, index) => (
+                          <tr key={index} className="hover:bg-gray-50">
+                            <td className="px-4 py-3 text-sm text-gray-500">
+                              {index + 1}
+                            </td>
+                            <td className="px-4 py-3 text-sm font-medium text-gray-900">
+                              {participant.name}
+                            </td>
+                            <td className="px-4 py-3 text-sm text-gray-600">
+                              {participant.email}
+                            </td>
+                            <td className="px-4 py-3">
+                              <span className="inline-block px-3 py-1 text-sm font-bold bg-orange-100 text-orange-700 rounded-full">
+                                #{participant.badgeNumber}
+                              </span>
+                            </td>
+                            <td className="px-4 py-3">
+                              <input
+                                type="checkbox"
+                                className="w-5 h-5 text-green-600 rounded"
+                                checked={participant.attended || false}
+                                onChange={(e) => {
+                                  // TODO: Update attendance in database
+                                  const newData = [...participantsData];
+                                  newData[index].attended = e.target.checked;
+                                  setParticipantsData(newData);
+                                }}
+                              />
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
                         <tr>
                           <td colSpan="5" className="px-4 py-8 text-center text-gray-500">
                             Henüz rezervasyon yok
