@@ -223,12 +223,22 @@ export default function ReserverenPage() {
                   
                   <h3 className="text-lg font-bold text-gray-800 mb-2">{selectedEvent.title}</h3>
                   <p className="text-gray-600 text-sm">
-                    {new Date(selectedEvent.startAt).toLocaleDateString('nl-NL', {
-                      weekday: 'long',
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
+                    {(() => {
+                      try {
+                        const dateStr = selectedEvent.startAt || selectedEvent.date;
+                        if (!dateStr) return 'Datum nog niet bekend';
+                        const eventDate = new Date(dateStr);
+                        if (isNaN(eventDate.getTime())) return 'Datum nog niet bekend';
+                        return eventDate.toLocaleDateString('nl-NL', {
+                          weekday: 'long',
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric'
+                        });
+                      } catch (e) {
+                        return 'Datum nog niet bekend';
+                      }
+                    })()}
                   </p>
                 </motion.div>
 
