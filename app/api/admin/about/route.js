@@ -70,7 +70,67 @@ export async function GET(request) {
   }
 }
 
-// Update about content
+// Update about content (admin only)
+export async function POST(request) {
+  const auth = checkAuth(request);
+  if (!auth.authenticated) {
+    return NextResponse.json(
+      { error: 'Niet geautoriseerd' },
+      { status: 401, headers: corsHeaders }
+    );
+  }
+  
+  try {
+    const db = await getDb();
+    const { content, team } = await request.json();
+    
+    // Update main content
+    await db.collection('about').updateOne(
+      { type: 'content' },
+      { 
+        $set: {
+          type: 'content',
+          whoWeAre: content.whoWeAre,
+          mission: content.mission,
+          vision: content.vision,
+          values: content.values,
+          updatedAt: new Date().toISOString()
+        }
+      },
+      { upsert: true }
+    );
+    
+    // Update team members
+    if (team && Array.isArray(team)) {
+      // Delete all existing team members
+      await db.collection('team').deleteMany({});
+      
+      // Insert new team members
+      if (team.length > 0) {
+        const teamWithOrder = team.map((member, index) => ({
+          ...member,
+          id: member.id || uuidv4(),
+          order: index,
+          updatedAt: new Date().toISOString()
+        }));
+        await db.collection('team').insertMany(teamWithOrder);
+      }
+    }
+    
+    return NextResponse.json(
+      { message: 'Succesvol opgeslagen' },
+      { headers: corsHeaders }
+    );
+  } catch (error) {
+    console.error('Error saving about:', error);
+    return NextResponse.json(
+      { error: 'Server error', details: error.message },
+      { status: 500, headers: corsHeaders }
+    );
+  }
+}
+
+// Update about content (legacy PUT support)
 export async function PUT(request) {
   const auth = checkAuth(request);
   if (!auth.authenticated) {
@@ -92,7 +152,8 @@ export async function PUT(request) {
       { 
         $set: {
           type: 'content',
-          ...updateData
+          ...updateData,
+          updatedAt: new Date().toISOString()
         }
       },
       { upsert: true }
