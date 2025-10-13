@@ -7,8 +7,7 @@ import Link from 'next/link'
 export default function AcademiePage() {
   const programs = [
     {
-      title: 'Kültür Eğitim Merkezi',
-      titleNL: 'Cultuur & Educatiecentrum',
+      title: 'Cultuur & Educatiecentrum',
       description: 'Ontdek onze educatieve programma\'s voor alle leeftijden. Cursussen in kunst, cultuur en taal.',
       icon: BookOpen,
       href: '/academie/cultuur-educatie',
@@ -16,8 +15,7 @@ export default function AcademiePage() {
       bgGradient: 'from-blue-50 to-cyan-50'
     },
     {
-      title: 'Kariyer Merkezi',
-      titleNL: 'Carrièrecentrum',
+      title: 'Carrièrecentrum',
       description: 'Professionele ontwikkeling en carrière coaching. Workshops, trainingen en mentorschap.',
       icon: Briefcase,
       href: '/academie/carriere',
@@ -25,8 +23,7 @@ export default function AcademiePage() {
       bgGradient: 'from-purple-50 to-pink-50'
     },
     {
-      title: 'Proje Grubu',
-      titleNL: 'Projectgroep',
+      title: 'Projectgroep',
       description: 'Doe mee aan gemeenschapsprojecten en vrijwilligerswerk. Maak impact in de samenleving.',
       icon: Users,
       href: '/academie/projectgroep',
