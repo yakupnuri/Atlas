@@ -345,7 +345,7 @@ export default function ReserverenPage() {
                           key={event.id}
                           onClick={() => {
                             setSelectedEvent(event);
-                            setFormData({ name: '', email: '', count: 1, notes: '' });
+                            setFormData({ name: '', email: '', phone: '', count: 1, notes: '' });
                             setError('');
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                           }}
@@ -353,7 +353,7 @@ export default function ReserverenPage() {
                         >
                           <div className="flex items-start gap-3">
                             <img
-                              src={event.bannerImage}
+                              src={event.bannerImage || event.image}
                               alt={event.title}
                               className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
                             />
@@ -363,10 +363,20 @@ export default function ReserverenPage() {
                               </h4>
                               <div className="flex items-center gap-1 text-xs text-gray-600">
                                 <Calendar className="w-3 h-3" />
-                                {new Date(event.startAt).toLocaleDateString('nl-NL', {
-                                  day: 'numeric',
-                                  month: 'short'
-                                })}
+                                {(() => {
+                                  try {
+                                    const dateStr = event.startAt || event.date;
+                                    if (!dateStr) return 'Datum TBA';
+                                    const eventDate = new Date(dateStr);
+                                    if (isNaN(eventDate.getTime())) return 'Datum TBA';
+                                    return eventDate.toLocaleDateString('nl-NL', {
+                                      day: 'numeric',
+                                      month: 'short'
+                                    });
+                                  } catch (e) {
+                                    return 'Datum TBA';
+                                  }
+                                })()}
                               </div>
                             </div>
                           </div>
