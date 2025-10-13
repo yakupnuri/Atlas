@@ -336,6 +336,315 @@ export default function EducatieAdminPage() {
             </div>
           </div>
         )}
+
+        {/* Article Modal */}
+        {showArticleModal && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-y-auto">
+              <div className="p-6 border-b sticky top-0 bg-white">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {editingArticle ? 'Makale Düzenle' : 'Yeni Makale Ekle'}
+                </h2>
+              </div>
+              <div className="p-6 space-y-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Başlık *</label>
+                  <input
+                    type="text"
+                    value={articleForm.title}
+                    onChange={(e) => setArticleForm({ ...articleForm, title: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Makale başlığı"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Özet *</label>
+                  <textarea
+                    rows="3"
+                    value={articleForm.excerpt}
+                    onChange={(e) => setArticleForm({ ...articleForm, excerpt: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none"
+                    placeholder="Kısa özet..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">İçerik *</label>
+                  <textarea
+                    rows="8"
+                    value={articleForm.content}
+                    onChange={(e) => setArticleForm({ ...articleForm, content: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none"
+                    placeholder="Makale içeriği..."
+                  />
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Yazar *</label>
+                    <input
+                      type="text"
+                      value={articleForm.author}
+                      onChange={(e) => setArticleForm({ ...articleForm, author: e.target.value })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                      placeholder="Yazar adı"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">Tarih *</label>
+                    <input
+                      type="date"
+                      value={articleForm.date}
+                      onChange={(e) => setArticleForm({ ...articleForm, date: e.target.value })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="p-6 border-t flex gap-3 sticky bottom-0 bg-white">
+                <button
+                  onClick={() => setShowArticleModal(false)}
+                  className="flex-1 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 font-medium"
+                >
+                  İptal
+                </button>
+                <button
+                  onClick={() => {
+                    alert('Makale kaydetme API bağlantısıyla eklenecek');
+                    setShowArticleModal(false);
+                  }}
+                  className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold"
+                >
+                  Kaydet
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Schedule Modal */}
+        {showScheduleModal && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg shadow-2xl w-full max-w-2xl">
+              <div className="p-6 border-b">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {editingSchedule ? 'Ders Düzenle' : 'Yeni Ders Ekle'}
+                </h2>
+              </div>
+              <div className="p-6 space-y-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Gün *</label>
+                  <select
+                    value={scheduleForm.day}
+                    onChange={(e) => setScheduleForm({ ...scheduleForm, day: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  >
+                    <option>Maandag</option>
+                    <option>Dinsdag</option>
+                    <option>Woensdag</option>
+                    <option>Donderdag</option>
+                    <option>Vrijdag</option>
+                    <option>Zaterdag</option>
+                    <option>Zondag</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Saat *</label>
+                  <input
+                    type="text"
+                    value={scheduleForm.time}
+                    onChange={(e) => setScheduleForm({ ...scheduleForm, time: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Örn: 18:00-19:30"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Ders *</label>
+                  <input
+                    type="text"
+                    value={scheduleForm.subject}
+                    onChange={(e) => setScheduleForm({ ...scheduleForm, subject: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Ders adı"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Öğretmen *</label>
+                  <input
+                    type="text"
+                    value={scheduleForm.teacher}
+                    onChange={(e) => setScheduleForm({ ...scheduleForm, teacher: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Öğretmen adı"
+                  />
+                </div>
+              </div>
+              <div className="p-6 border-t flex gap-3">
+                <button
+                  onClick={() => setShowScheduleModal(false)}
+                  className="flex-1 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 font-medium"
+                >
+                  İptal
+                </button>
+                <button
+                  onClick={() => {
+                    alert('Ders kaydetme API bağlantısıyla eklenecek');
+                    setShowScheduleModal(false);
+                  }}
+                  className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold"
+                >
+                  Kaydet
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Course Modal */}
+        {showCourseModal && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg shadow-2xl w-full max-w-2xl">
+              <div className="p-6 border-b">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {editingCourse ? 'Kurs Düzenle' : 'Yeni Kurs Ekle'}
+                </h2>
+              </div>
+              <div className="p-6 space-y-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Kurs Adı *</label>
+                  <input
+                    type="text"
+                    value={courseForm.name}
+                    onChange={(e) => setCourseForm({ ...courseForm, name: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Örn: Turks Taal"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Seviye *</label>
+                  <input
+                    type="text"
+                    value={courseForm.level}
+                    onChange={(e) => setCourseForm({ ...courseForm, level: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Örn: Niveau 1-3"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Açıklama *</label>
+                  <textarea
+                    rows="4"
+                    value={courseForm.description}
+                    onChange={(e) => setCourseForm({ ...courseForm, description: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none"
+                    placeholder="Kurs açıklaması..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Icon (Emoji)</label>
+                  <input
+                    type="text"
+                    value={courseForm.icon}
+                    onChange={(e) => setCourseForm({ ...courseForm, icon: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Örn: 🇹🇷 veya 📚"
+                    maxLength={2}
+                  />
+                </div>
+              </div>
+              <div className="p-6 border-t flex gap-3">
+                <button
+                  onClick={() => setShowCourseModal(false)}
+                  className="flex-1 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 font-medium"
+                >
+                  İptal
+                </button>
+                <button
+                  onClick={() => {
+                    alert('Kurs kaydetme API bağlantısıyla eklenecek');
+                    setShowCourseModal(false);
+                  }}
+                  className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold"
+                >
+                  Kaydet
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Important Date Modal */}
+        {showDateModal && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+            <div className="bg-white rounded-lg shadow-2xl w-full max-w-2xl">
+              <div className="p-6 border-b">
+                <h2 className="text-2xl font-bold text-gray-900">
+                  {editingDate ? 'Tarih Düzenle' : 'Yeni Önemli Tarih Ekle'}
+                </h2>
+              </div>
+              <div className="p-6 space-y-4">
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Başlık *</label>
+                  <input
+                    type="text"
+                    value={dateForm.title}
+                    onChange={(e) => setDateForm({ ...dateForm, title: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Örn: Ouderavond"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Açıklama *</label>
+                  <textarea
+                    rows="3"
+                    value={dateForm.description}
+                    onChange={(e) => setDateForm({ ...dateForm, description: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none"
+                    placeholder="Etkinlik açıklaması..."
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Tarih *</label>
+                  <input
+                    type="date"
+                    value={dateForm.date}
+                    onChange={(e) => setDateForm({ ...dateForm, date: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Renk *</label>
+                  <select
+                    value={dateForm.color}
+                    onChange={(e) => setDateForm({ ...dateForm, color: e.target.value })}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  >
+                    <option value="blue">Mavi</option>
+                    <option value="green">Yeşil</option>
+                    <option value="purple">Mor</option>
+                    <option value="orange">Turuncu</option>
+                    <option value="red">Kırmızı</option>
+                  </select>
+                </div>
+              </div>
+              <div className="p-6 border-t flex gap-3">
+                <button
+                  onClick={() => setShowDateModal(false)}
+                  className="flex-1 px-6 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 font-medium"
+                >
+                  İptal
+                </button>
+                <button
+                  onClick={() => {
+                    alert('Tarih kaydetme API bağlantısıyla eklenecek');
+                    setShowDateModal(false);
+                  }}
+                  className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 font-semibold"
+                >
+                  Kaydet
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </AdminLayout>
   );
