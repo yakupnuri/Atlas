@@ -163,7 +163,17 @@ export default function AdminEventsPage() {
   };
 
   const handleImageSelect = (imageUrl) => {
-    setFormData({ ...formData, image: imageUrl });
+    if (window.galleryMode) {
+      // Add to gallery
+      setFormData({ 
+        ...formData, 
+        gallery: [...(formData.gallery || []), imageUrl] 
+      });
+      window.galleryMode = false;
+    } else {
+      // Set as featured image
+      setFormData({ ...formData, image: imageUrl });
+    }
     setShowMediaLibrary(false);
   };
 
