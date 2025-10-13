@@ -411,7 +411,8 @@ export default function ReserverenPage() {
                           key={event.id}
                           onClick={() => {
                             setSelectedEvent(event);
-                            setFormData({ name: '', email: '', phone: '', count: 1, notes: '' });
+                            setFormData({ email: '', phone: '', count: 1 });
+                            setParticipantNames(['']);
                             setError('');
                             window.scrollTo({ top: 0, behavior: 'smooth' });
                           }}
