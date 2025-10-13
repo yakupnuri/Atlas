@@ -17,12 +17,12 @@ export default function ReserverenPage() {
   const [error, setError] = useState('');
   
   const [formData, setFormData] = useState({
-    name: '',
     email: '',
     phone: '',
     count: 1,
-    notes: '',
   });
+  
+  const [participantNames, setParticipantNames] = useState(['']);
 
   useEffect(() => {
     fetchEvents();
