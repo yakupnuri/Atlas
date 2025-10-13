@@ -1208,10 +1208,10 @@ export default function AdminEventsPage() {
         {/* Participants Modal */}
         {showParticipantsModal && selectedEvent && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg shadow-2xl w-full max-w-3xl max-h-[80vh] overflow-y-auto">
+            <div className="bg-white rounded-lg shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto">
               <div className="sticky top-0 bg-white border-b px-6 py-4 flex justify-between items-center">
                 <h2 className="text-2xl font-bold text-gray-900">
-                  Katılımcılar - {selectedEvent.title}
+                  🎫 Katılımcılar - {selectedEvent.title}
                 </h2>
                 <button
                   onClick={() => setShowParticipantsModal(false)}
@@ -1222,27 +1222,40 @@ export default function AdminEventsPage() {
               </div>
 
               <div className="p-6">
-                <div className="mb-4 flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-gray-600">
-                      Toplam Rezervasyon: <span className="font-bold">{selectedEvent.statistics?.totalReservations || 0}</span>
-                    </p>
-                    <p className="text-sm text-gray-600">
-                      Gerçek Katılım: <span className="font-bold text-green-600">{selectedEvent.statistics?.actualAttendees || 0}</span>
-                    </p>
+                <div className="mb-6 flex items-center justify-between">
+                  <div className="flex gap-6">
+                    <div className="px-4 py-3 bg-blue-50 border border-blue-200 rounded-lg">
+                      <p className="text-xs text-blue-600 mb-1">Toplam Rezervasyon</p>
+                      <p className="text-2xl font-bold text-blue-900">{selectedEvent.statistics?.totalReservations || 0}</p>
+                    </div>
+                    <div className="px-4 py-3 bg-green-50 border border-green-200 rounded-lg">
+                      <p className="text-xs text-green-600 mb-1">Gerçek Katılım</p>
+                      <p className="text-2xl font-bold text-green-900">{selectedEvent.statistics?.actualAttendees || 0}</p>
+                    </div>
                   </div>
-                  <button
-                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                  >
-                    📥 Excel'e Aktar
-                  </button>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => {
+                        window.print();
+                      }}
+                      className="flex items-center gap-2 px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
+                    >
+                      🏷️ Badge Yazdır
+                    </button>
+                    <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                      📥 Excel'e Aktar
+                    </button>
+                  </div>
                 </div>
 
-                {/* Demo Participants List */}
-                <div className="border rounded-lg overflow-hidden">
+                {/* Participants Table */}
+                <div className="border rounded-lg overflow-hidden mb-6">
                   <table className="w-full">
                     <thead className="bg-gray-50">
                       <tr>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          #
+                        </th>
                         <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                           İsim Soyisim
                         </th>
@@ -1250,27 +1263,42 @@ export default function AdminEventsPage() {
                           Email
                         </th>
                         <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
-                          Tarih
+                          Badge No
+                        </th>
+                        <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                          Katıldı
                         </th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-200">
                       {[...Array(selectedEvent.statistics?.totalReservations || 0)].map((_, index) => (
                         <tr key={index} className="hover:bg-gray-50">
-                          <td className="px-4 py-3 text-sm text-gray-900">
+                          <td className="px-4 py-3 text-sm text-gray-500">
+                            {index + 1}
+                          </td>
+                          <td className="px-4 py-3 text-sm font-medium text-gray-900">
                             Demo Kullanıcı {index + 1}
                           </td>
                           <td className="px-4 py-3 text-sm text-gray-600">
                             demo{index + 1}@example.com
                           </td>
-                          <td className="px-4 py-3 text-sm text-gray-500">
-                            {new Date().toLocaleDateString('tr-TR')}
+                          <td className="px-4 py-3">
+                            <span className="inline-block px-3 py-1 text-sm font-bold bg-orange-100 text-orange-700 rounded-full">
+                              #{index + 1}
+                            </span>
+                          </td>
+                          <td className="px-4 py-3">
+                            <input
+                              type="checkbox"
+                              className="w-5 h-5 text-green-600 rounded"
+                              defaultChecked={index < (selectedEvent.statistics?.actualAttendees || 0)}
+                            />
                           </td>
                         </tr>
                       ))}
                       {(!selectedEvent.statistics?.totalReservations || selectedEvent.statistics.totalReservations === 0) && (
                         <tr>
-                          <td colSpan="3" className="px-4 py-8 text-center text-gray-500">
+                          <td colSpan="5" className="px-4 py-8 text-center text-gray-500">
                             Henüz rezervasyon yok
                           </td>
                         </tr>
@@ -1279,9 +1307,17 @@ export default function AdminEventsPage() {
                   </table>
                 </div>
 
-                <p className="text-xs text-gray-500 mt-4">
-                  💡 Not: Bu demo veridir. Gerçek rezervasyon sistemi entegre edildiğinde buradan gerçek katılımcıları görebileceksiniz.
-                </p>
+                <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+                  <p className="text-sm text-yellow-800 mb-2">
+                    <strong>📋 Badge Sistemi:</strong>
+                  </p>
+                  <ul className="text-xs text-yellow-700 space-y-1 ml-4">
+                    <li>• Her katılımcıya otomatik benzersiz badge numarası atanır</li>
+                    <li>• A4 kağıt: 3 sütun x 8 satır = 24 etiket (70mm x 37mm)</li>
+                    <li>• "Badge Yazdır" ile tüm etiketleri yazdırabilirsiniz</li>
+                    <li>• Etkinlik girişinde numara sorulur ve badge verilir</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
