@@ -563,6 +563,30 @@ export default function AdminEventsPage() {
                       <td className="px-6 py-4 text-right">
                         <div className="flex items-center justify-end gap-2">
                           <button
+                            onClick={() => {
+                              setSelectedEvent(event);
+                              setShowParticipantsModal(true);
+                            }}
+                            className="p-2 text-purple-600 hover:bg-purple-50 rounded-lg transition-colors"
+                            title="Katılımcıları Gör"
+                          >
+                            <UserCheck className="w-5 h-5" />
+                          </button>
+                          <button
+                            onClick={() => {
+                              setSelectedEvent(event);
+                              setEmailForm({
+                                subject: `${event.title} - Hatırlatma`,
+                                message: `Merhaba,\n\n${event.title} etkinliği için kayıt yaptırdınız.\n\nTarih: ${new Date(event.date).toLocaleDateString('tr-TR')}\nKonum: ${event.location}\n\nGörüşmek üzere!`,
+                              });
+                              setShowEmailModal(true);
+                            }}
+                            className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                            title="Email Gönder"
+                          >
+                            <Mail className="w-5 h-5" />
+                          </button>
+                          <button
                             onClick={() => handleEdit(event)}
                             className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
                             title="Düzenle"
