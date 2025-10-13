@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Stichting Atlas - Modern web platform with NL interface for community events, reservations, donations, and education center"
+user_problem_statement: "Stichting Atlas - Modern web platform with NL interface for community events, reservations, donations, and education center. Latest update: Fixed data schema inconsistencies between admin panel and frontend - all event data now synced properly across all pages."
 
 backend:
   - task: "MongoDB Connection & Database Setup"
