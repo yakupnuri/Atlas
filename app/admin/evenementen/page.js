@@ -463,7 +463,7 @@ export default function AdminEventsPage() {
                     </td>
                   </tr>
                 ) : (
-                  events.map((event) => (
+                  filteredEvents.map((event) => (
                     <tr key={event.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-4">
