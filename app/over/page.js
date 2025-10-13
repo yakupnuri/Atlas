@@ -228,7 +228,7 @@ export default function AboutPage() {
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#05B6C4] mx-auto"></div>
               </div>
             ) : team.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 place-content-center place-items-center">
+              <div className="flex flex-wrap justify-center gap-8">
                 {team.map((member, index) => (
                   <motion.div
                     key={index}
