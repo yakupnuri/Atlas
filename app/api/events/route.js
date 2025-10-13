@@ -114,7 +114,7 @@ export async function PUT(request) {
       );
     }
     
-    const { id, ...updateData } = await request.json();
+    const { id, ...eventData } = await request.json();
     
     if (!id) {
       return NextResponse.json(
@@ -125,14 +125,38 @@ export async function PUT(request) {
     
     const db = await getDb();
     
+    // Convert admin form data to standardized format
+    const { date, startTime, endTime, allDay, maxParticipants, location, ...rest } = eventData;
+    
+    // Create startAt and endAt ISO strings
+    let startAt, endAt;
+    if (date) {
+      if (allDay) {
+        startAt = new Date(date + 'T00:00:00').toISOString();
+        endAt = new Date(date + 'T23:59:59').toISOString();
+      } else {
+        startAt = new Date(date + 'T' + (startTime || '00:00:00')).toISOString();
+        endAt = new Date(date + 'T' + (endTime || '23:59:59')).toISOString();
+      }
+    }
+    
+    const updateData = {
+      ...rest,
+      ...(startAt && { startAt }),
+      ...(endAt && { endAt }),
+      ...(maxParticipants && { capacity: parseInt(maxParticipants) }),
+      ...(location && { locationName: location }),
+      ...(rest.image && { bannerImage: rest.image }),
+      ...(rest.price !== undefined && { 
+        isPaid: parseFloat(rest.price) > 0,
+        price: parseFloat(rest.price) || 0
+      }),
+      updatedAt: new Date().toISOString()
+    };
+    
     await db.collection('events').updateOne(
       { id },
-      { 
-        $set: {
-          ...updateData,
-          updatedAt: new Date()
-        }
-      }
+      { $set: updateData }
     );
     
     return NextResponse.json(
