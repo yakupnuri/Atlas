@@ -140,8 +140,6 @@ export default function AcademiePage() {
     </div>
   )
 }
-
-      {/* Mission Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
