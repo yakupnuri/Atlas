@@ -242,6 +242,90 @@ export default function EventDetailPage() {
                 </div>
               </div>
             </motion.div>
+
+            {/* Organizer */}
+            {event.organizer && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+                className="bg-white rounded-lg p-6 shadow-md"
+              >
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">Georganiseerd door</h2>
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-[#05B6C4]/10 rounded-lg flex items-center justify-center">
+                    <Users className="w-6 h-6 text-[#05B6C4]" />
+                  </div>
+                  <p className="text-lg font-semibold text-gray-800">{event.organizer}</p>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Contributors (Speakers/Artists) */}
+            {event.contributors && event.contributors.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="bg-white rounded-lg p-6 shadow-md"
+              >
+                <h2 className="text-2xl font-bold text-gray-800 mb-6">Sprekers & Artiesten</h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {event.contributors.map((contributor, index) => (
+                    <div key={index} className="flex items-start gap-4">
+                      {contributor.photo ? (
+                        <img
+                          src={contributor.photo}
+                          alt={contributor.name}
+                          className="w-20 h-20 rounded-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-20 h-20 bg-gradient-to-br from-[#05B6C4] to-[#3B87BE] rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                          {contributor.name.charAt(0)}
+                        </div>
+                      )}
+                      <div className="flex-1">
+                        <h3 className="font-bold text-gray-900 text-lg">{contributor.name}</h3>
+                        <p className="text-sm text-[#05B6C4] font-medium mb-2">
+                          {contributor.role === 'speaker' ? 'Spreker' :
+                           contributor.role === 'seminar' ? 'Seminarleider' :
+                           contributor.role === 'artist' ? 'Artiest' :
+                           contributor.role === 'trainer' ? 'Trainer' :
+                           contributor.role === 'moderator' ? 'Moderator' :
+                           'Deelnemer'}
+                        </p>
+                        {contributor.bio && (
+                          <p className="text-gray-600 text-sm">{contributor.bio}</p>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+
+            {/* Photo Gallery */}
+            {event.gallery && event.gallery.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="bg-white rounded-lg p-6 shadow-md"
+              >
+                <h2 className="text-2xl font-bold text-gray-800 mb-6">Fotogalerij</h2>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                  {event.gallery.map((photo, index) => (
+                    <img
+                      key={index}
+                      src={photo}
+                      alt={`Gallery ${index + 1}`}
+                      className="w-full h-48 object-cover rounded-lg hover:scale-105 transition-transform cursor-pointer"
+                      onClick={() => window.open(photo, '_blank')}
+                    />
+                  ))}
+                </div>
+              </motion.div>
+            )}
           </div>
 
           {/* Sidebar */}
