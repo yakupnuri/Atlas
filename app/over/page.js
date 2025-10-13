@@ -216,7 +216,7 @@ export default function AboutPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
-            className="max-w-6xl mx-auto"
+            className="max-w-7xl mx-auto"
           >
             <div className="flex items-center justify-center mb-12">
               <Users className="w-12 h-12 text-[#05B6C4] mr-4" />
@@ -228,41 +228,39 @@ export default function AboutPage() {
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#05B6C4] mx-auto"></div>
               </div>
             ) : team.length > 0 ? (
-              <div className="flex justify-center">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                  {team.map((member, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{ delay: 0.1 * index }}
-                      className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-64 mx-auto"
-                    >
-                      <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
-                        {member.photo ? (
-                          <img
-                            src={member.photo}
-                            alt={member.name}
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#05B6C4] to-[#3B87BE]">
-                            <User className="w-24 h-24 text-white opacity-80" />
-                          </div>
-                        )}
-                      </div>
-                      <div className="p-4 text-center">
-                        <h3 className="font-bold text-gray-900 text-lg mb-1">
-                          {member.name}
-                        </h3>
-                        <p className="text-sm text-[#05B6C4] mb-2">{member.role}</p>
-                        {member.category && (
-                          <p className="text-xs text-gray-500">{member.category}</p>
-                        )}
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 justify-items-center">
+                {team.map((member, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.1 * index }}
+                    className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow w-full max-w-xs"
+                  >
+                    <div className="aspect-square bg-gray-100 flex items-center justify-center overflow-hidden">
+                      {member.photo ? (
+                        <img
+                          src={member.photo}
+                          alt={member.name}
+                          className="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-[#05B6C4] to-[#3B87BE]">
+                          <User className="w-24 h-24 text-white opacity-80" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="p-4 text-center">
+                      <h3 className="font-bold text-gray-900 text-lg mb-1">
+                        {member.name}
+                      </h3>
+                      <p className="text-sm text-[#05B6C4] mb-2">{member.role}</p>
+                      {member.category && (
+                        <p className="text-xs text-gray-500">{member.category}</p>
+                      )}
+                    </div>
+                  </motion.div>
+                ))}
               </div>
             ) : (
               <div className="text-center py-12 bg-white rounded-lg shadow-md max-w-2xl mx-auto">
