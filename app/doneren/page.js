@@ -67,41 +67,35 @@ export default function DonerenPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <Navbar />
-        <div className="min-h-screen flex items-center justify-center px-4 py-16">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-lg p-8 shadow-lg max-w-md w-full text-center"
+      <div className="min-h-screen flex items-center justify-center px-4 py-16 bg-gray-50">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-white rounded-lg p-8 shadow-lg max-w-md w-full text-center"
+        >
+          <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Check className="w-10 h-10 text-green-600" />
+          </div>
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">Bedankt voor uw donatie!</h2>
+          <p className="text-gray-600 mb-6">
+            Uw bijdrage zal een verschil maken. U ontvangt een bevestigingsmail.
+          </p>
+          <button
+            onClick={() => {
+              setSuccess(false);
+              fetchCampaigns();
+            }}
+            className="w-full bg-[#05B6C4] hover:bg-[#3B87BE] text-white px-6 py-3 rounded-lg font-semibold transition-colors"
           >
-            <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <Check className="w-10 h-10 text-green-600" />
-            </div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-2">Bedankt voor uw donatie!</h2>
-            <p className="text-gray-600 mb-6">
-              Uw bijdrage zal een verschil maken. U ontvangt een bevestigingsmail.
-            </p>
-            <button
-              onClick={() => {
-                setSuccess(false);
-                fetchCampaigns();
-              }}
-              className="w-full bg-[#05B6C4] hover:bg-[#3B87BE] text-white px-6 py-3 rounded-lg font-semibold transition-colors"
-            >
-              Terug naar Donatiecampagnes
-            </button>
-          </motion.div>
-        </div>
-        <Footer />
+            Terug naar Donatiecampagnes
+          </button>
+        </motion.div>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
-      
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-[#B37B83] to-[#F7941D] text-white py-20">
         <div className="container mx-auto px-4">
