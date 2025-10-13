@@ -243,6 +243,20 @@ export default function AdminEventsPage() {
     { value: 'overig', label: 'Overig' },
   ];
 
+  // Calculate statistics
+  const totalReservations = events.reduce((sum, e) => sum + (e.statistics?.totalReservations || 0), 0);
+  const totalAttendees = events.reduce((sum, e) => sum + (e.statistics?.actualAttendees || 0), 0);
+  const totalRevenue = events.reduce((sum, e) => sum + (e.statistics?.revenue || 0), 0);
+
+  // Filter events
+  const filteredEvents = events.filter(event => {
+    if (filterTab === 'all') return true;
+    if (filterTab === 'featured') return event.featured;
+    if (filterTab === 'upcoming') return new Date(event.date) >= new Date();
+    if (filterTab === 'past') return new Date(event.date) < new Date();
+    return true;
+  });
+
   if (loading) {
     return (
       <AdminLayout>
