@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { X, Upload, Trash2, Search, ExternalLink } from 'lucide-react';
 
-export default function MediaLibrary({ isOpen, onClose, onSelect }) {
+export default function MediaLibrary({ onClose, onSelect }) {
   const [media, setMedia] = useState([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
@@ -13,10 +13,8 @@ export default function MediaLibrary({ isOpen, onClose, onSelect }) {
   const [activeTab, setActiveTab] = useState('library'); // 'library' or 'unsplash'
 
   useEffect(() => {
-    if (isOpen) {
-      fetchMedia();
-    }
-  }, [isOpen]);
+    fetchMedia();
+  }, []);
 
   const fetchMedia = async () => {
     try {
