@@ -16,6 +16,7 @@ export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const upcoming = searchParams.get('upcoming');
+    const category = searchParams.get('category');
     
     const db = await getDb();
     
@@ -23,15 +24,38 @@ export async function GET(request) {
     
     // If upcoming=true, only show future events
     if (upcoming === 'true') {
-      query.date = { $gte: new Date().toISOString() };
+      query.startAt = { $gte: new Date().toISOString() };
+    }
+    
+    // Filter by category
+    if (category && category !== 'all') {
+      query.category = category;
     }
     
     const events = await db.collection('events')
       .find(query)
-      .sort({ date: 1 })
+      .sort({ startAt: 1 })
       .toArray();
     
-    return NextResponse.json({ events }, { headers: corsHeaders });
+    // Calculate capacity info for each event
+    const eventsWithCapacity = await Promise.all(
+      events.map(async (event) => {
+        const reservations = await db.collection('reservations')
+          .find({ eventId: event.id, status: 'confirmed' })
+          .toArray();
+        
+        const reservedCount = reservations.reduce((sum, r) => sum + (r.count || 0), 0);
+        const available = (event.capacity || 0) - reservedCount;
+        
+        return {
+          ...event,
+          reservedCount,
+          available
+        };
+      })
+    );
+    
+    return NextResponse.json({ events: eventsWithCapacity }, { headers: corsHeaders });
   } catch (error) {
     console.error('Error fetching events:', error);
     return NextResponse.json(
