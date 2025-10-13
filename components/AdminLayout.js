@@ -74,6 +74,11 @@ export default function AdminLayout({ children }) {
       icon: Heart,
       href: '/admin/donaties',
     },
+    {
+      title: 'Eğitim Merkezi',
+      icon: GraduationCap,
+      href: '/admin/educatie',
+    },
   ];
 
   const pagesMenuItems = [
