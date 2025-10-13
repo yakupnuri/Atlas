@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { CheckCircle, AlertCircle, Calendar, MapPin } from 'lucide-react';
+import { CheckCircle, AlertCircle, Calendar, MapPin, Users } from 'lucide-react';
 
 export default function ReserverenPage() {
   const searchParams = useSearchParams();
