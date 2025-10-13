@@ -281,8 +281,25 @@ export default function AdminEventsPage() {
                 maxParticipants: '',
                 price: '',
                 image: '',
+                gallery: [],
+                hasPreviousEdition: false,
+                previousEventId: '',
+                previousYear: '',
+                organizer: '',
+                contributors: [],
+                statistics: {
+                  totalReservations: 0,
+                  actualAttendees: 0,
+                  revenue: 0
+                },
                 featured: false,
                 registrationRequired: true,
+              });
+              setContributorForm({
+                name: '',
+                role: 'speaker',
+                bio: '',
+                photo: '',
               });
               setShowModal(true);
             }}
