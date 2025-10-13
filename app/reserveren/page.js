@@ -14,6 +14,7 @@ export default function ReserverenPage() {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [successData, setSuccessData] = useState(null);
   const [error, setError] = useState('');
   
   const [formData, setFormData] = useState({
