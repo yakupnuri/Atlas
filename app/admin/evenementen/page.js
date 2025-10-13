@@ -73,6 +73,37 @@ export default function AdminEventsPage() {
     }
   };
 
+  const fetchParticipants = async (eventId) => {
+    try {
+      const response = await fetch(`/api/reservations?eventId=${eventId}`);
+      const data = await response.json();
+      
+      // Flatten participants from all reservations
+      const allParticipants = [];
+      if (data.reservations) {
+        data.reservations.forEach(reservation => {
+          if (reservation.participants && reservation.participants.length > 0) {
+            reservation.participants.forEach(participant => {
+              allParticipants.push({
+                ...participant,
+                email: reservation.email,
+                phone: reservation.phone,
+                reservationId: reservation.id,
+              });
+            });
+          }
+        });
+      }
+      
+      // Sort by badge number
+      allParticipants.sort((a, b) => (a.badgeNumber || 0) - (b.badgeNumber || 0));
+      setParticipantsData(allParticipants);
+    } catch (error) {
+      console.error('Error fetching participants:', error);
+      setParticipantsData([]);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
