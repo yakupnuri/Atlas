@@ -402,8 +402,6 @@ export default function DonerenPage() {
           </div>
         )}
       </div>
-
-      <Footer />
     </div>
   );
 }
