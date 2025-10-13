@@ -326,52 +326,105 @@ export default function AdminEventsPage() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm">Toplam Etkinlik</p>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{events.length}</p>
-              </div>
-              <Calendar className="w-12 h-12 text-[#05B6C4] opacity-20" />
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 mb-8">
+          <div className="bg-white p-4 rounded-lg shadow">
+            <div className="flex flex-col">
+              <p className="text-gray-600 text-xs mb-1">Toplam Etkinlik</p>
+              <p className="text-2xl font-bold text-gray-900">{events.length}</p>
             </div>
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm">Yaklaşan</p>
-                <p className="text-2xl font-bold text-green-600 mt-1">
-                  {events.filter(e => new Date(e.date) >= new Date()).length}
-                </p>
-              </div>
-              <Clock className="w-12 h-12 text-green-600 opacity-20" />
+          <div className="bg-white p-4 rounded-lg shadow">
+            <div className="flex flex-col">
+              <p className="text-gray-600 text-xs mb-1">Yaklaşan</p>
+              <p className="text-2xl font-bold text-green-600">
+                {events.filter(e => new Date(e.date) >= new Date()).length}
+              </p>
             </div>
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm">Öne Çıkanlar</p>
-                <p className="text-2xl font-bold text-orange-600 mt-1">
-                  {events.filter(e => e.featured).length}
-                </p>
-              </div>
-              <ImageIcon className="w-12 h-12 text-orange-600 opacity-20" />
+          <div className="bg-white p-4 rounded-lg shadow">
+            <div className="flex flex-col">
+              <p className="text-gray-600 text-xs mb-1">Öne Çıkanlar</p>
+              <p className="text-2xl font-bold text-orange-600">
+                {events.filter(e => e.featured).length}
+              </p>
             </div>
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-600 text-sm">Geçmiş</p>
-                <p className="text-2xl font-bold text-gray-600 mt-1">
-                  {events.filter(e => new Date(e.date) < new Date()).length}
-                </p>
-              </div>
-              <Calendar className="w-12 h-12 text-gray-600 opacity-20" />
+          <div className="bg-white p-4 rounded-lg shadow">
+            <div className="flex flex-col">
+              <p className="text-gray-600 text-xs mb-1">Geçmiş</p>
+              <p className="text-2xl font-bold text-gray-600">
+                {events.filter(e => new Date(e.date) < new Date()).length}
+              </p>
             </div>
           </div>
+
+          <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg shadow">
+            <div className="flex flex-col">
+              <p className="text-blue-700 text-xs mb-1">👥 Rezervasyon</p>
+              <p className="text-2xl font-bold text-blue-900">{totalReservations}</p>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-br from-green-50 to-green-100 p-4 rounded-lg shadow">
+            <div className="flex flex-col">
+              <p className="text-green-700 text-xs mb-1">✅ Katıldı</p>
+              <p className="text-2xl font-bold text-green-900">{totalAttendees}</p>
+            </div>
+          </div>
+
+          <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg shadow">
+            <div className="flex flex-col">
+              <p className="text-purple-700 text-xs mb-1">💰 Gelir</p>
+              <p className="text-2xl font-bold text-purple-900">€{totalRevenue.toFixed(2)}</p>
+            </div>
+          </div>
+        </div>
+
+        {/* Filter Tabs */}
+        <div className="mb-6 flex gap-2 border-b border-gray-200">
+          <button
+            onClick={() => setFilterTab('all')}
+            className={`px-4 py-2 font-medium transition-colors ${
+              filterTab === 'all'
+                ? 'text-[#05B6C4] border-b-2 border-[#05B6C4]'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Tümü ({events.length})
+          </button>
+          <button
+            onClick={() => setFilterTab('featured')}
+            className={`px-4 py-2 font-medium transition-colors ${
+              filterTab === 'featured'
+                ? 'text-[#05B6C4] border-b-2 border-[#05B6C4]'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            ⭐ Öne Çıkanlar ({events.filter(e => e.featured).length})
+          </button>
+          <button
+            onClick={() => setFilterTab('upcoming')}
+            className={`px-4 py-2 font-medium transition-colors ${
+              filterTab === 'upcoming'
+                ? 'text-[#05B6C4] border-b-2 border-[#05B6C4]'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            📅 Yaklaşan ({events.filter(e => new Date(e.date) >= new Date()).length})
+          </button>
+          <button
+            onClick={() => setFilterTab('past')}
+            className={`px-4 py-2 font-medium transition-colors ${
+              filterTab === 'past'
+                ? 'text-[#05B6C4] border-b-2 border-[#05B6C4]'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            🕐 Geçmiş ({events.filter(e => new Date(e.date) < new Date()).length})
+          </button>
         </div>
 
         {/* Events List */}
