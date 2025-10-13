@@ -39,7 +39,7 @@ export default function DonationsAdminPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('adminToken');
     if (!token) {
       alert('❌ Lütfen giriş yapın');
       return;
