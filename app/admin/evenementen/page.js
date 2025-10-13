@@ -138,20 +138,33 @@ export default function AdminEventsPage() {
 
   const handleEdit = (event) => {
     setEditingEvent(event);
+    
+    // Extract date and time from startAt
+    let date = '', startTime = '', endTime = '';
+    if (event.startAt) {
+      const startDate = new Date(event.startAt);
+      date = startDate.toISOString().split('T')[0];
+      startTime = startDate.toTimeString().substring(0, 5);
+    }
+    if (event.endAt) {
+      const endDate = new Date(event.endAt);
+      endTime = endDate.toTimeString().substring(0, 5);
+    }
+    
     setFormData({
       title: event.title || '',
       slug: event.slug || '',
       description: event.description || '',
-      date: event.date ? event.date.split('T')[0] : '',
-      startTime: event.startTime || '',
-      endTime: event.endTime || '',
+      date,
+      startTime,
+      endTime,
       allDay: event.allDay || false,
-      location: event.location || '',
+      location: event.locationName || event.location || '',
       address: event.address || '',
       category: event.category || 'cultureel',
-      maxParticipants: event.maxParticipants || '',
+      maxParticipants: event.capacity || event.maxParticipants || '',
       price: event.price || '',
-      image: event.image || '',
+      image: event.bannerImage || event.image || '',
       gallery: event.gallery || [],
       hasPreviousEdition: event.hasPreviousEdition || false,
       previousEventId: event.previousEventId || '',
