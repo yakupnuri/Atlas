@@ -21,7 +21,8 @@ import {
   Phone,
   GraduationCap,
   Briefcase,
-  FolderKanban
+  FolderKanban,
+  Heart
 } from 'lucide-react';
 
 export default function AdminLayout({ children }) {
