@@ -247,6 +247,44 @@ export default function AdminLayout({ children }) {
           </div>
         </nav>
 
+        {/* User Profile Section */}
+        {currentUser && (
+          <div className="mt-auto p-4 border-t border-white/20">
+            <div className="bg-white/10 rounded-lg p-3 mb-3">
+              <div className="flex items-center gap-3">
+                <div className="relative">
+                  <img
+                    src={currentUser.avatar}
+                    alt={currentUser.name}
+                    className="w-10 h-10 rounded-full"
+                  />
+                  <Circle className="absolute bottom-0 right-0 w-3 h-3 text-green-400 fill-green-400" />
+                </div>
+                {sidebarOpen && (
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-white truncate">
+                      {currentUser.name}
+                    </p>
+                    <p className="text-xs text-white/70 truncate">
+                      {currentUser.email}
+                    </p>
+                  </div>
+                )}
+              </div>
+              {sidebarOpen && (
+                <div className="mt-3 pt-3 border-t border-white/20">
+                  <div className="flex items-center gap-2 text-xs text-white/80">
+                    <div className="flex items-center gap-1">
+                      <Circle className="w-2 h-2 text-green-400 fill-green-400" />
+                      <span>{onlineUsers} Kullanıcı Çevrimiçi</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
         {/* Logout Button */}
         <div className="p-4 border-t border-white/20">
           <button
