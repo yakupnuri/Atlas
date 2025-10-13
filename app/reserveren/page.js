@@ -286,20 +286,6 @@ export default function ReserverenPage() {
                   <div className="space-y-6">
                     <div>
                       <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Naam *
-                      </label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none"
-                        placeholder="Je volledige naam"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
                         E-mail *
                       </label>
                       <input
@@ -335,22 +321,38 @@ export default function ReserverenPage() {
                         min="1"
                         max={selectedEvent.capacity}
                         value={formData.count}
-                        onChange={(e) => setFormData({ ...formData, count: parseInt(e.target.value) })}
+                        onChange={(e) => setFormData({ ...formData, count: parseInt(e.target.value) || 1 })}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none"
                       />
+                      <p className="text-sm text-gray-500 mt-1">
+                        Vul hieronder de naam in van elke deelnemer
+                      </p>
                     </div>
 
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Opmerkingen
+                    {/* Dynamic Participant Name Fields */}
+                    <div className="space-y-4">
+                      <label className="block text-sm font-semibold text-gray-700">
+                        Namen van deelnemers *
                       </label>
-                      <textarea
-                        rows="4"
-                        value={formData.notes}
-                        onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none resize-none"
-                        placeholder="Vragen of bijzonderheden..."
-                      />
+                      {participantNames.map((name, index) => (
+                        <div key={index} className="flex items-center gap-3">
+                          <div className="flex-shrink-0 w-10 h-10 bg-[#05B6C4] text-white rounded-full flex items-center justify-center font-bold">
+                            {index + 1}
+                          </div>
+                          <input
+                            type="text"
+                            required
+                            value={name}
+                            onChange={(e) => {
+                              const newNames = [...participantNames];
+                              newNames[index] = e.target.value;
+                              setParticipantNames(newNames);
+                            }}
+                            className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none"
+                            placeholder={`Naam deelnemer ${index + 1}`}
+                          />
+                        </div>
+                      ))}
                     </div>
 
                     <button
