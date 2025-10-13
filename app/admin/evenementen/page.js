@@ -144,6 +144,17 @@ export default function AdminEventsPage() {
       maxParticipants: event.maxParticipants || '',
       price: event.price || '',
       image: event.image || '',
+      gallery: event.gallery || [],
+      hasPreviousEdition: event.hasPreviousEdition || false,
+      previousEventId: event.previousEventId || '',
+      previousYear: event.previousYear || '',
+      organizer: event.organizer || '',
+      contributors: event.contributors || [],
+      statistics: event.statistics || {
+        totalReservations: 0,
+        actualAttendees: 0,
+        revenue: 0
+      },
       featured: event.featured || false,
       registrationRequired: event.registrationRequired !== false,
     });
