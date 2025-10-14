@@ -149,7 +149,8 @@ export default function AdminLayout({ children }) {
 
   const handleLogout = () => {
     localStorage.removeItem('adminToken');
-    window.location.href = '/auth/login';
+    localStorage.removeItem('adminEmail');
+    window.location.href = '/admin/login';
   };
 
   return (
