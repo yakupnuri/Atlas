@@ -98,6 +98,12 @@ export default function AdminLayout({ children }) {
       icon: MessageCircle,
       href: '/admin/comments',
     },
+    {
+      title: 'CRM & Proje Yönetimi',
+      icon: FolderKanban,
+      href: '/crm/projeler',
+      external: true
+    },
   ];
 
   const pagesMenuItems = [
