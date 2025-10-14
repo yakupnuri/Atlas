@@ -200,7 +200,7 @@ export default function ProjectDetailPage() {
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-4">
                   <div
-                    className="bg-gradient-to-r from-blue-500 to-purple-500 h-4 rounded-full transition-all duration-300"
+                    className="bg-gradient-to-r from-blue-600 to-cyan-500 h-4 rounded-full transition-all duration-500 animate-pulse"
                     style={{ width: `${project.progress}%` }}
                   />
                 </div>
