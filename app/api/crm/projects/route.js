@@ -4,11 +4,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 
-// Helper function to check @stichtingatlas.com email domain
-function isAtlasEmail(email) {
-  if (!email) return false;
-  return email.toLowerCase().endsWith('@stichtingatlas.com');
-}
+// No email domain check needed for CRM
+// CRM is password-protected, not email-restricted
 
 // GET /api/crm/projects - Fetch all projects
 export async function GET(request) {
