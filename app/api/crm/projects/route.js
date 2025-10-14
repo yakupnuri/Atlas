@@ -86,7 +86,7 @@ export async function POST(request) {
       progress: data.progress || 0,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-      createdBy: session.user.email
+      createdBy: 'CRM User'
     };
 
     await db.collection('crm_projects').insertOne(newProject);
