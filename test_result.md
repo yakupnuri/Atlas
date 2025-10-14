@@ -402,3 +402,121 @@ agent_communication:
     message: "CAREER CENTER AUTO-EXPIRY BACKEND TESTING COMPLETE ✅ All backend functionality working perfectly! Tested 5 main scenarios plus edge cases: 1) Jobs with expiryDate filtering works correctly 2) Surveys with endDate filtering works correctly 3) Seminars with date+time filtering works correctly 4) Announcements have no date filtering (correct) 5) API error handling works properly. Edge cases verified: malformed dates treated as expired, empty dates allow items to appear, boundary date handling works. Public API filters expired items, admin API with includeExpired=true shows all items. Created comprehensive test suite (career_backend_test.py) with 15+ scenarios. All CRUD operations functional. Ready for production use."
 
     message: "DATA SCHEMA SYNC FIX COMPLETE ✅ Fixed critical data inconsistencies between admin panel and frontend. Problems identified: 1) Admin saved 'maxParticipants' but frontend expected 'capacity' 2) Admin saved separate date/time fields but frontend expected 'startAt/endAt' ISO strings 3) EventTicker had Invalid Date errors 4) Event detail page showed NaN values. SOLUTION: Updated /api/events/route.js to convert admin form data to standardized format (capacity, startAt, endAt, locationName, isPaid, bannerImage). Updated all frontend components (EventCard, EventTicker, Event Detail, Reserveren) to handle dates safely with try-catch. Added capacity availability info in event cards. Fixed 'Users' import error in reserveren page. RESULT: All pages now showing correct data - no more Invalid Date or NaN errors. Capacity info displays properly everywhere (50 plaatsen beschikbaar, etc). Admin panel edit function updated to load events correctly. All tested via screenshots - working perfectly!"
+
+backend:
+  - task: "CRM Projects API - Complete CRUD"
+    implemented: true
+    working: "NA"
+    file: "/app/app/api/crm/projects/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created /api/crm/projects with GET (with filters: publicOnly, category, status), POST (create project), PUT (update project), DELETE (delete project). All write operations require @stichtingatlas.com email validation. Projects stored in MongoDB crm_projects collection with UUID. Fields include: id, title, description, category, status, team[], budget, startDate, endDate, image, documents[], public, progress, createdAt, updatedAt, createdBy."
+
+  - task: "CRM Projects Admin Page"
+    implemented: true
+    working: "NA"
+    file: "/app/app/admin/crm/projeler/page.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created admin page for project management with: project table view, stats cards (total, active, completed, public), category and status filters, ProjectModal integration for create/edit, delete functionality, progress bars, team member count, visibility toggle (public/private). Restricted access check for @stichtingatlas.com users."
+
+  - task: "CRM Public Projects Page"
+    implemented: true
+    working: "NA"
+    file: "/app/app/academie/projectgroep/page.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Replaced placeholder projectgroep page with functional public project showcase. Features: fetches public projects only (publicOnly=true), category and status filters, stats cards, project grid layout, ProjectDetailModal for details, CRMAccessCard visible only to @stichtingatlas.com users. All text in Dutch. Project cards show image, title, description, category badge, status badge, progress bar, team count, start date."
+
+  - task: "Middleware - CRM Access Control"
+    implemented: true
+    working: "NA"
+    file: "/app/middleware.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created Next.js middleware for route protection. General /admin/* paths require authentication (redirects to login if not authenticated). /admin/crm/* paths require additional @stichtingatlas.com email validation. Unauthorized CRM access redirects to dashboard with error message."
+
+frontend:
+  - task: "ProjectModal Component"
+    implemented: true
+    working: "NA"
+    file: "/app/components/crm/ProjectModal.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created comprehensive project modal for create/edit operations. Fields: title, description, category dropdown, status dropdown, date pickers (start/end), budget input, progress slider (0-100%), image URL input with preview, team member management (add/remove), public toggle, document attachments (placeholder). Form validation and submit to API."
+
+  - task: "ProjectDetailModal Component"
+    implemented: true
+    working: "NA"
+    file: "/app/components/public/ProjectDetailModal.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created public project detail modal with full project information display. Shows: header image, title, description, category and status badges, progress bar, start/end dates, budget, team member count and list, all formatted in Dutch. Responsive design with close button."
+
+  - task: "CRMAccessCard Component"
+    implemented: true
+    working: "NA"
+    file: "/app/components/public/CRMAccessCard.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created CRM access card component visible only to @stichtingatlas.com users on public project page. Displays information about CRM system access and provides direct link to CRM dashboard. Gradient design matching theme."
+
+  - task: "AdminLayout - CRM Menu Item"
+    implemented: true
+    working: "NA"
+    file: "/app/components/AdminLayout.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Added 'CRM & Proje Yönetimi' menu item to AdminLayout with restrictedTo: '@stichtingatlas.com' flag. Updated menu rendering logic to conditionally show restricted items only to users with matching email domain. Menu item hidden from unauthorized users."
+
+metadata:
+  created_by: "main_agent"
+  version: "1.1"
+  test_sequence: 3
+  run_ui: false
+  fase_completed: 1
+  current_fase: 2
+
+test_plan:
+  current_focus:
+    - "CRM Projects API - Complete CRUD"
+    - "Middleware - CRM Access Control"
+  stuck_tasks: []
+  test_all: false
+  test_priority: "high_first"
+
+agent_communication:
+  - agent: "main"
+    message: "CRM & PROJECT MANAGEMENT PHASE 1 IMPLEMENTED! Created complete project management system with: 1) Backend API (/api/crm/projects) with full CRUD operations and @stichtingatlas.com email validation 2) Admin panel (/admin/crm/projeler) with project table, stats, filters, create/edit/delete 3) Public page (/academie/projectgroep) with project showcase, filters, detail modal 4) Middleware for /admin/crm/* access control 5) Components: ProjectModal, ProjectDetailModal, CRMAccessCard 6) AdminLayout updated with conditional CRM menu. Projects stored in MongoDB with fields: title, description, category, status, team, budget, dates, image, documents, public flag, progress. Ready for backend testing."
