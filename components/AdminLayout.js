@@ -98,12 +98,6 @@ export default function AdminLayout({ children }) {
       icon: MessageCircle,
       href: '/admin/comments',
     },
-    {
-      title: 'CRM & Proje Yönetimi',
-      icon: FolderKanban,
-      href: '/admin/crm/projeler',
-      restrictedTo: '@stichtingatlas.com'
-    },
   ];
 
   const pagesMenuItems = [
