@@ -131,7 +131,7 @@ export default function ProjectDetailPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="relative h-96 bg-gradient-to-br from-blue-500 to-purple-500">
+      <div className="relative h-96 bg-gradient-to-br from-blue-600 to-cyan-500 animate-fade-in">
         {project.image ? (
           <img
             src={project.image}
