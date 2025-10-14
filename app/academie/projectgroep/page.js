@@ -102,8 +102,6 @@ export default function ProjectgroepPage() {
     }
   };
 
-  const isAtlasEmail = session?.user?.email?.endsWith('@stichtingatlas.com');
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -123,8 +121,8 @@ export default function ProjectgroepPage() {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-12">
-        {/* CRM Access Card (visible only to @stichtingatlas.com users) */}
-        {isAtlasEmail && <CRMAccessCard />}
+        {/* CRM Access Card (visible to everyone, requires password) */}
+        <CRMAccessCard />
 
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
