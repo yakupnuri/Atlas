@@ -29,6 +29,13 @@ export default function ProjelerPage() {
   const [filterStatus, setFilterStatus] = useState('all');
 
   useEffect(() => {
+    // CRM authentication check
+    const crmAuth = localStorage.getItem('crmAuth');
+    if (!crmAuth) {
+      router.push('/crm/login');
+      return;
+    }
+    
     fetchProjects();
   }, [filterCategory, filterStatus]);
 
