@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -14,12 +14,13 @@ import {
   FolderOpen,
   Clock,
   Users,
-  TrendingUp
+  TrendingUp,
+  LogOut
 } from 'lucide-react';
 import ProjectModal from '@/components/crm/ProjectModal';
 
 export default function ProjelerPage() {
-  const { data: session } = useSession();
+  const router = useRouter();
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
