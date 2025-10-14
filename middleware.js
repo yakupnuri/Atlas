@@ -4,17 +4,27 @@ import { NextResponse } from 'next/server';
 export async function middleware(request) {
   const { pathname } = request.nextUrl;
 
+  // Allow access to login page without authentication
+  if (pathname === '/admin/login') {
+    return NextResponse.next();
+  }
+
   // Check if path is under /admin
   if (pathname.startsWith('/admin')) {
+    // Check for simple demo session (localStorage-based)
+    // In production, this would use proper NextAuth tokens
+    
+    // For now, we'll allow access if coming from login
+    // Real authentication check would happen here
     const token = await getToken({ 
       req: request, 
       secret: process.env.NEXTAUTH_SECRET 
     });
 
-    // If not authenticated, redirect to NextAuth signin
+    // If not authenticated, redirect to our custom login
     if (!token) {
-      const loginUrl = new URL('/api/auth/signin', request.url);
-      loginUrl.searchParams.set('callbackUrl', pathname);
+      const loginUrl = new URL('/admin/login', request.url);
+      loginUrl.searchParams.set('from', pathname);
       return NextResponse.redirect(loginUrl);
     }
 
