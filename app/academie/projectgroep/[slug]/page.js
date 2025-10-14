@@ -276,7 +276,7 @@ export default function ProjectDetailPage() {
               <div className="space-y-3">
                 <Button
                   onClick={() => setVolunteerModalOpen(true)}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg"
+                  className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white py-6 text-lg transition-all duration-300 transform hover:scale-105"
                 >
                   <UserPlus className="w-5 h-5 mr-2" />
                   Word Vrijwilliger
@@ -284,7 +284,7 @@ export default function ProjectDetailPage() {
 
                 <Button
                   onClick={() => setDonationModalOpen(true)}
-                  className="w-full bg-green-600 hover:bg-green-700 text-white py-6 text-lg"
+                  className="w-full bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white py-6 text-lg transition-all duration-300 transform hover:scale-105"
                 >
                   <Heart className="w-5 h-5 mr-2" />
                   Doneer Nu
@@ -292,7 +292,7 @@ export default function ProjectDetailPage() {
 
                 <Button
                   onClick={() => setSponsorModalOpen(true)}
-                  className="w-full bg-purple-600 hover:bg-purple-700 text-white py-6 text-lg"
+                  className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white py-6 text-lg transition-all duration-300 transform hover:scale-105"
                 >
                   <Handshake className="w-5 h-5 mr-2" />
                   Word Sponsor
