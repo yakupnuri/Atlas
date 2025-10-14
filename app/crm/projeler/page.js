@@ -389,13 +389,14 @@ export default function ProjelerPage() {
         </Card>
       )}
 
-      {/* Project Modal */}
-      {modalOpen && (
-        <ProjectModal
-          project={editingProject}
-          onClose={handleModalClose}
-        />
-      )}
+        {/* Project Modal */}
+        {modalOpen && (
+          <ProjectModal
+            project={editingProject}
+            onClose={handleModalClose}
+          />
+        )}
+      </div>
     </div>
   );
 }
