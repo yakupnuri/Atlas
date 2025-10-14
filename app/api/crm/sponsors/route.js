@@ -71,3 +71,54 @@ export async function GET(request) {
     );
   }
 }
+
+// PUT /api/crm/sponsors - Update sponsorship status
+export async function PUT(request) {
+  try {
+    const data = await request.json();
+    
+    if (!data.id) {
+      return NextResponse.json(
+        { error: 'ID gereklidir' },
+        { status: 400 }
+      );
+    }
+
+    const client = await clientPromise;
+    const db = client.db('stichting_atlas');
+    
+    const updateData = {
+      status: data.status,
+      updatedAt: new Date().toISOString()
+    };
+
+    if (data.notes) {
+      updateData.notes = data.notes;
+    }
+
+    const result = await db
+      .collection('crm_applications')
+      .updateOne(
+        { id: data.id, type: 'sponsor' },
+        { $set: updateData }
+      );
+
+    if (result.matchedCount === 0) {
+      return NextResponse.json(
+        { error: 'Sponsorluk bulunamadı' },
+        { status: 404 }
+      );
+    }
+
+    return NextResponse.json({ 
+      message: 'Durum güncellendi',
+      success: true
+    });
+  } catch (error) {
+    console.error('Error updating sponsorship:', error);
+    return NextResponse.json(
+      { error: 'Güncelleme başarısız' },
+      { status: 500 }
+    );
+  }
+}
