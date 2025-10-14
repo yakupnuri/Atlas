@@ -175,6 +175,14 @@ export default function AdminLayout({ children }) {
             const Icon = item.icon;
             const isActive = pathname === item.href;
             
+            // Check if item is restricted and user doesn't have access
+            if (item.restrictedTo) {
+              const hasAccess = currentUser?.email?.endsWith(item.restrictedTo);
+              if (!hasAccess) {
+                return null; // Don't show restricted items to unauthorized users
+              }
+            }
+            
             return (
               <Link
                 key={item.href}
