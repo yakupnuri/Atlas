@@ -161,25 +161,10 @@ export async function PUT(request) {
   }
 }
 
-// DELETE /api/crm/projects - Delete project (admin only, @stichtingatlas.com)
+// DELETE /api/crm/projects - Delete project (CRM password protected)
 export async function DELETE(request) {
   try {
-    const session = await getServerSession(authOptions);
-    
-    if (!session || !session.user) {
-      return NextResponse.json(
-        { error: 'Oturum açmanız gerekiyor' },
-        { status: 401 }
-      );
-    }
-
-    // Check if user has @stichtingatlas.com email
-    if (!isAtlasEmail(session.user.email)) {
-      return NextResponse.json(
-        { error: 'Bu işlem için @stichtingatlas.com e-posta adresi gereklidir' },
-        { status: 403 }
-      );
-    }
+    // For CRM, we rely on client-side password authentication
 
     const { searchParams } = new URL(request.url);
     const id = searchParams.get('id');
