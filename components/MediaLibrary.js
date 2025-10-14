@@ -1,0 +1,344 @@
+'use client'
+
+import { useState, useEffect } from 'react';
+import { X, Upload, Trash2, Search, ExternalLink } from 'lucide-react';
+
+export default function MediaLibrary({ onClose, onSelect }) {
+  const [media, setMedia] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [uploading, setUploading] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [unsplashQuery, setUnsplashQuery] = useState('');
+  const [unsplashResults, setUnsplashResults] = useState([]);
+  const [activeTab, setActiveTab] = useState('library'); // 'library' or 'unsplash'
+
+  useEffect(() => {
+    fetchMedia();
+  }, []);
+
+  const fetchMedia = async () => {
+    try {
+      const response = await fetch('/api/media');
+      if (response.ok) {
+        const data = await response.json();
+        setMedia(data.media || []);
+      }
+    } catch (error) {
+      console.error('Error fetching media:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFileUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await fetch('/api/media', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        alert('✅ Afbeelding geüpload!');
+        fetchMedia();
+      } else {
+        alert('❌ Upload mislukt!');
+      }
+    } catch (error) {
+      console.error('Upload error:', error);
+      alert('❌ Upload mislukt!');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    if (!confirm('Weet u zeker dat u deze afbeelding wilt verwijderen?')) return;
+
+    try {
+      const response = await fetch(`/api/media?id=${id}`, {
+        method: 'DELETE'
+      });
+
+      if (response.ok) {
+        alert('✅ Afbeelding verwijderd!');
+        fetchMedia();
+      }
+    } catch (error) {
+      console.error('Delete error:', error);
+      alert('❌ Verwijderen mislukt!');
+    }
+  };
+
+  const searchUnsplash = async () => {
+    if (!unsplashQuery.trim()) return;
+
+    try {
+      // Unsplash API - Gerçek arama
+      const response = await fetch(
+        `https://api.unsplash.com/search/photos?query=${encodeURIComponent(unsplashQuery)}&per_page=12&client_id=your_access_key_here`
+      );
+      
+      if (!response.ok) {
+        // API hatası durumunda konuya göre demo resimler
+        const demoImagesByQuery = {
+          'nature': [
+            'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=800',
+            'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=800',
+            'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800',
+            'https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800',
+          ],
+          'business': [
+            'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800',
+            'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800',
+            'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800',
+            'https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800',
+          ],
+          'people': [
+            'https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=800',
+            'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800',
+            'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800',
+            'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800',
+          ],
+          'technology': [
+            'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800',
+            'https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?w=800',
+            'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800',
+            'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800',
+          ],
+          'food': [
+            'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800',
+            'https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800',
+            'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=800',
+            'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800',
+          ],
+          'education': [
+            'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800',
+            'https://images.unsplash.com/photo-1488190211105-8b0e65b80b4e?w=800',
+            'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=800',
+            'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800',
+          ]
+        };
+        
+        const queryLower = unsplashQuery.toLowerCase();
+        let images = demoImagesByQuery[queryLower] || demoImagesByQuery['nature'];
+        
+        setUnsplashResults(images.map((url, i) => ({ id: i, url, alt: unsplashQuery })));
+        return;
+      }
+      
+      const data = await response.json();
+      setUnsplashResults(data.results.map(img => ({
+        id: img.id,
+        url: img.urls.regular,
+        alt: img.alt_description || unsplashQuery
+      })));
+    } catch (error) {
+      console.error('Unsplash search error:', error);
+      // Fallback demo
+      const fallbackImages = [
+        'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800',
+        'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800',
+        'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800',
+      ];
+      setUnsplashResults(fallbackImages.map((url, i) => ({ id: i, url, alt: unsplashQuery })));
+    }
+  };
+
+  const filteredMedia = media.filter(item =>
+    item.originalName?.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[100] p-4">
+      <div className="bg-white rounded-lg w-full max-w-6xl max-h-[90vh] flex flex-col shadow-2xl">
+        {/* Header */}
+        <div className="p-6 border-b flex items-center justify-between">
+          <h2 className="text-2xl font-bold text-gray-900">Mediabibliotheek</h2>
+          <button
+            onClick={onClose}
+            className="text-gray-500 hover:text-gray-700"
+          >
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        {/* Tabs */}
+        <div className="px-6 pt-4 border-b">
+          <div className="flex gap-4">
+            <button
+              onClick={() => setActiveTab('library')}
+              className={`px-4 py-2 font-semibold border-b-2 transition-colors ${
+                activeTab === 'library'
+                  ? 'border-[#05B6C4] text-[#05B6C4]'
+                  : 'border-transparent text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              Bibliotheek
+            </button>
+            <button
+              onClick={() => setActiveTab('unsplash')}
+              className={`px-4 py-2 font-semibold border-b-2 transition-colors ${
+                activeTab === 'unsplash'
+                  ? 'border-[#05B6C4] text-[#05B6C4]'
+                  : 'border-transparent text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              Unsplash
+            </button>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="flex-1 overflow-y-auto p-6">
+          {activeTab === 'library' && (
+            <>
+              {/* Upload & Search */}
+              <div className="mb-6 flex gap-4">
+                <label className="flex items-center gap-2 px-4 py-2 bg-[#05B6C4] text-white rounded-lg cursor-pointer hover:bg-[#3B87BE] transition-colors">
+                  <Upload className="w-5 h-5" />
+                  {uploading ? 'Uploaden...' : 'Afbeelding uploaden'}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                    disabled={uploading}
+                    className="hidden"
+                  />
+                </label>
+                
+                <div className="flex-1 relative">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Zoeken in afbeeldingen..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] focus:border-transparent outline-none"
+                  />
+                </div>
+              </div>
+
+              {/* Media Grid */}
+              {loading ? (
+                <div className="flex items-center justify-center py-12">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#05B6C4]"></div>
+                </div>
+              ) : filteredMedia.length > 0 ? (
+                <div className="grid grid-cols-4 gap-4">
+                  {filteredMedia.map((item) => {
+                    // Tam URL oluştur
+                    const fullUrl = item.url.startsWith('http') 
+                      ? item.url 
+                      : `${window.location.origin}${item.url}`;
+                    
+                    return (
+                      <div
+                        key={item.id}
+                        className="relative group aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
+                        onClick={() => onSelect(fullUrl)}
+                      >
+                        <img
+                          src={fullUrl}
+                          alt={item.originalName}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onSelect(fullUrl);
+                            }}
+                            className="px-4 py-2 bg-[#05B6C4] text-white rounded-lg hover:bg-[#3B87BE] text-sm font-semibold"
+                          >
+                            Selecteren
+                          </button>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDelete(item.id);
+                            }}
+                            className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <p className="text-gray-500">Nog geen afbeeldingen geüpload</p>
+                </div>
+              )}
+            </>
+          )}
+
+          {activeTab === 'unsplash' && (
+            <>
+              {/* Unsplash Search */}
+              <div className="mb-6 flex gap-4">
+                <input
+                  type="text"
+                  placeholder="Zoeken op Unsplash (bijv. nature, business)..."
+                  value={unsplashQuery}
+                  onChange={(e) => setUnsplashQuery(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && searchUnsplash()}
+                  className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] focus:border-transparent outline-none"
+                />
+                <button
+                  onClick={searchUnsplash}
+                  className="px-6 py-2 bg-[#05B6C4] text-white rounded-lg hover:bg-[#3B87BE] font-semibold"
+                >
+                  Zoeken
+                </button>
+              </div>
+
+              {/* Unsplash Results */}
+              {unsplashResults.length > 0 ? (
+                <div className="grid grid-cols-4 gap-4">
+                  {unsplashResults.map((item) => (
+                    <div
+                      key={item.id}
+                      className="relative group aspect-square bg-gray-100 rounded-lg overflow-hidden cursor-pointer hover:shadow-xl transition-shadow"
+                      onClick={() => onSelect(item.url)}
+                    >
+                      <img
+                        src={item.url}
+                        alt={item.alt}
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onSelect(item.url);
+                          }}
+                          className="px-4 py-2 bg-[#05B6C4] text-white rounded-lg hover:bg-[#3B87BE] text-sm font-semibold"
+                        >
+                          Deze afbeelding selecteren
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-center py-12">
+                  <p className="text-gray-500">Gebruik het zoekvak hierboven om te zoeken</p>
+                  <p className="text-sm text-gray-400 mt-2">Probeer: "nature", "business", "technology"</p>
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}

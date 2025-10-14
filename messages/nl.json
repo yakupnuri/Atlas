@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "home": "Home",
+    "events": "Evenementen",
+    "about": "Over Ons",
+    "news": "Nieuws",
+    "reserve": "Reserveren",
+    "donate": "Doneren",
+    "anbi": "ANBI"
+  },
+  "hero": {
+    "title": "Samen bouwen aan een inclusieve gemeenschap",
+    "subtitle": "Stichting Atlas brengt mensen samen door cultuur, educatie en gemeenschapsactiviteiten.",
+    "cta1": "Bekijk Evenementen",
+    "cta2": "Doneer Nu",
+    "anbi": "ANBI erkend"
+  },
+  "home": {
+    "mission": "Onze Missie",
+    "missionText": "We bouwen bruggen tussen culturen en generaties door toegankelijke programma's en ontmoetingen.",
+    "vision": "Onze Visie",
+    "visionText": "Een samenleving waarin iedereen zich welkom voelt en de kans krijgt om te groeien en te ontwikkelen.",
+    "values": "Onze Waarden",
+    "valuesText": "Inclusiviteit, respect, samenwerking en het koesteren van culturele diversiteit staan centraal.",
+    "upcomingEvents": "Aankomende Evenementen",
+    "upcomingEventsSubtitle": "Doe mee met onze activiteiten en ontmoet nieuwe mensen!",
+    "viewAll": "Bekijk Alle Evenementen",
+    "loadDemo": "Laad Demo Evenementen",
+    "noEvents": "Geen aankomende evenementen gevonden.",
+    "nearbyPrograms": "Yakındaki Programlar"
+  },
+  "programs": {
+    "ramazan": "Ramazan İftar Programı",
+    "ramazanDesc": "Toplumumuz için özel iftar yemekleri düzenliyoruz",
+    "ders": "Ders Yemeği Etkinliği",
+    "dersDesc": "Öğrenciler ve aileler için eğitici yemek programı"
+  },
+  "anbi": {
+    "title": "ANBI Status",
+    "subtitle": "Stichting Atlas is erkend als Algemeen Nut Beogende Instelling (ANBI)",
+    "info": {
+      "title": "Wat is ANBI?",
+      "description": "Een ANBI is een Algemeen Nut Beogende Instelling die fiscale voordelen biedt aan donateurs. Giften aan onze stichting zijn aftrekbaar van de belasting.",
+      "fiscalTitle": "Fiscale Voordelen",
+      "fiscalDesc": "Uw donaties zijn fiscaal aftrekbaar volgens de Nederlandse belastingwetgeving.",
+      "transparencyTitle": "Transparantie",
+      "transparencyDesc": "Als ANBI publiceren wij onze documenten en financiële informatie openbaar."
+    },
+    "documents": {
+      "title": "Officiële Documenten",
+      "subtitle": "Download onze beleidsplannen en financiële rapportages"
+    },
+    "beloningsbeleid": {
+      "title": "Beloningsbeleid",
+      "description": "Het bestuur en vrijwilligers ontvangen geen beloning. Eventuele kosten kunnen worden vergoed."
+    },
+    "beleidsplan": {
+      "title": "Beleidsplan",
+      "description": "Beleidsplan 2025 met onze visie, missie, doelstellingen en maatschappelijke koers."
+    },
+    "jaarrekening": {
+      "title": "Jaarrekening",
+      "description": "De meest recente jaarrekening met financieel overzicht en verantwoording."
+    },
+    "download": "Download PDF",
+    "notAvailable": "Nog niet beschikbaar",
+    "loading": "Documenten laden...",
+    "contact": {
+      "title": "Vragen over ANBI?",
+      "description": "Neem contact met ons op voor meer informatie over onze ANBI-status",
+      "button": "Contact Opnemen"
+    }
+  }
+}

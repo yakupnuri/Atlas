@@ -1,0 +1,74 @@
+{
+  "nav": {
+    "home": "Ana Sayfa",
+    "events": "Etkinlikler",
+    "about": "Hakkımızda",
+    "news": "Haberler",
+    "reserve": "Rezervasyon",
+    "donate": "Bağış Yap",
+    "anbi": "ANBI"
+  },
+  "hero": {
+    "title": "Birlikte kapsayıcı bir topluluk inşa ediyoruz",
+    "subtitle": "Stichting Atlas, kültür, eğitim ve topluluk etkinlikleri aracılığıyla insanları bir araya getiriyor.",
+    "cta1": "Etkinlikleri Görüntüle",
+    "cta2": "Şimdi Bağış Yap",
+    "anbi": "ANBI onaylı"
+  },
+  "home": {
+    "mission": "Misyonumuz",
+    "missionText": "Erişilebilir programlar ve buluşmalar yoluyla kültürler ve nesiller arasında köprüler kuruyoruz.",
+    "vision": "Vizyonumuz",
+    "visionText": "Herkesin kendini hoş karşılandığı ve büyüme ve gelişme fırsatına sahip olduğu bir toplum.",
+    "values": "Değerlerimiz",
+    "valuesText": "Kapsayıcılık, saygı, işbirliği ve kültürel çeşitliliği değerli kılmak merkezde yer alıyor.",
+    "upcomingEvents": "Yaklaşan Etkinlikler",
+    "upcomingEventsSubtitle": "Etkinliklerimize katılın ve yeni insanlarla tanışın!",
+    "viewAll": "Tüm Etkinlikleri Görüntüle",
+    "loadDemo": "Demo Etkinlikleri Yükle",
+    "noEvents": "Yaklaşan etkinlik bulunamadı.",
+    "nearbyPrograms": "Yakındaki Programlar"
+  },
+  "programs": {
+    "ramazan": "Ramazan İftar Programı",
+    "ramazanDesc": "Topluluğumuz için özel iftar yemekleri düzenliyoruz",
+    "ders": "Ders Yemeği Etkinliği",
+    "dersDesc": "Öğrenciler ve aileler için eğitici yemek programı"
+  },
+  "anbi": {
+    "title": "ANBI Durumu",
+    "subtitle": "Stichting Atlas, Kamu Yararına Kuruluş (ANBI) olarak tanınmıştır",
+    "info": {
+      "title": "ANBI Nedir?",
+      "description": "ANBI, bağışçılara vergi avantajları sağlayan bir Kamu Yararına Kuruluştur. Vakfımıza yapılan bağışlar vergiden düşülebilir.",
+      "fiscalTitle": "Vergi Avantajları",
+      "fiscalDesc": "Bağışlarınız Hollanda vergi kanunlarına göre vergiden düşülebilir.",
+      "transparencyTitle": "Şeffaflık",
+      "transparencyDesc": "ANBI olarak, belgelerimizi ve finansal bilgilerimizi kamuya açık olarak yayınlıyoruz."
+    },
+    "documents": {
+      "title": "Resmi Belgeler",
+      "subtitle": "Politika planlarımızı ve mali raporlarımızı indirin"
+    },
+    "beloningsbeleid": {
+      "title": "Ücretlendirme Politikası",
+      "description": "Yönetim kurulu ve gönüllüler ücret almazlar. Sadece masraflar karşılanabilir."
+    },
+    "beleidsplan": {
+      "title": "Politika Planı",
+      "description": "Vizyon, misyon, hedefler ve sosyal yönümüz ile 2025 Politika Planı."
+    },
+    "jaarrekening": {
+      "title": "Yıllık Rapor",
+      "description": "Mali genel bakış ve hesap verebilirlik ile en son yıllık rapor."
+    },
+    "download": "PDF İndir",
+    "notAvailable": "Henüz mevcut değil",
+    "loading": "Belgeler yükleniyor...",
+    "contact": {
+      "title": "ANBI hakkında sorularınız mı var?",
+      "description": "ANBI durumumuz hakkında daha fazla bilgi için bizimle iletişime geçin",
+      "button": "İletişime Geçin"
+    }
+  }
+}
