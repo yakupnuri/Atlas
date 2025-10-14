@@ -129,35 +129,49 @@ export default function ProjelerPage() {
     return texts[category] || category;
   };
 
-  if (!session?.user?.email?.endsWith('@stichtingatlas.com')) {
-    return (
-      <div className="p-8">
-        <Card className="p-8 text-center">
-          <h2 className="text-2xl font-bold text-red-600 mb-4">Erişim Reddedildi</h2>
-          <p className="text-gray-600">
-            CRM modülüne erişim için @stichtingatlas.com e-posta adresi gereklidir.
-          </p>
-        </Card>
-      </div>
-    );
-  }
+  const handleLogout = () => {
+    localStorage.removeItem('crmAuth');
+    localStorage.removeItem('crmLoginTime');
+    router.push('/crm/login');
+  };
 
   return (
-    <div className="p-8">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="flex justify-between items-center mb-8">
-        <div>
-          <h1 className="text-3xl font-bold text-gray-900">Projeler</h1>
-          <p className="text-gray-600 mt-1">Tüm projeleri yönetin ve takip edin</p>
+      <div className="bg-white border-b">
+        <div className="container mx-auto px-8 py-4">
+          <div className="flex justify-between items-center">
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">CRM - Proje Yönetimi</h1>
+              <p className="text-sm text-gray-600">Stichting Atlas</p>
+            </div>
+            <Button
+              onClick={handleLogout}
+              variant="outline"
+              className="text-red-600 hover:text-red-700 hover:bg-red-50"
+            >
+              <LogOut className="w-4 h-4 mr-2" />
+              Çıkış Yap
+            </Button>
+          </div>
         </div>
-        <Button 
-          onClick={() => setModalOpen(true)}
-          className="bg-blue-600 hover:bg-blue-700"
-        >
-          <Plus className="w-4 h-4 mr-2" />
-          Yeni Proje
-        </Button>
       </div>
+
+      <div className="container mx-auto p-8">
+        {/* Page Header */}
+        <div className="flex justify-between items-center mb-8">
+          <div>
+            <h2 className="text-3xl font-bold text-gray-900">Projeler</h2>
+            <p className="text-gray-600 mt-1">Tüm projeleri yönetin ve takip edin</p>
+          </div>
+          <Button 
+            onClick={() => setModalOpen(true)}
+            className="bg-blue-600 hover:bg-blue-700"
+          >
+            <Plus className="w-4 h-4 mr-2" />
+            Yeni Proje
+          </Button>
+        </div>
 
       {/* Filters */}
       <Card className="p-4 mb-6">
