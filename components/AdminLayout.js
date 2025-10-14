@@ -192,6 +192,22 @@ export default function AdminLayout({ children }) {
               }
             }
             
+            // External link (opens in same tab)
+            if (item.external) {
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="flex items-center gap-3 px-4 py-3 rounded-lg transition-all hover:bg-white/10"
+                >
+                  <Icon className="w-5 h-5 flex-shrink-0" />
+                  {sidebarOpen && (
+                    <span className="font-medium">{item.title}</span>
+                  )}
+                </a>
+              );
+            }
+            
             return (
               <Link
                 key={item.href}
