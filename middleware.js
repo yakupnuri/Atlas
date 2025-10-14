@@ -11,9 +11,9 @@ export async function middleware(request) {
       secret: process.env.NEXTAUTH_SECRET 
     });
 
-    // If not authenticated, redirect to login
+    // If not authenticated, redirect to NextAuth signin
     if (!token) {
-      const loginUrl = new URL('/auth/login', request.url);
+      const loginUrl = new URL('/api/auth/signin', request.url);
       loginUrl.searchParams.set('callbackUrl', pathname);
       return NextResponse.redirect(loginUrl);
     }
