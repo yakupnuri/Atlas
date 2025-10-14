@@ -36,7 +36,10 @@ export default function BasvurularPage() {
   useEffect(() => {
     // CRM authentication check
     const crmAuth = localStorage.getItem('crmAuth');
-    if (!crmAuth) {
+    const adminToken = localStorage.getItem('adminToken');
+    
+    // Allow access if either CRM auth or admin auth exists
+    if (!crmAuth && !adminToken) {
       router.push('/crm/login');
       return;
     }
