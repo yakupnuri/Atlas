@@ -209,11 +209,24 @@ export default function ProjectgroepPage() {
           </Card>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((project) => (
+            {projects.map((project) => {
+              // Create slug from title or use ID
+              const slug = project.title
+                .toLowerCase()
+                .replace(/ğ/g, 'g')
+                .replace(/ü/g, 'u')
+                .replace(/ş/g, 's')
+                .replace(/ı/g, 'i')
+                .replace(/ö/g, 'o')
+                .replace(/ç/g, 'c')
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-+|-+$/g, '') || project.id;
+              
+              return (
               <Card
                 key={project.id}
                 className="overflow-hidden hover:shadow-xl transition-shadow duration-300 cursor-pointer"
-                onClick={() => setSelectedProject(project)}
+                onClick={() => window.location.href = `/academie/projectgroep/${slug}`}
               >
                 {/* Project Image */}
                 <div className="relative h-48 bg-gradient-to-br from-blue-500 to-purple-500">
