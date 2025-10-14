@@ -514,7 +514,6 @@ metadata:
 
 test_plan:
   current_focus:
-    - "CRM Projects API - Complete CRUD"
     - "Middleware - CRM Access Control"
   stuck_tasks: []
   test_all: false
