@@ -305,7 +305,7 @@ export default function ProjectgroepPage() {
                   </Button>
                 </div>
               </Card>
-            );
+              );
             })}
           </div>
         )}
