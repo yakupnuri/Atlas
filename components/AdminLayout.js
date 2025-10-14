@@ -38,6 +38,14 @@ export default function AdminLayout({ children }) {
   useEffect(() => {
     // Get current user from localStorage
     const userEmail = localStorage.getItem('adminEmail');
+    const adminToken = localStorage.getItem('adminToken');
+    
+    if (!userEmail || !adminToken) {
+      // Not logged in, redirect to login
+      window.location.href = '/admin/login';
+      return;
+    }
+    
     if (userEmail) {
       setCurrentUser({
         email: userEmail,
