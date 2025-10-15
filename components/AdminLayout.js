@@ -153,6 +153,11 @@ export default function AdminLayout({ children }) {
     window.location.href = '/admin/login';
   };
 
+  // Check authentication
+  if (!currentUser) {
+    return null; // Will redirect in useEffect
+  }
+
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
