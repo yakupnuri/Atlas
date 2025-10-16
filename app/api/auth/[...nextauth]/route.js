@@ -67,7 +67,7 @@ export const authOptions = {
       }
     }),
   ],
-  adapter: MongoDBAdapter(clientPromise),
+  // No adapter needed for JWT strategy
   callbacks: {
     async session({ session, user, token }) {
       // Add user ID and role to the session
