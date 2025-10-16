@@ -339,6 +339,7 @@ export default function CultuurEducatiePage() {
       <ContactModal
         isOpen={contactModalOpen}
         onClose={() => setContactModalOpen(false)}
+        pageContext="Cultuur & Educatiecentrum"
       />
 
       <style jsx>{`
