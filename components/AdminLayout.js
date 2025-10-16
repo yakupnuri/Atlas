@@ -32,6 +32,7 @@ export default function AdminLayout({ children }) {
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [pagesMenuOpen, setPagesMenuOpen] = useState(true);
+  const [crmMenuOpen, setCrmMenuOpen] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState(1);
 
