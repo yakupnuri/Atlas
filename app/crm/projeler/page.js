@@ -365,6 +365,6 @@ export default function ProjelerPage() {
           />
         )}
       </div>
-    </div>
+    </AdminLayout>
   );
 }
