@@ -325,12 +325,21 @@ export default function CultuurEducatiePage() {
             <p className="text-lg mb-6 text-white/90">
               Neem gerust contact met ons op voor meer informatie
             </p>
-            <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            <button 
+              onClick={() => setContactModalOpen(true)}
+              className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+            >
               Contact Opnemen
             </button>
           </div>
         </motion.section>
       </div>
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={contactModalOpen}
+        onClose={() => setContactModalOpen(false)}
+      />
 
       <style jsx>{`
         @keyframes scroll {
