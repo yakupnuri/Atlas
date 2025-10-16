@@ -12,16 +12,26 @@ import {
   MessageSquare
 } from 'lucide-react';
 
-export default function ContactModal({ isOpen, onClose }) {
+export default function ContactModal({ isOpen, onClose, pageContext = null }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    subject: '',
+    subject: pageContext ? `Vraag over: ${pageContext}` : '',
     message: '',
   });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null);
+
+  // Update subject when pageContext changes
+  useState(() => {
+    if (pageContext && !formData.subject) {
+      setFormData(prev => ({
+        ...prev,
+        subject: `Vraag over: ${pageContext}`
+      }));
+    }
+  }, [pageContext]);
 
   const handleChange = (e) => {
     setFormData({
