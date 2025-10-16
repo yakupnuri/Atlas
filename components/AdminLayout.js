@@ -322,6 +322,56 @@ export default function AdminLayout({ children }) {
             )}
           </div>
 
+          {/* CRM Menüsü */}
+          <div className="mt-4">
+            <button
+              onClick={() => setCrmMenuOpen(!crmMenuOpen)}
+              className="flex items-center gap-3 px-4 py-3 w-full rounded-lg hover:bg-white/10 transition-all bg-white/5"
+            >
+              <FolderKanban className="w-5 h-5 flex-shrink-0" />
+              {sidebarOpen && (
+                <>
+                  <span className="font-medium flex-1 text-left">CRM & Proje Yönetimi</span>
+                  {crmMenuOpen ? (
+                    <ChevronDown className="w-4 h-4" />
+                  ) : (
+                    <ChevronRight className="w-4 h-4" />
+                  )}
+                </>
+              )}
+            </button>
+
+            {/* CRM Alt Menüsü */}
+            {crmMenuOpen && sidebarOpen && (
+              <div className="mt-2 ml-4 space-y-1">
+                {crmMenuItems.map((item) => {
+                  const Icon = item.icon;
+                  const isActive = pathname === item.href;
+                  
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all text-sm ${
+                        isActive
+                          ? 'bg-white text-[#05B6C4] shadow-lg'
+                          : 'hover:bg-white/10'
+                      }`}
+                    >
+                      <Icon className="w-4 h-4 flex-shrink-0" />
+                      <span className="font-medium flex-1">{item.title}</span>
+                      {item.badge && (
+                        <span className="text-xs bg-yellow-400 text-gray-900 px-2 py-0.5 rounded-full font-semibold">
+                          {item.badge}
+                        </span>
+                      )}
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
           {/* Alt Menü (Ayarlar) */}
           <div className="mt-4 pt-4 border-t border-white/20">
             {bottomMenuItems.map((item) => {
