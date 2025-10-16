@@ -95,7 +95,12 @@ export const authOptions = {
       return token;
     },
     async signIn({ user, account, profile }) {
-      // Only allow sign-in if user email exists in admins collection
+      // Skip admin check for CRM credentials login
+      if (account.provider === 'crm-credentials') {
+        return true; // Already verified in authorize()
+      }
+      
+      // Only allow sign-in if user email exists in admins collection (for Google OAuth)
       const { MongoClient } = require('mongodb');
       const client = new MongoClient(process.env.MONGO_URL);
       
