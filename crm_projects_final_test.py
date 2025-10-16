@@ -7,7 +7,7 @@ Tests all functionality that can be verified without authentication
 import requests
 import json
 
-BASE_URL = "https://atlas-projects.preview.emergentagent.com"
+BASE_URL = "https://atlas-manager-1.preview.emergentagent.com"
 API_BASE = f"{BASE_URL}/api"
 
 def test_comprehensive_crm_projects():
