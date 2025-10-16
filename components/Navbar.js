@@ -34,6 +34,7 @@ export default function Navbar() {
     },
     { href: '/nieuws', label: 'Nieuws' },
     { href: '/anbi', label: 'ANBI' },
+    { href: '/contact', label: 'Contact' },
     { href: '/doneren', label: 'Doneren', special: true },
   ];
 
