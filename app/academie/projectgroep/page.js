@@ -15,7 +15,6 @@ import {
   Eye
 } from 'lucide-react';
 import ProjectDetailModal from '@/components/public/ProjectDetailModal';
-import CRMAccessCard from '@/components/public/CRMAccessCard';
 import CRMLoginModal from '@/components/crm/CRMLoginModal';
 
 export default function ProjectgroepPage() {
