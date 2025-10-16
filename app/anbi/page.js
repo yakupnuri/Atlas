@@ -186,14 +186,21 @@ export default function ANBIPage() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">{t('anbi.contact.title')}</h2>
           <p className="text-gray-600 mb-6">{t('anbi.contact.description')}</p>
-          <a
-            href="mailto:info@stichtingatlas.nl"
+          <button
+            onClick={() => setContactModalOpen(true)}
             className="inline-block bg-gradient-to-r from-[#05B6C4] to-[#0891A0] text-white py-3 px-8 rounded-lg hover:shadow-lg transition-all duration-300 font-semibold"
           >
             {t('anbi.contact.button')}
-          </a>
+          </button>
         </div>
       </section>
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={contactModalOpen}
+        onClose={() => setContactModalOpen(false)}
+        pageContext="ANBI Status"
+      />
     </div>
   )
 }
