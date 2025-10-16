@@ -14,10 +14,10 @@ import {
   FolderOpen,
   Clock,
   Users,
-  TrendingUp,
-  LogOut
+  TrendingUp
 } from 'lucide-react';
 import ProjectModal from '@/components/crm/ProjectModal';
+import AdminLayout from '@/components/AdminLayout';
 
 export default function ProjelerPage() {
   const router = useRouter();
