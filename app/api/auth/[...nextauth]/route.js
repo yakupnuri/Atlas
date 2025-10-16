@@ -133,7 +133,11 @@ export const authOptions = {
       }
     },
     async redirect({ url, baseUrl }) {
-      // After login, redirect to admin dashboard
+      // After CRM login, redirect to CRM dashboard
+      if (url.includes('/crm')) {
+        return `${baseUrl}/crm/dashboard`;
+      }
+      // After admin login, redirect to admin dashboard
       if (url === baseUrl || url === `${baseUrl}/`) {
         return `${baseUrl}/admin/dashboard`;
       }
