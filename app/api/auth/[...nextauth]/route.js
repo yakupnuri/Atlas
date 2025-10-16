@@ -1,13 +1,70 @@
 import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
+import CredentialsProvider from "next-auth/providers/credentials";
 import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 import clientPromise from "@/lib/mongodbClient";
+import bcrypt from "bcryptjs";
 
 export const authOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
+    CredentialsProvider({
+      id: "crm-credentials",
+      name: "CRM Login",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" }
+      },
+      async authorize(credentials) {
+        const { MongoClient } = require('mongodb');
+        const client = new MongoClient(process.env.MONGO_URL);
+        
+        try {
+          await client.connect();
+          const db = client.db(process.env.DB_NAME || 'stichting_atlas');
+          
+          // Check crm_users collection
+          const crmUser = await db.collection('crm_users').findOne({ 
+            email: credentials.email 
+          });
+          
+          if (!crmUser) {
+            console.log(`❌ CRM user not found: ${credentials.email}`);
+            return null;
+          }
+          
+          // Verify password
+          const isValidPassword = await bcrypt.compare(
+            credentials.password, 
+            crmUser.password
+          );
+          
+          if (!isValidPassword) {
+            console.log(`❌ Invalid password for: ${credentials.email}`);
+            return null;
+          }
+          
+          console.log(`✅ CRM login success: ${credentials.email}`);
+          
+          return {
+            id: crmUser._id.toString(),
+            email: crmUser.email,
+            name: crmUser.name,
+            role: crmUser.role || 'volunteer',
+            firstLogin: crmUser.firstLogin || false,
+            provider: 'crm-credentials'
+          };
+          
+        } catch (error) {
+          console.error('Error during CRM login:', error);
+          return null;
+        } finally {
+          await client.close();
+        }
+      }
     }),
   ],
   adapter: MongoDBAdapter(clientPromise),
