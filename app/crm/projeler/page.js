@@ -123,12 +123,6 @@ export default function ProjelerPage() {
     return texts[category] || category;
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('crmAuth');
-    localStorage.removeItem('crmLoginTime');
-    router.push('/crm/login');
-  };
-
   return (
     <AdminLayout>
       <div className="p-8">
