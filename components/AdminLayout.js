@@ -99,11 +99,56 @@ export default function AdminLayout({ children }) {
       icon: MessageCircle,
       href: '/admin/comments',
     },
+  ];
+
+  // CRM Menu Items
+  const crmMenuItems = [
     {
-      title: 'CRM & Proje Yönetimi',
+      title: 'Projeler',
       icon: FolderKanban,
       href: '/crm/projeler',
-      external: true
+    },
+    {
+      title: 'Fonlar',
+      icon: Heart,
+      href: '/crm/fonlar',
+      badge: 'Yakında'
+    },
+    {
+      title: 'Gönüllüler',
+      icon: Users,
+      href: '/crm/gonulluler',
+      badge: 'Yakında'
+    },
+    {
+      title: 'Bağışlar',
+      icon: Heart,
+      href: '/crm/bagislar',
+      badge: 'Yakında'
+    },
+    {
+      title: 'Ticari Gelirler',
+      icon: FileText,
+      href: '/crm/ticari-gelirler',
+      badge: 'Yakında'
+    },
+    {
+      title: 'Toplantılar',
+      icon: Calendar,
+      href: '/crm/toplantilar',
+      badge: 'Yakında'
+    },
+    {
+      title: 'Raporlar',
+      icon: FileStack,
+      href: '/crm/raporlar',
+      badge: 'Yakında'
+    },
+    {
+      title: 'Ayarlar',
+      icon: Settings,
+      href: '/crm/ayarlar',
+      badge: 'Yakında'
     },
   ];
 
