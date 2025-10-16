@@ -126,15 +126,21 @@ export default function AcademiePage() {
             <p className="text-xl mb-8 text-white/90 max-w-2xl mx-auto">
               Neem contact met ons op voor meer informatie over onze programma's en hoe je kunt deelnemen.
             </p>
-            <Link
-              href="/contact"
+            <button
+              onClick={() => setContactModalOpen(true)}
               className="inline-block bg-white text-[#05B6C4] px-8 py-4 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg"
             >
               Contact Opnemen
-            </Link>
+            </button>
           </motion.div>
         </div>
       </section>
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={contactModalOpen}
+        onClose={() => setContactModalOpen(false)}
+      />
     </div>
   )
 }
