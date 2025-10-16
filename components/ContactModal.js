@@ -100,7 +100,10 @@ export default function ContactModal({ isOpen, onClose, pageContext = null }) {
             <h2 className="text-2xl font-bold">Neem Contact Op</h2>
           </div>
           <p className="text-sm text-blue-100">
-            Vul het formulier in en we nemen zo snel mogelijk contact met u op
+            {pageContext 
+              ? `U heeft een vraag over: ${pageContext}` 
+              : 'Vul het formulier in en we nemen zo snel mogelijk contact met u op'
+            }
           </p>
         </div>
 
