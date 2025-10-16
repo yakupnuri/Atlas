@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import ProjectDetailModal from '@/components/public/ProjectDetailModal';
 import CRMAccessCard from '@/components/public/CRMAccessCard';
+import CRMLoginModal from '@/components/crm/CRMLoginModal';
 
 export default function ProjectgroepPage() {
   const { data: session } = useSession();
@@ -24,6 +25,7 @@ export default function ProjectgroepPage() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [filterCategory, setFilterCategory] = useState('all');
   const [filterStatus, setFilterStatus] = useState('all');
+  const [showCRMLogin, setShowCRMLogin] = useState(false);
 
   useEffect(() => {
     fetchProjects();
