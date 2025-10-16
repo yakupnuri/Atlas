@@ -149,7 +149,7 @@ export const authOptions = {
     error: "/admin/auth-error",
   },
   session: {
-    strategy: "database",
+    strategy: "jwt", // Changed to JWT to support CredentialsProvider
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
