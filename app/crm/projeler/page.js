@@ -130,28 +130,8 @@ export default function ProjelerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white border-b">
-        <div className="container mx-auto px-8 py-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">CRM - Proje Yönetimi</h1>
-              <p className="text-sm text-gray-600">Stichting Atlas</p>
-            </div>
-            <Button
-              onClick={handleLogout}
-              variant="outline"
-              className="text-red-600 hover:text-red-700 hover:bg-red-50"
-            >
-              <LogOut className="w-4 h-4 mr-2" />
-              Çıkış Yap
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      <div className="container mx-auto p-8">
+    <AdminLayout>
+      <div className="p-8">
         {/* Page Header */}
         <div className="flex justify-between items-center mb-8">
           <div>
