@@ -1,10 +1,14 @@
 'use client'
 
+import { useState } from 'react';
 import { motion } from 'framer-motion'
 import { GraduationCap, BookOpen, Briefcase, Users, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
+import ContactModal from '@/components/ContactModal';
 
 export default function AcademiePage() {
+  const [contactModalOpen, setContactModalOpen] = useState(false);
+  
   const programs = [
     {
       title: 'Cultuur & Educatiecentrum',
