@@ -3,11 +3,13 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Users, Target, Heart, Award, User } from 'lucide-react';
+import ContactModal from '@/components/ContactModal';
 
 export default function AboutPage() {
   const [aboutContent, setAboutContent] = useState(null);
   const [team, setTeam] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [contactModalOpen, setContactModalOpen] = useState(false);
 
   useEffect(() => {
     fetchAboutData();
