@@ -439,7 +439,65 @@ export default function AdminLayout({ children }) {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 overflow-y-auto">
+      <main className="flex-1 overflow-y-auto bg-gray-100">
+        {/* Admin Header/Navbar */}
+        <div className="bg-white border-b border-gray-200 sticky top-0 z-40">
+          <div className="px-6 py-4">
+            <div className="flex items-center justify-between">
+              {/* Breadcrumb & Navigation */}
+              <div className="flex items-center gap-4">
+                {/* Back/Forward Buttons */}
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={() => window.history.back()}
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                    title="Geri"
+                  >
+                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={() => window.history.forward()}
+                    className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                    title="İleri"
+                  >
+                    <svg className="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Breadcrumb */}
+                <div className="flex items-center gap-2 text-sm">
+                  <span className="text-gray-400">Admin Panel</span>
+                  <span className="text-gray-400">/</span>
+                  <span className="text-gray-900 font-medium">
+                    {pathname.split('/').filter(Boolean).slice(1).join(' / ') || 'Dashboard'}
+                  </span>
+                </div>
+              </div>
+
+              {/* Right Side Actions */}
+              <div className="flex items-center gap-3">
+                {/* View Site Button */}
+                <a
+                  href="/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-[#05B6C4] to-[#3B87BE] text-white rounded-lg hover:shadow-lg transition-all"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                  <span className="text-sm font-medium">Siteyi Görüntüle</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Page Content */}
         {children}
       </main>
     </div>
