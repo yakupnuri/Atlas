@@ -294,6 +294,7 @@ export default function AboutPage() {
       <ContactModal
         isOpen={contactModalOpen}
         onClose={() => setContactModalOpen(false)}
+        pageContext="Over Ons"
       />
     </div>
   );
