@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { FileText, Download } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
+import ContactModal from '@/components/ContactModal'
 
 export default function ANBIPage() {
   const { t, loading: languageLoading } = useLanguage()
@@ -13,6 +14,7 @@ export default function ANBIPage() {
     jaarrekening: null
   })
   const [loading, setLoading] = useState(true)
+  const [contactModalOpen, setContactModalOpen] = useState(false)
 
   useEffect(() => {
     fetchDocuments()
