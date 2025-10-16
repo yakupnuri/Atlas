@@ -281,14 +281,20 @@ export default function AboutPage() {
           <p className="text-xl mb-8 opacity-90">
             Neem contact met ons op en ontdek hoe je kunt deelnemen aan onze projecten
           </p>
-          <a
-            href="mailto:info@stichtingatlas.nl"
+          <button
+            onClick={() => setContactModalOpen(true)}
             className="inline-block bg-white text-[#05B6C4] py-3 px-8 rounded-lg hover:shadow-lg transition-all duration-300 font-semibold"
           >
             Neem Contact Op
-          </a>
+          </button>
         </div>
       </section>
+
+      {/* Contact Modal */}
+      <ContactModal
+        isOpen={contactModalOpen}
+        onClose={() => setContactModalOpen(false)}
+      />
     </div>
   );
 }
