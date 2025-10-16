@@ -75,6 +75,11 @@ export default function AdminLayout({ children }) {
       href: '/admin/users',
     },
     {
+      title: 'Contact Berichten',
+      icon: Mail,
+      href: '/admin/contact',
+    },
+    {
       title: 'Etkinlikler',
       icon: Calendar,
       href: '/admin/evenementen',
