@@ -13,6 +13,7 @@ import {
   ChevronRight,
   Newspaper
 } from 'lucide-react'
+import ContactModal from '@/components/ContactModal';
 
 export default function CultuurEducatiePage() {
   const [announcements, setAnnouncements] = useState([])
@@ -22,6 +23,7 @@ export default function CultuurEducatiePage() {
   const [courses, setCourses] = useState([])
   const [importantDates, setImportantDates] = useState([])
   const [loading, setLoading] = useState(true)
+  const [contactModalOpen, setContactModalOpen] = useState(false);
 
   useEffect(() => {
     fetchData()
