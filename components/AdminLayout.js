@@ -159,16 +159,6 @@ export default function AdminLayout({ children }) {
       href: '/admin/pages/over-ons',
     },
     {
-      title: 'Carrière Center',
-      icon: Briefcase,
-      href: '/admin/pages/carriere-center',
-    },
-    {
-      title: 'Projectgroep',
-      icon: FolderKanban,
-      href: '/admin/pages/projectgroep',
-    },
-    {
       title: 'Nieuws',
       icon: Newspaper,
       href: '/admin/nieuws',
