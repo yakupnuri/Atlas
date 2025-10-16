@@ -69,13 +69,30 @@ export const authOptions = {
   ],
   adapter: MongoDBAdapter(clientPromise),
   callbacks: {
-    async session({ session, user }) {
+    async session({ session, user, token }) {
       // Add user ID and role to the session
-      if (user) {
+      if (token) {
+        session.user.id = token.id || token.sub;
+        session.user.role = token.role || 'user';
+        session.user.firstLogin = token.firstLogin || false;
+        session.user.provider = token.provider || 'google';
+      } else if (user) {
         session.user.id = user.id;
         session.user.role = user.role || 'user';
+        session.user.firstLogin = user.firstLogin || false;
+        session.user.provider = user.provider || 'google';
       }
       return session;
+    },
+    async jwt({ token, user }) {
+      // Store user info in JWT token
+      if (user) {
+        token.id = user.id;
+        token.role = user.role;
+        token.firstLogin = user.firstLogin;
+        token.provider = user.provider;
+      }
+      return token;
     },
     async signIn({ user, account, profile }) {
       // Only allow sign-in if user email exists in admins collection
