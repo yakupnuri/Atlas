@@ -313,6 +313,39 @@ export default function ProjectgroepPage() {
         )}
       </div>
 
+      {/* CRM Access Card - at bottom */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <Card className="overflow-hidden bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 text-white">
+          <div className="p-8 md:p-12">
+            <div className="flex items-start justify-between flex-col md:flex-row gap-6">
+              <div className="flex-1">
+                <div className="flex items-center gap-3 mb-4">
+                  <Lock className="w-10 h-10" />
+                  <h2 className="text-3xl font-bold">CRM & Proje Yönetim Sistemi</h2>
+                </div>
+                <p className="text-lg text-purple-100 mb-4">
+                  Özel şifre ile CRM sistemine erişin. Tüm projeleri, fonları, toplantıları ve ekip üyelerini yönetin.
+                </p>
+                <div className="bg-yellow-500/20 border border-yellow-300/30 rounded-lg p-4 mb-6">
+                  <p className="text-sm text-yellow-100">
+                    ⚠️ <strong>Kısıtlı Erişim:</strong> Bu sistem sadece yetkili kullanıcılar için şifre korumalıdır.
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center">
+                <Button
+                  onClick={() => setShowCRMLogin(true)}
+                  className="bg-white text-purple-700 hover:bg-purple-50 px-8 py-6 text-lg font-semibold rounded-xl shadow-lg transition-all hover:scale-105"
+                >
+                  <Lock className="w-5 h-5 mr-2" />
+                  CRM Girişi
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Card>
+      </div>
+
       {/* Project Detail Modal */}
       {selectedProject && (
         <ProjectDetailModal
@@ -320,6 +353,12 @@ export default function ProjectgroepPage() {
           onClose={() => setSelectedProject(null)}
         />
       )}
+
+      {/* CRM Login Modal */}
+      <CRMLoginModal
+        isOpen={showCRMLogin}
+        onClose={() => setShowCRMLogin(false)}
+      />
     </div>
   );
 }
