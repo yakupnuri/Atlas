@@ -140,6 +140,7 @@ export default function AcademiePage() {
       <ContactModal
         isOpen={contactModalOpen}
         onClose={() => setContactModalOpen(false)}
+        pageContext="Atlas Academie"
       />
     </div>
   )
