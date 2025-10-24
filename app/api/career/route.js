@@ -8,6 +8,7 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const type = searchParams.get('type'); // announcements, surveys, seminars, jobs
     const includeExpired = searchParams.get('includeExpired') === 'true'; // For admin panel
+    const page = searchParams.get('page'); // Filter by page: carriere, cultuur-educatie, projectgroep
 
     const db = await getDb();
     
@@ -18,7 +19,13 @@ export async function GET(request) {
     const collectionName = `career_${type}`;
     const collection = db.collection(collectionName);
     
-    let data = await collection.find({}).sort({ createdAt: -1 }).toArray();
+    // Build query filter
+    let query = {};
+    if (page && type === 'surveys') {
+      query.page = page;
+    }
+    
+    let data = await collection.find(query).sort({ createdAt: -1 }).toArray();
     
     // Filter expired items for public view
     if (!includeExpired) {
