@@ -16,6 +16,8 @@ export default function SurveyBuilder({ survey, module, onClose, onSave }) {
   })
   const [saving, setSaving] = useState(false)
   const [showMediaLibrary, setShowMediaLibrary] = useState(false)
+  const [showTemplates, setShowTemplates] = useState(!survey)
+  const [templates, setTemplates] = useState([])
 
   useEffect(() => {
     if (survey) {
