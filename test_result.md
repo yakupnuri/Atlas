@@ -419,6 +419,18 @@ backend:
         agent: "testing"
         comment: "CRM PROJECTS BACKEND TESTING COMPLETE ✅ All 8 test scenarios passed: 1) GET /api/crm/projects works correctly with proper JSON response structure 2) publicOnly filter working - returns only public projects 3) Category filters (egitim, kultur, sosyal, diger, all) all functional 4) Status filters (planlama, devam, tamamlandi, beklemede, iptal, all) all functional 5) Combined filters (category+status, publicOnly+category, publicOnly+status) working correctly 6) Authentication properly implemented - POST/PUT/DELETE return 401 without session, require @stichtingatlas.com email validation 7) Error handling correct - invalid endpoints return 404 8) Edge cases handled gracefully - invalid filters return empty results. MongoDB integration verified: uses stichting_atlas database, crm_projects collection, UUID-based IDs. API structure follows REST patterns with consistent JSON responses. All testable functionality working perfectly - authentication prevents testing CRUD operations without valid NextAuth session but 401 responses confirm proper security implementation."
 
+  - task: "Survey System API - CRUD Operations"
+    implemented: true
+    working: "NA"
+    file: "/app/app/api/surveys/route.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Global survey system implemented with /api/surveys (GET with module filter, POST create, PUT update, DELETE) and /api/surveys/responses (GET responses, POST submit). Survey data includes: id, title, description, module (career/education/projects), questions (array with id, text, type, options, required), image, endDate, isActive, responses, timestamps. Response data: id, surveyId, answers (array), userName, userEmail, submittedAt. Automatic expiry filtering based on endDate. Enhanced components with drag & drop, Chart.js visualizations, and templates library."
+
   - task: "CRM Projects Admin Page"
     implemented: true
     working: "NA"
