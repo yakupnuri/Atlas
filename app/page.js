@@ -22,7 +22,9 @@ import {
   Clock,
   TrendingUp,
   Bell,
-  FileCheck
+  FileCheck,
+  ChevronRight,
+  Download
 } from 'lucide-react';
 import ContactModal from '@/components/ContactModal';
 
