@@ -23,8 +23,27 @@ export default function SurveyBuilder({ survey, module, onClose, onSave }) {
     if (survey) {
       const { _id, ...surveyData } = survey
       setFormData(surveyData)
+      setShowTemplates(false)
+    } else {
+      // Load templates for new survey
+      const allTemplates = getTemplatesByCategory('all')
+      setTemplates(allTemplates)
     }
   }, [survey])
+
+  const handleTemplateSelect = (templateId) => {
+    const template = getTemplate(templateId)
+    if (template) {
+      setFormData({
+        ...formData,
+        questions: template.questions.map(q => ({
+          ...q,
+          id: `q${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
+        }))
+      })
+      setShowTemplates(false)
+    }
+  }
 
   const addQuestion = () => {
     const newQuestion = {
