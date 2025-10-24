@@ -48,6 +48,16 @@ export default function SurveyBuilder({ survey, module, onClose, onSave }) {
     setFormData({ ...formData, questions: updated })
   }
 
+  const handleDragEnd = (result) => {
+    if (!result.destination) return
+
+    const items = Array.from(formData.questions)
+    const [reorderedItem] = items.splice(result.source.index, 1)
+    items.splice(result.destination.index, 0, reorderedItem)
+
+    setFormData({ ...formData, questions: items })
+  }
+
   const addOption = (questionIndex) => {
     const updated = [...formData.questions]
     if (!updated[questionIndex].options) {
