@@ -27,7 +27,7 @@ import {
   Circle,
   MessageCircle,
   Mail,
-  Image
+  Image as ImageIcon
 } from 'lucide-react';
 
 export default function AdminLayout({ children }) {
