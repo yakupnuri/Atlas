@@ -26,7 +26,8 @@ import {
   User,
   Circle,
   MessageCircle,
-  Mail
+  Mail,
+  Image
 } from 'lucide-react';
 
 export default function AdminLayout({ children }) {
