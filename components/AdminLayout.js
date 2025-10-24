@@ -77,6 +77,16 @@ export default function AdminLayout({ children }) {
       href: '/admin/homepage',
     },
     {
+      title: 'Over Ons',
+      icon: Info,
+      href: '/admin/pages/over-ons',
+    },
+    {
+      title: 'Atlas Academie',
+      icon: GraduationCap,
+      href: '/admin/academie',
+    },
+    {
       title: 'Kullanıcılar',
       icon: Users,
       href: '/admin/users',
