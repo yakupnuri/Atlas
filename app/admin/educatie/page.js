@@ -226,7 +226,7 @@ export default function EducatieAdminPage() {
       const result = await response.json();
       if (result.success) {
         setShowArticleModal(false);
-        setArticleForm({ title: '', excerpt: '', content: '', author: '', date: '' });
+        setArticleForm({ title: '', excerpt: '', content: '', author: '', date: '', image: '' });
         setEditingArticle(null);
         fetchData();
       } else {
