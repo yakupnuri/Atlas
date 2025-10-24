@@ -139,3 +139,21 @@ code {
     @apply bg-background text-foreground;
     }
 }
+
+/* Vertical scrolling animation for news ticker */
+@keyframes scroll-up {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-scroll-up {
+  animation: scroll-up 30s linear infinite;
+}
+
+.animate-scroll-up:hover {
+  animation-play-state: paused;
+}
