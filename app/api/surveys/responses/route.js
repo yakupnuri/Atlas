@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getDb } from '@/lib/mongodb';
 import { v4 as uuidv4 } from 'uuid';
+import { sendNewResponseEmail, sendUserConfirmationEmail } from '@/lib/emailService';
 
 // GET - Fetch survey responses
 export async function GET(request) {
