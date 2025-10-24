@@ -21,8 +21,13 @@ export default function HeroSlider() {
       const data = await response.json();
       
       if (data.slides && data.slides.length > 0) {
-        // Filter only active slides
-        const activeSlides = data.slides.filter(slide => slide.isActive);
+        // Filter only active slides and ensure id exists
+        const activeSlides = data.slides
+          .filter(slide => slide.isActive)
+          .map((slide, index) => ({
+            ...slide,
+            id: slide.id || `slide-${index}` // Ensure id exists
+          }));
         setSlides(activeSlides);
       }
     } catch (error) {
