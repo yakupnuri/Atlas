@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { X, Image as ImageIcon } from 'lucide-react'
-import MediaLibrary from '@/components/MediaLibrary'
+import MediaLibraryModal from '@/components/MediaLibraryModal'
 
 export default function SeminarModal({ seminar, onClose, onSave }) {
   const [form, setForm] = useState({
