@@ -871,7 +871,8 @@ export default function EducatieAdminPage() {
                         <button
                           onClick={() => {
                             setEditingDate(item);
-                            setDateForm(item);
+                            const { _id, ...dateData } = item;
+                            setDateForm(dateData);
                             setShowDateModal(true);
                           }}
                           className="p-2 text-blue-600 hover:bg-blue-100 rounded"
