@@ -14,19 +14,32 @@ export async function OPTIONS() {
 }
 
 // Get all media
-export async function GET() {
+export async function GET(request) {
   try {
+    const { searchParams } = new URL(request.url)
+    const category = searchParams.get('category')
+    
     const db = await getDb();
+    
+    let query = {}
+    if (category && category !== 'all') {
+      query.category = category
+    }
+    
     const media = await db.collection('media')
-      .find({})
+      .find(query)
       .sort({ uploadDate: -1 })
       .toArray();
     
-    return NextResponse.json({ media }, { headers: corsHeaders });
+    return NextResponse.json({ 
+      success: true,
+      media,
+      data: media // Both for compatibility
+    }, { headers: corsHeaders });
   } catch (error) {
     console.error('Error fetching media:', error);
     return NextResponse.json(
-      { error: 'Server error', media: [] },
+      { error: 'Server error', media: [], data: [] },
       { status: 500, headers: corsHeaders }
     );
   }
