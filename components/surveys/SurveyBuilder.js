@@ -137,6 +137,68 @@ export default function SurveyBuilder({ survey, module, onClose, onSave }) {
     }
   }
 
+  // Template Selection Screen
+  if (showTemplates && !survey) {
+    return (
+      <div className="p-6 max-w-6xl mx-auto">
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <ArrowLeft className="w-6 h-6" />
+            </button>
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900">Kies een sjabloon</h2>
+              <p className="text-sm text-gray-600">
+                Begin met een voorgedefinieerd sjabloon of start vanaf nul
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => handleTemplateSelect('blank')}
+            className="px-4 py-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors font-medium"
+          >
+            Lege enquête starten →
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {templates.map((template) => (
+            <button
+              key={template.id}
+              onClick={() => handleTemplateSelect(template.id)}
+              className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all border-2 border-gray-100 hover:border-blue-500 text-left group"
+            >
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <FileText className="w-6 h-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors">
+                    {template.name}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    {template.description}
+                  </p>
+                </div>
+              </div>
+              
+              {template.questions.length > 0 && (
+                <div className="flex items-center gap-2 text-sm text-gray-500 bg-gray-50 rounded-lg px-3 py-2">
+                  <span className="font-medium">{template.questions.length} vragen</span>
+                  <span className="text-gray-400">•</span>
+                  <span className="capitalize">{template.category}</span>
+                </div>
+              )}
+            </button>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="p-6 max-w-4xl mx-auto">
       {/* Header */}
