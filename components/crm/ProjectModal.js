@@ -342,6 +342,17 @@ export default function ProjectModal({ project, onClose }) {
           </form>
         </div>
       </Card>
+
+      {/* Media Library Modal */}
+      <MediaLibraryModal
+        isOpen={showMediaLibrary}
+        onClose={() => setShowMediaLibrary(false)}
+        onSelect={(media) => {
+          setFormData({ ...formData, image: media.url });
+        }}
+        allowMultiple={false}
+        category="projects"
+      />
     </div>
   );
 }
