@@ -742,7 +742,8 @@ export default function EducatieAdminPage() {
                         <button
                           onClick={() => {
                             setEditingSchedule(item);
-                            setScheduleForm(item);
+                            const { _id, ...scheduleData } = item;
+                            setScheduleForm(scheduleData);
                             setShowScheduleModal(true);
                           }}
                           className="p-2 text-blue-600 hover:bg-blue-50 rounded"
