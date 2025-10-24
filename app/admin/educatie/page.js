@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import MediaLibraryModal from '@/components/MediaLibraryModal';
+import SurveyManager from '@/components/surveys/SurveyManager';
 import { 
   Plus, 
   Edit2, 
