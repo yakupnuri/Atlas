@@ -531,16 +531,6 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
-
-        {/* Decorative Wave */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 80" className="w-full h-16">
-            <path
-              fill="#ffffff"
-              d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,80L1360,80C1280,80,1120,80,960,80C800,80,640,80,480,80C320,80,160,80,80,80L0,80Z"
-            ></path>
-          </svg>
-        </div>
       </section>
 
       {/* News Highlight Section - Full Width with Hover Functionality */}
