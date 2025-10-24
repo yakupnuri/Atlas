@@ -407,7 +407,7 @@ export default function Home() {
       const data = await response.json();
       const sortedNews = (data.news || [])
         .sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate))
-        .slice(0, 3);
+        .slice(0, 4);
       setLatestNews(sortedNews);
     } catch (error) {
       console.error('Error fetching news:', error);
