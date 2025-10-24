@@ -76,7 +76,8 @@ export default function DonationsAdminPage() {
   };
 
   const handleEdit = (campaign) => {
-    setEditingCampaign(campaign);
+    const { _id, ...campaignData } = campaign;
+    setEditingCampaign(campaignData);
     setFormData({
       title: campaign.title || '',
       description: campaign.description || '',
