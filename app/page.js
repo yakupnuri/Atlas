@@ -413,7 +413,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Upcoming Events Section */}
+      {/* Upcoming Events */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-end mb-12">
@@ -460,29 +460,35 @@ export default function Home() {
                 >
                   <Link
                     href={`/evenementen/${event.slug}`}
-                    className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group"
+                    className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group h-full"
                   >
-                    <div className="relative h-48 overflow-hidden">
+                    <div className="relative h-56 overflow-hidden">
                       <img
                         src={event.image || 'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600'}
                         alt={event.title}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       />
-                      <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full">
-                        <span className="text-sm font-bold text-[#05B6C4]">
-                          {new Date(event.date).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short' })}
+                      <div className="absolute top-4 right-4 bg-white px-3 py-2 rounded-lg shadow-lg">
+                        <span className="text-sm font-bold text-[#05B6C4] block text-center">
+                          {new Date(event.date).toLocaleDateString('nl-NL', { day: 'numeric' })}
+                        </span>
+                        <span className="text-xs text-gray-600 block text-center uppercase">
+                          {new Date(event.date).toLocaleDateString('nl-NL', { month: 'short' })}
                         </span>
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#05B6C4] transition-colors line-clamp-2">
+                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#05B6C4] transition-colors line-clamp-2 min-h-[3.5rem]">
                         {event.title}
                       </h3>
-                      <p className="text-gray-600 text-sm line-clamp-2 mb-4">
+                      <p className="text-gray-600 text-sm line-clamp-2 mb-4 min-h-[2.5rem]">
                         {event.description}
                       </p>
                       <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-500">{event.location}</span>
+                        <span className="text-gray-500 flex items-center gap-1">
+                          <Calendar className="w-4 h-4" />
+                          {event.location}
+                        </span>
                         <span className="text-[#05B6C4] font-semibold">Meer info →</span>
                       </div>
                     </div>
@@ -498,82 +504,6 @@ export default function Home() {
           )}
         </div>
       </section>
-
-      {/* Latest News Section */}
-      {latestNews.length > 0 && (
-        <section className="py-20 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="flex justify-between items-end mb-12">
-              <div>
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                >
-                  <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full mb-4">
-                    <Newspaper className="w-5 h-5" />
-                    <span className="font-semibold">Nieuws</span>
-                  </div>
-                  <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                    Laatste Nieuws
-                  </h2>
-                  <p className="text-xl text-gray-600">
-                    Blijf op de hoogte van onze activiteiten en ontwikkelingen
-                  </p>
-                </motion.div>
-              </div>
-              <Link
-                href="/nieuws"
-                className="hidden md:inline-flex items-center gap-2 text-[#05B6C4] font-semibold hover:gap-3 transition-all"
-              >
-                Bekijk alle nieuws
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {latestNews.map((news, index) => (
-                <motion.div
-                  key={news.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.2 }}
-                >
-                  <Link
-                    href={`/nieuws/${news.slug}`}
-                    className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group"
-                  >
-                    <div className="relative h-48 overflow-hidden">
-                      <img
-                        src={news.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=600'}
-                        alt={news.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      />
-                    </div>
-                    <div className="p-6">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-semibold">
-                          {news.category || 'Nieuws'}
-                        </span>
-                        <span className="text-xs text-gray-500">
-                          {new Date(news.publishDate).toLocaleDateString('nl-NL')}
-                        </span>
-                      </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-[#05B6C4] transition-colors line-clamp-2">
-                        {news.title}
-                      </h3>
-                      <p className="text-gray-600 text-sm line-clamp-2">
-                        {news.excerpt}
-                      </p>
-                    </div>
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Mission, Vision, Values Section */}
       <section className="py-20 bg-white">
