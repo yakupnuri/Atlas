@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/AdminLayout';
-import { Plus, Edit2, Trash2, Image as ImageIcon, Euro, Target, TrendingUp } from 'lucide-react';
-import MediaLibrary from '@/components/MediaLibrary';
+import { Plus, Edit2, Trash2, Image as ImageIcon, Euro, Target, TrendingUp, X } from 'lucide-react';
+import MediaLibraryModal from '@/components/MediaLibraryModal';
 
 export default function DonationsAdminPage() {
   const [campaigns, setCampaigns] = useState([]);
