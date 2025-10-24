@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/AdminLayout';
+import MediaLibraryModal from '@/components/MediaLibraryModal';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -23,6 +24,7 @@ export default function AdminHeroSlidesPage() {
   const [slides, setSlides] = useState([]);
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
+  const [showMediaLibrary, setShowMediaLibrary] = useState(false);
   const [editingSlide, setEditingSlide] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
