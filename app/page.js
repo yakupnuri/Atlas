@@ -17,9 +17,377 @@ import {
   FileText,
   MessageSquare,
   Sparkles,
-  CheckCircle
+  CheckCircle,
+  BookOpen,
+  Clock,
+  TrendingUp,
+  Bell,
+  FileCheck
 } from 'lucide-react';
 import ContactModal from '@/components/ContactModal';
+
+// Cultuur & Educatiecentrum Section Component
+function CultuurEducatieSection() {
+  const [courses, setCourses] = useState([]);
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const [coursesRes, articlesRes] = await Promise.all([
+        fetch('/api/education?type=courses'),
+        fetch('/api/education?type=articles')
+      ]);
+      
+      const coursesData = await coursesRes.json();
+      const articlesData = await articlesRes.json();
+      
+      setCourses((coursesData.data || []).slice(0, 4));
+      setArticles((articlesData.data || []).slice(0, 3));
+    } catch (error) {
+      console.error('Error fetching education data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full mb-4">
+              <GraduationCap className="w-5 h-5" />
+              <span className="font-semibold">Cultuur & Educatiecentrum</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Educatie & Ontwikkeling
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Ontdek onze cursussen, workshops en educatieve materialen
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Courses Grid */}
+        {courses.length > 0 && (
+          <div className="mb-12">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Beschikbare Cursussen</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {courses.map((course, index) => (
+                <motion.div
+                  key={course.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all h-full">
+                    <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg mb-4 flex items-center justify-center">
+                      <BookOpen className="w-6 h-6 text-white" />
+                    </div>
+                    <h4 className="text-lg font-bold text-gray-900 mb-2">{course.title}</h4>
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-2">{course.description}</p>
+                    <div className="flex items-center text-xs text-gray-500 gap-4 mb-4">
+                      {course.duration && (
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {course.duration}
+                        </span>
+                      )}
+                      {course.level && (
+                        <span className="flex items-center gap-1">
+                          <TrendingUp className="w-3 h-3" />
+                          {course.level}
+                        </span>
+                      )}
+                    </div>
+                    <Link 
+                      href="/academie/cultuur-educatie"
+                      className="text-blue-600 font-semibold text-sm hover:text-blue-700 inline-flex items-center"
+                    >
+                      Meer info
+                      <ArrowRight className="w-4 h-4 ml-1" />
+                    </Link>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Articles Grid */}
+        {articles.length > 0 && (
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">Educatieve Artikelen</h3>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {articles.map((article, index) => (
+                <motion.div
+                  key={article.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Link href="/academie/cultuur-educatie">
+                    <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all h-full group">
+                      <div className="relative h-48 bg-gradient-to-br from-blue-100 to-cyan-100 flex items-center justify-center">
+                        <FileText className="w-16 h-16 text-blue-600" />
+                      </div>
+                      <div className="p-6">
+                        <h4 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                          {article.title}
+                        </h4>
+                        <p className="text-sm text-gray-600 line-clamp-3">
+                          {article.content?.substring(0, 150)}...
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Link
+            href="/academie/cultuur-educatie"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl hover:scale-105 transition-all"
+          >
+            <GraduationCap className="w-5 h-5" />
+            Ontdek Alle Cursussen & Artikelen
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Carrièrecentrum Section Component
+function CarrierecentrumSection() {
+  const [surveys, setSurveys] = useState([]);
+  const [jobs, setJobs] = useState([]);
+  const [announcements, setAnnouncements] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const [surveysRes, jobsRes, announcementsRes] = await Promise.all([
+        fetch('/api/career?type=surveys'),
+        fetch('/api/career?type=jobs'),
+        fetch('/api/career?type=announcements')
+      ]);
+      
+      const surveysData = await surveysRes.json();
+      const jobsData = await jobsRes.json();
+      const announcementsData = await announcementsRes.json();
+      
+      // Filter active surveys and jobs
+      const now = new Date();
+      const activeSurveys = (surveysData.data || []).filter(s => 
+        new Date(s.endDate) > now
+      ).slice(0, 3);
+      
+      const activeJobs = (jobsData.data || []).filter(j => 
+        !j.expiryDate || new Date(j.expiryDate) > now
+      ).slice(0, 3);
+      
+      setSurveys(activeSurveys);
+      setJobs(activeJobs);
+      setAnnouncements((announcementsData.data || []).slice(0, 2));
+    } catch (error) {
+      console.error('Error fetching career data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <section className="py-20 bg-white">
+      <div className="container mx-auto px-4">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <div className="inline-flex items-center gap-2 bg-purple-100 text-purple-700 px-4 py-2 rounded-full mb-4">
+              <Briefcase className="w-5 h-5" />
+              <span className="font-semibold">Carrièrecentrum</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Carrière & Ontwikkeling
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Vacatures, enquêtes en professionele ontwikkeling
+            </p>
+          </motion.div>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Vacatures */}
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <Briefcase className="w-6 h-6 text-purple-600" />
+              Vacatures
+            </h3>
+            {jobs.length > 0 ? (
+              <div className="space-y-4">
+                {jobs.map((job, index) => (
+                  <motion.div
+                    key={job.id}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link href="/academie/carriere">
+                      <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 hover:shadow-lg transition-all group">
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="flex-1">
+                            <h4 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-purple-600 transition-colors">
+                              {job.title}
+                            </h4>
+                            <p className="text-sm text-gray-600">{job.company}</p>
+                          </div>
+                          {job.type && (
+                            <span className="text-xs bg-purple-200 text-purple-800 px-3 py-1 rounded-full font-semibold">
+                              {job.type}
+                            </span>
+                          )}
+                        </div>
+                        <p className="text-sm text-gray-600 line-clamp-2 mb-3">
+                          {job.description}
+                        </p>
+                        <div className="flex items-center text-sm text-gray-500">
+                          <Calendar className="w-4 h-4 mr-1" />
+                          Geplaatst: {new Date(job.postedDate).toLocaleDateString('nl-NL')}
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            ) : (
+              <div className="bg-gray-50 rounded-xl p-8 text-center">
+                <Briefcase className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                <p className="text-gray-600">Momenteel geen actieve vacatures</p>
+              </div>
+            )}
+          </div>
+
+          {/* Enquêtes */}
+          <div>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <FileCheck className="w-6 h-6 text-blue-600" />
+              Actieve Enquêtes
+            </h3>
+            {surveys.length > 0 ? (
+              <div className="space-y-4">
+                {surveys.map((survey, index) => (
+                  <motion.div
+                    key={survey.id}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                  >
+                    <Link href="/academie/carriere">
+                      <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-6 hover:shadow-lg transition-all group">
+                        <h4 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                          {survey.title}
+                        </h4>
+                        <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                          {survey.description}
+                        </p>
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-gray-500 flex items-center gap-1">
+                            <Clock className="w-4 h-4" />
+                            Sluit: {new Date(survey.endDate).toLocaleDateString('nl-NL')}
+                          </span>
+                          <span className="text-blue-600 font-semibold">
+                            Doe mee →
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            ) : (
+              <div className="bg-gray-50 rounded-xl p-8 text-center">
+                <FileCheck className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                <p className="text-gray-600">Geen actieve enquêtes op dit moment</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Announcements */}
+        {announcements.length > 0 && (
+          <div className="mt-12">
+            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+              <Bell className="w-6 h-6 text-orange-600" />
+              Aankondigingen
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {announcements.map((announcement, index) => (
+                <motion.div
+                  key={announcement.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <div className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl p-6 border-l-4 border-orange-500">
+                    <div className="flex items-start gap-3">
+                      <Bell className="w-5 h-5 text-orange-600 flex-shrink-0 mt-1" />
+                      <div>
+                        <h4 className="text-lg font-bold text-gray-900 mb-2">
+                          {announcement.title}
+                        </h4>
+                        <p className="text-sm text-gray-600">
+                          {announcement.content}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+          <Link
+            href="/academie/carriere"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl hover:scale-105 transition-all"
+          >
+            <Briefcase className="w-5 h-5" />
+            Bezoek Carrièrecentrum
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default function Home() {
   const [upcomingEvents, setUpcomingEvents] = useState([]);
