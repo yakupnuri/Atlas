@@ -9,6 +9,7 @@ export default function SurveyModal({ survey, onClose, onSave }) {
     description: '',
     deadline: '',
     endDate: '',
+    page: 'carriere', // Default page
     questions: []
   })
   const [loading, setLoading] = useState(false)
@@ -20,6 +21,7 @@ export default function SurveyModal({ survey, onClose, onSave }) {
         description: survey.description || '',
         deadline: survey.deadline || '',
         endDate: survey.endDate || '',
+        page: survey.page || 'carriere',
         questions: survey.questions?.map(q => ({
           ...q,
           id: q.id || Date.now().toString() + Math.random()
