@@ -463,7 +463,7 @@ export default function Home() {
   return (
     <div className="bg-white">
       {/* Hero Section - Reduced Height */}
-      <section className="relative min-h-[65vh] flex items-center overflow-hidden">
+      <section className="relative min-h-[50vh] flex items-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
