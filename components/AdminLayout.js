@@ -43,6 +43,13 @@ export default function AdminLayout({ children }) {
   const [onlineUsers, setOnlineUsers] = useState(1);
 
   useEffect(() => {
+    // Set admin default language to Turkish if not set
+    const currentLang = localStorage.getItem('language');
+    if (!currentLang) {
+      localStorage.setItem('language', 'tr');
+      window.location.reload();
+    }
+    
     // Get current user from localStorage
     const userEmail = localStorage.getItem('adminEmail');
     const adminToken = localStorage.getItem('adminToken');
