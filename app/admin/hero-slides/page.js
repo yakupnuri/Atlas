@@ -358,20 +358,28 @@ export default function AdminHeroSlidesPage() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Afbeelding URL *
+                      Afbeelding *
                     </label>
-                    <input
-                      type="url"
-                      value={formData.image}
-                      onChange={(e) => setFormData({...formData, image: e.target.value})}
-                      required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                      placeholder="https://images.unsplash.com/..."
-                    />
-                    {formData.image && (
-                      <div className="mt-2">
-                        <img src={formData.image} alt="Preview" className="w-full h-40 object-cover rounded-lg" />
+                    {formData.image ? (
+                      <div className="relative">
+                        <img src={formData.image} alt="Preview" className="w-full h-48 object-cover rounded-lg" />
+                        <button
+                          type="button"
+                          onClick={() => setFormData({...formData, image: ''})}
+                          className="absolute top-2 right-2 p-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
                       </div>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => setShowMediaLibrary(true)}
+                        className="w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors flex flex-col items-center gap-2"
+                      >
+                        <Image className="w-12 h-12 text-gray-400" />
+                        <span className="text-sm text-gray-600">Klik om afbeelding te selecteren</span>
+                      </button>
                     )}
                   </div>
 
