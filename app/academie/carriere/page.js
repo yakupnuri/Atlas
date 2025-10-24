@@ -7,7 +7,11 @@ import {
   FileText, 
   ClipboardList, 
   Calendar,
-  Bell
+  Bell,
+  Users,
+  FileCheck,
+  ChevronRight,
+  Clock
 } from 'lucide-react'
 import SeminarCard from '@/components/career/SeminarCard'
 import SurveyCard from '@/components/career/SurveyCard'
