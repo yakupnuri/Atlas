@@ -52,7 +52,7 @@ export default function SurveyModal({ survey, isOpen, onClose }) {
     setError('')
 
     if (!validateForm()) {
-      setError('Vul alle verplichte vragen in')
+      setError(t('surveys.fillRequired'))
       return
     }
 
