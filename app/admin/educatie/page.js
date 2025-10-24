@@ -984,6 +984,33 @@ export default function EducatieAdminPage() {
                     placeholder="Makale içeriği..."
                   />
                 </div>
+                
+                {/* Image Field */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Afbeelding</label>
+                  {articleForm.image ? (
+                    <div className="relative">
+                      <img src={articleForm.image} alt="Preview" className="w-full h-48 object-cover rounded-lg" />
+                      <button
+                        type="button"
+                        onClick={() => setArticleForm({...articleForm, image: ''})}
+                        className="absolute top-2 right-2 p-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setShowMediaLibrary(true)}
+                      className="w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors flex flex-col items-center gap-2"
+                    >
+                      <ImageIcon className="w-12 h-12 text-gray-400" />
+                      <span className="text-sm text-gray-600">Selecteer afbeelding</span>
+                    </button>
+                  )}
+                </div>
+                
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-semibold text-gray-700 mb-2">Yazar *</label>
