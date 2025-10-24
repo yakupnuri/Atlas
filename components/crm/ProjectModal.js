@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { X, Upload, Plus, Trash2 } from 'lucide-react';
+import { X, Upload, Plus, Trash2, Image as ImageIcon } from 'lucide-react';
+import MediaLibraryModal from '@/components/MediaLibraryModal';
 
 export default function ProjectModal({ project, onClose }) {
   const [formData, setFormData] = useState({
@@ -23,6 +24,7 @@ export default function ProjectModal({ project, onClose }) {
   
   const [newTeamMember, setNewTeamMember] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showMediaLibrary, setShowMediaLibrary] = useState(false);
 
   useEffect(() => {
     if (project) {
