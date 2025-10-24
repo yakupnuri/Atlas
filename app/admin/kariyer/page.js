@@ -25,24 +25,32 @@ export default function KariyerAdminPage() {
   const fetchData = async () => {
     setLoading(true)
     try {
-      // Admin panel shows all items including expired ones
-      const response = await fetch(`/api/career?type=${activeTab}&includeExpired=true`)
-      const result = await response.json()
+      let response, result;
       
-      if (result.success) {
-        switch (activeTab) {
-          case 'announcements':
-            setAnnouncements(result.data || [])
-            break
-          case 'surveys':
-            setSurveys(result.data || [])
-            break
-          case 'seminars':
-            setSeminars(result.data || [])
-            break
-          case 'jobs':
-            setJobs(result.data || [])
-            break
+      if (activeTab === 'surveys') {
+        // Use global surveys API
+        response = await fetch(`/api/surveys?module=career&includeExpired=true`)
+        result = await response.json()
+        if (result.success) {
+          setSurveys(result.data || [])
+        }
+      } else {
+        // Use career API for other tabs
+        response = await fetch(`/api/career?type=${activeTab}&includeExpired=true`)
+        result = await response.json()
+        
+        if (result.success) {
+          switch (activeTab) {
+            case 'announcements':
+              setAnnouncements(result.data || [])
+              break
+            case 'seminars':
+              setSeminars(result.data || [])
+              break
+            case 'jobs':
+              setJobs(result.data || [])
+              break
+          }
         }
       }
     } catch (error) {
