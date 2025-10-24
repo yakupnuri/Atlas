@@ -161,6 +161,11 @@ export default function AdminLayout({ children }) {
 
   const pagesMenuItems = [
     {
+      title: 'Hero Slides',
+      icon: Image,
+      href: '/admin/hero-slides',
+    },
+    {
       title: 'Over Ons',
       icon: Info,
       href: '/admin/pages/over-ons',
