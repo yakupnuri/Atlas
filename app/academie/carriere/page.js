@@ -155,16 +155,16 @@ export default function CarrierePage() {
         </div>
       </section>
 
-      {/* Job Ticker */}
-      {tickerJobs.length > 0 && (
-        <div className="bg-gradient-to-r from-orange-500 to-yellow-500 text-white py-3 overflow-hidden">
+      {/* Horizontal News Ticker */}
+      {announcements.length > 0 && (
+        <div className="bg-orange-500 text-white py-3 overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="flex items-center">
               <Bell className="w-5 h-5 mr-3 flex-shrink-0 animate-pulse" />
               <div className="flex animate-scroll whitespace-nowrap">
-                {tickerJobs.concat(tickerJobs).map((job, index) => (
-                  <span key={index} className="mx-8">
-                    <strong>NIEUW:</strong> {job.title} - {job.company} {job.location && `(${job.location})`}
+                {announcements.concat(announcements).map((announcement, index) => (
+                  <span key={`${announcement.id}-${index}`} className="mx-8">
+                    <strong>NIEUWS:</strong> {announcement.title}
                   </span>
                 ))}
               </div>
