@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import { X, Send, CheckCircle, AlertCircle, Star } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function SurveyModal({ survey, isOpen, onClose }) {
   const [answers, setAnswers] = useState({})
