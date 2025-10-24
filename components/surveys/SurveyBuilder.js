@@ -351,16 +351,22 @@ export default function SurveyBuilder({ survey, module, onClose, onSave }) {
                       )}
                     </div>
 
-                    <button
-                      onClick={() => deleteQuestion(qIndex)}
-                      className="p-2 text-red-600 hover:bg-red-50 rounded-lg flex-shrink-0"
-                    >
-                      <Trash2 className="w-5 h-5" />
-                    </button>
+                              <button
+                                onClick={() => deleteQuestion(qIndex)}
+                                className="p-2 text-red-600 hover:bg-red-50 rounded-lg flex-shrink-0"
+                              >
+                                <Trash2 className="w-5 h-5" />
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
                   </div>
-                </div>
-              ))}
-            </div>
+                )}
+              </Droppable>
+            </DragDropContext>
           )}
         </div>
       </div>
