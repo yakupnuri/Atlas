@@ -394,6 +394,7 @@ export default function Home() {
   const [latestNews, setLatestNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [contactModalOpen, setContactModalOpen] = useState(false);
+  const [selectedNewsIndex, setSelectedNewsIndex] = useState(0);
 
   useEffect(() => {
     fetchUpcomingEvents();
