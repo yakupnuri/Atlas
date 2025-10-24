@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import { Plus, Edit2, Trash2, Save, Image as ImageIcon, Users as UsersIcon } from 'lucide-react';
-import MediaLibrary from '@/components/MediaLibrary';
+import MediaLibraryModal from '@/components/MediaLibraryModal';
 
 export default function OverOnsAdminPage() {
   const [loading, setLoading] = useState(true);
