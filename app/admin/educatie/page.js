@@ -618,7 +618,8 @@ export default function EducatieAdminPage() {
                         <button
                           onClick={() => {
                             setEditingArticle(article);
-                            setArticleForm(article);
+                            const { _id, ...articleData } = article;
+                            setArticleForm(articleData);
                             setShowArticleModal(true);
                           }}
                           className="p-2 text-blue-600 hover:bg-blue-50 rounded"
