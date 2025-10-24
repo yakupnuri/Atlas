@@ -51,24 +51,15 @@ export default function HomepageAdminPage() {
 
   const fetchHomepageContent = async () => {
     try {
-      const [homepageRes, slidesRes] = await Promise.all([
-        fetch('/api/homepage'),
-        fetch('/api/hero-slides')
-      ]);
+      const response = await fetch('/api/homepage');
+      const result = await response.json();
       
-      const homepageResult = await homepageRes.json();
-      const slidesResult = await slidesRes.json();
-      
-      if (homepageResult.success && homepageResult.data) {
+      if (result.success && result.data) {
         setFormData({
-          hero: homepageResult.data.hero || formData.hero,
-          featuredSections: homepageResult.data.featuredSections || formData.featuredSections,
-          seo: homepageResult.data.seo || formData.seo
+          hero: result.data.hero || formData.hero,
+          featuredSections: result.data.featuredSections || formData.featuredSections,
+          seo: result.data.seo || formData.seo
         });
-      }
-      
-      if (slidesResult.slides) {
-        setHeroSlides(slidesResult.slides);
       }
     } catch (error) {
       console.error('Error fetching homepage:', error);
