@@ -34,6 +34,7 @@ import {
 } from 'lucide-react';
 
 export default function AdminLayout({ children }) {
+  const { t, language } = useLanguage();
   const pathname = usePathname();
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [pagesMenuOpen, setPagesMenuOpen] = useState(true);
