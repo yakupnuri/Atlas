@@ -2,22 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/AdminLayout';
-import MediaLibraryModal from '@/components/MediaLibraryModal';
 import { 
   Save, 
-  Image as ImageIcon, 
-  Type, 
-  Link as LinkIcon,
   Eye,
-  Sparkles,
-  CheckCircle
+  TrendingUp
 } from 'lucide-react';
 
 export default function HomepageAdminPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
-  const [showMediaLibrary, setShowMediaLibrary] = useState(false);
-  const [mediaTarget, setMediaTarget] = useState('');
   
   const [formData, setFormData] = useState({
     featuredSections: {
@@ -41,9 +34,7 @@ export default function HomepageAdminPage() {
       
       if (result.success && result.data) {
         setFormData({
-          hero: result.data.hero || formData.hero,
-          featuredSections: result.data.featuredSections || formData.featuredSections,
-          seo: result.data.seo || formData.seo
+          featuredSections: result.data.featuredSections || formData.featuredSections
         });
       }
     } catch (error) {
@@ -61,14 +52,14 @@ export default function HomepageAdminPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           type: 'homepage',
-          ...formData
+          featuredSections: formData.featuredSections
         })
       });
 
       const result = await response.json();
       
       if (result.success) {
-        alert('✅ Homepage başarıyla güncellendi!');
+        alert('✅ Homepage ayarları başarıyla güncellendi!');
       } else {
         alert('❌ Hata: ' + result.error);
       }
@@ -78,49 +69,6 @@ export default function HomepageAdminPage() {
     } finally {
       setSaving(false);
     }
-  };
-
-  const handleImageSelect = (imageUrl) => {
-    if (mediaTarget === 'hero') {
-      setFormData({
-        ...formData,
-        hero: { ...formData.hero, image: imageUrl }
-      });
-    }
-    setShowMediaLibrary(false);
-    setMediaTarget('');
-  };
-
-  const addTrustBadge = () => {
-    setFormData({
-      ...formData,
-      hero: {
-        ...formData.hero,
-        trustBadges: [
-          ...formData.hero.trustBadges,
-          { text: '', icon: 'CheckCircle' }
-        ]
-      }
-    });
-  };
-
-  const updateTrustBadge = (index, text) => {
-    const badges = [...formData.hero.trustBadges];
-    badges[index].text = text;
-    setFormData({
-      ...formData,
-      hero: { ...formData.hero, trustBadges: badges }
-    });
-  };
-
-  const removeTrustBadge = (index) => {
-    setFormData({
-      ...formData,
-      hero: {
-        ...formData.hero,
-        trustBadges: formData.hero.trustBadges.filter((_, i) => i !== index)
-      }
-    });
   };
 
   if (loading) {
@@ -140,7 +88,7 @@ export default function HomepageAdminPage() {
         <div className="flex justify-between items-center mb-8">
           <div>
             <h1 className="text-3xl font-bold text-gray-900">🏠 Homepage Yönetimi</h1>
-            <p className="text-gray-600 mt-1">Ana sayfa içeriklerini düzenleyin</p>
+            <p className="text-gray-600 mt-1">Öne çıkan bölümleri yönetin</p>
           </div>
           <div className="flex gap-3">
             <a
@@ -163,222 +111,40 @@ export default function HomepageAdminPage() {
           </div>
         </div>
 
-        <div className="space-y-6">
-          {/* Hero Section */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
-              <Sparkles className="w-6 h-6 text-yellow-500" />
-              Hero Bölümü
-            </h2>
-
-            <div className="space-y-4">
-              {/* Badge */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Rozet Metni
-                </label>
-                <input
-                  type="text"
-                  value={formData.hero.badge}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    hero: { ...formData.hero, badge: e.target.value }
-                  })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                  placeholder="Welkom bij Stichting Atlas"
-                />
-              </div>
-
-              {/* Title */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Ana Başlık
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.hero.title}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      hero: { ...formData.hero, title: e.target.value }
-                    })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                    placeholder="Samen Bouwen Aan Een"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Vurgulu Başlık (Sarı)
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.hero.titleHighlight}
-                    onChange={(e) => setFormData({
-                      ...formData,
-                      hero: { ...formData.hero, titleHighlight: e.target.value }
-                    })}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                    placeholder="Inclusieve Toekomst"
-                  />
-                </div>
-              </div>
-
-              {/* Description */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Açıklama
-                </label>
-                <textarea
-                  rows="3"
-                  value={formData.hero.description}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    hero: { ...formData.hero, description: e.target.value }
-                  })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none resize-none"
-                  placeholder="Een gemeenschap waar culturen samenkomen..."
-                />
-              </div>
-
-              {/* Hero Image */}
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Arka Plan Görseli
-                </label>
-                <div className="flex gap-3">
-                  {formData.hero.image && (
-                    <img
-                      src={formData.hero.image}
-                      alt="Hero"
-                      className="w-32 h-20 object-cover rounded-lg"
-                    />
-                  )}
-                  <button
-                    onClick={() => {
-                      setMediaTarget('hero');
-                      setShowMediaLibrary(true);
-                    }}
-                    className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
-                  >
-                    <ImageIcon className="w-5 h-5" />
-                    Görsel Seç
-                  </button>
-                </div>
-              </div>
-
-              {/* Buttons */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <h3 className="font-semibold text-gray-900 mb-3">Birincil Buton</h3>
-                  <div className="space-y-2">
-                    <input
-                      type="text"
-                      value={formData.hero.primaryButton.text}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        hero: {
-                          ...formData.hero,
-                          primaryButton: { ...formData.hero.primaryButton, text: e.target.value }
-                        }
-                      })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
-                      placeholder="Buton Metni"
-                    />
-                    <input
-                      type="text"
-                      value={formData.hero.primaryButton.link}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        hero: {
-                          ...formData.hero,
-                          primaryButton: { ...formData.hero.primaryButton, link: e.target.value }
-                        }
-                      })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
-                      placeholder="/academie"
-                    />
-                  </div>
-                </div>
-
-                <div className="border border-gray-200 rounded-lg p-4">
-                  <h3 className="font-semibold text-gray-900 mb-3">İkincil Buton</h3>
-                  <div className="space-y-2">
-                    <input
-                      type="text"
-                      value={formData.hero.secondaryButton.text}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        hero: {
-                          ...formData.hero,
-                          secondaryButton: { ...formData.hero.secondaryButton, text: e.target.value }
-                        }
-                      })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
-                      placeholder="Buton Metni"
-                    />
-                    <input
-                      type="text"
-                      value={formData.hero.secondaryButton.link}
-                      onChange={(e) => setFormData({
-                        ...formData,
-                        hero: {
-                          ...formData.hero,
-                          secondaryButton: { ...formData.hero.secondaryButton, link: e.target.value }
-                        }
-                      })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
-                      placeholder="/contact"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              {/* Trust Badges */}
-              <div>
-                <div className="flex justify-between items-center mb-3">
-                  <label className="block text-sm font-medium text-gray-700">
-                    Güven Rozetleri
-                  </label>
-                  <button
-                    onClick={addTrustBadge}
-                    className="text-sm text-blue-600 hover:text-blue-700 font-medium"
-                  >
-                    + Rozet Ekle
-                  </button>
-                </div>
-                <div className="space-y-2">
-                  {formData.hero.trustBadges.map((badge, index) => (
-                    <div key={index} className="flex gap-2">
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-2" />
-                      <input
-                        type="text"
-                        value={badge.text}
-                        onChange={(e) => updateTrustBadge(index, e.target.value)}
-                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm"
-                        placeholder="ANBI Erkend"
-                      />
-                      <button
-                        onClick={() => removeTrustBadge(index)}
-                        className="px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg text-sm"
-                      >
-                        Sil
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              </div>
+        {/* Info Box */}
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
+          <div className="flex gap-3">
+            <TrendingUp className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
+            <div>
+              <h3 className="font-semibold text-blue-900 mb-1">Öne Çıkan Bölümler</h3>
+              <p className="text-sm text-blue-700">
+                Ana sayfada hangi içeriklerin gösterileceğini ve kaç adet gösterileceğini buradan ayarlayabilirsiniz.
+              </p>
+              <p className="text-sm text-blue-600 mt-2">
+                <strong>Not:</strong> Hero slider yönetimi için <a href="/admin/hero-slides" className="underline">Hero Slides</a> sayfasını, 
+                SEO ayarları için <a href="/admin/settings" className="underline">Ayarlar</a> sayfasını kullanın.
+              </p>
             </div>
           </div>
+        </div>
 
-          {/* Featured Sections Settings */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
-              Öne Çıkan Bölümler
-            </h2>
+        {/* Featured Sections Settings */}
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+            <TrendingUp className="w-6 h-6 text-orange-500" />
+            Öne Çıkan Bölümler
+          </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="border border-gray-200 rounded-lg p-4">
-                <label className="flex items-center gap-2 mb-3">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* News Section */}
+            <div className="border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                  <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+                  </svg>
+                </div>
+                <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={formData.featuredSections.showNews}
@@ -386,26 +152,42 @@ export default function HomepageAdminPage() {
                       ...formData,
                       featuredSections: { ...formData.featuredSections, showNews: e.target.checked }
                     })}
-                    className="w-4 h-4"
+                    className="w-5 h-5 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
                   />
-                  <span className="font-semibold">Haberler Göster</span>
+                  <span className="font-semibold text-gray-900">Haberler</span>
+                </label>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Gösterilecek Haber Sayısı
                 </label>
                 <input
                   type="number"
                   value={formData.featuredSections.newsCount}
                   onChange={(e) => setFormData({
                     ...formData,
-                    featuredSections: { ...formData.featuredSections, newsCount: parseInt(e.target.value) }
+                    featuredSections: { ...formData.featuredSections, newsCount: parseInt(e.target.value) || 1 }
                   })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
                   placeholder="4"
                   min="1"
                   max="12"
+                  disabled={!formData.featuredSections.showNews}
                 />
+                <p className="text-xs text-gray-500 mt-2">En fazla 12 haber gösterilebilir</p>
               </div>
+            </div>
 
-              <div className="border border-gray-200 rounded-lg p-4">
-                <label className="flex items-center gap-2 mb-3">
+            {/* Events Section */}
+            <div className="border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                  <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={formData.featuredSections.showEvents}
@@ -413,26 +195,42 @@ export default function HomepageAdminPage() {
                       ...formData,
                       featuredSections: { ...formData.featuredSections, showEvents: e.target.checked }
                     })}
-                    className="w-4 h-4"
+                    className="w-5 h-5 text-purple-600 rounded focus:ring-2 focus:ring-purple-500"
                   />
-                  <span className="font-semibold">Etkinlikler Göster</span>
+                  <span className="font-semibold text-gray-900">Etkinlikler</span>
+                </label>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Gösterilecek Etkinlik Sayısı
                 </label>
                 <input
                   type="number"
                   value={formData.featuredSections.eventsCount}
                   onChange={(e) => setFormData({
                     ...formData,
-                    featuredSections: { ...formData.featuredSections, eventsCount: parseInt(e.target.value) }
+                    featuredSections: { ...formData.featuredSections, eventsCount: parseInt(e.target.value) || 1 }
                   })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-purple-500 outline-none"
                   placeholder="3"
                   min="1"
                   max="12"
+                  disabled={!formData.featuredSections.showEvents}
                 />
+                <p className="text-xs text-gray-500 mt-2">En fazla 12 etkinlik gösterilebilir</p>
               </div>
+            </div>
 
-              <div className="border border-gray-200 rounded-lg p-4">
-                <label className="flex items-center gap-2 mb-3">
+            {/* Projects Section */}
+            <div className="border border-gray-200 rounded-lg p-5 hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                  <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                  </svg>
+                </div>
+                <label className="flex items-center gap-2 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={formData.featuredSections.showProjects}
@@ -440,96 +238,60 @@ export default function HomepageAdminPage() {
                       ...formData,
                       featuredSections: { ...formData.featuredSections, showProjects: e.target.checked }
                     })}
-                    className="w-4 h-4"
+                    className="w-5 h-5 text-green-600 rounded focus:ring-2 focus:ring-green-500"
                   />
-                  <span className="font-semibold">Projeler Göster</span>
+                  <span className="font-semibold text-gray-900">Projeler</span>
+                </label>
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Gösterilecek Proje Sayısı
                 </label>
                 <input
                   type="number"
                   value={formData.featuredSections.projectsCount}
                   onChange={(e) => setFormData({
                     ...formData,
-                    featuredSections: { ...formData.featuredSections, projectsCount: parseInt(e.target.value) }
+                    featuredSections: { ...formData.featuredSections, projectsCount: parseInt(e.target.value) || 1 }
                   })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-green-500 outline-none"
                   placeholder="6"
                   min="1"
                   max="12"
+                  disabled={!formData.featuredSections.showProjects}
                 />
+                <p className="text-xs text-gray-500 mt-2">En fazla 12 proje gösterilebilir</p>
               </div>
             </div>
           </div>
 
-          {/* SEO Settings */}
-          <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-            <h2 className="text-xl font-bold text-gray-900 mb-4">
-              SEO Ayarları
-            </h2>
-
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Sayfa Başlığı (Title)
-                </label>
-                <input
-                  type="text"
-                  value={formData.seo.title}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    seo: { ...formData.seo, title: e.target.value }
-                  })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                  placeholder="Stichting Atlas - Samen Bouwen..."
-                />
+          {/* Summary Stats */}
+          <div className="mt-8 pt-6 border-t border-gray-200">
+            <h3 className="text-sm font-semibold text-gray-700 mb-3">Özet</h3>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="bg-blue-50 rounded-lg p-3">
+                <p className="text-xs text-blue-600 font-medium">Haberler</p>
+                <p className="text-2xl font-bold text-blue-900">
+                  {formData.featuredSections.showNews ? formData.featuredSections.newsCount : '—'}
+                </p>
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Meta Açıklama
-                </label>
-                <textarea
-                  rows="2"
-                  value={formData.seo.description}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    seo: { ...formData.seo, description: e.target.value }
-                  })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none"
-                  placeholder="Een gemeenschap waar..."
-                />
+              <div className="bg-purple-50 rounded-lg p-3">
+                <p className="text-xs text-purple-600 font-medium">Etkinlikler</p>
+                <p className="text-2xl font-bold text-purple-900">
+                  {formData.featuredSections.showEvents ? formData.featuredSections.eventsCount : '—'}
+                </p>
               </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Anahtar Kelimeler (virgülle ayrılmış)
-                </label>
-                <input
-                  type="text"
-                  value={formData.seo.keywords}
-                  onChange={(e) => setFormData({
-                    ...formData,
-                    seo: { ...formData.seo, keywords: e.target.value }
-                  })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                  placeholder="stichting atlas, community, educatie"
-                />
+              <div className="bg-green-50 rounded-lg p-3">
+                <p className="text-xs text-green-600 font-medium">Projeler</p>
+                <p className="text-2xl font-bold text-green-900">
+                  {formData.featuredSections.showProjects ? formData.featuredSections.projectsCount : '—'}
+                </p>
               </div>
             </div>
           </div>
         </div>
       </div>
-
-      {/* Media Library Modal */}
-      {showMediaLibrary && (
-        <MediaLibraryModal
-          onSelect={handleImageSelect}
-          onClose={() => {
-            setShowMediaLibrary(false);
-            setMediaTarget('');
-          }}
-          category="homepage"
-        />
-      )}
     </AdminLayout>
   );
 }
