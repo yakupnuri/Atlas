@@ -1471,12 +1471,13 @@ export default function AdminEventsPage() {
         )}
 
         {/* Media Library Modal */}
-        {showMediaLibrary && (
-          <MediaLibrary
-            onSelect={handleImageSelect}
-            onClose={() => setShowMediaLibrary(false)}
-          />
-        )}
+        <MediaLibraryModal
+          isOpen={showMediaLibrary}
+          onClose={() => setShowMediaLibrary(false)}
+          onSelect={(media) => handleImageSelect(media.url)}
+          allowMultiple={false}
+          category="events"
+        />
       </div>
     </AdminLayout>
   );
