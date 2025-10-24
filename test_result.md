@@ -495,6 +495,30 @@ frontend:
         agent: "main"
         comment: "Created public project detail modal with full project information display. Shows: header image, title, description, category and status badges, progress bar, start/end dates, budget, team member count and list, all formatted in Dutch. Responsive design with close button."
 
+  - task: "Homepage Admin Simplification"
+    implemented: true
+    working: "NA"
+    file: "/app/app/admin/homepage/page.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Simplified homepage admin page to manage ONLY Featured Sections (News, Events, Projects). Removed Hero Section management (has dedicated /admin/hero-slides page). Removed SEO settings (moved to new Settings page). Clean UI with visibility toggles, count controls (1-12), and summary stats. Info box with links to Hero Slides and Settings pages. Fetches/updates data via /api/homepage endpoint."
+
+  - task: "Settings Admin Page"
+    implemented: true
+    working: "NA"
+    file: "/app/app/admin/settings/page.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Created new Settings admin page with tabbed interface. SEO Settings tab includes: meta title with 60 char limit, meta description with 160 char limit, keywords field, character counters with color-coded warnings, Google search result preview. General Settings tab (placeholder for future). Fetches/updates SEO data via /api/homepage endpoint. Clean UI with info boxes."
+
   - task: "CRMAccessCard Component"
     implemented: true
     working: "NA"
