@@ -240,16 +240,35 @@ export default function SurveyBuilder({ survey, module, onClose, onSave }) {
               <p>Nog geen vragen. Klik op "Vraag Toevoegen" om te beginnen.</p>
             </div>
           ) : (
-            <div className="space-y-4">
-              {formData.questions.map((question, qIndex) => (
-                <div
-                  key={question.id}
-                  className="border-2 border-gray-200 rounded-lg p-4 hover:border-blue-300 transition-colors"
-                >
-                  <div className="flex items-start gap-3">
-                    <GripVertical className="w-5 h-5 text-gray-400 mt-3 flex-shrink-0" />
-                    
-                    <div className="flex-1 space-y-3">
+            <DragDropContext onDragEnd={handleDragEnd}>
+              <Droppable droppableId="questions">
+                {(provided) => (
+                  <div
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                    className="space-y-4"
+                  >
+                    {formData.questions.map((question, qIndex) => (
+                      <Draggable key={question.id} draggableId={question.id} index={qIndex}>
+                        {(provided, snapshot) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            className={`border-2 rounded-lg p-4 transition-all ${
+                              snapshot.isDragging
+                                ? 'border-blue-500 shadow-2xl bg-blue-50'
+                                : 'border-gray-200 hover:border-blue-300'
+                            }`}
+                          >
+                            <div className="flex items-start gap-3">
+                              <div
+                                {...provided.dragHandleProps}
+                                className="mt-3 cursor-grab active:cursor-grabbing"
+                              >
+                                <GripVertical className="w-5 h-5 text-gray-400" />
+                              </div>
+                              
+                              <div className="flex-1 space-y-3">
                       {/* Question Text */}
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
