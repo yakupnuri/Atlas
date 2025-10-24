@@ -187,29 +187,9 @@ export default function AdminLayout({ children }) {
 
   const pagesMenuItems = [
     {
-      title: 'Hero Slides',
-      icon: ImageIcon,
-      href: '/admin/hero-slides',
-    },
-    {
-      title: 'Over Ons',
-      icon: Info,
-      href: '/admin/pages/over-ons',
-    },
-    {
-      title: 'Nieuws',
-      icon: Newspaper,
-      href: '/admin/nieuws',
-    },
-    {
       title: 'ANBI',
       icon: FileText,
       href: '/admin/anbi',
-    },
-    {
-      title: 'Contact',
-      icon: Phone,
-      href: '/admin/pages/contact',
     },
   ];
 
