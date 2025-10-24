@@ -70,5 +70,64 @@
       "description": "Neem contact met ons op voor meer informatie over onze ANBI-status",
       "button": "Contact Opnemen"
     }
+  },
+  "surveys": {
+    "title": "Enquêtes",
+    "newSurvey": "Nieuwe Enquête",
+    "editSurvey": "Enquête Bewerken",
+    "surveyTitle": "Enquête Titel",
+    "description": "Beschrijving",
+    "questions": "Vragen",
+    "addQuestion": "Vraag Toevoegen",
+    "questionText": "Vraag Tekst",
+    "questionType": "Vraag Type",
+    "questionTypes": {
+      "text": "Kort Antwoord",
+      "textarea": "Lang Antwoord",
+      "multipleChoice": "Meerkeuzevraag",
+      "rating": "Beoordeling (1-5)",
+      "yesNo": "Ja/Nee"
+    },
+    "options": "Opties",
+    "addOption": "Optie Toevoegen",
+    "required": "Verplicht?",
+    "endDate": "Einddatum",
+    "image": "Afbeelding",
+    "addImage": "Afbeelding Toevoegen",
+    "active": "Actief",
+    "inactive": "Inactief",
+    "expired": "Verlopen",
+    "closed": "Gesloten",
+    "responses": "Antwoorden",
+    "participants": "Deelnemers",
+    "viewResults": "Resultaten Bekijken",
+    "takeSurvey": "Deelnemen aan enquête",
+    "submitResponse": "Verzenden",
+    "yourAnswer": "Uw antwoord...",
+    "thankYou": "Bedankt voor uw deelname!",
+    "responseSaved": "Uw antwoorden zijn succesvol verzonden.",
+    "fillRequired": "Vul alle verplichte vragen in",
+    "anonymous": "Anoniem",
+    "name": "Naam",
+    "email": "E-mail",
+    "optionalInfo": "Optioneel: Vul uw gegevens in",
+    "results": {
+      "title": "Enquête Resultaten",
+      "totalParticipants": "Totaal Deelnemers",
+      "completionRate": "Voltooiingspercentage",
+      "distribution": "Verdeling van antwoorden",
+      "average": "Gemiddelde",
+      "outOf5": "van 5 sterren",
+      "exportToCSV": "Exporteren naar CSV",
+      "noResponses": "Nog geen reacties ontvangen"
+    },
+    "templates": {
+      "title": "Kies een sjabloon",
+      "description": "Begin met een voorgedefinieerd sjabloon",
+      "startBlank": "Lege enquête starten"
+    },
+    "closesOn": "Sluit op",
+    "closedOn": "Gesloten op",
+    "surveyClosed": "Deze enquête is gesloten"
   }
 }
