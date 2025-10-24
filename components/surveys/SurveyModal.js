@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function SurveyModal({ survey, isOpen, onClose }) {
+  const { t } = useLanguage()
   const [answers, setAnswers] = useState({})
   const [userName, setUserName] = useState('')
   const [userEmail, setUserEmail] = useState('')
