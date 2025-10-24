@@ -70,5 +70,64 @@
       "description": "Contact us for more information about our ANBI status",
       "button": "Contact Us"
     }
+  },
+  "surveys": {
+    "title": "Surveys",
+    "newSurvey": "New Survey",
+    "editSurvey": "Edit Survey",
+    "surveyTitle": "Survey Title",
+    "description": "Description",
+    "questions": "Questions",
+    "addQuestion": "Add Question",
+    "questionText": "Question Text",
+    "questionType": "Question Type",
+    "questionTypes": {
+      "text": "Short Answer",
+      "textarea": "Long Answer",
+      "multipleChoice": "Multiple Choice",
+      "rating": "Rating (1-5)",
+      "yesNo": "Yes/No"
+    },
+    "options": "Options",
+    "addOption": "Add Option",
+    "required": "Required?",
+    "endDate": "End Date",
+    "image": "Image",
+    "addImage": "Add Image",
+    "active": "Active",
+    "inactive": "Inactive",
+    "expired": "Expired",
+    "closed": "Closed",
+    "responses": "Responses",
+    "participants": "Participants",
+    "viewResults": "View Results",
+    "takeSurvey": "Take Survey",
+    "submitResponse": "Submit",
+    "yourAnswer": "Your answer...",
+    "thankYou": "Thank you for your participation!",
+    "responseSaved": "Your answers have been submitted successfully.",
+    "fillRequired": "Please fill in all required questions",
+    "anonymous": "Anonymous",
+    "name": "Name",
+    "email": "Email",
+    "optionalInfo": "Optional: Enter your information",
+    "results": {
+      "title": "Survey Results",
+      "totalParticipants": "Total Participants",
+      "completionRate": "Completion Rate",
+      "distribution": "Answer distribution",
+      "average": "Average",
+      "outOf5": "out of 5 stars",
+      "exportToCSV": "Export to CSV",
+      "noResponses": "No responses received yet"
+    },
+    "templates": {
+      "title": "Choose a template",
+      "description": "Start with a predefined template",
+      "startBlank": "Start blank survey"
+    },
+    "closesOn": "Closes on",
+    "closedOn": "Closed on",
+    "surveyClosed": "This survey is closed"
   }
 }
