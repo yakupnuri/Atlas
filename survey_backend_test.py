@@ -10,7 +10,7 @@ import uuid
 from datetime import datetime, timedelta
 
 # Configuration
-BASE_URL = "https://atlas-webapp.preview.emergentagent.com"
+BASE_URL = "https://atlas-content.preview.emergentagent.com"
 API_BASE = f"{BASE_URL}/api"
 
 # Test data storage
