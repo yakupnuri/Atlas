@@ -194,12 +194,15 @@ export default function SeminarModal({ seminar, onClose, onSave }) {
       </div>
 
       {/* Media Library Modal */}
-      {showMediaLibrary && (
-        <MediaLibrary
-          onClose={() => setShowMediaLibrary(false)}
-          onSelect={handleImageSelect}
-        />
-      )}
+      <MediaLibraryModal
+        isOpen={showMediaLibrary}
+        onClose={() => setShowMediaLibrary(false)}
+        onSelect={(media) => {
+          setForm({ ...form, imageUrl: media.url });
+        }}
+        allowMultiple={false}
+        category="career"
+      />
     </div>
   )
 }
