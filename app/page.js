@@ -606,6 +606,12 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Cultuur & Educatiecentrum Section */}
+      <CultuurEducatieSection />
+
+      {/* Carrièrecentrum Section */}
+      <CarrierecentrumSection />
+
       {/* CTA Section - Donate */}
       <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4">
