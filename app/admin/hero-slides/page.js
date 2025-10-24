@@ -471,6 +471,17 @@ export default function AdminHeroSlidesPage() {
           </div>
         )}
       </div>
+
+      {/* Media Library Modal */}
+      <MediaLibraryModal
+        isOpen={showMediaLibrary}
+        onClose={() => setShowMediaLibrary(false)}
+        onSelect={(media) => {
+          setFormData({...formData, image: media.url});
+        }}
+        allowMultiple={false}
+        category="hero"
+      />
     </AdminLayout>
   );
 }
