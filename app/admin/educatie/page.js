@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/AdminLayout';
+import MediaLibraryModal from '@/components/MediaLibraryModal';
 import { 
   Plus, 
   Edit2, 
@@ -12,12 +13,15 @@ import {
   Download,
   BookOpen,
   Calendar,
-  Clock
+  Clock,
+  Image as ImageIcon,
+  X
 } from 'lucide-react';
 
 export default function EducatieAdminPage() {
   const [activeTab, setActiveTab] = useState('announcements');
   const [loading, setLoading] = useState(false);
+  const [showMediaLibrary, setShowMediaLibrary] = useState(false);
   
   // Announcements
   const [announcements, setAnnouncements] = useState([]);
@@ -29,7 +33,7 @@ export default function EducatieAdminPage() {
   const [articles, setArticles] = useState([]);
   const [showArticleModal, setShowArticleModal] = useState(false);
   const [editingArticle, setEditingArticle] = useState(null);
-  const [articleForm, setArticleForm] = useState({ title: '', excerpt: '', content: '', author: '', date: '' });
+  const [articleForm, setArticleForm] = useState({ title: '', excerpt: '', content: '', author: '', date: '', image: '' });
 
   // Documents
   const [documents, setDocuments] = useState([]);
