@@ -421,15 +421,18 @@ backend:
 
   - task: "Survey System API - CRUD Operations"
     implemented: true
-    working: "NA"
+    working: true
     file: "/app/app/api/surveys/route.js"
     stuck_count: 0
     priority: "high"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
       - working: "NA"
         agent: "main"
         comment: "Global survey system implemented with /api/surveys (GET with module filter, POST create, PUT update, DELETE) and /api/surveys/responses (GET responses, POST submit). Survey data includes: id, title, description, module (career/education/projects), questions (array with id, text, type, options, required), image, endDate, isActive, responses, timestamps. Response data: id, surveyId, answers (array), userName, userEmail, submittedAt. Automatic expiry filtering based on endDate. Enhanced components with drag & drop, Chart.js visualizations, and templates library."
+      - working: true
+        agent: "testing"
+        comment: "SURVEY SYSTEM BACKEND TESTING COMPLETE ✅ All 11 test scenarios passed with comprehensive coverage: 1) GET /api/surveys - Returns empty array initially, works with all module filters (career, education, projects), handles includeExpired parameter correctly 2) POST /api/surveys - Creates surveys successfully for all modules, validates required fields (title, module, questions), rejects invalid data with proper 400 status codes, generates UUID and timestamps correctly 3) PUT /api/surveys - Updates existing surveys, rejects missing ID (400), handles non-existent surveys (404), removes _id from update data properly 4) DELETE /api/surveys - Deletes surveys successfully, rejects missing ID (400), handles non-existent surveys (404) 5) GET /api/surveys/responses - Fetches responses by surveyId, rejects missing surveyId (400), returns proper count and data structure 6) POST /api/surveys/responses - Submits responses successfully, validates required fields (surveyId, answers), handles anonymous users (userName: 'Anoniem'), generates UUID and timestamps 7) Expiry filtering - Automatically filters expired surveys based on endDate, includeExpired=true shows all surveys including expired ones 8) Data structure validation - All returned objects match expected schema with proper UUID usage (no ObjectIDs). Collections verified: surveys, survey_responses. All endpoints return proper JSON with {success, data/error} structure and correct HTTP status codes. Created comprehensive test suite (survey_backend_test.py) with 11 test categories covering CRUD operations, filtering, validation, edge cases, and data integrity. Ready for production use."
 
   - task: "CRM Projects Admin Page"
     implemented: true
