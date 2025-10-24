@@ -389,16 +389,16 @@ export default function NewsManagement() {
           </div>
         )}
 
-        {/* Media Library - Only render when needed */}
-        {showMediaLibrary && (
-          <MediaLibrary
-            onClose={() => setShowMediaLibrary(false)}
-            onSelect={(url) => {
-              setFormData({ ...formData, image: url });
-              setShowMediaLibrary(false);
-            }}
-          />
-        )}
+        {/* Media Library Modal */}
+        <MediaLibraryModal
+          isOpen={showMediaLibrary}
+          onClose={() => setShowMediaLibrary(false)}
+          onSelect={(media) => {
+            setFormData({ ...formData, image: media.url });
+          }}
+          allowMultiple={false}
+          category="news"
+        />
       </div>
     </AdminLayout>
   );
