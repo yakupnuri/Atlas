@@ -10,7 +10,7 @@ from datetime import datetime, timedelta
 import time
 
 # Configuration
-BASE_URL = "https://atlas-manager-1.preview.emergentagent.com"
+BASE_URL = "https://stichting-atlas.preview.emergentagent.com"
 API_BASE = f"{BASE_URL}/api"
 
 def create_test_job(title, company, description, expiry_date=None):
