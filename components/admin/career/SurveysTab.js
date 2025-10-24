@@ -1,9 +1,8 @@
 'use client'
 
 import { useState } from 'react'
-import { Plus, Edit2, Trash2, Eye, ClipboardList } from 'lucide-react'
-import SurveyModal from './SurveyModal'
-import ResultsModal from './ResultsModal'
+import { Plus } from 'lucide-react'
+import SurveyManager from '@/components/surveys/SurveyManager'
 
 export default function SurveysTab({ surveys, onRefresh }) {
   const [showModal, setShowModal] = useState(false)
