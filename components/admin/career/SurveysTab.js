@@ -92,6 +92,13 @@ export default function SurveysTab({ surveys, onRefresh }) {
                 <div className="flex-1">
                   <div className="flex items-center gap-2">
                     <h3 className="font-semibold text-gray-900">{survey.title}</h3>
+                    {survey.page && (
+                      <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded font-medium">
+                        {survey.page === 'carriere' && 'Kariyer'}
+                        {survey.page === 'cultuur-educatie' && 'Kültür & Eğitim'}
+                        {survey.page === 'projectgroep' && 'Proje Grubu'}
+                      </span>
+                    )}
                     {isExpired && (
                       <span className="text-xs bg-red-600 text-white px-2 py-1 rounded">
                         Süresi Dolmuş
