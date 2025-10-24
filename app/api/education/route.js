@@ -86,8 +86,11 @@ export async function PUT(request) {
     const collectionName = `education_${type}`;
     const collection = db.collection(collectionName);
 
+    // Remove _id from update data to avoid MongoDB error
+    const { _id, ...updateData } = data;
+    
     const updatedItem = {
-      ...data,
+      ...updateData,
       updatedAt: new Date().toISOString(),
     };
 
