@@ -157,3 +157,21 @@ code {
 .animate-scroll-up:hover {
   animation-play-state: paused;
 }
+
+/* Horizontal scrolling animation for news ticker */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
