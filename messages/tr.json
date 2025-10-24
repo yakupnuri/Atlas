@@ -70,5 +70,64 @@
       "description": "ANBI durumumuz hakkında daha fazla bilgi için bizimle iletişime geçin",
       "button": "İletişime Geçin"
     }
+  },
+  "surveys": {
+    "title": "Anketler",
+    "newSurvey": "Yeni Anket",
+    "editSurvey": "Anketi Düzenle",
+    "surveyTitle": "Anket Başlığı",
+    "description": "Açıklama",
+    "questions": "Sorular",
+    "addQuestion": "Soru Ekle",
+    "questionText": "Soru Metni",
+    "questionType": "Soru Tipi",
+    "questionTypes": {
+      "text": "Kısa Cevap",
+      "textarea": "Uzun Cevap",
+      "multipleChoice": "Çoktan Seçmeli",
+      "rating": "Değerlendirme (1-5)",
+      "yesNo": "Evet/Hayır"
+    },
+    "options": "Seçenekler",
+    "addOption": "Seçenek Ekle",
+    "required": "Zorunlu mu?",
+    "endDate": "Bitiş Tarihi",
+    "image": "Görsel",
+    "addImage": "Görsel Ekle",
+    "active": "Aktif",
+    "inactive": "Pasif",
+    "expired": "Süresi Dolmuş",
+    "closed": "Kapatıldı",
+    "responses": "Yanıtlar",
+    "participants": "Katılımcılar",
+    "viewResults": "Sonuçları Gör",
+    "takeSurvey": "Ankete Katıl",
+    "submitResponse": "Gönder",
+    "yourAnswer": "Cevabınız...",
+    "thankYou": "Katılımınız için teşekkürler!",
+    "responseSaved": "Cevaplarınız başarıyla gönderildi.",
+    "fillRequired": "Tüm zorunlu soruları doldurun",
+    "anonymous": "Anonim",
+    "name": "İsim",
+    "email": "E-posta",
+    "optionalInfo": "İsteğe bağlı: Bilgilerinizi girin",
+    "results": {
+      "title": "Anket Sonuçları",
+      "totalParticipants": "Toplam Katılımcı",
+      "completionRate": "Tamamlanma Oranı",
+      "distribution": "Cevap dağılımı",
+      "average": "Ortalama",
+      "outOf5": "5 üzerinden",
+      "exportToCSV": "CSV Olarak Dışa Aktar",
+      "noResponses": "Henüz yanıt alınmadı"
+    },
+    "templates": {
+      "title": "Bir şablon seçin",
+      "description": "Öntanımlı bir şablonla başlayın",
+      "startBlank": "Boş anket başlat"
+    },
+    "closesOn": "Kapanış tarihi",
+    "closedOn": "Kapandığı tarih",
+    "surveyClosed": "Bu anket kapatıldı"
   }
 }
