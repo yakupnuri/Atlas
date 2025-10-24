@@ -3,12 +3,15 @@
 import { useState, useEffect, useCallback } from 'react'
 import { X, Upload, Search, Image as ImageIcon, Loader, Check, Trash2, Edit2 } from 'lucide-react'
 
-export default function MediaLibraryModal({ isOpen, onClose, onSelect, allowMultiple = false }) {
+export default function MediaLibraryModal({ isOpen, onClose, onSelect, allowMultiple = false, category = 'all' }) {
   const [activeTab, setActiveTab] = useState('library') // library, upload, unsplash
   const [media, setMedia] = useState([])
   const [selectedMedia, setSelectedMedia] = useState([])
   const [loading, setLoading] = useState(false)
   const [uploading, setUploading] = useState(false)
+  
+  // Category filter
+  const [selectedCategory, setSelectedCategory] = useState(category)
   
   // Upload
   const [dragActive, setDragActive] = useState(false)
@@ -25,12 +28,13 @@ export default function MediaLibraryModal({ isOpen, onClose, onSelect, allowMult
     if (isOpen && activeTab === 'library') {
       fetchMedia()
     }
-  }, [isOpen, activeTab])
+  }, [isOpen, activeTab, selectedCategory])
 
   const fetchMedia = async () => {
     setLoading(true)
     try {
-      const response = await fetch(`/api/media?search=${searchQuery}`)
+      const categoryParam = selectedCategory !== 'all' ? `&category=${selectedCategory}` : ''
+      const response = await fetch(`/api/media?search=${searchQuery}${categoryParam}`)
       const result = await response.json()
       setMedia(result.data || result.media || [])
     } catch (error) {
@@ -49,6 +53,7 @@ export default function MediaLibraryModal({ isOpen, onClose, onSelect, allowMult
         const formData = new FormData()
         formData.append('file', file)
         formData.append('title', file.name)
+        formData.append('category', selectedCategory !== 'all' ? selectedCategory : 'general')
         
         const response = await fetch('/api/media', {
           method: 'POST',
