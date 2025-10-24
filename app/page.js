@@ -174,133 +174,127 @@ export default function Home() {
         </div>
       </section>
 
-      {/* News Highlight + Mission/Vision/Values Section */}
+      {/* News Highlight Section - Full Width */}
       <section className="py-16 container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Left: News Section - 2 columns */}
-          <div className="lg:col-span-2">
-            {latestNews.length > 0 ? (
-              <div className="space-y-6">
-                {/* Big Main News */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
-                >
-                  <Link href={`/nieuws/${latestNews[0]?.slug}`}>
-                    <div className="relative h-[400px]">
-                      <img
-                        src={latestNews[0]?.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'}
-                        alt={latestNews[0]?.title}
-                        className="w-full h-full object-cover transition-all duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent"></div>
-                      
-                      {/* Category badge */}
-                      <div className="absolute top-4 left-4">
-                        <span className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-bold uppercase">
-                          {latestNews[0]?.category || 'Nieuws'}
-                        </span>
-                      </div>
-                      
-                      {/* Title and description */}
-                      <div className="absolute bottom-0 left-0 right-0 p-6 bg-white/95 backdrop-blur-sm">
-                        <h2 className="text-2xl font-bold text-gray-900 mb-2 leading-tight">
-                          {latestNews[0]?.title}
-                        </h2>
-                        <p className="text-gray-600 text-sm line-clamp-2">
-                          {latestNews[0]?.excerpt}
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-
-                {/* Small News Boxes with Hover Effect */}
-                {latestNews.length > 1 && (
-                  <div className="grid grid-cols-4 gap-3">
-                    {latestNews.slice(0, 4).map((news, index) => (
-                      <motion.div
-                        key={news.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: index * 0.1 }}
-                        className="rounded-lg overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-lg hover:scale-105"
-                      >
-                        <Link href={`/nieuws/${news.slug}`}>
-                          <div className="relative h-32">
-                            <img
-                              src={news.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=300'}
-                              alt={news.title}
-                              className="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                          </div>
-                        </Link>
-                      </motion.div>
-                    ))}
-                  </div>
-                )}
+        {latestNews.length > 0 ? (
+          <div className="space-y-6">
+            {/* Section Header */}
+            <div className="text-center mb-8">
+              <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-700 px-4 py-2 rounded-full mb-4">
+                <Newspaper className="w-5 h-5" />
+                <span className="font-semibold">Laatste Nieuws</span>
               </div>
-            ) : (
-              <div className="bg-gray-100 rounded-2xl shadow-lg h-full flex items-center justify-center p-8">
-                <p className="text-gray-500 text-lg">Geen nieuws beschikbaar</p>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                Blijf Op De Hoogte
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Ontdek de nieuwste ontwikkelingen, verhalen en updates van Stichting Atlas
+              </p>
+            </div>
+
+            {/* Big Main News */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
+            >
+              <Link href={`/nieuws/${latestNews[0]?.slug}`}>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                  {/* Image */}
+                  <div className="relative h-[400px] lg:h-[500px]">
+                    <img
+                      src={latestNews[0]?.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'}
+                      alt={latestNews[0]?.title}
+                      className="w-full h-full object-cover transition-all duration-500 hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent lg:hidden"></div>
+                    
+                    {/* Category badge */}
+                    <div className="absolute top-6 left-6">
+                      <span className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-bold uppercase shadow-lg">
+                        {latestNews[0]?.category || 'Nieuws'}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-8 lg:p-12 flex flex-col justify-center">
+                    <div className="mb-4">
+                      <span className="text-sm text-gray-500">
+                        {new Date(latestNews[0]?.publishDate).toLocaleDateString('nl-NL', { 
+                          day: 'numeric', 
+                          month: 'long', 
+                          year: 'numeric' 
+                        })}
+                      </span>
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                      {latestNews[0]?.title}
+                    </h2>
+                    <p className="text-gray-600 text-lg mb-6 line-clamp-4">
+                      {latestNews[0]?.excerpt}
+                    </p>
+                    <div className="flex items-center text-[#05B6C4] font-semibold text-lg group-hover:gap-3 transition-all">
+                      Lees meer
+                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </div>
+              </Link>
+            </motion.div>
+
+            {/* Small News Boxes Grid */}
+            {latestNews.length > 1 && (
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {latestNews.slice(1, 5).map((news, index) => (
+                  <motion.div
+                    key={news.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="rounded-xl overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-xl hover:scale-105 group"
+                  >
+                    <Link href={`/nieuws/${news.slug}`}>
+                      <div className="relative h-48">
+                        <img
+                          src={news.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=300'}
+                          alt={news.title}
+                          className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+                        <div className="absolute bottom-0 left-0 right-0 p-4">
+                          <h3 className="text-white font-bold text-sm line-clamp-2">
+                            {news.title}
+                          </h3>
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                ))}
               </div>
             )}
-          </div>
 
-          {/* Right: Mission/Vision/Values - 1 column */}
-          <div className="lg:col-span-1 space-y-4">
-            {[
-              {
-                title: 'Onze Missie',
-                description: 'We bouwen bruggen tussen culturen en generaties.',
-                icon: Target,
-                color: 'from-[#05B6C4] to-[#3B87BE]',
-              },
-              {
-                title: 'Onze Visie',
-                description: 'Een inclusieve samenleving waar iedereen zich welkom voelt.',
-                icon: Heart,
-                color: 'from-[#3B87BE] to-[#99D8E0]',
-              },
-              {
-                title: 'Onze Waarden',
-                description: 'Inclusiviteit, respect en samenwerking staan centraal.',
-                icon: Award,
-                color: 'from-[#B37B83] to-[#F7941D]',
-              },
-            ].map((item, index) => {
-              const IconComponent = item.icon;
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.15 }}
-                  className="bg-white rounded-xl p-6 shadow-md hover:shadow-xl transition-all group"
-                >
-                  <div className={`w-12 h-12 bg-gradient-to-br ${item.color} rounded-lg mb-4 flex items-center justify-center`}>
-                    <IconComponent className="w-6 h-6 text-white" />
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-800 mb-2">{item.title}</h3>
-                  <p className="text-gray-600 text-sm mb-4">{item.description}</p>
-                  
-                  <Link 
-                    href="/over" 
-                    className="inline-flex items-center text-[#05B6C4] hover:text-[#3B87BE] font-semibold text-sm transition-colors"
-                  >
-                    Lees meer
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </motion.div>
-              );
-            })}
+            {/* View All Link */}
+            <div className="text-center pt-6">
+              <Link
+                href="/nieuws"
+                className="inline-flex items-center gap-2 text-[#05B6C4] font-semibold text-lg hover:gap-3 transition-all"
+              >
+                Bekijk alle nieuws
+                <ArrowRight className="w-5 h-5" />
+              </Link>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="bg-gray-100 rounded-2xl shadow-lg h-full flex items-center justify-center p-12">
+            <div className="text-center">
+              <Newspaper className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+              <p className="text-gray-500 text-lg">Geen nieuws beschikbaar</p>
+            </div>
+          </div>
+        )}
       </section>
 
       {/* Quick Links Bar */}
