@@ -50,6 +50,9 @@ export async function POST(request) {
   try {
     const formData = await request.formData();
     const file = formData.get('file');
+    const category = formData.get('category') || 'general';
+    const title = formData.get('title') || '';
+    const alt = formData.get('alt') || '';
     
     if (!file) {
       return NextResponse.json(
@@ -76,21 +79,36 @@ export async function POST(request) {
       id: require('crypto').randomUUID(),
       filename,
       originalName: file.name,
+      title: title || file.name,
+      alt: alt,
       path: `/uploads/${filename}`,
       url: `/uploads/${filename}`,
       type: file.type,
       size: file.size,
-      uploadDate: new Date()
+      category: category,
+      uploadDate: new Date(),
+      createdAt: new Date().toISOString()
     };
     
     await db.collection('media').insertOne(mediaDoc);
     
     return NextResponse.json(
       { 
+        success: true,
         message: 'File uploaded successfully',
-        media: mediaDoc
+        media: mediaDoc,
+        data: mediaDoc
       },
       { headers: corsHeaders }
+    );
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    return NextResponse.json(
+      { error: 'Upload failed', details: error.message },
+      { status: 500, headers: corsHeaders }
+    );
+  }
+}
     );
   } catch (error) {
     console.error('Error uploading file:', error);
