@@ -2,6 +2,27 @@
 
 import { useState, useEffect } from 'react'
 import { ArrowLeft, Users, BarChart3, PieChart, Download } from 'lucide-react'
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js'
+import { Bar, Doughnut } from 'react-chartjs-2'
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  ArcElement,
+  Title,
+  Tooltip,
+  Legend
+)
 
 export default function SurveyResults({ survey, onClose }) {
   const [responses, setResponses] = useState([])
