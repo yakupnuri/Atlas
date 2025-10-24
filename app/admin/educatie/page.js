@@ -1272,6 +1272,17 @@ export default function EducatieAdminPage() {
           </div>
         )}
       </div>
+
+      {/* Media Library Modal */}
+      <MediaLibraryModal
+        isOpen={showMediaLibrary}
+        onClose={() => setShowMediaLibrary(false)}
+        onSelect={(media) => {
+          setArticleForm({...articleForm, image: media.url});
+        }}
+        allowMultiple={false}
+        category="education"
+      />
     </AdminLayout>
   );
 }
