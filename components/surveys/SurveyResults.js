@@ -313,34 +313,72 @@ export default function SurveyResults({ survey, onClose }) {
                 )}
 
                 {questionStats.type === 'rating' && (
-                  <div>
-                    <div className="text-center mb-4">
-                      <p className="text-5xl font-bold text-blue-600">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* Average Display */}
+                    <div className="flex flex-col items-center justify-center bg-gradient-to-br from-yellow-50 to-orange-50 rounded-lg p-8">
+                      <p className="text-6xl font-bold text-yellow-600 mb-2">
                         {questionStats.average}
                       </p>
-                      <p className="text-gray-600 text-sm">van 5 sterren</p>
+                      <p className="text-gray-600 text-lg font-medium">van 5 sterren</p>
+                      <p className="text-gray-500 text-sm mt-2">
+                        Gebaseerd op {questionStats.total} antwoorden
+                      </p>
                     </div>
-                    <div className="space-y-2">
-                      {[5, 4, 3, 2, 1].map((rating) => {
-                        const count = questionStats.distribution[rating] || 0
-                        const percentage = questionStats.total > 0
-                          ? ((count / questionStats.total) * 100).toFixed(1)
-                          : 0
-                        return (
-                          <div key={rating} className="flex items-center gap-3">
-                            <span className="text-sm font-medium w-8">{rating}⭐</span>
-                            <div className="flex-1 bg-gray-200 rounded-full h-2 overflow-hidden">
-                              <div
-                                className="bg-yellow-500 h-full rounded-full"
-                                style={{ width: `${percentage}%` }}
-                              />
-                            </div>
-                            <span className="text-sm text-gray-600 w-16 text-right">
-                              {count} ({percentage}%)
-                            </span>
-                          </div>
-                        )
-                      })}
+
+                    {/* Bar Chart for Rating Distribution */}
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <Bar
+                        data={{
+                          labels: ['1 ⭐', '2 ⭐', '3 ⭐', '4 ⭐', '5 ⭐'],
+                          datasets: [
+                            {
+                              label: 'Aantal stemmen',
+                              data: [1, 2, 3, 4, 5].map(rating => questionStats.distribution[rating] || 0),
+                              backgroundColor: [
+                                'rgba(239, 68, 68, 0.8)',
+                                'rgba(251, 146, 60, 0.8)',
+                                'rgba(234, 179, 8, 0.8)',
+                                'rgba(132, 204, 22, 0.8)',
+                                'rgba(34, 197, 94, 0.8)',
+                              ],
+                              borderColor: [
+                                'rgba(239, 68, 68, 1)',
+                                'rgba(251, 146, 60, 1)',
+                                'rgba(234, 179, 8, 1)',
+                                'rgba(132, 204, 22, 1)',
+                                'rgba(34, 197, 94, 1)',
+                              ],
+                              borderWidth: 2,
+                              borderRadius: 8,
+                            }
+                          ]
+                        }}
+                        options={{
+                          responsive: true,
+                          maintainAspectRatio: true,
+                          plugins: {
+                            legend: {
+                              display: false
+                            },
+                            title: {
+                              display: true,
+                              text: 'Verdeling van beoordelingen',
+                              font: {
+                                size: 14,
+                                weight: 'bold'
+                              }
+                            }
+                          },
+                          scales: {
+                            y: {
+                              beginAtZero: true,
+                              ticks: {
+                                stepSize: 1
+                              }
+                            }
+                          }
+                        }}
+                      />
                     </div>
                   </div>
                 )}
