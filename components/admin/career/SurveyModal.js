@@ -147,6 +147,22 @@ export default function SurveyModal({ survey, onClose, onSave }) {
               placeholder="Anket başlığı"
             />
           </div>
+
+          {/* Page Selection Dropdown */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">Anket Hangi Sayfada Gösterilecek? *</label>
+            <select
+              value={form.page}
+              onChange={(e) => setForm({ ...form, page: e.target.value })}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none bg-white"
+            >
+              <option value="carriere">Kariyer Centrum</option>
+              <option value="cultuur-educatie">Kültür & Eğitim Merkezi</option>
+              <option value="projectgroep">Proje Grubu</option>
+            </select>
+            <p className="text-xs text-gray-500 mt-1">Anket seçilen sayfada görünecektir</p>
+          </div>
+
           <div>
             <label className="block text-sm font-semibold text-gray-700 mb-2">Açıklama</label>
             <textarea
