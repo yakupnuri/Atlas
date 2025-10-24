@@ -806,7 +806,8 @@ export default function EducatieAdminPage() {
                           <button
                             onClick={() => {
                               setEditingCourse(course);
-                              setCourseForm(course);
+                              const { _id, ...courseData } = course;
+                              setCourseForm(courseData);
                               setShowCourseModal(true);
                             }}
                             className="p-2 text-blue-600 hover:bg-blue-50 rounded"
