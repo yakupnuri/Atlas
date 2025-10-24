@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminLayout from '@/components/AdminLayout';
-import MediaLibrary from '@/components/MediaLibrary';
+import MediaLibraryModal from '@/components/MediaLibraryModal';
 import { Calendar, MapPin, Clock, Users, Plus, Edit, Trash2, Image as ImageIcon, X, Mail, UserCheck } from 'lucide-react';
 
 export default function AdminEventsPage() {
