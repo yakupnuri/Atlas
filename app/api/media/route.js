@@ -109,15 +109,6 @@ export async function POST(request) {
     );
   }
 }
-    );
-  } catch (error) {
-    console.error('Error uploading file:', error);
-    return NextResponse.json(
-      { error: 'Upload failed: ' + error.message },
-      { status: 500, headers: corsHeaders }
-    );
-  }
-}
 
 // Delete media
 export async function DELETE(request) {
