@@ -559,7 +559,8 @@ export default function EducatieAdminPage() {
                         <button
                           onClick={() => {
                             setEditingAnnouncement(announcement);
-                            setAnnouncementForm(announcement);
+                            const { _id, ...announcementData } = announcement;
+                            setAnnouncementForm(announcementData);
                             setShowAnnouncementModal(true);
                           }}
                           className="p-2 text-blue-600 hover:bg-blue-50 rounded"
