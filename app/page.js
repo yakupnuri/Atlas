@@ -638,76 +638,8 @@ export default function Home() {
 
   return (
     <div className="bg-white">
-      {/* Hero Section - Reduced Height */}
-      <section className="relative min-h-[50vh] flex items-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=1920"
-            alt="Community"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#05B6C4]/95 via-[#3B87BE]/90 to-transparent"></div>
-        </div>
-
-        {/* Content */}
-        <div className="relative container mx-auto px-4 py-16">
-          <div className="max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <Sparkles className="w-5 h-5 text-yellow-300" />
-                <span className="text-white/90 font-medium">Welkom bij Stichting Atlas</span>
-              </div>
-              
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 leading-tight">
-                Samen Bouwen Aan Een
-                <span className="block text-yellow-300">Inclusieve Toekomst</span>
-              </h1>
-              
-              <p className="text-lg md:text-xl text-white/90 mb-6 leading-relaxed">
-                Een gemeenschap waar culturen samenkomen, kennis wordt gedeeld en iedereen de kans krijgt om te groeien.
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-3">
-                <Link
-                  href="/academie"
-                  className="inline-flex items-center justify-center gap-2 bg-white text-[#05B6C4] px-6 py-3 rounded-xl font-bold hover:shadow-2xl hover:scale-105 transition-all"
-                >
-                  <GraduationCap className="w-5 h-5" />
-                  Ontdek Atlas Academie
-                </Link>
-                <button
-                  onClick={() => setContactModalOpen(true)}
-                  className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm border-2 border-white text-white px-6 py-3 rounded-xl font-bold hover:bg-white/20 transition-all"
-                >
-                  Neem Contact Op
-                  <ArrowRight className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Trust Badges */}
-              <div className="mt-8 flex items-center gap-4 text-white/80 text-sm">
-                <div className="flex items-center gap-1">
-                  <CheckCircle className="w-4 h-4 text-green-300" />
-                  <span>ANBI Erkend</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <CheckCircle className="w-4 h-4 text-green-300" />
-                  <span>500+ Deelnemers</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <CheckCircle className="w-4 h-4 text-green-300" />
-                  <span>10+ Jaar Ervaring</span>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
+      {/* Hero Slider */}
+      <HeroSlider />
 
       {/* News Highlight Section - Full Width with Hover Functionality */}
       <section className="py-16 container mx-auto px-4">
