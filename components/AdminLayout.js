@@ -257,55 +257,6 @@ export default function AdminLayout({ children }) {
               }
             }
 
-            // Item with SubItems (like Homepage)
-            if (item.subItems) {
-              return (
-                <div key={`menu-item-${index}`}>
-                  <button
-                    onClick={() => setHomepageMenuOpen(!homepageMenuOpen)}
-                    className="flex items-center gap-3 px-4 py-3 w-full rounded-lg hover:bg-white/10 transition-all"
-                  >
-                    <Icon className="w-5 h-5 flex-shrink-0" />
-                    {sidebarOpen && (
-                      <>
-                        <span className="font-medium flex-1 text-left">{item.title}</span>
-                        {homepageMenuOpen ? (
-                          <ChevronDown className="w-4 h-4" />
-                        ) : (
-                          <ChevronRight className="w-4 h-4" />
-                        )}
-                      </>
-                    )}
-                  </button>
-
-                  {/* SubItems */}
-                  {homepageMenuOpen && sidebarOpen && (
-                    <div className="mt-2 ml-4 space-y-1">
-                      {item.subItems.map((subItem) => {
-                        const SubIcon = subItem.icon;
-                        const isSubActive = pathname === subItem.href;
-                        
-                        return (
-                          <Link
-                            key={subItem.href}
-                            href={subItem.href}
-                            className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all text-sm ${
-                              isSubActive
-                                ? 'bg-white text-[#05B6C4] shadow-lg'
-                                : 'hover:bg-white/10'
-                            }`}
-                          >
-                            <SubIcon className="w-4 h-4 flex-shrink-0" />
-                            <span className="font-medium">{subItem.title}</span>
-                          </Link>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              );
-            }
-            
             // External link (opens in same tab)
             if (item.external) {
               return (
