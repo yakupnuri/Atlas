@@ -20,16 +20,6 @@ export default function HomepageAdminPage() {
   const [mediaTarget, setMediaTarget] = useState('');
   
   const [formData, setFormData] = useState({
-    hero: {
-      badge: '',
-      title: '',
-      titleHighlight: '',
-      description: '',
-      image: '',
-      primaryButton: { text: '', link: '' },
-      secondaryButton: { text: '', link: '' },
-      trustBadges: []
-    },
     featuredSections: {
       showNews: true,
       showEvents: true,
@@ -37,11 +27,6 @@ export default function HomepageAdminPage() {
       newsCount: 4,
       eventsCount: 3,
       projectsCount: 6
-    },
-    seo: {
-      title: '',
-      description: '',
-      keywords: ''
     }
   });
 
