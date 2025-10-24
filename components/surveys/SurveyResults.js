@@ -210,26 +210,105 @@ export default function SurveyResults({ survey, onClose }) {
                 </h3>
 
                 {questionStats.type === 'multiple-choice' && (
-                  <div className="space-y-3">
-                    {Object.entries(questionStats.distribution).map(([option, count]) => {
-                      const percentage = ((count / questionStats.total) * 100).toFixed(1)
-                      return (
-                        <div key={option} className="space-y-1">
-                          <div className="flex items-center justify-between text-sm">
-                            <span className="font-medium">{option}</span>
-                            <span className="text-gray-600">
-                              {count} ({percentage}%)
-                            </span>
-                          </div>
-                          <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
-                            <div
-                              className="bg-blue-600 h-full rounded-full transition-all"
-                              style={{ width: `${percentage}%` }}
-                            />
-                          </div>
-                        </div>
-                      )
-                    })}
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    {/* Bar Chart */}
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <Bar
+                        data={{
+                          labels: Object.keys(questionStats.distribution),
+                          datasets: [
+                            {
+                              label: 'Aantal antwoorden',
+                              data: Object.values(questionStats.distribution),
+                              backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                              borderColor: 'rgba(59, 130, 246, 1)',
+                              borderWidth: 2,
+                              borderRadius: 8,
+                            }
+                          ]
+                        }}
+                        options={{
+                          responsive: true,
+                          maintainAspectRatio: true,
+                          plugins: {
+                            legend: {
+                              display: false
+                            },
+                            title: {
+                              display: true,
+                              text: 'Verdeling van antwoorden',
+                              font: {
+                                size: 14,
+                                weight: 'bold'
+                              }
+                            }
+                          },
+                          scales: {
+                            y: {
+                              beginAtZero: true,
+                              ticks: {
+                                stepSize: 1
+                              }
+                            }
+                          }
+                        }}
+                      />
+                    </div>
+
+                    {/* Doughnut Chart */}
+                    <div className="bg-gray-50 rounded-lg p-4">
+                      <Doughnut
+                        data={{
+                          labels: Object.keys(questionStats.distribution),
+                          datasets: [
+                            {
+                              label: 'Percentage',
+                              data: Object.values(questionStats.distribution),
+                              backgroundColor: [
+                                'rgba(59, 130, 246, 0.8)',
+                                'rgba(16, 185, 129, 0.8)',
+                                'rgba(251, 146, 60, 0.8)',
+                                'rgba(239, 68, 68, 0.8)',
+                                'rgba(168, 85, 247, 0.8)',
+                                'rgba(236, 72, 153, 0.8)',
+                              ],
+                              borderColor: [
+                                'rgba(59, 130, 246, 1)',
+                                'rgba(16, 185, 129, 1)',
+                                'rgba(251, 146, 60, 1)',
+                                'rgba(239, 68, 68, 1)',
+                                'rgba(168, 85, 247, 1)',
+                                'rgba(236, 72, 153, 1)',
+                              ],
+                              borderWidth: 2,
+                            }
+                          ]
+                        }}
+                        options={{
+                          responsive: true,
+                          maintainAspectRatio: true,
+                          plugins: {
+                            legend: {
+                              position: 'bottom',
+                              labels: {
+                                padding: 12,
+                                font: {
+                                  size: 12
+                                }
+                              }
+                            },
+                            title: {
+                              display: true,
+                              text: 'Percentage verdeling',
+                              font: {
+                                size: 14,
+                                weight: 'bold'
+                              }
+                            }
+                          }
+                        }}
+                      />
+                    </div>
                   </div>
                 )}
 
