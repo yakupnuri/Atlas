@@ -62,6 +62,29 @@ export async function POST(request) {
     
     await collection.insertOne(response);
     
+    // Fetch survey data for email
+    const surveysCollection = db.collection('surveys');
+    const survey = await surveysCollection.findOne({ id: surveyId });
+    
+    // Send emails (async, don't wait)
+    if (survey) {
+      const adminEmail = process.env.ADMIN_EMAIL;
+      
+      // Admin notification
+      if (adminEmail) {
+        sendNewResponseEmail(survey, response, adminEmail, 'nl').catch(err => 
+          console.error('Admin email failed:', err)
+        );
+      }
+      
+      // User confirmation
+      if (response.userEmail) {
+        sendUserConfirmationEmail(survey, response, 'nl').catch(err => 
+          console.error('User confirmation email failed:', err)
+        );
+      }
+    }
+    
     return NextResponse.json({ 
       success: true, 
       message: 'Response submitted successfully',
