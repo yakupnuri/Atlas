@@ -265,19 +265,17 @@ export default function AdminLayout({ children }) {
 
             // Item with SubItems (like Homepage)
             if (item.subItems) {
-              const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
-              
               return (
                 <div key={`menu-item-${index}`}>
                   <button
-                    onClick={() => setIsSubMenuOpen(!isSubMenuOpen)}
+                    onClick={() => setHomepageMenuOpen(!homepageMenuOpen)}
                     className="flex items-center gap-3 px-4 py-3 w-full rounded-lg hover:bg-white/10 transition-all"
                   >
                     <Icon className="w-5 h-5 flex-shrink-0" />
                     {sidebarOpen && (
                       <>
                         <span className="font-medium flex-1 text-left">{item.title}</span>
-                        {isSubMenuOpen ? (
+                        {homepageMenuOpen ? (
                           <ChevronDown className="w-4 h-4" />
                         ) : (
                           <ChevronRight className="w-4 h-4" />
@@ -287,7 +285,7 @@ export default function AdminLayout({ children }) {
                   </button>
 
                   {/* SubItems */}
-                  {isSubMenuOpen && sidebarOpen && (
+                  {homepageMenuOpen && sidebarOpen && (
                     <div className="mt-2 ml-4 space-y-1">
                       {item.subItems.map((subItem) => {
                         const SubIcon = subItem.icon;
