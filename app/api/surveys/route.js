@@ -78,6 +78,14 @@ export async function POST(request) {
     
     await collection.insertOne(survey);
     
+    // Send email notification to admin (async, don't wait)
+    const adminEmail = process.env.ADMIN_EMAIL;
+    if (adminEmail) {
+      sendSurveyCreatedEmail(survey, adminEmail, 'nl').catch(err => 
+        console.error('Email send failed:', err)
+      );
+    }
+    
     return NextResponse.json({ 
       success: true, 
       message: 'Survey created successfully',
