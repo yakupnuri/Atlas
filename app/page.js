@@ -293,8 +293,9 @@ function CultuurEducatieSection() {
 
 // Carrièrecentrum Section Component
 function CarrierecentrumSection() {
-  const [surveys, setSurveys] = useState([]);
   const [jobs, setJobs] = useState([]);
+  const [seminars, setSeminars] = useState([]);
+  const [surveys, setSurveys] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -304,29 +305,22 @@ function CarrierecentrumSection() {
 
   const fetchData = async () => {
     try {
-      const [surveysRes, jobsRes, announcementsRes] = await Promise.all([
-        fetch('/api/career?type=surveys'),
+      const [jobsRes, seminarsRes, surveysRes, announcementsRes] = await Promise.all([
         fetch('/api/career?type=jobs'),
+        fetch('/api/career?type=seminars'),
+        fetch('/api/career?type=surveys'),
         fetch('/api/career?type=announcements')
       ]);
       
-      const surveysData = await surveysRes.json();
       const jobsData = await jobsRes.json();
+      const seminarsData = await seminarsRes.json();
+      const surveysData = await surveysRes.json();
       const announcementsData = await announcementsRes.json();
       
-      // Filter active surveys and jobs
-      const now = new Date();
-      const activeSurveys = (surveysData.data || []).filter(s => 
-        new Date(s.endDate) > now
-      ).slice(0, 3);
-      
-      const activeJobs = (jobsData.data || []).filter(j => 
-        !j.expiryDate || new Date(j.expiryDate) > now
-      ).slice(0, 3);
-      
-      setSurveys(activeSurveys);
-      setJobs(activeJobs);
-      setAnnouncements((announcementsData.data || []).slice(0, 2));
+      setJobs((jobsData.data || []).slice(0, 3));
+      setSeminars((seminarsData.data || []).slice(0, 3));
+      setSurveys((surveysData.data || []).slice(0, 3));
+      setAnnouncements(announcementsData.data || []);
     } catch (error) {
       console.error('Error fetching career data:', error);
     } finally {
@@ -352,144 +346,208 @@ function CarrierecentrumSection() {
               Carrière & Ontwikkeling
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Vacatures, enquêtes en professionele ontwikkeling
+              Vacatures, seminars, enquêtes en professionele ontwikkeling
             </p>
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Vacatures */}
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-              <Briefcase className="w-6 h-6 text-purple-600" />
-              Vacatures
-            </h3>
-            {jobs.length > 0 ? (
-              <div className="space-y-4">
-                {jobs.map((job, index) => (
-                  <motion.div
-                    key={job.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link href="/academie/carriere">
-                      <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl p-6 hover:shadow-lg transition-all group">
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="flex-1">
-                            <h4 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-purple-600 transition-colors">
-                              {job.title}
-                            </h4>
-                            <p className="text-sm text-gray-600">{job.company}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Left Column - Main Content */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Vacatures (Job Postings) */}
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <Briefcase className="w-6 h-6 text-purple-600" />
+                Vacatures
+              </h3>
+              {jobs.length > 0 ? (
+                <div className="space-y-4">
+                  {jobs.map((job, index) => (
+                    <motion.div
+                      key={job.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <Link href="/academie/carriere">
+                        <div className="bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all group border-l-4 border-purple-500">
+                          <div className="flex items-start gap-4">
+                            <div className="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                              <Briefcase className="w-6 h-6 text-white" />
+                            </div>
+                            <div className="flex-1">
+                              <div className="flex items-start justify-between mb-2">
+                                <div>
+                                  <h4 className="text-lg font-bold text-gray-900 group-hover:text-purple-600 transition-colors">
+                                    {job.title}
+                                  </h4>
+                                  <p className="text-sm text-gray-600">{job.company}</p>
+                                </div>
+                                {job.type && (
+                                  <span className="text-xs bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-semibold">
+                                    {job.type}
+                                  </span>
+                                )}
+                              </div>
+                              <p className="text-sm text-gray-600 mb-3 line-clamp-2">{job.description}</p>
+                              <div className="flex items-center text-xs text-gray-500">
+                                <Calendar className="w-3 h-3 mr-1" />
+                                Geplaatst: {new Date(job.postedDate || job.createdAt).toLocaleDateString('nl-NL')}
+                              </div>
+                            </div>
+                            <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-purple-600 transition-colors" />
                           </div>
-                          {job.type && (
-                            <span className="text-xs bg-purple-200 text-purple-800 px-3 py-1 rounded-full font-semibold">
-                              {job.type}
-                            </span>
-                          )}
                         </div>
-                        <p className="text-sm text-gray-600 line-clamp-2 mb-3">
-                          {job.description}
-                        </p>
-                        <div className="flex items-center text-sm text-gray-500">
-                          <Calendar className="w-4 h-4 mr-1" />
-                          Geplaatst: {new Date(job.postedDate).toLocaleDateString('nl-NL')}
-                        </div>
-                      </div>
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-            ) : (
-              <div className="bg-gray-50 rounded-xl p-8 text-center">
-                <Briefcase className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                <p className="text-gray-600">Momenteel geen actieve vacatures</p>
-              </div>
-            )}
-          </div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              ) : (
+                <div className="bg-gray-50 rounded-xl p-8 text-center">
+                  <Briefcase className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                  <p className="text-gray-600">Momenteel geen actieve vacatures</p>
+                </div>
+              )}
+            </div>
 
-          {/* Enquêtes */}
-          <div>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-              <FileCheck className="w-6 h-6 text-blue-600" />
-              Actieve Enquêtes
-            </h3>
-            {surveys.length > 0 ? (
-              <div className="space-y-4">
-                {surveys.map((survey, index) => (
-                  <motion.div
-                    key={survey.id}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link href="/academie/carriere">
-                      <div className="bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-6 hover:shadow-lg transition-all group">
-                        <h4 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
-                          {survey.title}
-                        </h4>
-                        <p className="text-sm text-gray-600 mb-3 line-clamp-2">
-                          {survey.description}
-                        </p>
-                        <div className="flex items-center justify-between text-sm">
-                          <span className="text-gray-500 flex items-center gap-1">
-                            <Clock className="w-4 h-4" />
-                            Sluit: {new Date(survey.endDate).toLocaleDateString('nl-NL')}
-                          </span>
-                          <span className="text-blue-600 font-semibold">
-                            Doe mee →
-                          </span>
+            {/* Seminars */}
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <Users className="w-6 h-6 text-blue-600" />
+                Seminars & Workshops
+              </h3>
+              {seminars.length > 0 ? (
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  {seminars.map((seminar, index) => (
+                    <motion.div
+                      key={seminar.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      <Link href="/academie/carriere">
+                        <div className="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl p-6 hover:shadow-lg transition-all group h-full">
+                          <Users className="w-8 h-8 text-blue-600 mb-3 group-hover:scale-110 transition-transform" />
+                          <h4 className="text-sm font-bold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors">
+                            {seminar.title}
+                          </h4>
+                          <div className="space-y-1 text-xs text-gray-600">
+                            {seminar.date && (
+                              <div className="flex items-center gap-1">
+                                <Calendar className="w-3 h-3" />
+                                {new Date(seminar.date).toLocaleDateString('nl-NL')}
+                              </div>
+                            )}
+                            {seminar.time && (
+                              <div className="flex items-center gap-1">
+                                <Clock className="w-3 h-3" />
+                                {seminar.time}
+                              </div>
+                            )}
+                          </div>
                         </div>
-                      </div>
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-            ) : (
-              <div className="bg-gray-50 rounded-xl p-8 text-center">
-                <FileCheck className="w-12 h-12 text-gray-400 mx-auto mb-3" />
-                <p className="text-gray-600">Geen actieve enquêtes op dit moment</p>
-              </div>
-            )}
-          </div>
-        </div>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              ) : (
+                <div className="bg-gray-50 rounded-xl p-8 text-center">
+                  <Users className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                  <p className="text-gray-600">Geen seminars gepland</p>
+                </div>
+              )}
+            </div>
 
-        {/* Announcements */}
-        {announcements.length > 0 && (
-          <div className="mt-12">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-              <Bell className="w-6 h-6 text-orange-600" />
-              Aankondigingen
-            </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {announcements.map((announcement, index) => (
-                <motion.div
-                  key={announcement.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <div className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-xl p-6 border-l-4 border-orange-500">
-                    <div className="flex items-start gap-3">
-                      <Bell className="w-5 h-5 text-orange-600 flex-shrink-0 mt-1" />
-                      <div>
-                        <h4 className="text-lg font-bold text-gray-900 mb-2">
-                          {announcement.title}
-                        </h4>
-                        <p className="text-sm text-gray-600">
-                          {announcement.content}
-                        </p>
+            {/* Surveys */}
+            <div>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <FileCheck className="w-6 h-6 text-green-600" />
+                Actieve Enquêtes
+              </h3>
+              {surveys.length > 0 ? (
+                <div className="space-y-3">
+                  {surveys.map((survey, index) => (
+                    <motion.div
+                      key={survey.id}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-4 flex items-center gap-4"
+                    >
+                      <div className="bg-white rounded-lg p-3 flex items-center justify-center">
+                        <FileCheck className="w-6 h-6 text-green-600" />
                       </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                      <div className="flex-1">
+                        <h4 className="font-bold text-gray-900">{survey.title}</h4>
+                        {survey.description && (
+                          <p className="text-sm text-gray-600 line-clamp-1">{survey.description}</p>
+                        )}
+                      </div>
+                      <Link href="/academie/carriere">
+                        <button className="text-sm bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                          Doe mee
+                        </button>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              ) : (
+                <div className="bg-gray-50 rounded-xl p-8 text-center">
+                  <FileCheck className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                  <p className="text-gray-600">Geen actieve enquêtes</p>
+                </div>
+              )}
             </div>
           </div>
-        )}
+
+          {/* Right Column - News/Announcements */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-24">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                <Bell className="w-6 h-6 text-orange-600" />
+                Nieuws
+              </h3>
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden" style={{ height: '600px' }}>
+                {announcements.length > 0 ? (
+                  <div className="relative h-full overflow-hidden">
+                    <div className="animate-scroll-up space-y-4 p-6">
+                      {announcements.concat(announcements).map((announcement, index) => (
+                        <motion.div
+                          key={`${announcement.id}-${index}`}
+                          className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg p-4 border-l-4 border-orange-500"
+                        >
+                          <div className="flex items-start gap-2">
+                            <Bell className="w-4 h-4 text-orange-600 flex-shrink-0 mt-1" />
+                            <div>
+                              <h4 className="font-bold text-gray-900 text-sm mb-1">
+                                {announcement.title}
+                              </h4>
+                              {announcement.content && (
+                                <p className="text-xs text-gray-600 line-clamp-2">
+                                  {announcement.content}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+                ) : (
+                  <div className="h-full flex items-center justify-center p-8">
+                    <div className="text-center">
+                      <Bell className="w-12 h-12 text-gray-400 mx-auto mb-3" />
+                      <p className="text-gray-600">Geen nieuws beschikbaar</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
 
         {/* CTA */}
         <div className="text-center mt-12">
