@@ -14,14 +14,10 @@ import {
 } from 'lucide-react';
 
 export default function HomepageAdminPage() {
-  const [activeTab, setActiveTab] = useState('content');
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [showMediaLibrary, setShowMediaLibrary] = useState(false);
   const [mediaTarget, setMediaTarget] = useState('');
-  const [heroSlides, setHeroSlides] = useState([]);
-  const [editingSlide, setEditingSlide] = useState(null);
-  const [showSlideModal, setShowSlideModal] = useState(false);
   
   const [formData, setFormData] = useState({
     hero: {
