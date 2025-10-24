@@ -41,6 +41,7 @@ export default function AdminLayout({ children }) {
   const [crmMenuOpen, setCrmMenuOpen] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
   const [onlineUsers, setOnlineUsers] = useState(1);
+  const [homepageMenuOpen, setHomepageMenuOpen] = useState(false);
 
   useEffect(() => {
     // Set admin default language to Turkish if not set
