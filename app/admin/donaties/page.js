@@ -392,16 +392,16 @@ export default function DonationsAdminPage() {
         </div>
       )}
 
-      {/* Media Library */}
-      {showMediaLibrary && (
-        <MediaLibrary
-          onSelect={(url) => {
-            setFormData({ ...formData, image: url });
-            setShowMediaLibrary(false);
-          }}
-          onClose={() => setShowMediaLibrary(false)}
-        />
-      )}
+      {/* Media Library Modal */}
+      <MediaLibraryModal
+        isOpen={showMediaLibrary}
+        onClose={() => setShowMediaLibrary(false)}
+        onSelect={(media) => {
+          setFormData({ ...formData, image: media.url });
+        }}
+        allowMultiple={false}
+        category="donations"
+      />
     </AdminLayout>
   );
 }
