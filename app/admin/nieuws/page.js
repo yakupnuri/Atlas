@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminLayout from '@/components/AdminLayout';
-import MediaLibrary from '@/components/MediaLibrary';
+import MediaLibraryModal from '@/components/MediaLibraryModal';
 import { Plus, Edit2, Trash2, Eye, Image as ImageIcon, X } from 'lucide-react';
 
 export default function NewsManagement() {
