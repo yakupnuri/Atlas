@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd'
-import { ArrowLeft, Plus, Trash2, GripVertical, Save, Image as ImageIcon, X } from 'lucide-react'
+import { ArrowLeft, Plus, Trash2, GripVertical, Save, Image as ImageIcon, X, FileText } from 'lucide-react'
 import MediaLibraryModal from '@/components/MediaLibraryModal'
+import { getTemplate, getTemplatesByCategory } from '@/lib/surveyTemplates'
 
 export default function SurveyBuilder({ survey, module, onClose, onSave }) {
   const [formData, setFormData] = useState({
