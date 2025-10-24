@@ -895,6 +895,13 @@ export default function EducatieAdminPage() {
               )}
             </div>
           )}
+
+          {/* Surveys Tab */}
+          {activeTab === 'surveys' && (
+            <div>
+              <SurveyManager module="education" />
+            </div>
+          )}
         </div>
 
         {/* Announcement Modal */}
