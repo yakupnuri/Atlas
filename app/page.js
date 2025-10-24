@@ -27,6 +27,7 @@ import {
   Download
 } from 'lucide-react';
 import ContactModal from '@/components/ContactModal';
+import HeroSlider from '@/components/HeroSlider';
 
 // Cultuur & Educatiecentrum Section Component
 function CultuurEducatieSection() {
