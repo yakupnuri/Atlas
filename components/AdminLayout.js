@@ -502,6 +502,9 @@ export default function AdminLayout({ children }) {
 
               {/* Right Side Actions */}
               <div className="flex items-center gap-3">
+                {/* Language Switcher */}
+                <LanguageSwitcher />
+                
                 {/* View Site Button */}
                 <a
                   href="/"
