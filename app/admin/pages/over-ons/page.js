@@ -453,9 +453,9 @@ export default function OverOnsAdminPage() {
         </div>
       </div>
 
-      {/* Media Library */}
+      {/* Media Library Modal */}
       {showMediaLibrary && (
-        <MediaLibrary
+        <MediaLibraryModal
           onSelect={(url) => {
             if (selectedPhotoIndex !== null) {
               updateTeamMember(selectedPhotoIndex, 'photo', url);
@@ -467,6 +467,7 @@ export default function OverOnsAdminPage() {
             setShowMediaLibrary(false);
             setSelectedPhotoIndex(null);
           }}
+          category="team"
         />
       )}
     </AdminLayout>
