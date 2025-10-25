@@ -712,7 +712,7 @@ export default function Home() {
 
             {/* News Items Grid - Hover to preview above */}
             {latestNews.length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
                 {latestNews.map((news, index) => (
                   <motion.div
                     key={news.id}
@@ -720,21 +720,21 @@ export default function Home() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className={`rounded-xl overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-xl hover:scale-105 group ${
-                      selectedNewsIndex === index ? 'ring-4 ring-blue-500' : ''
+                    className={`rounded-lg md:rounded-xl overflow-hidden transition-all duration-300 cursor-pointer hover:shadow-xl hover:scale-105 group ${
+                      selectedNewsIndex === index ? 'ring-2 md:ring-4 ring-blue-500' : ''
                     }`}
                     onMouseEnter={() => setSelectedNewsIndex(index)}
                     onClick={() => window.location.href = `/nieuws/${news.slug}`}
                   >
-                    <div className="relative h-48">
+                    <div className="relative h-24 md:h-48">
                       <img
                         src={news.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=300'}
                         alt={news.title}
                         className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-                      <div className="absolute bottom-0 left-0 right-0 p-4">
-                        <h3 className="text-white font-bold text-sm line-clamp-2">
+                      <div className="absolute bottom-0 left-0 right-0 p-2 md:p-4">
+                        <h3 className="text-white font-bold text-xs md:text-sm line-clamp-2">
                           {news.title}
                         </h3>
                       </div>
