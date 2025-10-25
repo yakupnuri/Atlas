@@ -16,13 +16,15 @@ import {
   Calendar,
   Clock,
   Image as ImageIcon,
-  X
+  X,
+  Video
 } from 'lucide-react';
 
 export default function EducatieAdminPage() {
   const [activeTab, setActiveTab] = useState('announcements');
   const [loading, setLoading] = useState(false);
   const [showMediaLibrary, setShowMediaLibrary] = useState(false);
+  const [mediaTarget, setMediaTarget] = useState(null); // 'article' or 'video'
   
   // Announcements
   const [announcements, setAnnouncements] = useState([]);
@@ -35,6 +37,12 @@ export default function EducatieAdminPage() {
   const [showArticleModal, setShowArticleModal] = useState(false);
   const [editingArticle, setEditingArticle] = useState(null);
   const [articleForm, setArticleForm] = useState({ title: '', excerpt: '', content: '', author: '', date: '', image: '' });
+
+  // Videos - NEW
+  const [videos, setVideos] = useState([]);
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [editingVideo, setEditingVideo] = useState(null);
+  const [videoForm, setVideoForm] = useState({ title: '', description: '', url: '', thumbnail: '' });
 
   // Documents
   const [documents, setDocuments] = useState([]);
