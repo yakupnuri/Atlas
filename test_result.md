@@ -519,6 +519,30 @@ frontend:
         agent: "main"
         comment: "Created new Settings admin page with tabbed interface. SEO Settings tab includes: meta title with 60 char limit, meta description with 160 char limit, keywords field, character counters with color-coded warnings, Google search result preview. General Settings tab (placeholder for future). Fetches/updates SEO data via /api/homepage endpoint. Clean UI with info boxes."
 
+  - task: "Over Ons Page - Component Restructure"
+    implemented: true
+    working: "NA"
+    file: "/app/app/over/page.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Completely restructured Over Ons public page into reusable components. Created 5 separate components: WhoWeAreSection.js, MissionSection.js, VisionSection.js, ValuesSection.js, TeamSection.js. All components use Framer Motion animations. Main page now imports and orchestrates these components. Clean separation of concerns, easier maintenance, improved code organization."
+
+  - task: "Over Ons Admin - MediaLibrary Integration Fix"
+    implemented: true
+    working: "NA"
+    file: "/app/app/admin/pages/over-ons/page.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+      - working: "NA"
+        agent: "main"
+        comment: "Fixed MediaLibrary integration for team photo uploads. Improved team member management with proper state handling (selectedTeamIndex). Enhanced UI with better visual feedback, hover effects, preview button, error handling for broken images. Added 'Voorvertoning' link to view public page. Improved button styling and transitions. Fixed photo selection callback flow. Team photos now properly save and display."
+
   - task: "CRMAccessCard Component"
     implemented: true
     working: "NA"
