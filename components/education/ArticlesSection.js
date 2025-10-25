@@ -72,7 +72,7 @@ export default function ArticlesSection({ articles, loading }) {
                 <ShareButtons 
                   title={article.title}
                   description={article.excerpt}
-                  variant="inline"
+                  variant="dropdown"
                 />
               </div>
             </motion.div>

@@ -94,7 +94,7 @@ export default function CoursesSection({ courses, loading }) {
                 <ShareButtons 
                   title={course.title}
                   description={course.description}
-                  variant="inline"
+                  variant="dropdown"
                 />
               </div>
             </motion.div>

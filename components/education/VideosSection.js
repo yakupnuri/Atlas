@@ -109,7 +109,7 @@ export default function VideosSection({ videos, loading }) {
                     title={video.title}
                     description={video.description}
                     url={video.url}
-                    variant="inline"
+                    variant="dropdown"
                   />
                 </div>
               </motion.div>
@@ -146,7 +146,7 @@ export default function VideosSection({ videos, loading }) {
                   title={selectedVideo.title}
                   description={selectedVideo.description}
                   url={selectedVideo.url}
-                  variant="inline"
+                  variant="dropdown"
                 />
                 <button
                   onClick={() => setSelectedVideo(null)}

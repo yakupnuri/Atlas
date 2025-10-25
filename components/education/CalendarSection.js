@@ -87,7 +87,7 @@ export default function CalendarSection({ events, loading }) {
                   <ShareButtons 
                     title={event.title}
                     description={event.description}
-                    variant="inline"
+                    variant="dropdown"
                   />
                 </div>
               </div>
