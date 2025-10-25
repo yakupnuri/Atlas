@@ -160,16 +160,27 @@ export default function OverOnsAdminPage() {
   };
 
   const handleMediaSelect = (selectedItem) => {
+    console.log('MediaLibrary callback - selectedItem:', selectedItem);
+    
     if (selectedTeamIndex !== null) {
       // selectedItem can be an object with url/path, or a string URL
       const imageUrl = typeof selectedItem === 'string' 
         ? selectedItem 
-        : (selectedItem?.url || selectedItem?.path || '');
+        : (selectedItem?.url || selectedItem?.path || selectedItem?.thumb || '');
+      
+      console.log('Extracted imageUrl:', imageUrl);
+      console.log('Team index:', selectedTeamIndex);
       
       if (imageUrl) {
         updateTeamMember(selectedTeamIndex, 'photo', imageUrl);
+        console.log('Photo updated for team member', selectedTeamIndex);
+      } else {
+        console.error('No valid image URL found in selectedItem:', selectedItem);
       }
+    } else {
+      console.error('selectedTeamIndex is null!');
     }
+    
     setShowMediaLibrary(false);
     setSelectedTeamIndex(null);
   };
