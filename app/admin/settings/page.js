@@ -7,7 +7,12 @@ import {
   Globe,
   Search,
   Tag,
-  AlertCircle
+  AlertCircle,
+  Key,
+  Image,
+  Map,
+  Cloud,
+  CreditCard
 } from 'lucide-react';
 
 export default function SettingsPage() {
