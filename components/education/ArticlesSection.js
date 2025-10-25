@@ -53,19 +53,26 @@ export default function ArticlesSection({ articles, loading }) {
               <div className="p-4">
                 <h3 className="font-bold text-lg text-gray-900 mb-2">{article.title}</h3>
                 <p className="text-gray-600 text-sm mb-3 line-clamp-2">{article.excerpt}</p>
-                <div className="flex items-center gap-4 text-xs text-gray-500">
-                  {article.author && (
-                    <span className="flex items-center gap-1">
-                      <User className="w-3 h-3" />
-                      {article.author}
-                    </span>
-                  )}
-                  {article.date && (
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      {new Date(article.date).toLocaleDateString('nl-NL')}
-                    </span>
-                  )}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4 text-xs text-gray-500">
+                    {article.author && (
+                      <span className="flex items-center gap-1">
+                        <User className="w-3 h-3" />
+                        {article.author}
+                      </span>
+                    )}
+                    {article.date && (
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {new Date(article.date).toLocaleDateString('nl-NL')}
+                      </span>
+                    )}
+                  </div>
+                  <ShareButtons 
+                    title={article.title}
+                    description={article.excerpt}
+                    variant="dropdown"
+                  />
                 </div>
               </div>
             </motion.div>
