@@ -30,10 +30,22 @@ export function useEducationData(type) {
   // Create or Update
   const saveData = useCallback(async (itemData, isEdit = false) => {
     try {
+      const payload = {
+        type: type,
+        data: itemData
+      };
+
+      // Add id if editing
+      if (isEdit && itemData.id) {
+        payload.id = itemData.id;
+      }
+
+      console.log('Saving to API:', payload);
+
       const response = await fetch('/api/education', {
         method: isEdit ? 'PUT' : 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type, data: itemData })
+        body: JSON.stringify(payload)
       });
 
       const result = await response.json();
