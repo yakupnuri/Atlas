@@ -12,7 +12,6 @@ import ScheduleSection from '@/components/education/ScheduleSection';
 import CoursesSection from '@/components/education/CoursesSection';
 import CalendarSection from '@/components/education/CalendarSection';
 import SurveyCard from '@/components/surveys/SurveyCard';
-import SurveyModal from '@/components/surveys/SurveyModal';
 
 export default function CultuurEducatiePage() {
   const [announcements, setAnnouncements] = useState([])
@@ -25,7 +24,6 @@ export default function CultuurEducatiePage() {
   const [surveys, setSurveys] = useState([])
   const [loading, setLoading] = useState(true)
   const [contactModalOpen, setContactModalOpen] = useState(false);
-  const [selectedSurvey, setSelectedSurvey] = useState(null);
 
   useEffect(() => {
     fetchData()
@@ -91,9 +89,6 @@ export default function CultuurEducatiePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Announcements Ticker */}
-      <AnnouncementsTicker announcements={announcements} />
-
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 text-white py-16">
         <div className="container mx-auto px-4 text-center">
@@ -111,6 +106,9 @@ export default function CultuurEducatiePage() {
           </motion.div>
         </div>
       </section>
+
+      {/* Announcements Ticker - BELOW HERO */}
+      <AnnouncementsTicker announcements={announcements} />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-12">
@@ -131,7 +129,6 @@ export default function CultuurEducatiePage() {
                   <SurveyCard
                     key={survey.id}
                     survey={survey}
-                    onClick={() => setSelectedSurvey(survey)}
                   />
                 ))}
               </div>
@@ -156,19 +153,12 @@ export default function CultuurEducatiePage() {
         </div>
       </section>
 
-      {/* Modals */}
+      {/* Contact Modal */}
       <ContactModal
         isOpen={contactModalOpen}
         onClose={() => setContactModalOpen(false)}
         pageContext="Cultuur & Educatiecentrum"
       />
-
-      {selectedSurvey && (
-        <SurveyModal
-          survey={selectedSurvey}
-          onClose={() => setSelectedSurvey(null)}
-        />
-      )}
     </div>
   );
 }
