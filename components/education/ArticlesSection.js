@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Newspaper, User, Calendar } from 'lucide-react';
+import ShareButtons from '@/components/ShareButtons';
 
 export default function ArticlesSection({ articles, loading }) {
   if (loading) {
