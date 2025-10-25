@@ -90,24 +90,6 @@ export default function SettingsPage() {
       setSaving(false);
     }
   };
-          seo: seoData
-        })
-      });
-
-      const result = await response.json();
-      
-      if (result.success) {
-        alert('✅ SEO ayarları başarıyla güncellendi!');
-      } else {
-        alert('❌ Hata: ' + result.error);
-      }
-    } catch (error) {
-      console.error('Error saving:', error);
-      alert('❌ Kaydetme hatası!');
-    } finally {
-      setSaving(false);
-    }
-  };
 
   if (loading) {
     return (
