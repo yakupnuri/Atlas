@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Calendar as CalendarIcon } from 'lucide-react';
+import ShareButtons from '@/components/ShareButtons';
 
 export default function CalendarSection({ events, loading }) {
   if (loading) {
@@ -81,8 +82,13 @@ export default function CalendarSection({ events, loading }) {
                   </div>
                   <h3 className="font-bold text-gray-900 mb-1">{event.title}</h3>
                   {event.description && (
-                    <p className="text-sm text-gray-700">{event.description}</p>
+                    <p className="text-sm text-gray-700 mb-3">{event.description}</p>
                   )}
+                  <ShareButtons 
+                    title={event.title}
+                    description={event.description}
+                    variant="inline"
+                  />
                 </div>
               </div>
             </motion.div>

@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { Video, Play } from 'lucide-react';
 import { useState } from 'react';
+import ShareButtons from '@/components/ShareButtons';
 
 export default function VideosSection({ videos, loading }) {
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -76,10 +77,12 @@ export default function VideosSection({ videos, loading }) {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.1 }}
-                className="group relative cursor-pointer rounded-lg overflow-hidden hover:shadow-xl transition-all"
-                onClick={() => setSelectedVideo(video)}
+                className="group relative rounded-lg overflow-hidden hover:shadow-xl transition-all"
               >
-                <div className="relative aspect-video bg-gray-900">
+                <div 
+                  className="relative aspect-video bg-gray-900 cursor-pointer"
+                  onClick={() => setSelectedVideo(video)}
+                >
                   {getThumbnail(video) ? (
                     <img 
                       src={getThumbnail(video)} 
@@ -100,8 +103,14 @@ export default function VideosSection({ videos, loading }) {
                     {video.title}
                   </h3>
                   {video.description && (
-                    <p className="text-sm text-gray-600 line-clamp-2">{video.description}</p>
+                    <p className="text-sm text-gray-600 line-clamp-2 mb-3">{video.description}</p>
                   )}
+                  <ShareButtons 
+                    title={video.title}
+                    description={video.description}
+                    url={video.url}
+                    variant="inline"
+                  />
                 </div>
               </motion.div>
             ))}
@@ -130,14 +139,22 @@ export default function VideosSection({ videos, loading }) {
             <div className="p-6">
               <h3 className="text-2xl font-bold text-gray-900 mb-2">{selectedVideo.title}</h3>
               {selectedVideo.description && (
-                <p className="text-gray-600">{selectedVideo.description}</p>
+                <p className="text-gray-600 mb-4">{selectedVideo.description}</p>
               )}
-              <button
-                onClick={() => setSelectedVideo(null)}
-                className="mt-4 px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
-              >
-                Sluiten
-              </button>
+              <div className="flex items-center justify-between">
+                <ShareButtons 
+                  title={selectedVideo.title}
+                  description={selectedVideo.description}
+                  url={selectedVideo.url}
+                  variant="inline"
+                />
+                <button
+                  onClick={() => setSelectedVideo(null)}
+                  className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"
+                >
+                  Sluiten
+                </button>
+              </div>
             </div>
           </div>
         </div>

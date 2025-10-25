@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { BookOpen, Clock, Users } from 'lucide-react';
+import ShareButtons from '@/components/ShareButtons';
 
 export default function CoursesSection({ courses, loading }) {
   if (loading) {
@@ -68,7 +69,7 @@ export default function CoursesSection({ courses, loading }) {
                 <p className="text-gray-600 text-sm mb-4 line-clamp-3">{course.description}</p>
               )}
               
-              <div className="space-y-2 text-sm text-gray-700">
+              <div className="space-y-2 text-sm text-gray-700 mb-4">
                 {course.instructor && (
                   <div className="flex items-center gap-2">
                     <Users className="w-4 h-4 text-teal-500" />
@@ -85,8 +86,16 @@ export default function CoursesSection({ courses, loading }) {
                   <p><strong>Schema:</strong> {course.schedule}</p>
                 )}
                 {course.price && (
-                  <p className="text-lg font-bold text-teal-600 mt-3">{course.price}</p>
+                  <p className="text-lg font-bold text-teal-600 mt-2">{course.price}</p>
                 )}
+              </div>
+
+              <div className="pt-4 border-t border-gray-200">
+                <ShareButtons 
+                  title={course.title}
+                  description={course.description}
+                  variant="inline"
+                />
               </div>
             </motion.div>
           ))}
