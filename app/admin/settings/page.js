@@ -21,6 +21,26 @@ export default function SettingsPage() {
     keywords: ''
   });
 
+  const [integrations, setIntegrations] = useState({
+    stripe: {
+      publishableKey: '',
+      secretKey: '',
+      mode: 'test' // 'test' or 'live'
+    },
+    unsplash: {
+      accessKey: '',
+      applicationName: ''
+    },
+    googleMaps: {
+      apiKey: ''
+    },
+    googleDrive: {
+      clientId: '',
+      clientSecret: '',
+      enabled: false
+    }
+  });
+
   useEffect(() => {
     fetchSettings();
   }, []);
