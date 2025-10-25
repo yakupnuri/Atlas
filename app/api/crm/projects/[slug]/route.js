@@ -14,7 +14,7 @@ export async function GET(request, { params }) {
     }
 
     const client = await clientPromise;
-    const db = client.db('stichting_atlas');
+    const db = client.db(process.env.DB_NAME || 'stichting_atlas');
     
     // Convert title to slug format and search
     // Or search by ID if slug is UUID format
