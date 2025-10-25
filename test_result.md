@@ -615,15 +615,18 @@ agent_communication:
 backend:
   - task: "FASE 1 LAUNCH - News API (GET /api/news)"
     implemented: true
-    working: true
+    working: false
     file: "/app/app/api/news/route.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: false
     status_history:
       - working: true
         agent: "testing"
         comment: "FASE 1 LAUNCH BACKEND TESTING COMPLETE ✅ News API (GET /api/news) working perfectly! Returns 9 Dutch news articles with proper structure. Core fields (id, title, excerpt, content) all present. Date information available (either 'date' or 'publishDate' field). Author field optional and present in most articles. API returns proper JSON response with 'news' array. All articles have proper metadata including category, image, and creation timestamps. Ready for Monday launch."
+      - working: false
+        agent: "testing"
+        comment: "CRITICAL ISSUE FOUND ❌ Frontend testing reveals Nieuws page displays 'Henüz haber bulunmamaktadır' (No news available) despite API returning data. Issue appears to be in frontend data fetching or display logic. Homepage news section also affected. This prevents news from showing on both homepage and dedicated news page. Requires immediate fix before Monday launch."
 
   - task: "FASE 1 LAUNCH - Events API (GET /api/events)"
     implemented: true
