@@ -5,73 +5,30 @@ import { motion } from 'framer-motion';
 import { Calendar, User, ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-const newsItems = [
-  {
-    id: 1,
-    title: 'Ramazan İftar Programı Başarıyla Tamamlandı',
-    slug: 'ramazan-iftar-programi-basariyla-tamamlandi',
-    excerpt: 'Bu yılki Ramazan ayında düzenlediğimiz iftar programlarına 150\'den fazla kişi katıldı.',
-    date: '2025-04-15',
-    author: 'Fatma Demir',
-    image: 'https://images.unsplash.com/photo-1610348725531-843dff563e2c?w=800',
-    category: 'Etkinlik',
-  },
-  {
-    id: 2,
-    title: 'Yeni Ders Yemeği Programı Başlıyor',
-    slug: 'yeni-ders-yemegi-programi-basliyor',
-    excerpt: 'Öğrenciler ve aileler için her Cumartesi düzenlenen eğitici yemek programımız başlıyor.',
-    date: '2025-03-22',
-    author: 'Mehmet Kaya',
-    image: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=800',
-    category: 'Eğitim',
-  },
-  {
-    id: 3,
-    title: 'Weekendonderwijs Kayıtları Başladı',
-    slug: 'weekendonderwijs-kayitlari-basladi',
-    excerpt: 'Hafta sonu okulumuzun yeni dönemi için kayıtlar açıldı. Şimdi kaydolun!',
-    date: '2025-03-10',
-    author: 'Ayşe Öztürk',
-    image: 'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=800',
-    category: 'Eğitim',
-  },
-  {
-    id: 4,
-    title: 'Soepdag - 100. Etkinlik Kutlaması',
-    slug: 'soepdag-100-etkinlik-kutlamasi',
-    excerpt: 'Her hafta düzenlediğimiz Soepdag programının 100. etkinliğini kutladık!',
-    date: '2025-02-28',
-    author: 'Ahmet Yılmaz',
-    image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800',
-    category: 'Etkinlik',
-  },
-  {
-    id: 5,
-    title: 'Yeni Gönüllüler Arıyoruz',
-    slug: 'yeni-gonulluler-ariyoruz',
-    excerpt: 'Etkinliklerimizde görev almak isteyen gönüllüleri aramaya başladık.',
-    date: '2025-02-15',
-    author: 'Fatma Demir',
-    image: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=800',
-    category: 'Duyuru',
-  },
-  {
-    id: 6,
-    title: 'ANBI Statüsü Yenilendi',
-    slug: 'anbi-statusu-yenilendi',
-    excerpt: 'Stichting Atlas\'un ANBI statüsü başarıyla yenilendi.',
-    date: '2025-01-20',
-    author: 'Ahmet Yılmaz',
-    image: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800',
-    category: 'Duyuru',
-  },
-];
-
 export default function NewsPage() {
+  const [newsItems, setNewsItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
 
   const categories = ['all', 'Etkinlik', 'Eğitim', 'Duyuru'];
+
+  useEffect(() => {
+    fetchNews();
+  }, []);
+
+  const fetchNews = async () => {
+    try {
+      const response = await fetch('/api/news');
+      const data = await response.json();
+      if (data.success && data.news) {
+        setNewsItems(data.news);
+      }
+    } catch (error) {
+      console.error('Error fetching news:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const filteredNews = filter === 'all' 
     ? newsItems 
