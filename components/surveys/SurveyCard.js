@@ -80,6 +80,7 @@ export default function SurveyCard({ survey }) {
       {showModal && (
         <SurveyModal
           survey={survey}
+          isOpen={showModal}
           onClose={() => setShowModal(false)}
         />
       )}
