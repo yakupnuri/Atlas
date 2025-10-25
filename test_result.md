@@ -569,11 +569,13 @@ frontend:
 
 metadata:
   created_by: "main_agent"
-  version: "1.1"
-  test_sequence: 3
+  version: "1.2"
+  test_sequence: 4
   run_ui: false
   fase_completed: 1
   current_fase: 2
+  last_backend_test: "2025-01-27"
+  fase1_launch_ready: true
 
 test_plan:
   current_focus:
