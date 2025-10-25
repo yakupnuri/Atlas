@@ -678,18 +678,17 @@ metadata:
 
 test_plan:
   current_focus:
-    - "FASE 1 PAZARTESI LAUNCH - Homepage News Section"
-    - "FASE 1 PAZARTESI LAUNCH - Nieuws Page Dynamic Data"
-    - "FASE 1 PAZARTESI LAUNCH - Mobile Responsive"
-    - "FASE 1 PAZARTESI LAUNCH - Evenementen Page"
-    - "FASE 1 PAZARTESI LAUNCH - ANBI Page"
-    - "FASE 1 PAZARTESI LAUNCH - Over Ons Page"
-    - "FASE 1 PAZARTESI LAUNCH - Contact Form"
-  stuck_tasks: []
+    - "FASE 1 LAUNCH - Nieuws Page Dynamic Data Fix"
+  stuck_tasks:
+    - "FASE 1 LAUNCH - Nieuws Page Dynamic Data"
   test_all: false
   test_priority: "high_first"
   backend_testing_complete: true
   backend_test_date: "2025-01-27"
+  frontend_testing_complete: true
+  frontend_test_date: "2025-01-27"
+  launch_ready: false
+  critical_blocker: "News page not displaying data"
 
 agent_communication:
   - agent: "main"
