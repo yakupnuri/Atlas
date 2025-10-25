@@ -16,7 +16,7 @@ export async function GET(request) {
     const status = searchParams.get('status');
 
     const client = await clientPromise;
-    const db = client.db('stichting_atlas');
+    const db = client.db(process.env.DB_NAME || 'stichting_atlas');
     
     let query = {};
     
@@ -68,7 +68,7 @@ export async function POST(request) {
     }
 
     const client = await clientPromise;
-    const db = client.db('stichting_atlas');
+    const db = client.db(process.env.DB_NAME || 'stichting_atlas');
     
     const newProject = {
       id: uuidv4(),
@@ -119,7 +119,7 @@ export async function PUT(request) {
     }
 
     const client = await clientPromise;
-    const db = client.db('stichting_atlas');
+    const db = client.db(process.env.DB_NAME || 'stichting_atlas');
     
     const updateData = {
       title: data.title,
@@ -177,7 +177,7 @@ export async function DELETE(request) {
     }
 
     const client = await clientPromise;
-    const db = client.db('stichting_atlas');
+    const db = client.db(process.env.DB_NAME || 'stichting_atlas');
     
     const result = await db
       .collection('crm_projects')
