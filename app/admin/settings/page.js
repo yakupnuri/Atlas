@@ -64,11 +64,14 @@ export default function SettingsPage() {
   const handleSave = async () => {
     setSaving(true);
     try {
+      const updateData = activeTab === 'seo' 
+        ? { type: 'homepage', seo: seoData }
+        : { type: 'homepage', integrations: integrations };
+
       const response = await fetch('/api/homepage', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'homepage',
+        body: JSON.stringify(updateData)
           seo: seoData
         })
       });
