@@ -91,7 +91,7 @@ export default function Navbar() {
                       
                       {/* Dropdown Menu */}
                       <div 
-                        className={`absolute top-full left-0 mt-2 transition-all duration-200 ${
+                        className={`absolute top-full left-0 mt-2 z-40 transition-all duration-200 ${
                           openDropdown === index 
                             ? 'opacity-100 visible translate-y-0' 
                             : 'opacity-0 invisible -translate-y-2'
