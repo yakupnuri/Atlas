@@ -669,7 +669,7 @@ export default function Home() {
             >
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                 {/* Image */}
-                <div className="relative h-[400px] lg:h-[500px]">
+                <div className="relative h-[250px] md:h-[350px] lg:h-[500px]">
                   <img
                     src={latestNews[selectedNewsIndex]?.image || 'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800'}
                     alt={latestNews[selectedNewsIndex]?.title}
@@ -678,17 +678,17 @@ export default function Home() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent lg:hidden"></div>
                   
                   {/* Category badge */}
-                  <div className="absolute top-6 left-6">
-                    <span className="bg-red-600 text-white px-4 py-2 rounded-lg text-sm font-bold uppercase shadow-lg">
+                  <div className="absolute top-4 left-4 md:top-6 md:left-6">
+                    <span className="bg-red-600 text-white px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-bold uppercase shadow-lg">
                       {latestNews[selectedNewsIndex]?.category || 'Nieuws'}
                     </span>
                   </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-8 lg:p-12 flex flex-col justify-center">
-                  <div className="mb-4">
-                    <span className="text-sm text-gray-500">
+                <div className="p-5 md:p-8 lg:p-12 flex flex-col justify-center">
+                  <div className="mb-3 md:mb-4">
+                    <span className="text-xs md:text-sm text-gray-500">
                       {new Date(latestNews[selectedNewsIndex]?.publishDate).toLocaleDateString('nl-NL', { 
                         day: 'numeric', 
                         month: 'long', 
@@ -696,15 +696,15 @@ export default function Home() {
                       })}
                     </span>
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+                  <h2 className="text-xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3 md:mb-4 leading-tight">
                     {latestNews[selectedNewsIndex]?.title}
                   </h2>
-                  <p className="text-gray-600 text-lg mb-6 line-clamp-4">
+                  <p className="text-gray-600 text-sm md:text-base lg:text-lg mb-4 md:mb-6 line-clamp-3 md:line-clamp-4">
                     {latestNews[selectedNewsIndex]?.excerpt}
                   </p>
-                  <div className="flex items-center text-[#05B6C4] font-semibold text-lg">
+                  <div className="flex items-center text-[#05B6C4] font-semibold text-sm md:text-base lg:text-lg">
                     Lees meer
-                    <ArrowRight className="w-5 h-5 ml-2" />
+                    <ArrowRight className="w-4 h-4 md:w-5 md:h-5 ml-2" />
                   </div>
                 </div>
               </div>
