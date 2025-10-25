@@ -180,12 +180,14 @@ export default function MediaLibraryModal({ isOpen, onClose, onSelect, allowMult
               <div className="mb-6 flex gap-4">
                 <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} className="px-4 py-3 border rounded-lg">
                   <option value="all">Tüm Kategoriler</option>
+                  <option value="team">Team</option>
                   <option value="news">Nieuws</option>
                   <option value="events">Events</option>
                   <option value="education">Education</option>
                   <option value="career">Career</option>
                   <option value="projects">Projects</option>
                   <option value="hero">Hero Slides</option>
+                  <option value="homepage">Homepage</option>
                 </select>
                 <div className="relative flex-1">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
