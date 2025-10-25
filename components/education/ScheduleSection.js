@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Clock, MapPin } from 'lucide-react';
+import ShareButtons from '@/components/ShareButtons';
 
 export default function ScheduleSection({ schedule, loading }) {
   const days = ['Maandag', 'Dinsdag', 'Woensdag', 'Donderdag', 'Vrijdag', 'Zaterdag', 'Zondag'];
@@ -47,9 +48,18 @@ export default function ScheduleSection({ schedule, loading }) {
   return (
     <section className="mb-8">
       <div className="bg-white rounded-lg shadow-md p-6">
-        <div className="flex items-center gap-3 mb-6">
-          <Clock className="w-6 h-6 text-indigo-500" />
-          <h2 className="text-2xl font-bold text-gray-900">Lesrooster</h2>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <Clock className="w-6 h-6 text-indigo-500" />
+            <h2 className="text-2xl font-bold text-gray-900">Lesrooster</h2>
+          </div>
+          <div className="relative z-10">
+            <ShareButtons 
+              title="Lesrooster - Cultuur & Educatiecentrum"
+              description="Bekijk ons wekelijks lesrooster"
+              variant="dropdown"
+            />
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -60,6 +70,7 @@ export default function ScheduleSection({ schedule, loading }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.1 }}
               className="border border-gray-200 rounded-lg p-4"
+              style={{ overflow: 'visible' }}
             >
               <h3 className="font-bold text-lg text-indigo-600 mb-4 flex items-center gap-2">
                 <Clock className="w-5 h-5" />
