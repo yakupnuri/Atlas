@@ -77,10 +77,11 @@ export default function VideosSection({ videos, loading }) {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: index * 0.1 }}
-                className="group relative rounded-lg overflow-hidden hover:shadow-xl transition-all"
+                className="group relative rounded-lg hover:shadow-xl transition-all"
+                style={{ overflow: 'visible' }}
               >
                 <div 
-                  className="relative aspect-video bg-gray-900 cursor-pointer"
+                  className="relative aspect-video bg-gray-900 cursor-pointer rounded-t-lg overflow-hidden"
                   onClick={() => setSelectedVideo(video)}
                 >
                   {getThumbnail(video) ? (
@@ -98,19 +99,21 @@ export default function VideosSection({ videos, loading }) {
                     <Play className="w-16 h-16 text-white opacity-0 group-hover:opacity-100 transform scale-75 group-hover:scale-100 transition-all" />
                   </div>
                 </div>
-                <div className="p-4 bg-white">
+                <div className="p-4 bg-white border border-gray-200 rounded-b-lg">
                   <h3 className="font-semibold text-gray-900 line-clamp-2 mb-1">
                     {video.title}
                   </h3>
                   {video.description && (
                     <p className="text-sm text-gray-600 line-clamp-2 mb-3">{video.description}</p>
                   )}
-                  <ShareButtons 
-                    title={video.title}
-                    description={video.description}
-                    url={video.url}
-                    variant="dropdown"
-                  />
+                  <div className="relative z-10">
+                    <ShareButtons 
+                      title={video.title}
+                      description={video.description}
+                      url={video.url}
+                      variant="dropdown"
+                    />
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -142,12 +145,14 @@ export default function VideosSection({ videos, loading }) {
                 <p className="text-gray-600 mb-4">{selectedVideo.description}</p>
               )}
               <div className="flex items-center justify-between">
-                <ShareButtons 
-                  title={selectedVideo.title}
-                  description={selectedVideo.description}
-                  url={selectedVideo.url}
-                  variant="dropdown"
-                />
+                <div className="relative z-10">
+                  <ShareButtons 
+                    title={selectedVideo.title}
+                    description={selectedVideo.description}
+                    url={selectedVideo.url}
+                    variant="dropdown"
+                  />
+                </div>
                 <button
                   onClick={() => setSelectedVideo(null)}
                   className="px-6 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors"

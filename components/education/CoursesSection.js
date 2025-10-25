@@ -57,6 +57,7 @@ export default function CoursesSection({ courses, loading }) {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: index * 0.1 }}
               className="border border-gray-200 rounded-lg p-6 hover:shadow-xl hover:border-teal-500 transition-all"
+              style={{ overflow: 'visible' }}
             >
               <div className="flex justify-between items-start mb-4">
                 <h3 className="font-bold text-xl text-gray-900 flex-1">{course.title}</h3>
@@ -90,7 +91,7 @@ export default function CoursesSection({ courses, loading }) {
                 )}
               </div>
 
-              <div className="pt-4 border-t border-gray-200">
+              <div className="pt-4 border-t border-gray-200 relative z-10">
                 <ShareButtons 
                   title={course.title}
                   description={course.description}

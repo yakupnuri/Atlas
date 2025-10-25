@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Download, FileText } from 'lucide-react';
+import ShareButtons from '@/components/ShareButtons';
 
 export default function DocumentsSection({ documents, loading }) {
   if (loading) {
@@ -33,22 +34,20 @@ export default function DocumentsSection({ documents, loading }) {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {documents.slice(0, 6).map((doc, index) => (
-            <motion.a
+            <motion.div
               key={doc.id || index}
-              href={doc.url}
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="group border border-gray-200 rounded-lg p-5 hover:shadow-xl hover:border-green-500 transition-all"
+              className="border border-gray-200 rounded-lg p-5 hover:shadow-xl hover:border-green-500 transition-all"
+              style={{ overflow: 'visible' }}
             >
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 mb-3">
                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center group-hover:bg-green-500 transition-colors flex-shrink-0">
-                  <Download className="w-6 h-6 text-green-600 group-hover:text-white" />
+                  <Download className="w-6 h-6 text-green-600" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-bold text-gray-900 mb-1 group-hover:text-green-600 transition-colors line-clamp-2">
+                  <h3 className="font-bold text-gray-900 mb-1 line-clamp-2">
                     {doc.title}
                   </h3>
                   {doc.description && (
@@ -61,7 +60,26 @@ export default function DocumentsSection({ documents, loading }) {
                   )}
                 </div>
               </div>
-            </motion.a>
+              <div className="flex items-center justify-between pt-3 border-t border-gray-200">
+                <a
+                  href={doc.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-green-600 hover:text-green-700 font-medium flex items-center gap-1"
+                >
+                  <Download className="w-4 h-4" />
+                  Download
+                </a>
+                <div className="relative z-10">
+                  <ShareButtons 
+                    title={doc.title}
+                    description={doc.description}
+                    url={doc.url}
+                    variant="dropdown"
+                  />
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
       </div>

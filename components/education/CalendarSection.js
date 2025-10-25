@@ -64,6 +64,7 @@ export default function CalendarSection({ events, loading }) {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: index * 0.05 }}
               className={`border-2 rounded-lg p-4 ${getTypeColor(event.type)}`}
+              style={{ overflow: 'visible', position: 'relative' }}
             >
               <div className="flex items-start gap-3">
                 <CalendarIcon className="w-5 h-5 flex-shrink-0 mt-1" />
@@ -84,11 +85,13 @@ export default function CalendarSection({ events, loading }) {
                   {event.description && (
                     <p className="text-sm text-gray-700 mb-3">{event.description}</p>
                   )}
-                  <ShareButtons 
-                    title={event.title}
-                    description={event.description}
-                    variant="dropdown"
-                  />
+                  <div className="relative z-10">
+                    <ShareButtons 
+                      title={event.title}
+                      description={event.description}
+                      variant="dropdown"
+                    />
+                  </div>
                 </div>
               </div>
             </motion.div>
