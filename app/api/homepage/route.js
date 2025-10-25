@@ -55,6 +55,25 @@ export async function GET(request) {
           description: 'Een gemeenschap waar culturen samenkomen, kennis wordt gedeeld en iedereen de kans krijgt om te groeien.',
           keywords: 'stichting atlas, community, educatie, cultuur, inclusief'
         },
+        integrations: {
+          stripe: {
+            publishableKey: '',
+            secretKey: '',
+            mode: 'test'
+          },
+          unsplash: {
+            accessKey: '',
+            applicationName: ''
+          },
+          googleMaps: {
+            apiKey: ''
+          },
+          googleDrive: {
+            clientId: '',
+            clientSecret: '',
+            enabled: false
+          }
+        },
         isActive: true,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString()
