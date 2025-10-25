@@ -35,9 +35,12 @@ export function useEducationData(type) {
         data: itemData
       };
 
-      // Add id if editing
+      // If editing, extract id from itemData and add to payload root
       if (isEdit && itemData.id) {
         payload.id = itemData.id;
+        // Remove id from data to avoid duplication
+        const { id, ...dataWithoutId } = itemData;
+        payload.data = dataWithoutId;
       }
 
       console.log('Saving to API:', payload);
@@ -54,6 +57,7 @@ export function useEducationData(type) {
         await fetchData(); // Refresh data
         return { success: true };
       } else {
+        console.error('Save error:', result.error);
         return { success: false, error: result.error };
       }
     } catch (err) {
