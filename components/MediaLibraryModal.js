@@ -127,10 +127,18 @@ export default function MediaLibraryModal({ isOpen, onClose, onSelect, allowMult
   }
 
   const handleInsert = () => {
+    console.log('MediaLibrary - handleInsert called');
+    console.log('Selected media:', selectedMedia);
+    console.log('Allow multiple:', allowMultiple);
+    
     if (selectedMedia.length > 0) {
-      onSelect(allowMultiple ? selectedMedia : selectedMedia[0])
-      onClose()
-      setSelectedMedia([])
+      const dataToSend = allowMultiple ? selectedMedia : selectedMedia[0];
+      console.log('Sending to onSelect:', dataToSend);
+      onSelect(dataToSend);
+      onClose();
+      setSelectedMedia([]);
+    } else {
+      console.warn('No media selected!');
     }
   }
 
