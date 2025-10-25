@@ -72,6 +72,19 @@ export default function SettingsPage() {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updateData)
+      });
+
+      const result = await response.json();
+      if (result.success) {
+        alert(activeTab === 'seo' ? 'SEO ayarları kaydedildi!' : 'API entegrasyonları kaydedildi!');
+      }
+    } catch (error) {
+      console.error('Error saving:', error);
+      alert('Hata oluştu!');
+    } finally {
+      setSaving(false);
+    }
+  };
           seo: seoData
         })
       });
