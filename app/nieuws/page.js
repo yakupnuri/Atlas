@@ -20,7 +20,7 @@ export default function NewsPage() {
     try {
       const response = await fetch('/api/news');
       const data = await response.json();
-      if (data.success && data.news) {
+      if (data.news && Array.isArray(data.news)) {
         setNewsItems(data.news);
       }
     } catch (error) {
