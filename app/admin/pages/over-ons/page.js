@@ -497,6 +497,7 @@ export default function OverOnsAdminPage() {
       {/* Media Library Modal */}
       {showMediaLibrary && (
         <MediaLibraryModal
+          isOpen={showMediaLibrary}
           onSelect={handleMediaSelect}
           onClose={() => {
             setShowMediaLibrary(false);
