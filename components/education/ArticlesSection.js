@@ -38,42 +38,48 @@ export default function ArticlesSection({ articles, loading }) {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow"
+              className="border border-gray-200 rounded-lg hover:shadow-lg transition-shadow"
+              style={{ overflow: 'visible' }}
             >
               {article.image && (
-                <img 
-                  src={article.image} 
-                  alt={article.title}
-                  className="w-full h-48 object-cover"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
-                />
+                <div className="overflow-hidden rounded-t-lg">
+                  <img 
+                    src={article.image} 
+                    alt={article.title}
+                    className="w-full h-48 object-cover"
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                </div>
               )}
               <div className="p-4">
                 <h3 className="font-bold text-lg text-gray-900 mb-2">{article.title}</h3>
                 <p className="text-gray-600 text-sm mb-3 line-clamp-2">{article.excerpt}</p>
                 
-                <div className="flex items-center gap-4 text-xs text-gray-500 mb-3">
-                  {article.author && (
-                    <span className="flex items-center gap-1">
-                      <User className="w-3 h-3" />
-                      {article.author}
-                    </span>
-                  )}
-                  {article.date && (
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      {new Date(article.date).toLocaleDateString('nl-NL')}
-                    </span>
-                  )}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-4 text-xs text-gray-500">
+                    {article.author && (
+                      <span className="flex items-center gap-1">
+                        <User className="w-3 h-3" />
+                        {article.author}
+                      </span>
+                    )}
+                    {article.date && (
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {new Date(article.date).toLocaleDateString('nl-NL')}
+                      </span>
+                    )}
+                  </div>
+                  <div className="relative z-10">
+                    <ShareButtons 
+                      title={article.title}
+                      description={article.excerpt}
+                      variant="dropdown"
+                    />
+                  </div>
                 </div>
-
-                <ShareButtons 
-                  title={article.title}
-                  description={article.excerpt}
-                  variant="dropdown"
-                />
               </div>
             </motion.div>
           ))}
