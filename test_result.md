@@ -577,12 +577,20 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Middleware - CRM Access Control"
+    - "FASE 1 PAZARTESI LAUNCH - Homepage News Section"
+    - "FASE 1 PAZARTESI LAUNCH - Nieuws Page Dynamic Data"
+    - "FASE 1 PAZARTESI LAUNCH - Mobile Responsive"
+    - "FASE 1 PAZARTESI LAUNCH - Evenementen Page"
+    - "FASE 1 PAZARTESI LAUNCH - ANBI Page"
+    - "FASE 1 PAZARTESI LAUNCH - Over Ons Page"
+    - "FASE 1 PAZARTESI LAUNCH - Contact Form"
   stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
 agent_communication:
+  - agent: "main"
+    message: "FASE 1 PAZARTESI LAUNCH PREPARATION! Critical pages prepared for Monday launch: 1) Fixed Nieuws page to fetch dynamic data from API (removed static array) 2) Added 5 Dutch news articles to database 3) Mobile optimization - reduced main news card height (400px→250px mobile), reduced bottom 4 cards height (192px→96px mobile), optimized padding and font sizes 4) Navbar already sticky with z-index fixes 5) All 5 critical pages verified: Homepage (news section working), Nieuws (dynamic API), Evenementen (working), ANBI (working), Over Ons (refactored, working). Ready for comprehensive testing of all Fase 1 features. Need to test: Homepage news display, Nieuws page data fetching, mobile responsive on all pages, contact form functionality, all page navigation and links."
   - agent: "main"
     message: "CRM & PROJECT MANAGEMENT PHASE 1 IMPLEMENTED! Created complete project management system with: 1) Backend API (/api/crm/projects) with full CRUD operations and @stichtingatlas.com email validation 2) Admin panel (/admin/crm/projeler) with project table, stats, filters, create/edit/delete 3) Public page (/academie/projectgroep) with project showcase, filters, detail modal 4) Middleware for /admin/crm/* access control 5) Components: ProjectModal, ProjectDetailModal, CRMAccessCard 6) AdminLayout updated with conditional CRM menu. Projects stored in MongoDB with fields: title, description, category, status, team, budget, dates, image, documents, public flag, progress. Ready for backend testing."
   - agent: "testing"
