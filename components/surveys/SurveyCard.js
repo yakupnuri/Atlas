@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { FileCheck, Calendar, Clock, ChevronRight } from 'lucide-react'
 import SurveyModal from './SurveyModal'
+import ShareButtons from '@/components/ShareButtons'
 
 export default function SurveyCard({ survey }) {
   const [showModal, setShowModal] = useState(false)
@@ -23,15 +24,18 @@ export default function SurveyCard({ survey }) {
 
   return (
     <>
-      <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all border border-green-100 cursor-pointer group"
-        onClick={() => setShowModal(true)}
+      <div 
+        className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all border border-green-100 cursor-pointer group"
+        style={{ overflow: 'visible' }}
       >
         {survey.image && (
-          <img
-            src={survey.image}
-            alt={survey.title}
-            className="w-full h-40 object-cover rounded-lg mb-4"
-          />
+          <div className="overflow-hidden rounded-lg mb-4">
+            <img
+              src={survey.image}
+              alt={survey.title}
+              className="w-full h-40 object-cover"
+            />
+          </div>
         )}
 
         <div className="flex items-start gap-3 mb-3">
@@ -63,13 +67,17 @@ export default function SurveyCard({ survey }) {
               </span>
             )}
           </div>
+          <div className="relative z-10" onClick={(e) => e.stopPropagation()}>
+            <ShareButtons 
+              title={survey.title}
+              description={survey.description}
+              variant="dropdown"
+            />
+          </div>
         </div>
 
         <button
-          onClick={(e) => {
-            e.stopPropagation()
-            setShowModal(true)
-          }}
+          onClick={() => setShowModal(true)}
           className="w-full flex items-center justify-center gap-2 px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium group-hover:gap-3"
         >
           Doe mee aan enquête
