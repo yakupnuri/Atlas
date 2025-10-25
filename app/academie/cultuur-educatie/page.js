@@ -89,26 +89,29 @@ export default function CultuurEducatiePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-          >
-            <BookOpen className="w-16 h-16 mx-auto mb-4" />
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Cultuur & Educatiecentrum
-            </h1>
-            <p className="text-xl max-w-3xl mx-auto text-white/90">
-              Welkom bij ons educatiecentrum waar we taal, cultuur en traditie samenbrengen
-            </p>
-          </motion.div>
-        </div>
-      </section>
+      {/* Sticky Container - Hero + Ticker (Desktop Only) */}
+      <div className="md:sticky md:top-0 md:z-50">
+        {/* Hero Section */}
+        <section className="bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 text-white py-16">
+          <div className="container mx-auto px-4 text-center">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <BookOpen className="w-16 h-16 mx-auto mb-4" />
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                Cultuur & Educatiecentrum
+              </h1>
+              <p className="text-xl max-w-3xl mx-auto text-white/90">
+                Welkom bij ons educatiecentrum waar we taal, cultuur en traditie samenbrengen
+              </p>
+            </motion.div>
+          </div>
+        </section>
 
-      {/* Announcements Ticker - BELOW HERO */}
-      <AnnouncementsTicker announcements={announcements} />
+        {/* Announcements Ticker - BELOW HERO */}
+        <AnnouncementsTicker announcements={announcements} />
+      </div>
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-12">
