@@ -494,6 +494,7 @@ export default function EducatieAdminPage() {
   const tabs = [
     { id: 'announcements', label: 'Duyurular', icon: Bell },
     { id: 'articles', label: 'Makaleler', icon: Newspaper },
+    { id: 'videos', label: 'Videolar', icon: Video },
     { id: 'documents', label: 'Dokümanlar', icon: Download },
     { id: 'schedule', label: 'Ders Programı', icon: Clock },
     { id: 'courses', label: 'Kurslar', icon: BookOpen },
