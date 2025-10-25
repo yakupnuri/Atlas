@@ -470,6 +470,9 @@ export default function EducatieAdminPage() {
           case 'articles':
             setArticles(result.data || []);
             break;
+          case 'videos':
+            setVideos(result.data || []);
+            break;
           case 'documents':
             setDocuments(result.data || []);
             break;
