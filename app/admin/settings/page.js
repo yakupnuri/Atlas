@@ -52,6 +52,7 @@ export default function SettingsPage() {
       
       if (result.success && result.data) {
         setSeoData(result.data.seo || seoData);
+        setIntegrations(result.data.integrations || integrations);
       }
     } catch (error) {
       console.error('Error fetching settings:', error);
