@@ -2,14 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/AdminLayout';
-import { Plus, Edit2, Trash2, Save, Image as ImageIcon, Users as UsersIcon } from 'lucide-react';
 import MediaLibraryModal from '@/components/MediaLibraryModal';
+import { Plus, Edit2, Trash2, Save, Image as ImageIcon, Users as UsersIcon, Eye } from 'lucide-react';
 
 export default function OverOnsAdminPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [showMediaLibrary, setShowMediaLibrary] = useState(false);
-  const [selectedPhotoIndex, setSelectedPhotoIndex] = useState(null);
+  const [selectedTeamIndex, setSelectedTeamIndex] = useState(null);
   
   const [formData, setFormData] = useState({
     whoWeAre: {
@@ -159,11 +159,19 @@ export default function OverOnsAdminPage() {
     setFormData({ ...formData, team: newTeam });
   };
 
+  const handleMediaSelect = (imageUrl) => {
+    if (selectedTeamIndex !== null) {
+      updateTeamMember(selectedTeamIndex, 'photo', imageUrl);
+    }
+    setShowMediaLibrary(false);
+    setSelectedTeamIndex(null);
+  };
+
   if (loading) {
     return (
       <AdminLayout>
-        <div className="flex items-center justify-center h-64">
-          <div className="text-gray-500">Laden...</div>
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
         </div>
       </AdminLayout>
     );
@@ -177,14 +185,25 @@ export default function OverOnsAdminPage() {
             <h1 className="text-3xl font-bold text-gray-900">📄 Over Ons Pagina</h1>
             <p className="text-gray-600 mt-1">Beheer de inhoud van de Over Ons pagina</p>
           </div>
-          <button
-            onClick={handleSave}
-            disabled={saving}
-            className="flex items-center gap-2 bg-[#05B6C4] hover:bg-[#3B87BE] text-white px-6 py-3 rounded-lg font-semibold transition-colors disabled:opacity-50"
-          >
-            <Save className="w-5 h-5" />
-            {saving ? 'Bezig...' : 'Alles Opslaan'}
-          </button>
+          <div className="flex gap-3">
+            <a
+              href="/over"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50"
+            >
+              <Eye className="w-5 h-5" />
+              Voorvertoning
+            </a>
+            <button
+              onClick={handleSave}
+              disabled={saving}
+              className="flex items-center gap-2 bg-[#05B6C4] hover:bg-[#3B87BE] text-white px-6 py-3 rounded-lg font-semibold transition-colors disabled:opacity-50"
+            >
+              <Save className="w-5 h-5" />
+              {saving ? 'Bezig...' : 'Alles Opslaan'}
+            </button>
+          </div>
         </div>
 
         <div className="space-y-8">
@@ -234,7 +253,7 @@ export default function OverOnsAdminPage() {
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Missie Beschrijving
+                  Missie Beschrijving (optioneel)
                 </label>
                 <textarea
                   rows="4"
@@ -244,7 +263,7 @@ export default function OverOnsAdminPage() {
                     mission: { ...formData.mission, content: e.target.value }
                   })}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] outline-none resize-none"
-                  placeholder="Algemene missie beschrijving (optioneel)"
+                  placeholder="Algemene missie beschrijving"
                 />
               </div>
 
@@ -255,7 +274,7 @@ export default function OverOnsAdminPage() {
                   </label>
                   <button
                     onClick={addMissionItem}
-                    className="flex items-center gap-1 text-sm text-[#05B6C4] hover:text-[#3B87BE]"
+                    className="flex items-center gap-1 text-sm text-[#05B6C4] hover:text-[#3B87BE] font-medium"
                   >
                     <Plus className="w-4 h-4" />
                     Punt Toevoegen
@@ -275,7 +294,7 @@ export default function OverOnsAdminPage() {
                       {formData.mission.items.length > 1 && (
                         <button
                           onClick={() => removeMissionItem(index)}
-                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg"
+                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                         >
                           <Trash2 className="w-5 h-5" />
                         </button>
@@ -314,7 +333,7 @@ export default function OverOnsAdminPage() {
               <h2 className="text-2xl font-bold text-gray-900">4️⃣ Onze Waarden</h2>
               <button
                 onClick={addValue}
-                className="flex items-center gap-2 text-sm bg-[#05B6C4] text-white px-4 py-2 rounded-lg hover:bg-[#3B87BE]"
+                className="flex items-center gap-2 text-sm bg-[#05B6C4] text-white px-4 py-2 rounded-lg hover:bg-[#3B87BE] transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 Waarde Toevoegen
@@ -323,13 +342,13 @@ export default function OverOnsAdminPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {formData.values.map((value, index) => (
-                <div key={index} className="border border-gray-200 rounded-lg p-4">
+                <div key={index} className="border border-gray-200 rounded-lg p-4 hover:border-[#05B6C4] transition-colors">
                   <div className="flex justify-between items-start mb-3">
                     <span className="text-sm font-semibold text-gray-600">Waarde {index + 1}</span>
                     {formData.values.length > 1 && (
                       <button
                         onClick={() => removeValue(index)}
-                        className="text-red-600 hover:bg-red-50 p-1 rounded"
+                        className="text-red-600 hover:bg-red-50 p-1 rounded transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -359,11 +378,11 @@ export default function OverOnsAdminPage() {
 
           {/* Team */}
           <div className="bg-white rounded-lg shadow-md p-6">
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold text-gray-900">5️⃣ Ons Team</h2>
               <button
                 onClick={addTeamMember}
-                className="flex items-center gap-2 text-sm bg-[#05B6C4] text-white px-4 py-2 rounded-lg hover:bg-[#3B87BE]"
+                className="flex items-center gap-2 text-sm bg-[#05B6C4] text-white px-4 py-2 rounded-lg hover:bg-[#3B87BE] transition-colors"
               >
                 <Plus className="w-4 h-4" />
                 Teamlid Toevoegen
@@ -371,19 +390,20 @@ export default function OverOnsAdminPage() {
             </div>
 
             {formData.team.length === 0 ? (
-              <div className="text-center py-8 text-gray-500">
-                <UsersIcon className="w-12 h-12 mx-auto mb-2 text-gray-300" />
-                <p>Nog geen teamleden toegevoegd</p>
+              <div className="text-center py-12 bg-gray-50 rounded-lg">
+                <UsersIcon className="w-16 h-16 mx-auto mb-3 text-gray-300" />
+                <p className="text-gray-500">Nog geen teamleden toegevoegd</p>
+                <p className="text-sm text-gray-400 mt-2">Klik op "Teamlid Toevoegen" om te beginnen</p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {formData.team.map((member, index) => (
-                  <div key={index} className="border border-gray-200 rounded-lg p-4">
+                  <div key={index} className="border border-gray-200 rounded-lg p-4 hover:border-[#05B6C4] transition-colors">
                     <div className="flex justify-between items-start mb-3">
                       <span className="text-sm font-semibold text-gray-600">Lid {index + 1}</span>
                       <button
                         onClick={() => removeTeamMember(index)}
-                        className="text-red-600 hover:bg-red-50 p-1 rounded"
+                        className="text-red-600 hover:bg-red-50 p-1 rounded transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -395,16 +415,19 @@ export default function OverOnsAdminPage() {
                         {member.photo && (
                           <img
                             src={member.photo}
-                            alt={member.name}
-                            className="w-full h-32 object-cover rounded-lg mb-2"
+                            alt={member.name || 'Team member'}
+                            className="w-full h-40 object-cover rounded-lg mb-2"
+                            onError={(e) => {
+                              e.target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(member.name || 'Team')}&size=200&background=05B6C4&color=fff`;
+                            }}
                           />
                         )}
                         <button
                           onClick={() => {
-                            setSelectedPhotoIndex(index);
+                            setSelectedTeamIndex(index);
                             setShowMediaLibrary(true);
                           }}
-                          className="w-full flex items-center justify-center gap-2 px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 text-sm"
+                          className="w-full flex items-center justify-center gap-2 px-3 py-2 border-2 border-dashed border-gray-300 rounded-lg hover:border-[#05B6C4] hover:bg-gray-50 text-sm transition-colors"
                         >
                           <ImageIcon className="w-4 h-4" />
                           {member.photo ? 'Foto Wijzigen' : 'Foto Toevoegen'}
@@ -440,11 +463,11 @@ export default function OverOnsAdminPage() {
           </div>
 
           {/* Save Button (Bottom) */}
-          <div className="flex justify-end">
+          <div className="flex justify-end pt-4 border-t border-gray-200">
             <button
               onClick={handleSave}
               disabled={saving}
-              className="flex items-center gap-2 bg-[#05B6C4] hover:bg-[#3B87BE] text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors disabled:opacity-50"
+              className="flex items-center gap-2 bg-[#05B6C4] hover:bg-[#3B87BE] text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors disabled:opacity-50 shadow-lg"
             >
               <Save className="w-6 h-6" />
               {saving ? 'Bezig met Opslaan...' : 'Alles Opslaan'}
@@ -456,16 +479,10 @@ export default function OverOnsAdminPage() {
       {/* Media Library Modal */}
       {showMediaLibrary && (
         <MediaLibraryModal
-          onSelect={(url) => {
-            if (selectedPhotoIndex !== null) {
-              updateTeamMember(selectedPhotoIndex, 'photo', url);
-              setSelectedPhotoIndex(null);
-            }
-            setShowMediaLibrary(false);
-          }}
+          onSelect={handleMediaSelect}
           onClose={() => {
             setShowMediaLibrary(false);
-            setSelectedPhotoIndex(null);
+            setSelectedTeamIndex(null);
           }}
           category="team"
         />
