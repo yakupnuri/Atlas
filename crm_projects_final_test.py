@@ -7,7 +7,7 @@ Tests all functionality that can be verified without authentication
 import requests
 import json
 
-BASE_URL = "https://atlas-content.preview.emergentagent.com"
+BASE_URL = "https://stichting-web-app.preview.emergentagent.com"
 API_BASE = f"{BASE_URL}/api"
 
 def test_comprehensive_crm_projects():
