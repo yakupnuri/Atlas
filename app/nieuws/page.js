@@ -77,8 +77,18 @@ export default function NewsPage() {
 
       {/* News Grid */}
       <section className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredNews.map((item, index) => (
+        {loading ? (
+          <div className="text-center py-20">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#05B6C4]"></div>
+            <p className="mt-4 text-gray-600">Haberler yükleniyor...</p>
+          </div>
+        ) : filteredNews.length === 0 ? (
+          <div className="text-center py-20">
+            <p className="text-gray-600 text-lg">Henüz haber bulunmamaktadır.</p>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filteredNews.map((item, index) => (
             <motion.article
               key={item.id}
               initial={{ opacity: 0, y: 20 }}
