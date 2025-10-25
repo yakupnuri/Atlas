@@ -4,9 +4,13 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { BookOpen } from 'lucide-react'
 import ContactModal from '@/components/ContactModal';
-import AnnouncementsSection from '@/components/education/AnnouncementsSection';
+import AnnouncementsTicker from '@/components/education/AnnouncementsTicker';
 import ArticlesSection from '@/components/education/ArticlesSection';
 import VideosSection from '@/components/education/VideosSection';
+import DocumentsSection from '@/components/education/DocumentsSection';
+import ScheduleSection from '@/components/education/ScheduleSection';
+import CoursesSection from '@/components/education/CoursesSection';
+import CalendarSection from '@/components/education/CalendarSection';
 import SurveyCard from '@/components/surveys/SurveyCard';
 import SurveyModal from '@/components/surveys/SurveyModal';
 
@@ -14,6 +18,10 @@ export default function CultuurEducatiePage() {
   const [announcements, setAnnouncements] = useState([])
   const [articles, setArticles] = useState([])
   const [videos, setVideos] = useState([])
+  const [documents, setDocuments] = useState([])
+  const [schedule, setSchedule] = useState([])
+  const [courses, setCourses] = useState([])
+  const [calendar, setCalendar] = useState([])
   const [surveys, setSurveys] = useState([])
   const [loading, setLoading] = useState(true)
   const [contactModalOpen, setContactModalOpen] = useState(false);
@@ -25,23 +33,53 @@ export default function CultuurEducatiePage() {
 
   const fetchData = async () => {
     try {
-      const [announcementsRes, articlesRes, videosRes, surveysRes] = await Promise.all([
+      const [
+        announcementsRes, 
+        articlesRes, 
+        videosRes, 
+        documentsRes,
+        scheduleRes,
+        coursesRes,
+        calendarRes,
+        surveysRes
+      ] = await Promise.all([
         fetch('/api/education?type=announcements'),
         fetch('/api/education?type=articles'),
         fetch('/api/education?type=videos'),
+        fetch('/api/education?type=documents'),
+        fetch('/api/education?type=schedule'),
+        fetch('/api/education?type=courses'),
+        fetch('/api/education?type=calendar'),
         fetch('/api/surveys?module=education')
       ])
 
-      const [announcementsData, articlesData, videosData, surveysData] = await Promise.all([
+      const [
+        announcementsData, 
+        articlesData, 
+        videosData, 
+        documentsData,
+        scheduleData,
+        coursesData,
+        calendarData,
+        surveysData
+      ] = await Promise.all([
         announcementsRes.json(),
         articlesRes.json(),
         videosRes.json(),
+        documentsRes.json(),
+        scheduleRes.json(),
+        coursesRes.json(),
+        calendarRes.json(),
         surveysRes.json()
       ])
 
       if (announcementsData.success) setAnnouncements(announcementsData.data || [])
       if (articlesData.success) setArticles(articlesData.data || [])
       if (videosData.success) setVideos(videosData.data || [])
+      if (documentsData.success) setDocuments(documentsData.data || [])
+      if (scheduleData.success) setSchedule(scheduleData.data || [])
+      if (coursesData.success) setCourses(coursesData.data || [])
+      if (calendarData.success) setCalendar(calendarData.data || [])
       if (surveysData.success) setSurveys(surveysData.data || [])
       
     } catch (error) {
@@ -53,6 +91,9 @@ export default function CultuurEducatiePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
+      {/* Announcements Ticker */}
+      <AnnouncementsTicker announcements={announcements} />
+
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 text-white py-16">
         <div className="container mx-auto px-4 text-center">
@@ -73,9 +114,12 @@ export default function CultuurEducatiePage() {
 
       {/* Main Content */}
       <div className="container mx-auto px-4 py-12">
-        <AnnouncementsSection announcements={announcements} loading={loading} />
         <ArticlesSection articles={articles} loading={loading} />
         <VideosSection videos={videos} loading={loading} />
+        <CoursesSection courses={courses} loading={loading} />
+        <ScheduleSection schedule={schedule} loading={loading} />
+        <DocumentsSection documents={documents} loading={loading} />
+        <CalendarSection events={calendar} loading={loading} />
         
         {/* Surveys Section */}
         {surveys.length > 0 && (
