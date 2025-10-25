@@ -3,8 +3,13 @@
 import { useState } from 'react';
 import AdminLayout from '@/components/AdminLayout';
 import SurveyManager from '@/components/surveys/SurveyManager';
-import VideosTab from '@/components/admin/education/VideosTab';
+import AnnouncementsTab from '@/components/admin/education/AnnouncementsTab';
 import ArticlesTab from '@/components/admin/education/ArticlesTab';
+import VideosTab from '@/components/admin/education/VideosTab';
+import DocumentsTab from '@/components/admin/education/DocumentsTab';
+import ScheduleTab from '@/components/admin/education/ScheduleTab';
+import CoursesTab from '@/components/admin/education/CoursesTab';
+import CalendarTab from '@/components/admin/education/CalendarTab';
 import { 
   Bell,
   Newspaper,
@@ -22,6 +27,10 @@ export default function EducatieAdminPage() {
     { id: 'announcements', label: 'Duyurular', icon: Bell },
     { id: 'articles', label: 'Makaleler', icon: Newspaper },
     { id: 'videos', label: 'Videolar', icon: Video },
+    { id: 'documents', label: 'Dokümanlar', icon: Download },
+    { id: 'schedule', label: 'Ders Programı', icon: Clock },
+    { id: 'courses', label: 'Kurslar', icon: BookOpen },
+    { id: 'calendar', label: 'Takvim', icon: Calendar },
     { id: 'surveys', label: 'Anketler', icon: () => (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -60,20 +69,14 @@ export default function EducatieAdminPage() {
 
         {/* Tab Content */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
-          {activeTab === 'announcements' && (
-            <div className="text-center py-12 text-gray-500">
-              <Bell className="w-12 h-12 mx-auto mb-3 text-gray-300" />
-              <p>Duyurular tab component yakında eklenecek</p>
-            </div>
-          )}
-          
+          {activeTab === 'announcements' && <AnnouncementsTab />}
           {activeTab === 'articles' && <ArticlesTab />}
-          
           {activeTab === 'videos' && <VideosTab />}
-          
-          {activeTab === 'surveys' && (
-            <SurveyManager module="education" />
-          )}
+          {activeTab === 'documents' && <DocumentsTab />}
+          {activeTab === 'schedule' && <ScheduleTab />}
+          {activeTab === 'courses' && <CoursesTab />}
+          {activeTab === 'calendar' && <CalendarTab />}
+          {activeTab === 'surveys' && <SurveyManager module="education" />}
         </div>
       </div>
     </AdminLayout>
