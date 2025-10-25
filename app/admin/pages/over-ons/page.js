@@ -159,9 +159,16 @@ export default function OverOnsAdminPage() {
     setFormData({ ...formData, team: newTeam });
   };
 
-  const handleMediaSelect = (imageUrl) => {
+  const handleMediaSelect = (selectedItem) => {
     if (selectedTeamIndex !== null) {
-      updateTeamMember(selectedTeamIndex, 'photo', imageUrl);
+      // selectedItem can be an object with url/path, or a string URL
+      const imageUrl = typeof selectedItem === 'string' 
+        ? selectedItem 
+        : (selectedItem?.url || selectedItem?.path || '');
+      
+      if (imageUrl) {
+        updateTeamMember(selectedTeamIndex, 'photo', imageUrl);
+      }
     }
     setShowMediaLibrary(false);
     setSelectedTeamIndex(null);
