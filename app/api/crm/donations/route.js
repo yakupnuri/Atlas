@@ -16,7 +16,7 @@ export async function POST(request) {
     }
 
     const client = await clientPromise;
-    const db = client.db('stichting_atlas');
+    const db = client.db(process.env.DB_NAME || 'stichting_atlas');
     
     const newDonation = {
       id: uuidv4(),
@@ -51,7 +51,7 @@ export async function POST(request) {
 export async function GET(request) {
   try {
     const client = await clientPromise;
-    const db = client.db('stichting_atlas');
+    const db = client.db(process.env.DB_NAME || 'stichting_atlas');
     
     const donations = await db
       .collection('crm_applications')
@@ -82,7 +82,7 @@ export async function PUT(request) {
     }
 
     const client = await clientPromise;
-    const db = client.db('stichting_atlas');
+    const db = client.db(process.env.DB_NAME || 'stichting_atlas');
     
     const updateData = {
       status: data.status,
