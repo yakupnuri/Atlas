@@ -138,6 +138,7 @@ export default function NewsPage() {
             </motion.article>
           ))}
         </div>
+        )}
       </section>
     </div>
   );
