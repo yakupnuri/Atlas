@@ -19,7 +19,18 @@ export default function HeroCarousel() {
         const data = await response.json();
         const activeSlides = (data.slides || [])
           .filter(slide => slide.isActive)
-          .sort((a, b) => a.order - b.order);
+          .sort((a, b) => a.order - b.order)
+          .map(slide => ({
+            ...slide,
+            // Ensure badge is always an object with correct structure
+            badge: typeof slide.badge === 'object' && slide.badge !== null 
+              ? {
+                  text: String(slide.badge.text || ''),
+                  color: String(slide.badge.color || 'blue'),
+                  enabled: Boolean(slide.badge.enabled)
+                }
+              : { text: '', color: 'blue', enabled: false }
+          }));
         setSlides(activeSlides);
       } catch (error) {
         console.error('Error fetching slides:', error);
