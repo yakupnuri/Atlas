@@ -140,8 +140,8 @@ export default function HeroCarousel() {
 
           <div className="relative z-10 container mx-auto px-4 py-24 md:py-32">
             <div className="max-w-3xl">
-              {/* Badge */}
-              {currentSlide.badge?.enabled && currentSlide.badge?.text && (
+              {/* Badge - DISABLED FOR TESTING */}
+              {false && currentSlide.badge?.enabled && currentSlide.badge?.text && (
                 <motion.div
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
