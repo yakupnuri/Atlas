@@ -89,12 +89,10 @@ export default function CultuurEducatiePage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Sticky Container - Hero + Ticker (Desktop Only) */}
-      <div className="md:sticky md:top-0 md:z-50">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 text-white py-16">
-          <div className="container mx-auto px-4 text-center">
-            <motion.div
+      {/* Hero Section */}
+      <section className="bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 text-white py-16">
+        <div className="container mx-auto px-4 text-center">
+          <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
             >
