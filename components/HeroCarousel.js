@@ -82,6 +82,18 @@ export default function HeroCarousel() {
 
   const currentSlide = slides[currentIndex];
 
+  // Safety check
+  if (!currentSlide) {
+    return (
+      <section className="relative bg-gradient-to-r from-[#05B6C4] via-[#3B87BE] to-[#99D8E0] text-white">
+        <div className="container mx-auto px-4 py-32 text-center">
+          <h2 className="text-4xl font-bold mb-4">Welkom bij Stichting Atlas</h2>
+          <p className="text-xl text-blue-100">Samen bouwen aan een inclusieve gemeenschap</p>
+        </div>
+      </section>
+    );
+  }
+
   const variants = {
     enter: (direction) => ({
       x: direction > 0 ? 1000 : -1000,
