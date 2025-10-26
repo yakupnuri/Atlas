@@ -118,6 +118,7 @@ export default function AdminDashboard() {
     {
       title: 'Donaties',
       value: stats.donations,
+      subtitle: `€${stats.donationsTotal.toFixed(2)}`,
       icon: Heart,
       color: 'from-red-500 to-red-600',
       bgColor: 'bg-red-50',
