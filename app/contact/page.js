@@ -319,6 +319,22 @@ export default function ContactPage() {
               </Card>
             </div>
           </div>
+
+          {/* Google Maps Section */}
+          {mapsApiKey && (
+            <div className="mt-12">
+              <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">
+                Bezoek Ons
+              </h2>
+              <GoogleMap 
+                apiKey={mapsApiKey}
+                address="Amsterdam, Netherlands"
+                lat={52.3676}
+                lng={4.9041}
+                height="450px"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
