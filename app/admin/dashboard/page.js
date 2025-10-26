@@ -265,13 +265,17 @@ export default function AdminDashboard() {
           <Card className="p-6">
             <h2 className="text-xl font-bold text-gray-900 mb-4">Statistieken</h2>
             <div className="space-y-4">
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center pb-3 border-b border-gray-100">
                 <span className="text-sm text-gray-600">Totaal Bezoekers</span>
                 <span className="text-lg font-bold text-gray-900">Coming Soon</span>
               </div>
-              <div className="flex justify-between items-center">
+              <div className="flex justify-between items-center pb-3 border-b border-gray-100">
                 <span className="text-sm text-gray-600">Totaal Donaties</span>
-                <span className="text-lg font-bold text-gray-900">€ 0</span>
+                <span className="text-lg font-bold text-green-600">€ {stats.donationsTotal.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between items-center pb-3 border-b border-gray-100">
+                <span className="text-sm text-gray-600">Aantal Donaties</span>
+                <span className="text-lg font-bold text-gray-900">{stats.donations}</span>
               </div>
               <div className="flex justify-between items-center">
                 <span className="text-sm text-gray-600">Actieve Gebruikers</span>
