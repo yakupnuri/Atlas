@@ -37,25 +37,37 @@ export default function AdminDashboard() {
   const fetchDashboardStats = async () => {
     try {
       // Fetch all stats in parallel
-      const [newsRes, eventsRes, contactsRes, surveysRes] = await Promise.all([
+      const [newsRes, eventsRes, contactsRes, surveysRes, donationsRes] = await Promise.all([
         fetch('/api/news'),
         fetch('/api/events'),
         fetch('/api/contacts'),
-        fetch('/api/surveys')
+        fetch('/api/surveys'),
+        fetch('/api/donations')
       ]);
 
-      const [newsData, eventsData, contactsData, surveysData] = await Promise.all([
+      const [newsData, eventsData, contactsData, surveysData, donationsData] = await Promise.all([
         newsRes.json(),
         eventsRes.json(),
         contactsRes.json(),
-        surveysRes.json()
+        surveysRes.json(),
+        donationsRes.json()
       ]);
+
+      // Calculate total donations
+      const totalDonations = (donationsData.donations || [])
+        .filter(d => d.status === 'paid')
+        .reduce((sum, d) => sum + (d.amount || 0), 0);
+      
+      const donationCount = (donationsData.donations || [])
+        .filter(d => d.status === 'paid')
+        .length;
 
       setStats({
         news: newsData.news?.length || 0,
         events: eventsData.events?.length || 0,
         contacts: contactsData.contacts?.length || 0,
-        donations: 0, // Placeholder
+        donations: donationCount,
+        donationsTotal: totalDonations,
         surveys: surveysData.surveys?.length || 0,
         projects: 0, // Placeholder
         volunteers: 0, // Placeholder
