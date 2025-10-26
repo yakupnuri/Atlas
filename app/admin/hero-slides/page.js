@@ -70,7 +70,8 @@ export default function AdminHeroSlidesPage() {
         ctaText: slide.ctaText || 'Lees Meer',
         ctaLink: slide.ctaLink || '/',
         order: slide.order || 0,
-        isActive: slide.isActive !== undefined ? slide.isActive : true
+        isActive: slide.isActive !== undefined ? slide.isActive : true,
+        badge: slide.badge || { text: '', color: 'blue', enabled: false }
       });
     } else {
       setEditingSlide(null);
