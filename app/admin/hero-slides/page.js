@@ -51,7 +51,14 @@ export default function AdminHeroSlidesPage() {
     try {
       const response = await fetch('/api/hero-slides');
       const data = await response.json();
-      setSlides(data.slides || []);
+      // Normalize badge objects for safety
+      const normalizedSlides = (data.slides || []).map(slide => ({
+        ...slide,
+        badge: typeof slide.badge === 'object' && slide.badge !== null
+          ? slide.badge
+          : { text: '', color: 'blue', enabled: false }
+      }));
+      setSlides(normalizedSlides);
     } catch (error) {
       console.error('Error fetching slides:', error);
     } finally {
