@@ -126,14 +126,14 @@ export default function HeroCarousel() {
                   className="mb-4"
                 >
                   <span className={`inline-block px-4 py-2 text-sm font-bold rounded-full shadow-lg ${
-                    currentSlide.badge.color === 'blue' ? 'bg-blue-500 text-white' :
+                    (currentSlide.badge.color || 'blue') === 'blue' ? 'bg-blue-500 text-white' :
                     currentSlide.badge.color === 'green' ? 'bg-green-500 text-white' :
                     currentSlide.badge.color === 'red' ? 'bg-red-500 text-white' :
                     currentSlide.badge.color === 'yellow' ? 'bg-yellow-400 text-gray-900' :
                     currentSlide.badge.color === 'purple' ? 'bg-purple-500 text-white' :
                     'bg-pink-500 text-white'
                   }`}>
-                    {currentSlide.badge.text}
+                    {String(currentSlide.badge.text)}
                   </span>
                 </motion.div>
               )}
