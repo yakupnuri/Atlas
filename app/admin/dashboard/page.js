@@ -23,6 +23,7 @@ export default function AdminDashboard() {
     events: 0,
     contacts: 0,
     donations: 0,
+    donationsTotal: 0,
     surveys: 0,
     projects: 0,
     volunteers: 0,
