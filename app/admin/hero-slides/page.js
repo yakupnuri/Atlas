@@ -34,7 +34,12 @@ export default function AdminHeroSlidesPage() {
     ctaText: 'Lees Meer',
     ctaLink: '/',
     order: 0,
-    isActive: true
+    isActive: true,
+    badge: {
+      text: '',
+      color: 'blue',
+      enabled: false
+    }
   });
   const [saving, setSaving] = useState(false);
 
