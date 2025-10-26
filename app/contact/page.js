@@ -25,6 +25,23 @@ export default function ContactPage() {
   });
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState(null); // 'success', 'error'
+  const [mapsApiKey, setMapsApiKey] = useState(null);
+
+  // Fetch Google Maps API key from settings
+  useEffect(() => {
+    const fetchMapsKey = async () => {
+      try {
+        const response = await fetch('/api/homepage');
+        const data = await response.json();
+        if (data.success && data.data?.integrations?.googleMaps?.apiKey) {
+          setMapsApiKey(data.data.integrations.googleMaps.apiKey);
+        }
+      } catch (error) {
+        console.error('Error fetching Maps API key:', error);
+      }
+    };
+    fetchMapsKey();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
