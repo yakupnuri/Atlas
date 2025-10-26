@@ -179,6 +179,9 @@ export default function AdminDashboard() {
                     <div className="flex-1">
                       <p className="text-sm font-medium text-gray-600 mb-2">{stat.title}</p>
                       <h3 className="text-3xl font-bold text-gray-900">{stat.value}</h3>
+                      {stat.subtitle && (
+                        <p className="text-sm text-gray-500 mt-1">{stat.subtitle}</p>
+                      )}
                     </div>
                     <div className={`p-3 rounded-lg ${stat.bgColor}`}>
                       <stat.icon className={`w-6 h-6 ${stat.iconColor}`} />
