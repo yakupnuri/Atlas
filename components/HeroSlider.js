@@ -149,7 +149,7 @@ export default function HeroSlider() {
             {/* Content */}
             <div className="relative container mx-auto px-4 md:px-8 h-full flex items-center">
               <div className="max-w-3xl">
-                {currentSlide.badge && (
+                {currentSlide.badge && typeof currentSlide.badge === 'object' && currentSlide.badge.text && (
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -157,7 +157,7 @@ export default function HeroSlider() {
                     className="flex items-center gap-2 mb-4"
                   >
                     <Sparkles className="w-5 h-5 text-yellow-300" />
-                    <span className="text-white/90 font-medium">{currentSlide.badge}</span>
+                    <span className="text-white/90 font-medium">{String(currentSlide.badge.text)}</span>
                   </motion.div>
                 )}
                 
