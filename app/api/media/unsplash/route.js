@@ -85,8 +85,21 @@ export async function POST(request) {
       return NextResponse.json({ error: 'No photo data provided' }, { status: 400 })
     }
     
+    // Fetch Unsplash configuration from database
+    const { getDb } = require('@/lib/mongodb')
+    const db = await getDb()
+    const collection = db.collection('homepage_content');
+    const content = await collection.findOne({ type: 'homepage' });
+    
+    let UNSPLASH_ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY;
+    
+    // Check if access key is stored in database (Settings)
+    if (content && content.integrations && content.integrations.unsplash && content.integrations.unsplash.accessKey) {
+      UNSPLASH_ACCESS_KEY = content.integrations.unsplash.accessKey;
+    }
+    
     // Trigger download endpoint (Unsplash requires this for analytics)
-    if (unsplashPhoto.unsplashData?.download_location) {
+    if (unsplashPhoto.unsplashData?.download_location && UNSPLASH_ACCESS_KEY) {
       await fetch(unsplashPhoto.unsplashData.download_location, {
         headers: {
           'Authorization': `Client-ID ${UNSPLASH_ACCESS_KEY}`
@@ -95,11 +108,9 @@ export async function POST(request) {
     }
     
     // Save to our database
-    const { getDb } = require('@/lib/mongodb')
     const { v4: uuidv4 } = require('uuid')
     
-    const db = await getDb()
-    const collection = db.collection('media_library')
+    const mediaCollection = db.collection('media_library')
     
     const mediaData = {
       id: uuidv4(),
