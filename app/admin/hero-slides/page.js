@@ -416,6 +416,83 @@ export default function AdminHeroSlidesPage() {
                     </div>
                   </div>
 
+                  {/* Badge Section */}
+                  <div className="border-t pt-4 mt-4">
+                    <div className="flex items-center justify-between mb-3">
+                      <label className="block text-sm font-medium text-gray-700">
+                        Rozet (Badge)
+                      </label>
+                      <label className="flex items-center gap-2 cursor-pointer">
+                        <input
+                          type="checkbox"
+                          checked={formData.badge.enabled}
+                          onChange={(e) => setFormData({
+                            ...formData, 
+                            badge: {...formData.badge, enabled: e.target.checked}
+                          })}
+                          className="w-4 h-4 text-blue-600 rounded focus:ring-2 focus:ring-blue-500"
+                        />
+                        <span className="text-sm text-gray-600">Rozet tonen</span>
+                      </label>
+                    </div>
+                    
+                    {formData.badge.enabled && (
+                      <div className="grid grid-cols-2 gap-4 mt-3">
+                        <div>
+                          <label className="block text-xs font-medium text-gray-600 mb-2">
+                            Rozet Tekst
+                          </label>
+                          <input
+                            type="text"
+                            value={formData.badge.text}
+                            onChange={(e) => setFormData({
+                              ...formData, 
+                              badge: {...formData.badge, text: e.target.value}
+                            })}
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Nieuw, Populair, etc."
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-xs font-medium text-gray-600 mb-2">
+                            Kleur
+                          </label>
+                          <select
+                            value={formData.badge.color}
+                            onChange={(e) => setFormData({
+                              ...formData, 
+                              badge: {...formData.badge, color: e.target.value}
+                            })}
+                            className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                          >
+                            <option value="blue">Blauw</option>
+                            <option value="green">Groen</option>
+                            <option value="red">Rood</option>
+                            <option value="yellow">Geel</option>
+                            <option value="purple">Paars</option>
+                            <option value="pink">Roze</option>
+                          </select>
+                        </div>
+                      </div>
+                    )}
+                    
+                    {formData.badge.enabled && formData.badge.text && (
+                      <div className="mt-3 p-3 bg-gray-50 rounded-lg">
+                        <p className="text-xs text-gray-600 mb-2">Preview:</p>
+                        <span className={`inline-block px-3 py-1 text-sm font-semibold rounded-full ${
+                          formData.badge.color === 'blue' ? 'bg-blue-100 text-blue-800' :
+                          formData.badge.color === 'green' ? 'bg-green-100 text-green-800' :
+                          formData.badge.color === 'red' ? 'bg-red-100 text-red-800' :
+                          formData.badge.color === 'yellow' ? 'bg-yellow-100 text-yellow-800' :
+                          formData.badge.color === 'purple' ? 'bg-purple-100 text-purple-800' :
+                          'bg-pink-100 text-pink-800'
+                        }`}>
+                          {formData.badge.text}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-gray-700 mb-2">
