@@ -10,7 +10,7 @@ export async function middleware(request) {
     pathname.startsWith('/_next') ||
     pathname.startsWith('/favicon.ico') ||
     pathname.startsWith('/logo.png') ||
-    pathname === '/maintenance-page'
+    pathname === '/maintenance'
   ) {
     return NextResponse.next();
   }
@@ -38,7 +38,7 @@ export async function middleware(request) {
       
       if (!token) {
         // Not authenticated - show maintenance page
-        return NextResponse.rewrite(new URL('/maintenance-page', request.url));
+        return NextResponse.rewrite(new URL('/maintenance', request.url));
       }
     }
   } catch (error) {
@@ -50,5 +50,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|maintenance-page).*)']
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|maintenance).*)']
 };
