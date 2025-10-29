@@ -6,6 +6,9 @@ import { CheckCircle, XCircle, Loader, Heart } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 function SuccessPageContent() {
   const [status, setStatus] = useState('loading');
   const [paymentInfo, setPaymentInfo] = useState(null);
