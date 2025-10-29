@@ -838,7 +838,7 @@ backend:
 
   - task: "FASE 1 LAUNCH - News API (GET /api/news)"
     implemented: true
-    working: false
+    working: true
     file: "/app/app/api/news/route.js"
     stuck_count: 1
     priority: "high"
@@ -850,6 +850,9 @@ backend:
       - working: false
         agent: "testing"
         comment: "CRITICAL ISSUE FOUND ❌ Frontend testing reveals Nieuws page displays 'Henüz haber bulunmamaktadır' (No news available) despite API returning data. Issue appears to be in frontend data fetching or display logic. Homepage news section also affected. This prevents news from showing on both homepage and dedicated news page. Requires immediate fix before Monday launch."
+      - working: true
+        agent: "testing"
+        comment: "PRODUCTION LAUNCH UI TESTING UPDATE ✅ News functionality now working correctly! Nieuws page displays 10 article elements with proper content. No 'no news available' message found. Articles appear to have content and are clickable. Homepage news section also functioning. Previous issue appears resolved. Backend logs show APIs returning 200 status codes. Some intermittent 502 errors observed during testing but core functionality working."
 
   - task: "FASE 1 LAUNCH - Events API (GET /api/events)"
     implemented: true
