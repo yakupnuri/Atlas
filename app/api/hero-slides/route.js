@@ -89,7 +89,10 @@ export async function POST(request) {
 export async function PUT(request) {
   try {
     const body = await request.json();
-    const { id, ...updateData } = body;
+    
+    // ID'yi body'den veya query parameter'dan al
+    const { searchParams } = new URL(request.url);
+    const id = body.id || searchParams.get('id');
     
     if (!id) {
       return NextResponse.json(
@@ -97,6 +100,9 @@ export async function PUT(request) {
         { status: 400 }
       );
     }
+    
+    // ID'yi body'den çıkar
+    const { id: _, ...updateData } = body;
     
     await client.connect();
     const db = client.db(process.env.DB_NAME || 'stichting_atlas');
