@@ -112,7 +112,7 @@ export default function NewsPage() {
                 <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
                   <div className="flex items-center gap-1">
                     <Calendar className="w-4 h-4" />
-                    {new Date(item.date).toLocaleDateString('tr-TR')}
+                    {new Date(item.date).toLocaleDateString('nl-NL')}
                   </div>
                   <div className="flex items-center gap-1">
                     <User className="w-4 h-4" />
@@ -132,7 +132,7 @@ export default function NewsPage() {
                   href={`/nieuws/${item.slug}`}
                   className="text-[#05B6C4] hover:text-[#3B87BE] font-semibold flex items-center gap-2"
                 >
-                  Devamını Oku
+                  Lees verder
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </div>
