@@ -138,32 +138,50 @@ export default function CarrierePage() {
         </div>
       </section>
 
-      {/* Horizontal News Ticker */}
+      {/* Horizontal News Ticker - Same as EventTicker style */}
       {announcements.length > 0 && (
-        <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 shadow-lg">
-          <div className="container mx-auto px-4">
-            <div className="flex items-start gap-4">
-              <div className="flex items-center gap-2 flex-shrink-0">
-                <Bell className="w-5 h-5 animate-pulse" />
-                <span className="font-bold text-sm uppercase">Aankondigingen</span>
-              </div>
-              
-              <div className="flex-1 space-y-2">
-                {announcements.slice(0, 5).map((announcement) => (
-                  <div 
-                    key={announcement.id}
-                    className="flex items-center gap-3"
-                  >
+        <div className="bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 text-white py-3 overflow-hidden">
+          <div className="flex items-center gap-2 mb-1">
+            <div className="container mx-auto px-4">
+              <span className="text-sm font-semibold flex items-center gap-2">
+                <Bell className="w-4 h-4 animate-pulse" />
+                Aankondigingen
+              </span>
+            </div>
+          </div>
+          
+          <div className="relative flex overflow-hidden">
+            <motion.div
+              className="flex gap-8 whitespace-nowrap"
+              animate={{
+                x: [0, -1000],
+              }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  duration: 30,
+                  ease: "linear",
+                },
+              }}
+            >
+              {[...announcements, ...announcements, ...announcements].map((announcement, index) => (
+                <div
+                  key={`${announcement.id}-${index}`}
+                  className="flex items-center gap-4 px-6 py-2 bg-white/10 hover:bg-white/20 rounded-lg backdrop-blur-sm transition-colors"
+                >
+                  <Bell className="w-4 h-4 flex-shrink-0" />
+                  <div className="flex items-center gap-4">
                     <span className="font-semibold">{announcement.title}</span>
                     {announcement.date && (
-                      <span className="text-sm opacity-90">
-                        • {new Date(announcement.date).toLocaleDateString('nl-NL')}
+                      <span className="text-white/80 text-sm">
+                        {new Date(announcement.date).toLocaleDateString('nl-NL', { day: 'numeric', month: 'short' })}
                       </span>
                     )}
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
         </div>
       )}
