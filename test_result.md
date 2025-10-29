@@ -443,6 +443,8 @@ agent_communication:
   - agent: "testing"
     message: "ANBI DOCUMENT TYPES UPDATE TESTING COMPLETE ✅ Successfully tested updated ANBI feature with new document types. Cleared database and file system as requested. Verified all functionality with NEW document types: beloningsbeleid (Remuneration Policy), beleidsplan (Policy Plan), jaarrekening (Annual Report). Old 'huisstijl' type properly rejected. All 6 test scenarios pass with new types. File naming, MongoDB storage, validation, and upsert functionality all working correctly. Backend ready for production with updated document types."
   - agent: "main"
+  - agent: "testing"
+    message: "COMPREHENSIVE UI/UX VERIFICATION FOR PRODUCTION LAUNCH COMPLETED ✅ Tested all 10 public pages and admin panel functionality. CRITICAL BACKEND ISSUE FOUND: Multiple API endpoints returning 502 errors (/api/news, /api/events, /api/education, /api/career, /api/hero-slides, /api/translations). This is preventing dynamic content from loading properly. FRONTEND UI WORKING: All page layouts, navigation, forms, mobile responsive design, static content, and admin login functionality working correctly. Static news sections confirmed non-scrolling as requested. Program card heights appear equal. Contact form functional. Admin panel accessible. URGENT: Backend API server issues need immediate attention before production launch."
 
   - task: "Career Center API - Auto-expiry filtering"
     implemented: true
