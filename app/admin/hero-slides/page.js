@@ -258,7 +258,7 @@ export default function HeroSlidesPage() {
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b">
               <h2 className="text-2xl font-bold text-gray-900">
-                {editingSlide ? 'Slide Bewerken' : 'Nieuwe Slide'}
+                {editingSlide ? 'Slayt Düzenle' : 'Yeni Slayt Ekle'}
               </h2>
               <button onClick={closeModal} className="text-gray-400 hover:text-gray-600">
                 <X className="w-6 h-6" />
@@ -269,7 +269,7 @@ export default function HeroSlidesPage() {
             <form onSubmit={handleSubmit} className="p-6 space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Titel *
+                  Başlık *
                 </label>
                 <input
                   type="text"
@@ -277,30 +277,33 @@ export default function HeroSlidesPage() {
                   onChange={(e) => setFormData({...formData, title: e.target.value})}
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
                   required
+                  placeholder="Slayt başlığını girin"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Subtitel
+                  Alt Başlık
                 </label>
                 <input
                   type="text"
                   value={formData.subtitle}
                   onChange={(e) => setFormData({...formData, subtitle: e.target.value})}
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  placeholder="Alt başlık (opsiyonel)"
                 />
               </div>
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Beschrijving
+                  Açıklama
                 </label>
                 <textarea
                   rows="3"
                   value={formData.description}
                   onChange={(e) => setFormData({...formData, description: e.target.value})}
                   className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                  placeholder="Slayt açıklaması (opsiyonel)"
                 />
               </div>
 
