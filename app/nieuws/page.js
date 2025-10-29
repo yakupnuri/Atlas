@@ -69,7 +69,7 @@ export default function NewsPage() {
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                {cat === 'all' ? 'Tümü' : cat}
+                {cat === 'all' ? 'Alle' : cat}
               </button>
             ))}
           </div>
@@ -81,11 +81,11 @@ export default function NewsPage() {
         {loading ? (
           <div className="text-center py-20">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-[#05B6C4]"></div>
-            <p className="mt-4 text-gray-600">Haberler yükleniyor...</p>
+            <p className="mt-4 text-gray-600">Nieuws laden...</p>
           </div>
         ) : filteredNews.length === 0 ? (
           <div className="text-center py-20">
-            <p className="text-gray-600 text-lg">Henüz haber bulunmamaktadır.</p>
+            <p className="text-gray-600 text-lg">Nog geen nieuws beschikbaar.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
