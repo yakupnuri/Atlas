@@ -85,6 +85,12 @@ export default function AdminLayout({ children }) {
       href: '/admin/dashboard',
     },
     {
+      title: 'Onderhoudsmodus',
+      icon: Wrench,
+      href: '/admin/maintenance',
+      badge: 'Nieuw'
+    },
+    {
       title: 'Homepage İçerik',
       icon: Type,
       href: '/admin/homepage',
