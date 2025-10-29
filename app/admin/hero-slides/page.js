@@ -308,13 +308,23 @@ export default function HeroSlidesPage() {
                 <label className="block text-sm font-medium text-gray-700 mb-2">
                   Afbeelding URL
                 </label>
-                <input
-                  type="url"
-                  value={formData.image}
-                  onChange={(e) => setFormData({...formData, image: e.target.value})}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                  placeholder="https://..."
-                />
+                <div className="flex gap-2">
+                  <input
+                    type="url"
+                    value={formData.image}
+                    onChange={(e) => setFormData({...formData, image: e.target.value})}
+                    className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="https://..."
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowMediaLibrary(true)}
+                    className="px-4 py-2 bg-gradient-to-r from-[#05B6C4] to-[#3B87BE] text-white rounded-lg hover:shadow-lg transition-all flex items-center gap-2"
+                  >
+                    <ImageIcon className="w-4 h-4" />
+                    Kies Afbeelding
+                  </button>
+                </div>
                 {formData.image && (
                   <div className="mt-2 h-32 bg-gray-100 rounded-lg overflow-hidden">
                     <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
