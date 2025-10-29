@@ -92,3 +92,15 @@ function AuthErrorContent() {
     </div>
   );
 }
+
+export default function AuthErrorPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center">
+        <div className="text-gray-600">Yükleniyor...</div>
+      </div>
+    }>
+      <AuthErrorContent />
+    </Suspense>
+  );
+}
