@@ -30,7 +30,8 @@ import {
   MessageCircle,
   Mail,
   Image as ImageIcon,
-  Type
+  Type,
+  Wrench
 } from 'lucide-react';
 
 export default function AdminLayout({ children }) {
