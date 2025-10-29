@@ -403,6 +403,18 @@ export default function HeroSlidesPage() {
           </div>
         </div>
       )}
+
+      {/* Media Library Modal */}
+      <MediaLibraryModal
+        isOpen={showMediaLibrary}
+        onClose={() => setShowMediaLibrary(false)}
+        onSelect={(media) => {
+          setFormData({ ...formData, image: media.url });
+          setShowMediaLibrary(false);
+        }}
+        allowMultiple={false}
+        category="hero-slides"
+      />
     </AdminLayout>
   );
 }
