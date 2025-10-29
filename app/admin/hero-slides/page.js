@@ -148,15 +148,15 @@ export default function HeroSlidesPage() {
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Hero Slides</h1>
-            <p className="text-gray-600 mt-2">Beheer de slides op de homepage</p>
+            <h1 className="text-3xl font-bold text-gray-900">Hero Slaytlar</h1>
+            <p className="text-gray-600 mt-2">Anasayfa slaytlarını yönetin</p>
           </div>
           <button
             onClick={() => openModal()}
             className="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
           >
             <Plus className="w-5 h-5" />
-            Nieuwe Slide
+            Yeni Slayt Ekle
           </button>
         </div>
 
