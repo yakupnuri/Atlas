@@ -10,7 +10,7 @@ export default function NewsPage() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
 
-  const categories = ['all', 'Etkinlik', 'Eğitim', 'Duyuru'];
+  const categories = ['all', 'Evenement', 'Onderwijs', 'Aankondiging'];
 
   useEffect(() => {
     fetchNews();
@@ -45,9 +45,10 @@ export default function NewsPage() {
             className="text-center"
           >
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Haberler
+              Nieuws
             </h1>
             <p className="text-xl text-white/90">
+              Blijf op de hoogte van ons laatste nieuws en updates
               Stichting Atlas'tan son haberler ve duyurular
             </p>
           </motion.div>
