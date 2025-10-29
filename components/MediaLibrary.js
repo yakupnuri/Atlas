@@ -80,9 +80,9 @@ export default function MediaLibrary({ onClose, onSelect }) {
     if (!unsplashQuery.trim()) return;
 
     try {
-      // Unsplash API - Gerçek arama
+      // Use backend API route for Unsplash search
       const response = await fetch(
-        `https://api.unsplash.com/search/photos?query=${encodeURIComponent(unsplashQuery)}&per_page=12&client_id=your_access_key_here`
+        `/api/media/unsplash?query=${encodeURIComponent(unsplashQuery)}&per_page=12`
       );
       
       if (!response.ok) {
@@ -134,11 +134,21 @@ export default function MediaLibrary({ onClose, onSelect }) {
       }
       
       const data = await response.json();
-      setUnsplashResults(data.results.map(img => ({
-        id: img.id,
-        url: img.urls.regular,
-        alt: img.alt_description || unsplashQuery
-      })));
+      if (data.success && data.results) {
+        setUnsplashResults(data.results.map(img => ({
+          id: img.id,
+          url: img.url,
+          alt: img.alt || unsplashQuery
+        })));
+      } else {
+        // Fallback to demo images
+        const fallbackImages = [
+          'https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800',
+          'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=800',
+          'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=800',
+        ];
+        setUnsplashResults(fallbackImages.map((url, i) => ({ id: i, url, alt: unsplashQuery })));
+      }
     } catch (error) {
       console.error('Unsplash search error:', error);
       // Fallback demo
