@@ -314,11 +314,11 @@ export default function HeroSlidesPage() {
                 <div className="space-y-2">
                   <div className="flex gap-2">
                     <input
-                      type="url"
+                      type="text"
                       value={formData.image}
                       onChange={(e) => setFormData({...formData, image: e.target.value})}
                       className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                      placeholder="Manuel olarak resim URL'si girin veya aşağıdan seçin..."
+                      placeholder="Manuel URL girebilir veya aşağıdaki butona tıklayabilirsiniz..."
                     />
                   </div>
                   <button
@@ -327,7 +327,7 @@ export default function HeroSlidesPage() {
                     className="w-full px-4 py-3 bg-gradient-to-r from-[#05B6C4] to-[#3B87BE] text-white rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2"
                   >
                     <ImageIcon className="w-5 h-5" />
-                    Medya Kütüphanesinden Resim Seç
+                    📸 Medya Kütüphanesinden Resim Seç
                   </button>
                 </div>
                 {formData.image && (
