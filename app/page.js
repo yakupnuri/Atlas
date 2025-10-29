@@ -818,12 +818,13 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.2 }}
+                  className="h-full"
                 >
                   <Link
                     href={program.href}
-                    className="block bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group"
+                    className="flex flex-col h-full bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all group"
                   >
-                    <div className="relative h-48 overflow-hidden">
+                    <div className="relative h-48 overflow-hidden flex-shrink-0">
                       <img
                         src={program.image}
                         alt={program.title}
@@ -834,11 +835,11 @@ export default function Home() {
                         <Icon className="w-6 h-6 text-gray-900" />
                       </div>
                     </div>
-                    <div className="p-6">
+                    <div className="p-6 flex flex-col flex-1">
                       <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#05B6C4] transition-colors">
                         {program.title}
                       </h3>
-                      <p className="text-gray-600 mb-4">
+                      <p className="text-gray-600 mb-4 flex-1">
                         {program.description}
                       </p>
                       <div className="flex items-center text-[#05B6C4] font-semibold group-hover:gap-3 transition-all">
