@@ -7,6 +7,9 @@ import { ShieldAlert, Mail, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 function AuthErrorContent() {
   const searchParams = useSearchParams();
   const error = searchParams.get('error');
