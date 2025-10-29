@@ -9,7 +9,8 @@ export async function middleware(request) {
     pathname.startsWith('/api') ||
     pathname.startsWith('/_next') ||
     pathname.startsWith('/favicon.ico') ||
-    pathname.startsWith('/logo.png')
+    pathname.startsWith('/logo.png') ||
+    pathname === '/maintenance-page'
   ) {
     return NextResponse.next();
   }
@@ -21,10 +22,14 @@ export async function middleware(request) {
 
   // Check maintenance mode
   try {
-    const maintenanceResponse = await fetch(
-      `${request.nextUrl.origin}/api/maintenance`,
-      { cache: 'no-store' }
-    );
+    // Use internal URL without SSL
+    const maintenanceUrl = `http://localhost:3000/api/maintenance`;
+    const maintenanceResponse = await fetch(maintenanceUrl, { 
+      cache: 'no-store',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     const maintenanceData = await maintenanceResponse.json();
 
     if (maintenanceData.enabled) {
@@ -45,5 +50,5 @@ export async function middleware(request) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)']
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|maintenance-page).*)']
 };
