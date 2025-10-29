@@ -3,8 +3,9 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Settings, Power, Clock, MessageSquare, Save, Loader } from 'lucide-react';
+import AdminLayout from '@/components/AdminLayout';
 
-export default function MaintenanceSettings() {
+function MaintenanceSettingsContent() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [settings, setSettings] = useState({
@@ -183,5 +184,13 @@ export default function MaintenanceSettings() {
         </div>
       </motion.div>
     </div>
+  );
+}
+
+export default function MaintenanceSettings() {
+  return (
+    <AdminLayout>
+      <MaintenanceSettingsContent />
+    </AdminLayout>
   );
 }
