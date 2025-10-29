@@ -140,15 +140,27 @@ export default function CarrierePage() {
 
       {/* Horizontal News Ticker */}
       {announcements.length > 0 && (
-        <div className="bg-orange-500 text-white py-3 overflow-hidden">
+        <div className="bg-gradient-to-r from-orange-500 to-red-500 text-white py-4 shadow-lg">
           <div className="container mx-auto px-4">
-            <div className="flex items-center">
-              <Bell className="w-5 h-5 mr-3 flex-shrink-0 animate-pulse" />
-              <div className="flex animate-scroll whitespace-nowrap">
-                {announcements.concat(announcements).map((announcement, index) => (
-                  <span key={`${announcement.id}-${index}`} className="mx-8">
-                    <strong>NIEUWS:</strong> {announcement.title}
-                  </span>
+            <div className="flex items-start gap-4">
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <Bell className="w-5 h-5 animate-pulse" />
+                <span className="font-bold text-sm uppercase">Aankondigingen</span>
+              </div>
+              
+              <div className="flex-1 space-y-2">
+                {announcements.slice(0, 5).map((announcement) => (
+                  <div 
+                    key={announcement.id}
+                    className="flex items-center gap-3"
+                  >
+                    <span className="font-semibold">{announcement.title}</span>
+                    {announcement.date && (
+                      <span className="text-sm opacity-90">
+                        • {new Date(announcement.date).toLocaleDateString('nl-NL')}
+                      </span>
+                    )}
+                  </div>
                 ))}
               </div>
             </div>
