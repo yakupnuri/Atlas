@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   images: {
     domains: ['images.unsplash.com', 'localhost'],
     remotePatterns: [
@@ -15,7 +16,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  // Exclude dynamic pages from static generation
   experimental: {
     missingSuspenseWithCSRBailout: false,
   },
