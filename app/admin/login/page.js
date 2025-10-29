@@ -45,8 +45,8 @@ export default function AdminLoginPage() {
           {/* Logo */}
           <div className="flex justify-center mb-8">
             <Image 
-              src="/web-logo.png" 
-              alt="Logo" 
+              src="/logo.png" 
+              alt="Stichting Atlas Logo" 
               width={80} 
               height={80} 
               className="rounded"
