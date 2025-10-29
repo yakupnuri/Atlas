@@ -86,20 +86,20 @@ export default function HeroSlidesPage() {
       });
 
       if (response.ok) {
-        alert('✅ Opgeslagen!');
+        alert('✅ Kaydedildi!');
         closeModal();
         fetchSlides();
       } else {
-        alert('❌ Fout bij opslaan');
+        alert('❌ Kaydetme hatası');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('❌ Fout bij opslaan');
+      alert('❌ Kaydetme hatası');
     }
   };
 
   const handleDelete = async (id) => {
-    if (!confirm('Weet je zeker dat je deze slide wilt verwijderen?')) return;
+    if (!confirm('Bu slaytı silmek istediğinizden emin misiniz?')) return;
     
     try {
       const response = await fetch(`/api/hero-slides?id=${id}`, {
@@ -107,12 +107,12 @@ export default function HeroSlidesPage() {
       });
 
       if (response.ok) {
-        alert('✅ Verwijderd!');
+        alert('✅ Silindi!');
         fetchSlides();
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('❌ Fout bij verwijderen');
+      alert('❌ Silme hatası');
     }
   };
 
