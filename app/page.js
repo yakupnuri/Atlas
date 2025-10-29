@@ -511,31 +511,33 @@ function CarrierecentrumSection() {
                 <Bell className="w-6 h-6 text-orange-600" />
                 Nieuws
               </h3>
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden" style={{ height: '600px' }}>
+              <div className="bg-white rounded-xl shadow-lg overflow-auto" style={{ height: '600px' }}>
                 {announcements.length > 0 ? (
-                  <div className="relative h-full overflow-hidden">
-                    <div className="animate-scroll-up space-y-4 p-6">
-                      {announcements.concat(announcements).map((announcement, index) => (
-                        <motion.div
-                          key={`${announcement.id}-${index}`}
-                          className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg p-4 border-l-4 border-orange-500"
-                        >
-                          <div className="flex items-start gap-2">
-                            <Bell className="w-4 h-4 text-orange-600 flex-shrink-0 mt-1" />
-                            <div>
-                              <h4 className="font-bold text-gray-900 text-sm mb-1">
-                                {announcement.title}
-                              </h4>
-                              {announcement.content && (
-                                <p className="text-xs text-gray-600 line-clamp-2">
-                                  {announcement.content}
-                                </p>
-                              )}
-                            </div>
+                  <div className="space-y-4 p-6">
+                    {announcements.slice(0, 5).map((announcement, index) => (
+                      <motion.div
+                        key={announcement.id}
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        className="bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg p-4 border-l-4 border-orange-500"
+                      >
+                        <div className="flex items-start gap-2">
+                          <Bell className="w-4 h-4 text-orange-600 flex-shrink-0 mt-1" />
+                          <div>
+                            <h4 className="font-bold text-gray-900 text-sm mb-1">
+                              {announcement.title}
+                            </h4>
+                            {announcement.content && (
+                              <p className="text-xs text-gray-600 line-clamp-2">
+                                {announcement.content}
+                              </p>
+                            )}
                           </div>
-                        </motion.div>
-                      ))}
-                    </div>
+                        </div>
+                      </motion.div>
+                    ))}
                   </div>
                 ) : (
                   <div className="h-full flex items-center justify-center p-8">
