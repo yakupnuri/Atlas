@@ -303,30 +303,44 @@ export default function NewsManagement() {
 
                 {/* Image Selection */}
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">Afbeelding</label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">Resim</label>
                   
-                  {formData.image ? (
-                    <div className="relative mb-3">
-                      <img src={formData.image} alt="Geselecteerd" className="w-full h-48 object-cover rounded-lg" />
-                      <button
-                        type="button"
-                        onClick={() => setFormData({ ...formData, image: '' })}
-                        className="absolute top-2 right-2 p-2 bg-red-600 text-white rounded-full hover:bg-red-700"
-                      >
-                        <X className="w-5 h-5" />
-                      </button>
+                  <div className="space-y-3">
+                    {/* Manuel URL Input */}
+                    <div>
+                      <input
+                        type="text"
+                        value={formData.image}
+                        onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#05B6C4] focus:border-transparent outline-none"
+                        placeholder="Manuel URL girebilir veya aşağıdaki butona tıklayabilirsiniz..."
+                      />
                     </div>
-                  ) : (
+
+                    {/* Media Library Button */}
                     <button
                       type="button"
                       onClick={() => setShowMediaLibrary(true)}
-                      className="w-full px-4 py-8 border-2 border-dashed border-gray-300 rounded-lg hover:border-blue-500 hover:bg-blue-50 transition-colors flex flex-col items-center gap-2 text-gray-600 hover:text-blue-600"
+                      className="w-full px-4 py-4 bg-gradient-to-r from-[#05B6C4] to-[#3B87BE] text-white rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2"
                     >
-                      <ImageIcon className="w-12 h-12" />
-                      <span className="font-semibold">Afbeelding toevoegen</span>
-                      <span className="text-sm">Klik om afbeelding te kiezen uit mediabibliotheek</span>
+                      <ImageIcon className="w-5 h-5" />
+                      📸 Medya Kütüphanesinden Resim Seç
                     </button>
-                  )}
+
+                    {/* Preview */}
+                    {formData.image && (
+                      <div className="relative">
+                        <img src={formData.image} alt="Önizleme" className="w-full h-48 object-cover rounded-lg" />
+                        <button
+                          type="button"
+                          onClick={() => setFormData({ ...formData, image: '' })}
+                          className="absolute top-2 right-2 p-2 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors"
+                        >
+                          <X className="w-5 h-5" />
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
