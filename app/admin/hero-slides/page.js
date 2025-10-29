@@ -2,12 +2,14 @@
 
 import { useState, useEffect } from 'react';
 import AdminLayout from '@/components/AdminLayout';
-import { Plus, Edit, Trash2, Eye, EyeOff, GripVertical, X, Save } from 'lucide-react';
+import MediaLibraryModal from '@/components/MediaLibraryModal';
+import { Plus, Edit, Trash2, Eye, EyeOff, GripVertical, X, Save, Image as ImageIcon } from 'lucide-react';
 
 export default function HeroSlidesPage() {
   const [slides, setSlides] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
+  const [showMediaLibrary, setShowMediaLibrary] = useState(false);
   const [editingSlide, setEditingSlide] = useState(null);
   const [formData, setFormData] = useState({
     title: '',
