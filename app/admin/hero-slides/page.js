@@ -306,28 +306,30 @@ export default function HeroSlidesPage() {
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Afbeelding URL
+                  Resim
                 </label>
-                <div className="flex gap-2">
-                  <input
-                    type="url"
-                    value={formData.image}
-                    onChange={(e) => setFormData({...formData, image: e.target.value})}
-                    className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-                    placeholder="https://..."
-                  />
+                <div className="space-y-2">
+                  <div className="flex gap-2">
+                    <input
+                      type="url"
+                      value={formData.image}
+                      onChange={(e) => setFormData({...formData, image: e.target.value})}
+                      className="flex-1 px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                      placeholder="Manuel olarak resim URL'si girin veya aşağıdan seçin..."
+                    />
+                  </div>
                   <button
                     type="button"
                     onClick={() => setShowMediaLibrary(true)}
-                    className="px-4 py-2 bg-gradient-to-r from-[#05B6C4] to-[#3B87BE] text-white rounded-lg hover:shadow-lg transition-all flex items-center gap-2"
+                    className="w-full px-4 py-3 bg-gradient-to-r from-[#05B6C4] to-[#3B87BE] text-white rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2"
                   >
-                    <ImageIcon className="w-4 h-4" />
-                    Kies Afbeelding
+                    <ImageIcon className="w-5 h-5" />
+                    Medya Kütüphanesinden Resim Seç
                   </button>
                 </div>
                 {formData.image && (
                   <div className="mt-2 h-32 bg-gray-100 rounded-lg overflow-hidden">
-                    <img src={formData.image} alt="Preview" className="w-full h-full object-cover" />
+                    <img src={formData.image} alt="Önizleme" className="w-full h-full object-cover" />
                   </div>
                 )}
               </div>
