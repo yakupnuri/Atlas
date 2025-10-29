@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Backend Test Suite for Stichting Atlas ANBI API
-Tests the ANBI document management functionality
+Backend Test Suite for Stichting Atlas - DEPLOYMENT READINESS
+Tests all critical API endpoints for production launch
 """
 
 import requests
