@@ -2,7 +2,7 @@ const { MongoClient } = require('mongodb');
 const { v4: uuidv4 } = require('uuid');
 
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost:27017';
-const DB_NAME = 'stichting_atlas';
+const DB_NAME = process.env.DB_NAME || 'stichting_atlas';
 
 const demoProjects = [
   {
