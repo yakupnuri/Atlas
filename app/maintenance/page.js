@@ -33,18 +33,6 @@ export default function MaintenancePage() {
         transition={{ duration: 0.5 }}
         className="max-w-2xl w-full"
       >
-        {/* Logo */}
-        <div className="text-center mb-8">
-          <img 
-            src="/logo.png" 
-            alt="Stichting Atlas" 
-            className="w-24 h-24 mx-auto mb-6 rounded-xl shadow-lg"
-          />
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-2">
-            Stichting Atlas
-          </h1>
-        </div>
-
         {/* Main Content */}
         <div className="bg-white rounded-2xl shadow-2xl p-8 md:p-12">
           <motion.div
