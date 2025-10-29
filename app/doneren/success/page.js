@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { CheckCircle, XCircle, Loader, Heart } from 'lucide-react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
-export default function SuccessPage() {
+function SuccessPageContent() {
   const [status, setStatus] = useState('loading');
   const [paymentInfo, setPaymentInfo] = useState(null);
   const searchParams = useSearchParams();
@@ -36,7 +36,6 @@ export default function SuccessPage() {
         setStatus('success');
       } else if (data.status === 'open') {
         setStatus('processing');
-        // Poll again in 2 seconds
         setTimeout(() => checkPaymentStatus(sessionId), 2000);
       } else {
         setStatus('failed');
@@ -184,5 +183,17 @@ export default function SuccessPage() {
         )}
       </motion.div>
     </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
+        <Loader className="w-16 h-16 text-blue-600 animate-spin" />
+      </div>
+    }>
+      <SuccessPageContent />
+    </Suspense>
   );
 }
