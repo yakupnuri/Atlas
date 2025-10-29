@@ -5,6 +5,9 @@ import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { CheckCircle, AlertCircle, Calendar, MapPin, Users } from 'lucide-react';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 export default function ReserverenPage() {
   const searchParams = useSearchParams();
   const eventIdFromUrl = searchParams.get('eventId');
