@@ -340,24 +340,26 @@ export default function HeroSlidesPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    CTA Tekst
+                    Buton Yazısı (CTA)
                   </label>
                   <input
                     type="text"
                     value={formData.ctaText}
                     onChange={(e) => setFormData({...formData, ctaText: e.target.value})}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="Örn: Daha Fazla Bilgi"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    CTA Link
+                    Buton Linki (CTA)
                   </label>
                   <input
                     type="text"
                     value={formData.ctaLink}
                     onChange={(e) => setFormData({...formData, ctaLink: e.target.value})}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="/sayfa-adi"
                   />
                 </div>
               </div>
@@ -365,13 +367,14 @@ export default function HeroSlidesPage() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Volgorde
+                    Sıra (Küçük sayı önce gösterilir)
                   </label>
                   <input
                     type="number"
                     value={formData.order}
                     onChange={(e) => setFormData({...formData, order: parseInt(e.target.value)})}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
+                    placeholder="0"
                   />
                 </div>
                 <div className="flex items-end">
@@ -382,7 +385,7 @@ export default function HeroSlidesPage() {
                       onChange={(e) => setFormData({...formData, isActive: e.target.checked})}
                       className="w-5 h-5 text-blue-600 rounded"
                     />
-                    <span className="text-sm font-medium text-gray-700">Actief</span>
+                    <span className="text-sm font-medium text-gray-700">Aktif</span>
                   </label>
                 </div>
               </div>
@@ -394,14 +397,14 @@ export default function HeroSlidesPage() {
                   className="flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
                 >
                   <Save className="w-5 h-5" />
-                  Opslaan
+                  Kaydet
                 </button>
                 <button
                   type="button"
                   onClick={closeModal}
                   className="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
                 >
-                  Annuleren
+                  İptal
                 </button>
               </div>
             </form>
