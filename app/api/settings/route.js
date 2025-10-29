@@ -24,7 +24,7 @@ export async function GET() {
         site: {
           title: 'Stichting Atlas',
           description: 'Interculturele ontmoeting en educatie',
-          logo: '/web-logo.png',
+          logo: '/logo.png',
           favicon: '/favicon.ico',
           contact: {
             email: 'info@stichtingatlas.nl',
