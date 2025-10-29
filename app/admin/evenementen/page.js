@@ -678,34 +678,44 @@ export default function AdminEventsPage() {
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Etkinlik Görseli
                   </label>
-                  <div className="flex items-center gap-4">
-                    {formData.image ? (
+                  
+                  <div className="space-y-3">
+                    {/* Manuel URL Input */}
+                    <input
+                      type="text"
+                      value={formData.image}
+                      onChange={(e) => setFormData({ ...formData, image: e.target.value })}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none"
+                      placeholder="Manuel URL girebilir veya aşağıdaki butona tıklayabilirsiniz..."
+                    />
+
+                    {/* Media Library Button */}
+                    <button
+                      type="button"
+                      onClick={() => setShowMediaLibrary(true)}
+                      className="w-full px-4 py-3 bg-gradient-to-r from-[#05B6C4] to-[#3B87BE] text-white rounded-lg hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                    >
+                      <ImageIcon className="w-5 h-5" />
+                      📸 Medya Kütüphanesinden Görsel Seç
+                    </button>
+
+                    {/* Preview */}
+                    {formData.image && (
                       <div className="relative">
                         <img
                           src={formData.image}
-                          alt="Preview"
-                          className="w-40 h-40 rounded-lg object-cover"
+                          alt="Önizleme"
+                          className="w-full h-48 rounded-lg object-cover"
                         />
                         <button
                           type="button"
                           onClick={() => setFormData({ ...formData, image: '' })}
-                          className="absolute -top-2 -right-2 p-1 bg-red-500 text-white rounded-full hover:bg-red-600"
+                          className="absolute top-2 right-2 p-2 bg-red-500 text-white rounded-full hover:bg-red-600 transition-colors"
                         >
-                          <X className="w-4 h-4" />
+                          <X className="w-5 h-5" />
                         </button>
                       </div>
-                    ) : (
-                      <div className="w-40 h-40 border-2 border-dashed border-gray-300 rounded-lg flex items-center justify-center">
-                        <ImageIcon className="w-12 h-12 text-gray-400" />
-                      </div>
                     )}
-                    <button
-                      type="button"
-                      onClick={() => setShowMediaLibrary(true)}
-                      className="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
-                    >
-                      Görsel Seç
-                    </button>
                   </div>
                 </div>
 
