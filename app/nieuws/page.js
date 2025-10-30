@@ -49,7 +49,6 @@ export default function NewsPage() {
             </h1>
             <p className="text-xl text-white/90">
               Blijf op de hoogte van ons laatste nieuws en updates
-              Stichting Atlas'tan son haberler ve duyurular
             </p>
           </motion.div>
         </div>
