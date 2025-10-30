@@ -22,14 +22,21 @@ export async function middleware(request) {
 
   // Check maintenance mode
   try {
-    // Use internal URL without SSL
-    const maintenanceUrl = `http://localhost:3000/api/maintenance`;
+    // Use request origin for production compatibility
+    const baseUrl = request.nextUrl.origin;
+    const maintenanceUrl = `${baseUrl}/api/maintenance`;
+    
     const maintenanceResponse = await fetch(maintenanceUrl, { 
       cache: 'no-store',
       headers: {
         'Content-Type': 'application/json'
       }
     });
+    
+    if (!maintenanceResponse.ok) {
+      throw new Error('Failed to fetch maintenance status');
+    }
+    
     const maintenanceData = await maintenanceResponse.json();
 
     if (maintenanceData.enabled) {
